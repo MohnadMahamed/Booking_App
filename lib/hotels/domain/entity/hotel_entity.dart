@@ -167,8 +167,12 @@ class HotelDetails extends Equatable {
   final String? rate;
   final String? createdAt;
   final String? updatedAt;
-  final HotelFacilities? hotelFacilities;///to do make it list
-  final HotelImages? hotelImages;///to do make it list
+  final HotelFacilities? hotelFacilities;
+
+  ///to do make it list
+  final HotelImages? hotelImages;
+
+  ///to do make it list
 
   @override
   List<Object?> get props => [
@@ -199,6 +203,34 @@ class HotelDetails extends Equatable {
     required this.updatedAt,
     required this.hotelFacilities,
     required this.hotelImages,
+  });
+}
+
+class Booking extends Equatable {
+  final int? bookingId;
+  final String? userId;
+  final String? hotelId;
+  final String? type;
+  final String? createdAt;
+  final String? updatedAt;
+  final UserData? userData;
+  final HotelDetails? hotelDetails;
+
+  @override
+  List<Object?> get props =>
+      [bookingId, userId, hotelId, type, createdAt, updatedAt,userData,hotelDetails];
+
+  const Booking({
+    required this.bookingId,
+    required this.userId,
+    required this.hotelId,
+    required this.type,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.userData,
+    required this.hotelDetails,
+
+
   });
 }
 
