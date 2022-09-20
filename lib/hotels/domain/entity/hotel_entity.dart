@@ -255,6 +255,21 @@ class UpdateProfileRequest extends Equatable {
     required this.image,
   });
 }
+class AllData extends Equatable {
+  final int? currentPage;
+  final List<HotelDetails>? hotelData;
+  final int? to;
+  final int? total;
+  @override
+  List<Object?> get props => [currentPage,hotelData,to,total];
+
+  const AllData({
+    required  this.currentPage,
+    required  this.hotelData,
+    required  this.to,
+    required  this.total,
+  });
+}
 
 // class HotelsData extends Equatable {
 //   final List<HotelDetails>? hotelsData;
