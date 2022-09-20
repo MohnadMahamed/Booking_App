@@ -231,7 +231,7 @@ class AllDataModel extends AllData{
   factory AllDataModel.fromJson(Map<String, dynamic> json) {
     return AllDataModel(currentPage: json["current_page"], hotelData: List<HotelDetailsModel>.from(json["data"].map((element)=>HotelDetailsModel.fromJson(element))), to: json["to"], total: json["total"]);
   }
-//
+
 
 }
 
