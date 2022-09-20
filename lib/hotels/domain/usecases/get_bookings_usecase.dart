@@ -3,13 +3,15 @@ import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/domain/repository/base_hotel_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class GetAllHotelsUseCase {
+class GetBookingsUseCase {
   final BaseHotelsRepository baseHotelsRepository;
 
-  GetAllHotelsUseCase(this.baseHotelsRepository);
-  Future<Either<Failure, List<HotelDetailsModel>>> call(
-  int pageNumber
-) async {
-    return await baseHotelsRepository.getAllHotelsDetails(pageNumber);
+  GetBookingsUseCase(this.baseHotelsRepository);
+
+  Future<Either<Failure, List<BookingModel>>> call(
+    String type,
+  int count,
+  ) async {
+    return await baseHotelsRepository.getBookings(type, count);
   }
 }
