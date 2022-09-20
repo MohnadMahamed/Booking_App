@@ -1,19 +1,18 @@
 import 'package:booking_app/core/error/exceptions.dart';
 import 'package:booking_app/core/util/constaces/api_constances.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-//
 abstract class BaseRemoteDataSource {
   Future<UserDataModel> userRegister(RegisterRequestModel registerRequest);
   Future<UserDataModel> userLogin(LoginRequestModel loginRequestModel);
   Future<List<HotelDetailsModel>> getAllHotelsDetails(int pageNumber);
   Future<UserDataModel> updateUserInfo(
       RegisterRequestModel updateUserInfoRequest);
-  Future<StatusModel> createBooking(int userId, hotelId);
+  Future<StatusModel> createBooking(int userId, String hotelId);
   Future<StatusModel> updateBookingStatus(int bookingId, String type);
   Future<List<BookingModel>> getBookings(String type, int count);
+
   Future<List<HotelFacilityModel>> getFacilities();
   Future<List<HotelDetailsModel>> searchHotels(
       String address,
@@ -60,7 +59,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
       UserDataModel userData = UserDataModel.fromJson(response.data);
       return userData;
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 
@@ -76,7 +75,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
       UserDataModel userData = UserDataModel.fromJson(response.data);
       return userData;
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 
@@ -92,7 +91,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
         (e) => HotelImageModel.fromJson(e),
       ));
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 
@@ -112,7 +111,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
       UserDataModel userData = UserDataModel.fromJson(response.data);
       return userData;
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 
@@ -131,7 +130,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
 
       return statusData;
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 
@@ -149,7 +148,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
 
       return statusData;
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 
@@ -165,7 +164,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
         (e) => HotelImageModel.fromJson(e),
       ));
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 
@@ -179,7 +178,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
         (e) => HotelFacilityModel.fromJson(e),
       ));
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 
@@ -206,7 +205,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
         (e) => HotelImageModel.fromJson(e),
       ));
     } else {
-      throw ServerExeption();
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 }
