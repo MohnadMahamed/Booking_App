@@ -1,23 +1,14 @@
 import 'package:booking_app/core/error/failure.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
+import 'package:booking_app/hotels/domain/repository/base_hotel_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class RegisterUseCase {
-  final BaseHotelRepo baseHotelRepo;
+  final BaseHotelsRepository baseHotelsRepository;
 
-  RegisterUseCase(this.baseHotelRepo);
+  RegisterUseCase(this.baseHotelsRepository);
 
-  Future<Either<Failure, RegisterRequestModel>> call({
-    required String name,
-    required String email,
-    required String password,
-    required String passwordConfirmation,
-  }) async {
-    return await baseHotelRepo.Register(
-      name: name,
-      email: email,
-      password: password,
-      passwordConfirmation: passwordConfirmation,
-    );
+  Future<Either<Failure, UserDataModel>> call(RegisterRequestModel registerRequest) async {
+    return await baseHotelsRepository.getUserRegister(registerRequest);
   }
 }

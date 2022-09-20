@@ -1,23 +1,17 @@
 import 'package:booking_app/core/error/failure.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
+import 'package:booking_app/hotels/domain/repository/base_hotel_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class UpdateUserInfoUseCase {
-  final BaseHotelRepo baseHotelRepo;
+  final BaseHotelsRepository baseHotelsRepository;
 
-  UpdateUserInfoUseCase(this.baseHotelRepo);
+  UpdateUserInfoUseCase(this.baseHotelsRepository);
 
-  Future<Either<Failure, UserDataModel>> call({
-    required String name,
-    required String email,
-    required String password,
 
-  }) async {
-    return await baseHotelRepo.UpdateUserInfo(
-      name: name,
-      email: email,
-      password: password,
-    );
+
+  Future<Either<Failure, UserDataModel>> call(RegisterRequestModel updateUserInfoRequest) async {
+    return await baseHotelsRepository.getUpdateUserInfo(updateUserInfoRequest);
   }
 }
 

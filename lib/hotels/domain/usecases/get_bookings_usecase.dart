@@ -1,19 +1,17 @@
 import 'package:booking_app/core/error/failure.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
+import 'package:booking_app/hotels/domain/repository/base_hotel_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class GetBookingsUseCase {
-  final BaseHotelRepo baseHotelRepo;
+  final BaseHotelsRepository baseHotelsRepository;
 
-  GetBookingsUseCase(this.baseHotelRepo);
+  GetBookingsUseCase(this.baseHotelsRepository);
 
-  Future<Either<Failure, BookingModel>> call({
-    required String type,
-    required int count,
-  }) async {
-    return await baseHotelRepo.GetBookings(
-      type: type,
-      count: count,
-    );
+  Future<Either<Failure, List<BookingModel>>> call(
+    String type,
+  int count,
+  ) async {
+    return await baseHotelsRepository.getBookings(type, count);
   }
 }
