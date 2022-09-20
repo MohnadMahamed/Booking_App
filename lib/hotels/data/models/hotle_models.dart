@@ -225,15 +225,6 @@ class UpdateProfileRequestModel extends UpdateProfileRequest{
   }
 
 }
-class AllDataModel extends AllData{
- const  AllDataModel({required super.currentPage, required super.hotelData, required super.to, required super.total});
-
- factory AllDataModel.fromJson(Map<String, dynamic> json) {
-    return AllDataModel(currentPage: json["current_page"], hotelData: List<HotelDetailsModel>.from(json["data"].map((element)=>HotelDetailsModel.fromJson(element))), to: json["to"], total: json["total"]);
- }
-//
-
-}
 
 // class HotelsDataModel extends HotelsData {
 //   const HotelsDataModel({required super.hotelsData});
