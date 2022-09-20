@@ -27,6 +27,31 @@ class RegisterRequestModel extends RegisterRequest {
     };
   }
 }
+class UserResponseModel extends UserResponse{
+  const UserResponseModel({required super.statusEntity, required super.userDataEntity});
+
+  factory UserResponseModel.fromJson(Map<String, dynamic> json) {
+    return UserResponseModel(statusEntity: StatusModel.fromJson( json["status"]), userDataEntity: UserDataModel.fromJson( json["data"]));
+  }
+
+}
+class StatusModel extends Status{
+  const StatusModel({required super.type, required super.titleEntity});
+
+  factory StatusModel.fromJson(Map<String, dynamic> json) {
+    return StatusModel(type: json["type"], titleEntity: ResponseTitleModel.fromJson( json["title"]));
+  }
+  
+
+}
+class ResponseTitleModel extends ResponseTitle{
+const   ResponseTitleModel({required super.ar, required super.en});
+
+factory ResponseTitleModel.fromJson(Map<String, dynamic> json) {
+    return ResponseTitleModel(ar: json["ar"], en: json["en"]);
+}
+
+}
 
 class UserDataModel extends UserData {
   const UserDataModel(
@@ -181,6 +206,23 @@ class BookingModel extends Booking {
     );
   }
 //
+
+}
+class UpdateProfileRequestModel extends UpdateProfileRequest{
+  const UpdateProfileRequestModel({required super.name, required super.email, required super.image});
+
+
+  factory UpdateProfileRequestModel.fromJson(Map<String, dynamic> json) {
+    return UpdateProfileRequestModel(name: json["name"], email:  json["email"], image:  json["image"]);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "email": email,
+      "image": image,
+    };
+  }
 
 }
 
