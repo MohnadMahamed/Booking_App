@@ -217,8 +217,16 @@ class Booking extends Equatable {
   final HotelDetails? hotelDetails;
 
   @override
-  List<Object?> get props =>
-      [bookingId, userId, hotelId, type, createdAt, updatedAt,userData,hotelDetails];
+  List<Object?> get props => [
+        bookingId,
+        userId,
+        hotelId,
+        type,
+        createdAt,
+        updatedAt,
+        userData,
+        hotelDetails
+      ];
 
   const Booking({
     required this.bookingId,
@@ -229,8 +237,22 @@ class Booking extends Equatable {
     required this.updatedAt,
     required this.userData,
     required this.hotelDetails,
+  });
+}
 
+class UpdateProfileRequest extends Equatable {
+  final String? name;
+  final String? email;
+  final String? image;
 
+  @override
+  // TODO: implement props
+  List<Object?> get props => [name, email, image];
+
+  const UpdateProfileRequest({
+    required this.name,
+    required this.email,
+    required this.image,
   });
 }
 
