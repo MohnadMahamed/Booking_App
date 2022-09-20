@@ -85,7 +85,7 @@ class HotelImagesModel extends HotelImages {
   const HotelImagesModel({required super.hotelImages});
 
   factory HotelImagesModel.fromJson(Map<String, dynamic> json) {
-    return HotelImagesModel(hotelImages: List<HotelImageModel>.from(json["hotel_images"]));
+    return HotelImagesModel(hotelImages: List<HotelImageModel>.from(json["hotel_images"].map((element)=>HotelImagesModel.fromJson(element))));
   }
 
 }
@@ -109,7 +109,7 @@ class HotelFacilitiesModel extends HotelFacilities {
   const HotelFacilitiesModel({required super.hotelFacilities});
 
   factory HotelFacilitiesModel.fromJson(Map<String, dynamic> json) {
-    return HotelFacilitiesModel(hotelFacilities: List<HotelFacility>.from(json["hotel_facilities"]));
+    return HotelFacilitiesModel(hotelFacilities: List<HotelFacility>.from(json["hotel_facilities"].map((element)=>HotelFacilityModel.fromJson(element))));
   }
 
 
@@ -141,7 +141,7 @@ class HotelDetailsModel extends HotelDetails {
 //   const HotelsDataModel({required super.hotelsData});
 //
 //   factory HotelsDataModel.fromJson(Map<String, dynamic> json) {
-//     return HotelsDataModel(hotelsData: List<HotelDetailsModel>.from(json["data"]));
+//     return HotelsDataModel(hotelsData: List<HotelDetailsModel>.from(json["data"].map((element)=>HotelDetailsModel.fromJson(element))));
 //   }
 //
 //
