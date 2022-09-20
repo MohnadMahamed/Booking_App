@@ -246,27 +246,13 @@ class UpdateProfileRequest extends Equatable {
   final String? image;
 
   @override
+  // TODO: implement props
   List<Object?> get props => [name, email, image];
 
   const UpdateProfileRequest({
     required this.name,
     required this.email,
     required this.image,
-  });
-}
-class AllData extends Equatable {
-  final int? currentPage;
-  final List<HotelDetails>? hotelData;
-  final int? to;
-  final int? total;
-  @override
-  List<Object?> get props => [currentPage,hotelData,to,total];
-
-  const AllData({
-    required  this.currentPage,
-    required  this.hotelData,
-    required  this.to,
-    required  this.total,
   });
 }
 
