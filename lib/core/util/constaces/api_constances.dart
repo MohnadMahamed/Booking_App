@@ -8,12 +8,12 @@ class ApiConstaces {
   static const basUrl = "http://api.mahmoudtaha.com/api";
   static const registerPath = "$basUrl/auth/register";
   static const loginPath = "$basUrl/auth/login";
-  static const getAllHottelsDetailsPath = "$basUrl/hotels?count=10";
+  static const getAllHottelsDetailsPath = "$basUrl/hotels?count=7";
   static const updatePath = "$basUrl/auth/update-info";
   static const creatBookingPath = "$basUrl/create-booking";
   static const updateBookingStatusPath = "$basUrl/update-booking-status";
   static const getBookingsPath = "$basUrl/get-bookings";
   static const getFacilitiesPath = "$basUrl/facilities";
   static const searchHotelsPath = "$basUrl/search-hotels";
-  static const token = "";
+  static const token = "AFhxM8ch7WPLH4GNrNW8MwmvxoQZPLkpgQbDGKC5stB7IBe5Bnl0GhOa0qB8";
 }

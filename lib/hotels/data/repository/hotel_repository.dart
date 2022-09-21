@@ -29,7 +29,7 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
   @override
-  Future<Either<Failure, List<HotelDetailsModel>>> getAllHotelsDetails(int pageNumber) async {
+  Future<Either<Failure,AllDataModel>> getAllHotelsDetails(int pageNumber) async {
     final result=await baseHotelRemoteDataSource.getAllHotelsDetails(pageNumber);
 
     try{
@@ -51,7 +51,7 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
   @override
-  Future<Either<Failure, StatusModel>> getCreateBooking(int userId, String hotelId) async {
+  Future<Either<Failure, StatusModel>> getCreateBooking(int userId, int hotelId) async {
     final result=await baseHotelRemoteDataSource.createBooking( userId, hotelId);
 
     try{
@@ -95,8 +95,17 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
   @override
-  Future<Either<Failure, List<HotelDetailsModel>>> getSearch(String address, String maxPrice,String minPrice, String facilities0,String facilities1, double latitude,double longitude, double distance,int page,int count,String name) async {
-    final result=await baseHotelRemoteDataSource.searchHotels(address, maxPrice, minPrice, facilities0, facilities1, latitude, longitude, distance, page, count, name) ;
+  Future<Either<Failure, List<HotelDetailsForBookingModel>>> getSearch(
+      {required String address,
+        required  String maxPrice,
+        required   String minPrice,
+        required   String latitude,
+        required   String longitude,
+        required   String distance,
+        required   String page,
+        required    String count,
+        required   String name}) async {
+    final result=await baseHotelRemoteDataSource.searchHotels() ;
 
     try{
       return Right(result);
