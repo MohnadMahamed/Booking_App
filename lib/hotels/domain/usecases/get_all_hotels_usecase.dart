@@ -7,7 +7,7 @@ class GetAllHotelsUseCase {
   final BaseHotelsRepository baseHotelsRepository;
 
   GetAllHotelsUseCase(this.baseHotelsRepository);
-  Future<Either<Failure, List<HotelDetailsModel>>> call(
+  Future<Either<Failure, AllDataModel>> call(
   int pageNumber
 ) async {
     return await baseHotelsRepository.getAllHotelsDetails(pageNumber);

@@ -35,13 +35,22 @@ class UserResponseModel extends UserResponse{
   }
 
 }
+// class StatusModel extends Status{
+//   const StatusModel({required super.type, required super.titleEntity});
+//
+//   factory StatusModel.fromJson(Map<String, dynamic> json) {
+//     return StatusModel(type: json["type"], titleEntity: ResponseTitleModel.fromJson( json["title"]));
+//   }
+//
+//
+// }
 class StatusModel extends Status{
   const StatusModel({required super.type, required super.titleEntity});
 
   factory StatusModel.fromJson(Map<String, dynamic> json) {
-    return StatusModel(type: json["type"], titleEntity: ResponseTitleModel.fromJson( json["title"]));
+    return StatusModel(type: json["type"], titleEntity: ResponseTitleModel.fromJson(json["title"]));
   }
-  
+
 
 }
 class ResponseTitleModel extends ResponseTitle{
@@ -144,8 +153,7 @@ class HotelFacilitiesModel extends HotelFacilities {
 
   factory HotelFacilitiesModel.fromJson(Map<String, dynamic> json) {
     return HotelFacilitiesModel(
-        hotelFacilities: List<HotelFacility>.from(json["hotel_facilities"]
-            .map((element) => HotelFacilityModel.fromJson(element))));
+        hotelFacilities: List<HotelFacility>.from(json["hotel_facilities"].map((element) => HotelFacilityModel.fromJson(element))));
   }
 }
 
@@ -176,9 +184,45 @@ class HotelDetailsModel extends HotelDetails {
         rate: json["rate"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
-        hotelFacilities:
-            HotelFacilitiesModel.fromJson(json["hotel_facilities"]),
-        hotelImages: HotelImagesModel.fromJson(json["hotel_images"]));
+        hotelFacilities:List<HotelFacility>.from(json["hotel_facilities"].map((element) => HotelFacilityModel.fromJson(element))),
+    hotelImages:List<HotelImage>.from(json["hotel_images"].map((element) => HotelImageModel.fromJson(element))),);
+
+        // List<HotelDetailsModel>.from(json["data"].map((element)=>HotelDetailsModel.fromJson(element)))
+        // hotelImages: HotelImagesModel.fromJson(json["hotel_images"]));
+  }
+}
+class HotelDetailsForBookingModel extends HotelDetailsForBooking {
+  const HotelDetailsForBookingModel(
+      {required super.id,
+      required super.name,
+      required super.description,
+      required super.price,
+      required super.address,
+      required super.longitude,
+      required super.latitude,
+      required super.rate,
+      required super.createdAt,
+      required super.updatedAt,
+      required super.hotelFacilities,
+      required super.hotelImages});
+
+  factory HotelDetailsForBookingModel.fromJson(Map<String, dynamic> json) {
+    return HotelDetailsForBookingModel(
+        id: json["id"],
+        name: json["name"],
+        description: json["description"],
+        price: json["price"],
+        address: json["address"],
+        longitude: json["longitude"],
+        latitude: json["latitude"],
+        rate: json["rate"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+        hotelFacilities:List<HotelFacility>.from(json["facilities"].map((element) => HotelFacilityModel.fromJson(element))),
+    hotelImages:List<HotelImage>.from(json["hotel_images"].map((element) => HotelImageModel.fromJson(element))),);
+
+        // List<HotelDetailsModel>.from(json["data"].map((element)=>HotelDetailsModel.fromJson(element)))
+        // hotelImages: HotelImagesModel.fromJson(json["hotel_images"]));
   }
 }
 
@@ -191,7 +235,7 @@ class BookingModel extends Booking {
       required super.createdAt,
       required super.updatedAt,
       required super.userData,
-      required super.hotelDetails});
+      required super.hotelDetailsForBookingModel});
 
   factory BookingModel.fromJson(Map<String, dynamic> json) {
     return BookingModel(
@@ -202,7 +246,7 @@ class BookingModel extends Booking {
       createdAt: json["created_at"],
       updatedAt: json["updated_at"],
       userData: UserDataModel.fromJson(json["user"]),
-      hotelDetails: HotelDetailsModel.fromJson(json["hotel"]),
+      hotelDetailsForBookingModel: HotelDetailsForBookingModel.fromJson(json["hotel"]),
     );
   }
 //
@@ -229,7 +273,7 @@ class AllDataModel extends AllData{
   const  AllDataModel({required super.currentPage, required super.hotelData, required super.to, required super.total});
 
   factory AllDataModel.fromJson(Map<String, dynamic> json) {
-    return AllDataModel(currentPage: json["current_page"], hotelData: List<HotelDetailsModel>.from(json["data"].map((element)=>HotelDetailsModel.fromJson(element))), to: json["to"], total: json["total"]);
+    return AllDataModel(currentPage: json["current_page"], hotelData: List<HotelDetailsModel>.from(json["data"]["data"].map((element)=>HotelDetailsModel.fromJson(element))), to: json["to"], total: json["total"]);
   }
 
 
