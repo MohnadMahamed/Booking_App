@@ -23,15 +23,15 @@ abstract class BaseHotelsRepository{
       String type, int count);
   Future<Either<Failure,List<HotelFacilityModel>>> getFacilities();
   Future<Either<Failure,List<HotelDetailsForBookingModel>>> getSearch(
-      {required String address,
-       required String maxPrice,
-       required String minPrice,
+      { String? address,
+        String? maxPrice,
+        String? minPrice,
       // String facilities0,
       // String facilities1,
-       required  String latitude,
-       required   String longitude,
-       required  String distance,
-       required   String page,
-       required   String count,
-       required   String name});
+         String? latitude,
+          String? longitude,
+         String? distance,
+          String? page,
+          String? count,
+          String? name});
 }

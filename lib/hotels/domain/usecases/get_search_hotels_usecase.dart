@@ -9,18 +9,19 @@ class SearchHotelsUseCase {
   SearchHotelsUseCase(this.baseHotelsRepository);
 
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> call(
-    String address,
-    String maxPrice,
-    String minPrice,
+      {
+    String? address,
+         String? maxPrice,
+         String? minPrice,
     // String facilities0,
     // String facilities1,
-    String name,
-      String latitude,
-      String longitude,
-      String distance,
-      String page,
-      String count,
-  ) async {
+         String? name,
+         String? latitude,
+         String? longitude,
+         String? distance,
+         String? page,
+         String? count,
+  }) async {
     return await baseHotelsRepository.getSearch(address: address, maxPrice: maxPrice, minPrice: minPrice, latitude: latitude, longitude: longitude, distance: distance, page: page, count: count, name: name);
   }
 }
