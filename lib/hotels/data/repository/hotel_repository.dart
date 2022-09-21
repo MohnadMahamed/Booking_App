@@ -96,15 +96,15 @@ class HotelsRepository extends BaseHotelsRepository{
 
   @override
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> getSearch(
-      {required String address,
-        required  String maxPrice,
-        required   String minPrice,
-        required   String latitude,
-        required   String longitude,
-        required   String distance,
-        required   String page,
-        required    String count,
-        required   String name}) async {
+      { String? address,
+          String? maxPrice,
+           String? minPrice,
+           String? latitude,
+           String? longitude,
+           String? distance,
+           String? page,
+            String? count,
+           String? name}) async {
     final result=await baseHotelRemoteDataSource.searchHotels() ;
 
     try{

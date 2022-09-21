@@ -45,9 +45,10 @@ class RemoteDataSource implements BaseRemoteDataSource {
       'email': registerRequest.email,
       'image': registerRequest.image,
       'password': registerRequest.password,
-      'passwordConfirmation': registerRequest.passwordConfirmation,
+      'password_confirmation': registerRequest.passwordConfirmation,
     });
     if (response.statusCode == 200) {
+      print(response.data);
       //  user = UserDataModel(
       //     id: response.data.id,
       //     name: response.data.name,
@@ -56,7 +57,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
       //     image: response.data.image,
       //     createdAt: response.data.createdAt,
       //     updatedAt: response.data.updatedAt);
-      UserDataModel userData = UserDataModel.fromJson(response.data);
+      UserDataModel userData = UserDataModel.fromJson(response.data["data"]);
       return userData;
     } else {
       throw ServerException(errorMessageModel: response.data);
@@ -73,7 +74,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     });
     if (response.statusCode == 200) {
       print(response.data);
-      UserDataModel userData = UserDataModel.fromJson(response.data);
+      UserDataModel userData = UserDataModel.fromJson(response.data["data"]);
       return userData;
     } else {
       throw ServerException(errorMessageModel: response.data);
@@ -114,7 +115,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     });
     if (response.statusCode == 200) {
       print(response.data);
-      UserDataModel userData = UserDataModel.fromJson(response.data);
+      UserDataModel userData = UserDataModel.fromJson(response.data["data"]);
       return userData;
     } else {
       throw ServerException(errorMessageModel: response.data);
@@ -213,7 +214,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     if (response.statusCode == 200) {
       print(response.data);
       return List<HotelDetailsForBookingModel>.from(
-          (response.data['data']['data'] as List).map(
+          (response.data['data']['data'] ).map(
         (e) => HotelDetailsForBookingModel.fromJson(e),
       ));
     } else {
