@@ -3,7 +3,6 @@ import 'package:booking_app/hotels/presentation/screens/home_screen/Widget/Hotal
 import 'package:booking_app/hotels/presentation/screens/home_screen/Widget/Sliver_App_Bar.dart';import 'package:booking_app/hotels/presentation/screens/home_screen/Widget/Sliver_To_Box_Adapter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<Widget> images = [
@@ -32,6 +31,7 @@ class HomeScreen extends StatelessWidget {
             Sliver_App_Bar(images: images),
             Sliver_To_Box_Adapter(),
             Hotal_Card(),
+            //
           ],
         ),
       );
