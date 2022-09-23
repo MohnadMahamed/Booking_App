@@ -47,6 +47,7 @@ dependencies:
   bloc: ^8.1.0
   get: ^4.6.5
   google_fonts: ^3.0.1
+  carousel_slider: ^4.1.1
 
 
 

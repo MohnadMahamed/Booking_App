@@ -3,12 +3,10 @@ import 'package:booking_app/core/services/services_locator.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/hotels_main_screen.dart';
-import 'package:booking_app/hotels/presentation/screens/search_screen/search_screen.dart';
-import 'package:booking_app/hotels/presentation/screens/splach_screen/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-
 void main() async {
   ServiceLocator().init();
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,9 +37,9 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           HotelCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
-      child: const GetMaterialApp(
+      child:  GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SearchScreen(),
+        home: HomeScreen(),
       ),
     );
   }
