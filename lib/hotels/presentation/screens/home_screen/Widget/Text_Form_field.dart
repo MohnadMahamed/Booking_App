@@ -17,6 +17,7 @@ Widget defaultFormField({
   Color? Icon_color,
   Color? border_color,
   Color? border_chang_color,
+  double? border ,
 }) =>
     TextFormField(
       controller: controller,
@@ -45,7 +46,7 @@ Widget defaultFormField({
           icon: Icon(suffix, color: Icon_color),
         )
             : null,
-        enabledBorder:  OutlineInputBorder(borderSide: BorderSide(color: border_color!, width: 3.0), borderRadius: BorderRadius.circular(18.0), ),
-        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: border_chang_color!, width: 3.0),borderRadius: BorderRadius.circular(18.0),),
+        enabledBorder:  OutlineInputBorder(borderSide: BorderSide(color: border_color!, width: 3.0), borderRadius: BorderRadius.circular(border!), ),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: border_chang_color!, width: 3.0),borderRadius: BorderRadius.circular(border),),
       ),
     );

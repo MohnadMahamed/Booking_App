@@ -1,4 +1,5 @@
 import 'package:booking_app/hotels/presentation/screens/home_screen/Widget/Custom_Button.dart';
+import 'package:booking_app/hotels/presentation/screens/home_screen/Widget/Text_Form_field.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -6,9 +7,11 @@ class Sliver_App_Bar extends StatelessWidget {
   const Sliver_App_Bar({
     Key? key,
     required this.images,
+    required this.SearchController,
   }) : super(key: key);
 
   final List<Widget> images;
+  final SearchController;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,33 @@ class Sliver_App_Bar extends StatelessWidget {
       expandedHeight: 380,
       floating: false,
       pinned: true,
-      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.icecream))],
+      title: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: const Color(0xff2C2C2C),
+            borderRadius:
+            BorderRadiusDirectional.all(Radius.circular(50)),
+          ),
+          child: defaultFormField(
+            controller: SearchController,
+            label: 'Where are you going ?',
+            color: Colors.grey,
+            border:50,
+            prefix: Icons.search,
+            Icon_color: Colors.teal,
+            type: TextInputType.text,
+            border_chang_color: const Color(0xff2C2C2C),
+            border_color: const Color(0xff2C2C2C),
+            validate: (String? value) {
+              if (value!.isEmpty) {
+                return 'Enter Where are you going ?';
+              }
+              return null;
+            },
+          ),
+        ),
+      ),
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           children: [
@@ -66,7 +95,8 @@ class Sliver_App_Bar extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ],
-                ))
+                )),
+
           ],
         ),
       ),
