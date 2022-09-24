@@ -86,7 +86,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     Dio dio = Dio();
 
     final response = await dio
-        .get("${ApiConstaces.getAllHottelsDetailsPath}&page=$pageNumber");
+        .get("${ApiConstaces.getAllHottelsDetailsPath}");
     if (response.statusCode == 200) {
       print(response.data);
       // return List<HotelFacilityModel>.from((response.data['data'] as List).map(

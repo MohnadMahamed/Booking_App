@@ -11,7 +11,6 @@ class MyForm extends StatelessWidget {
   final Widget? suffix;
   final int maxLength;
   final Function(String? title)? validate;
-
   const MyForm({
     Key? key,
     this.label,
@@ -32,7 +31,7 @@ class MyForm extends StatelessWidget {
       style: const TextStyle(color: Colors.white60),
       obscureText: isPassword,
       keyboardType: type,
-      controller: TextEditingController(),
+      controller:controller ,
       validator: (T)=>validate!(T),
 
 

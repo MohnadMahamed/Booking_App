@@ -8,7 +8,8 @@ class ApiConstaces {
   static const basUrl = "http://api.mahmoudtaha.com/api";
   static const registerPath = "$basUrl/auth/register";
   static const loginPath = "$basUrl/auth/login";
-  static const getAllHottelsDetailsPath = "$basUrl/hotels?count=7";
+  // static const getAllHottelsDetailsPath = "$basUrl/hotels?count=7";
+  static const getAllHottelsDetailsPath = "$basUrl/hotels";
   static const updatePath = "$basUrl/auth/update-info";
   static const creatBookingPath = "$basUrl/create-booking";
   static const updateBookingStatusPath = "$basUrl/update-booking-status";

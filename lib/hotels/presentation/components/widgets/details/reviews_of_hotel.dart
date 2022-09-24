@@ -32,6 +32,12 @@ class _ReviewsOfHotelState extends State<ReviewsOfHotel> {
                       width: double.infinity,
                       fit: BoxFit.fill,
                     ),
+                    // child: Image(
+                    //   image: NetworkImage("http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                    //   height: double.infinity,
+                    //   width: double.infinity,
+                    //   fit: BoxFit.fill,
+                    // ),
                   ),
                   const SizedBox(width: 5,),
                   Column(

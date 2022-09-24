@@ -12,6 +12,8 @@ import 'package:booking_app/hotels/presentation/components/widgets/search/popula
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
+  static const routeName = 'SearchScreen';
+
   const SearchScreen({super.key});
 
   @override

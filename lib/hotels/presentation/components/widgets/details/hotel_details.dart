@@ -1,4 +1,6 @@
+import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HotelViewDetails extends StatefulWidget {
   const HotelViewDetails({Key? key}) : super(key: key);
@@ -10,66 +12,71 @@ class HotelViewDetails extends StatefulWidget {
 class _HotelViewDetailsState extends State<HotelViewDetails> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    var cubit=HotelCubit.get(context);
+    return BlocBuilder<HotelCubit,HotelState>(
+      builder: (context, state) {
+        return  Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Grand Royal Hotel',
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            Row(
-              children: const [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Text(
-                  'Wembley, Londen',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                  cubit.hotelDetails!.name!,
+                  style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                SizedBox(
-                  width: 5,
+                Row(
+                  children:  [
+                    Text(
+                      cubit.hotelDetails!.address!,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    const Icon(
+                      Icons.add_location,
+                      color: Colors.teal,
+                      size: 20,
+                    ),
+                    const Text(
+                      '2.0km to city',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white),
+                    ),
+                  ],
                 ),
-                Icon(
-                  Icons.add_location,
-                  color: Colors.teal,
-                  size: 20,
-                ),
+              ],
+            ),
+            Column(
+              children:  [
                 Text(
-                  '2.0km to city',
+                  "\$ ${cubit.hotelDetails!.price!}",
+                  style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                const Text(
+                  "/per night",
                   style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.normal,
                       color: Colors.white),
                 ),
               ],
-            ),
+            )
           ],
-        ),
-        Column(
-          children: const [
-            Text(
-              "\$ 180",
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            Text(
-              "/per night",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.white),
-            ),
-          ],
-        )
-      ],
+        );
+      },
     );
   }
 }
