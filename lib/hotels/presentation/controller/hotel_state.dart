@@ -24,6 +24,9 @@ class GetAllHotelsLoadingState extends HotelState {}
 
 class GetAllHotelsSuccessState extends HotelState {}
 
+class GetHotelDetailsLoadingState extends HotelState {}
+class  GetHotelDetailsSuccessState extends HotelState {}
+
 class UpdateBookingSuccessState extends HotelState {}
 
 class UpdateBookingLoadingState extends HotelState {}

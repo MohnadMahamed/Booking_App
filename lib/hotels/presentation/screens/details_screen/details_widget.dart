@@ -1,4 +1,6 @@
+import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../components/widgets/details/background_details_page.dart';
 import '../../components/widgets/details/hotel_details.dart';
 import '../../components/widgets/details/photohotel.dart';
@@ -7,8 +9,10 @@ import '../../components/widgets/details/reviews_of_hotel.dart';
 import '../component/my_buttom.dart';
 
 class DetailsWidget extends StatefulWidget {
+
   const DetailsWidget({
     Key? key,
+
   }) : super(key: key);
 
   @override
@@ -44,8 +48,13 @@ class _DetailsWidgetState extends State<DetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var cubit=HotelCubit.get(context);
     return SafeArea(
-      child: Scaffold(
+      child: BlocConsumer<HotelCubit, HotelState>(
+  listener: (context, state) {
+  },
+  builder: (context, state) {
+    return Scaffold(
         body: CustomScrollView(controller: scrollController, slivers: [
           SliverAppBar(
             elevation: 0,
@@ -64,7 +73,10 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                     color: Colors.white60),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      cubit.getAllHotels(1);
+                      Navigator.pop(context);
+                    },
                     icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,
@@ -106,8 +118,14 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                         bottomLeft: Radius.circular(30.0),
                         bottomRight: Radius.circular(30.0),
                       )),
-                      child: Image.asset(
-                        'assets/images/1.jpg',
+                      // child: Image.asset(
+                      //   'assets/images/1.jpg',
+                      //   height: double.infinity,
+                      //   width: double.infinity,
+                      //   fit: BoxFit.cover,
+                      // ),
+                      child: Image(
+                        image: NetworkImage("http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
                         height: double.infinity,
                         width: double.infinity,
                         fit: BoxFit.cover,
@@ -151,7 +169,8 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                           height: 10,
                         ),
                         Text(
-                          'Featuring a fitness center, Grand Royale Park Hote is located in Sweden, 4.7 km frome National Museum...',
+                          // 'Featuring a fitness center, Grand Royale Park Hote is located in Sweden, 4.7 km frome National Museum...',
+                          cubit.hotelDetails!.description!,
                           style: const TextStyle(
                               wordSpacing: 5,
                               fontSize: 14,
@@ -236,9 +255,15 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                         Container(
                           width: double.infinity,
                           height: 280,
-                          child: Image.asset(
-                            'assets/images/onboard.png',
-                            fit: BoxFit.fill,
+                          // child: Image.asset(
+                          //   'assets/images/onboard.png',
+                          //   fit: BoxFit.fill,
+                          // ),
+                          child: Image(
+                            image: NetworkImage("http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                            height: double.infinity,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
                         ),
                        const SizedBox(
@@ -260,7 +285,9 @@ class _DetailsWidgetState extends State<DetailsWidget> {
             ),
           ),
         ]),
-      ),
+      );
+  },
+),
     );
   }
 }

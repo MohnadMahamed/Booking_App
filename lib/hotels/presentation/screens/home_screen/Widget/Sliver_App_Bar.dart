@@ -3,8 +3,8 @@ import 'package:booking_app/hotels/presentation/screens/home_screen/Widget/Text_
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class Sliver_App_Bar extends StatelessWidget {
-  const Sliver_App_Bar({
+class SliverApp extends StatelessWidget {
+  const SliverApp({
     Key? key,
     required this.images,
     required this.SearchController,
