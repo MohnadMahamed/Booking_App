@@ -10,7 +10,6 @@ import 'package:booking_app/hotels/domain/usecases/update_booking_status_usecase
 import 'package:booking_app/hotels/domain/usecases/update_user_info_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_log_in_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_register_usecase.dart';
-import 'package:booking_app/hotels/presentation/layout/test1.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/booking_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/hotels_main_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/user_profile_screen.dart';
@@ -148,190 +147,20 @@ allHotelsData!.hotelData!.forEach((element) {
   imageList=element.hotelImages!;
 });
 
-  // allHotelsData!.hotelData!.forEach((element) {
-  //   element.hotelImages!.forEach((element) {
-  //     imageList.add(element);
-  //   });
-  //   // imageList=element.hotelImages;
-  //   // imageList.add(element.);
-  //
-  // });
   emit(GetAllHotelsSuccessState());
 
   } );
   return result;
 
 }
-  // Future<Either<Failure, List<BookingModel>>> getAllBookings(String type ,int count)async {
-  //   emit(GetAllBookingLoadingState());
-  // }
-  //   Future<Either<Failure, UserDataModel>> register(
-  //       RegisterRequestModel registerRequest) async {
-  //     emit(UserRegisterLoadingState());
-  //     final result = await registerUseCase.call(registerRequest);
-  //     result.fold((l) {
-  //       print(l.message);
-  //       ServerFailure(l.message);
-  //       emit(HotelErrorState());
-  //     }, (r) {
-  //       registerDataModel = r;
-  //       print(r);
-  //       emit(UserRegisterSuccessState());
-  //     });
-  //
-  //     return result;
-  //   }
-  //
-  // Future<Either<Failure, UserDataModel>> login(
-  //     LoginRequestModel loginRequestModel) async {
-  //   emit(UserLoginLoadingState());
-  //
-  //   final result = await loginUseCase.call(loginRequestModel);
-  //   result.fold((l) {
-  //     ServerFailure(l.message);
-  //     emit(HotelErrorState());
-  //   }, (r) {
-  //     loginDataModel = r;
-  //     emit(UserLoginSuccessState());
-  //     print(loginDataModel);
-  //   });
-  //   emit(UserLoginSuccessState());
-  //
-  //   return result;
-  // }
-  //
-  // Future<Either<Failure, UserDataModel>> updateUserInfo(
-  //     RegisterRequestModel updateUserInfoRequest) async {
-  //   emit(UserUpdateInfoLoadingState());
-  //
-  //   final result = await updateUserInfoUseCase.call(updateUserInfoRequest);
-  //   result.fold((l) {
-  //     ServerFailure(l.message);
-  //     emit(HotelErrorState());
-  //   }, (r) {
-  //     updateInfoDataModel = r;
-  //     emit(UserUpdateInfoSuccessState());
-  //     print(updateInfoDataModel);
-  //   });
-  //   return result;
-  //   emit(UserUpdateInfoSuccessState());
-  // }
-  //
-  // Future<Either<Failure, AllDataModel>> getAllHotels(int pageNumber) async {
-  //   emit(GetAllHotelsLoadingState());
-  //
-  //   final result = await getAllHotelsUseCase.call(pageNumber);
-  //   result.fold((l) {
-  //     ServerFailure(l.message);
-  //     emit(HotelErrorState());
-  //   }, (r) {
-  //     allHotelsData = r;
-  //     print(allHotelsData);
-  //     emit(GetAllHotelsSuccessState());
-  //   });
-  //   return result;
-  // }
-  //
-  // Future<Either<Failure, List<BookingModel>>> getAllBookings(
-  //     String type, int count) async {
-  //   emit(GetAllBookingLoadingState());
-  //
-  //   final result = await getBookingsUseCase.call(type, count);
-  //   result.fold((l) {
-  //     ServerFailure(l.message);
-  //     emit(HotelErrorState());
-  //   }, (r) {
-  //     listOfBooking = r;
-  //     print(listOfBooking);
-  //     emit(GetAllBookingSuccessState());
-  //   });
-  //   return result;
-  // }
-  int currentIndex = 0;
 
-  List<Widget> screens = [
-    HomeScreen(),
-    const BookingScreen(),
-    const UserProfileScreen(),
-  ];
 
-  List<String> titles = [
-    'Test 1',
-    'Test 2',
-    'Test 3',
-  ];
 
-  void changeNavBar(index) {
-    currentIndex = index;
-    emit(ChangeNavBarState());
-  }
 
-  Future<Either<Failure, UserDataModel>> register(
-      RegisterRequestModel registerRequest) async {
-    emit(UserRegisterLoadingState());
-    final result = await registerUseCase.call(registerRequest);
-    result.fold((l) {
-      print(l.message);
-      ServerFailure(l.message);
-      emit(HotelErrorState());
-    }, (r) {
-      registerDataModel = r;
-      print(r);
-      emit(UserRegisterSuccessState());
-    });
 
-    return result;
-  }
 
-  Future<Either<Failure, UserDataModel>> login(
-      LoginRequestModel loginRequestModel) async {
-    emit(UserLoginLoadingState());
 
-    final result = await loginUseCase.call(loginRequestModel);
-    result.fold((l) {
-      ServerFailure(l.message);
-      emit(HotelErrorState());
-    }, (r) {
-      loginDataModel = r;
-      emit(UserLoginSuccessState());
-      print(loginDataModel);
-    });
-    emit(UserLoginSuccessState());
 
-    return result;
-  }
-
-  Future<Either<Failure, UserDataModel>> updateUserInfo(
-      RegisterRequestModel updateUserInfoRequest) async {
-    emit(UserUpdateInfoLoadingState());
-
-    final result = await updateUserInfoUseCase.call(updateUserInfoRequest);
-    result.fold((l) {
-      ServerFailure(l.message);
-      emit(HotelErrorState());
-    }, (r) {
-      updateInfoDataModel = r;
-      emit(UserUpdateInfoSuccessState());
-      print(updateInfoDataModel);
-    });
-    return result;
-    emit(UserUpdateInfoSuccessState());
-  }
-
-  Future<Either<Failure, AllDataModel>> getAllHotels(int pageNumber) async {
-    emit(GetAllHotelsLoadingState());
-
-    final result = await getAllHotelsUseCase.call(pageNumber);
-    result.fold((l) {
-      ServerFailure(l.message);
-      emit(HotelErrorState());
-    }, (r) {
-      allHotelsData = r;
-      print(allHotelsData);
-      emit(GetAllHotelsSuccessState());
-    });
-    return result;
-  }
 
   Future<Either<Failure, List<BookingModel>>> getAllBookings(
       String type, int count) async {
