@@ -7,7 +7,6 @@ import 'package:booking_app/hotels/presentation/components/widgets/small_text.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rolling_switch/rolling_switch.dart';
 
 var userNameController = TextEditingController();
 var emailController = TextEditingController();

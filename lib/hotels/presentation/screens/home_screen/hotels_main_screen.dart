@@ -7,26 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-
   HomeScreen({super.key});
 
   var SearchController;
   static const routeName = 'HomeScreen';
 
-
-
   Widget build(BuildContext context) {
     return BlocConsumer<HotelCubit, HotelState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
-        if(state is GetAllHotelsSuccessState){
+        if (state is GetAllHotelsSuccessState) {
           return Scaffold(
             backgroundColor: Colors.grey[900],
             body: CustomScrollView(
-physics: ScrollPhysics(),
+              physics: ScrollPhysics(),
               slivers: [
-                SliverApp(images: buildListView(), SearchController: SearchController,),
+                SliverApp(
+                  images: buildListView(),
+                  SearchController: SearchController,
+                ),
                 const SliverAdapter(),
 
                 hotelCard(),
@@ -35,47 +34,47 @@ physics: ScrollPhysics(),
             ),
             // body: buildListView(),
           );
-
-        }else
-        return Scaffold( body:Center(child: CircularProgressIndicator(),),);
-
+        } else
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
       },
     );
   }
 
   List<Widget> buildListView() {
-    return [BlocConsumer<HotelCubit, HotelState>(
-
-      listener: (context, state) {
-
-      },
-
-      builder: (context, state) {
-      var cubit=HotelCubit.get(context);
-        return ListView.builder(
-
-          scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            if(cubit.allHotelsData!.hotelData![index].hotelImages![0].image!.isEmpty){
-              return Image(
-                image: AssetImage("assets/images/no.png"),
-                fit: BoxFit.cover,
-              );
-
-            }else{
-            return Image(
-              image: NetworkImage("http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
-              fit: BoxFit.cover,
-            );}
-          },
-          itemCount: 1,
-
-        );
-      },
-    )
+    return [
+      BlocConsumer<HotelCubit, HotelState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = HotelCubit.get(context);
+          return ListView.builder(
+            scrollDirection: Axis.vertical,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              if (cubit.allHotelsData!.hotelData![index].hotelImages![0].image!
+                  .isEmpty) {
+                return Image(
+                  image: AssetImage("assets/images/no.png"),
+                  fit: BoxFit.cover,
+                );
+              } else {
+                return Image(
+                  image: NetworkImage(
+                      "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+                  fit: BoxFit.cover,
+                );
+              }
+            },
+            itemCount: 1,
+          );
+        },
+      )
     ];
   }
+
   final List<Widget> images = [
     const Image(
       image: AssetImage('assets/images/21.PNG'),
@@ -93,6 +92,5 @@ physics: ScrollPhysics(),
   ];
 
 //
-
 
 }

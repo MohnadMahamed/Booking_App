@@ -4,6 +4,7 @@ import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/hotels_main_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/search_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,8 @@ import 'hotels/presentation/screens/register_screen/register_screen.dart';
 void main() async {
   ServiceLocator().init();
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
 
   Bloc.observer = MyBlocObserver();
 
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
           HotelCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
       child:  GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home:  LoginScreen(),
+        home:  HomeScreen(),
       routes: {
         // WeatherMainScreen.routeName:(context)=>WeatherMainScreen(),
         RegisterScreen.routeName:(context) => const RegisterScreen(),
