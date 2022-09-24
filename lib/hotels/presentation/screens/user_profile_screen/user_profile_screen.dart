@@ -9,7 +9,6 @@ import 'package:booking_app/hotels/presentation/screens/component/component.dart
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rolling_switch/rolling_switch.dart';
 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
