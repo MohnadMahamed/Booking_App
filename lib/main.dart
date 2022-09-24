@@ -2,6 +2,7 @@ import 'package:booking_app/core/services/blocobserver.dart';
 import 'package:booking_app/core/services/services_locator.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/hotels_main_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
 
@@ -10,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'hotels/presentation/screens/details_screen/details_screen.dart';
 import 'hotels/presentation/screens/register_screen/register_screen.dart';
+
 void main() async {
   ServiceLocator().init();
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,9 +42,9 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           HotelCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
-      child:  GetMaterialApp(
+      child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: DetailsScreen(),
+        home: LayoutScreen(),
       ),
     );
   }
