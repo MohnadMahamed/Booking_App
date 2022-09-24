@@ -14,34 +14,54 @@ class NameAdressLatAndLonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: Dimensions.height10,
+        ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            defaultTextFormFeild(
-                controller: hotelNameController,
-                labelText: 'Name',
-                type: TextInputType.name),
-            defaultTextFormFeild(
-                controller: addressController,
-                type: TextInputType.name,
-                labelText: 'Address'),
+            Expanded(
+              child: defaultTextFormFeild(
+                  controller: hotelNameController,
+                  labelText: 'Name',
+                  type: TextInputType.name),
+            ),
+            SizedBox(
+              width: Dimensions.width10,
+            ),
+            Expanded(
+              child: defaultTextFormFeild(
+                  controller: addressController,
+                  type: TextInputType.name,
+                  labelText: 'Address'),
+            ),
           ],
         ),
         SizedBox(
-          height: Dimensions.height20,
+          height: Dimensions.height30,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            defaultTextFormFeild(
-                controller: latitudeController,
-                labelText: 'Latitude',
-                type: TextInputType.number),
-            defaultTextFormFeild(
-                controller: longitudeController,
-                labelText: 'Longitude',
-                type: TextInputType.number),
+            Expanded(
+              child: defaultTextFormFeild(
+                  controller: latitudeController,
+                  labelText: 'Latitude',
+                  type: TextInputType.number),
+            ),
+            SizedBox(
+              width: Dimensions.width10,
+            ),
+            Expanded(
+              child: defaultTextFormFeild(
+                  controller: longitudeController,
+                  labelText: 'Longitude',
+                  type: TextInputType.number),
+            ),
           ],
+        ),
+        SizedBox(
+          height: Dimensions.height10,
         ),
       ],
     );
