@@ -31,8 +31,7 @@ class HotelItemWidget extends StatelessWidget {
                 Radius.circular(Dimensions.radius15)),
             color: Colors.white.withOpacity(0.1),
           ),
-          height: 150,
-          width: double.infinity,
+          height: 140,
 
           child: Row(
             children: [
@@ -54,10 +53,10 @@ class HotelItemWidget extends StatelessWidget {
                         child: hotelImage)),
               ),
               SizedBox(
-                width:10,
+                width: Dimensions.width20,
               ),
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -68,7 +67,7 @@ class HotelItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BigText(
-                          size: Dimensions.font12 * 1.7,
+                          size: Dimensions.font12 * 2,
                           text: hotelName,
                         ),
                         SmallText(
@@ -97,7 +96,7 @@ class HotelItemWidget extends StatelessWidget {
                                 ),
                                 SmallText(
                                   text: '40.0 Km to city',
-                                  size: Dimensions.font10*1.4,
+                                  size: Dimensions.font16,
                                 ),
                               ],
                             ),
@@ -115,14 +114,14 @@ class HotelItemWidget extends StatelessWidget {
                                         (index) => Icon(
                                           Icons.star_sharp,
                                           color: AppColors.mainColor,
-                                          size: Dimensions.iconSize16*1.5,
+                                          size: Dimensions.iconSize24,
                                         ),
                                       ),
                                     ),
                                     Icon(
                                       Icons.star_half,
                                       color: Colors.teal,
-                                      size: Dimensions.iconSize16*1.5,
+                                      size: Dimensions.iconSize24,
                                     ),
                                   ],
                                 )),
@@ -138,8 +137,8 @@ class HotelItemWidget extends StatelessWidget {
                                 text: hotelPrice,
                               ),
                               SmallText(
-                                text: 'per night',
-                                size: Dimensions.font12 * 1.7,
+                                text: '/per night',
+                                size: Dimensions.font20,
                               ),
                             ],
                           ),
@@ -226,7 +225,7 @@ class HotelItemWidget extends StatelessWidget {
                   //                       CrossAxisAlignment.start,
                   //                   children: [
                   //                     BigText(
-                  //                       size: Dimensions.font12 * 1.7,
+                  //                       size: Dimensions.font12 * 2,
                   // text: cubit.allHotelsData!
                   //     .hotelData![index].name!,
                   //                     ),
@@ -365,7 +364,7 @@ class HotelItemWidget extends StatelessWidget {
 //                       crossAxisAlignment: CrossAxisAlignment.start,
 //                       children: [
 //                         BigText(
-//                           size: Dimensions.font12 * 1.7,
+//                           size: Dimensions.font12 * 2,
 //                           text: hotelName,
 //                         ),
 //                         SmallText(
