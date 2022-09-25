@@ -27,7 +27,6 @@ class HomeScreen extends StatelessWidget {
                   SearchController: SearchController,
                 ),
                 const SliverAdapter(),
-
                 hotelCard(),
                 //
               ],

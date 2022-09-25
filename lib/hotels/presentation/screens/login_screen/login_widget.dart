@@ -4,6 +4,7 @@ import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/component/my_buttom.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/hotels_main_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -251,25 +252,30 @@ class _LoginWidgetState extends State<LoginWidget> {
       },
     );
   }
-  void signInWithFacebook() async {
+  void signInWithFacebook() async
+  {
     try {
       final LoginResult result = await FacebookAuth.instance.login(permissions: (['email', 'public_profile']));
       final token = result.accessToken!.token;
       print('Facebook token userID : ${result.accessToken!.grantedPermissions}');
       final graphResponse = await http.get(Uri.parse( 'https://graph.facebook.com/'
           'v2.12/me?fields=name,first_name,last_name,email&access_token=${token}'));
+      final userData= await FacebookAuth.instance.getUserData();
 
+      await FirebaseFirestore.instance.collection('users').add({
+        'email':userData['email'],
+        'imageUrl':userData['picture']['data']['url'],
+        'name':userData['name'],
+      });
       final profile = jsonDecode(graphResponse.body);
+      print(profile['id']);
+      print(userData['']);
       print("Profile is equal to $profile");
       try {
         final AuthCredential facebookCredential = FacebookAuthProvider.credential(result.accessToken!.token);
         final userCredential = await FirebaseAuth.instance.signInWithCredential(facebookCredential);
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
 
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) =>  HomeScreen()),
-        // );
       }catch(e)
       {
         final snackBar = SnackBar(
