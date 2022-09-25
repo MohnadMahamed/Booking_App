@@ -58,7 +58,7 @@ dependencies:
   firebase_auth: ^3.10.0
   flutter_facebook_auth: ^4.3.4
   cloud_firestore: ^3.4.9
-
+  google_sign_in: ^5.4.2
 
 
 

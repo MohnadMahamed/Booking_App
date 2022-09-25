@@ -1,7 +1,5 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/widgets/booking_item_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
@@ -57,7 +55,7 @@ class CancelledScreen extends StatelessWidget {
                       hotelPrice:
                           '\$${cubit.allHotelsData!.hotelData![index].price!}',
                     ),
-                    itemCount: cubit.allHotelsData!.hotelData!.length,
+                    itemCount: cubit.listOfBooking.length,
                   ),
                 ),
                 SizedBox(

@@ -10,8 +10,8 @@ class UpdateUserInfoUseCase {
 
 
 
-  Future<Either<Failure, UserDataModel>> call(RegisterRequestModel updateUserInfoRequest) async {
-    return await baseHotelsRepository.getUpdateUserInfo(updateUserInfoRequest);
+  Future<Either<Failure, UserDataModel>> call(String name,String email) async {
+    return await baseHotelsRepository.getUpdateUserInfo(name,email);
   }
 }
 
