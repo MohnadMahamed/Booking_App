@@ -8,7 +8,9 @@ abstract class BaseRemoteDataSource {
   Future<UserDataModel> userLogin(LoginRequestModel loginRequestModel);
   Future<AllDataModel> getAllHotelsDetails(int pageNumber);
   Future<UserDataModel> updateUserInfo(
-      RegisterRequestModel updateUserInfoRequest);
+      String name,String email);
+  Future<UserDataModel> getInfo(
+      );
   Future<StatusModel> createBooking(int userId, int hotelId);
   Future<StatusModel> updateBookingStatus(int bookingId, String type);
   Future<List<BookingModel>> getBookings(String type, int count);
@@ -103,15 +105,15 @@ class RemoteDataSource implements BaseRemoteDataSource {
 
   @override
   Future<UserDataModel> updateUserInfo(
-      RegisterRequestModel updateUserInfoRequest) async {
+      String name,String email) async {
     Dio dio = Dio();
 
     dio.options.headers = {"token": ApiConstaces.token};
 
     final response = await dio.post(ApiConstaces.updatePath, data: {
-      'name': updateUserInfoRequest.name,
-      'email': updateUserInfoRequest.email,
-      'image': updateUserInfoRequest.image,
+      'name': name,
+      'email': email,
+      // 'image': updateUserInfoRequest.image,
     });
     if (response.statusCode == 200) {
       print(response.data);
@@ -219,6 +221,22 @@ class RemoteDataSource implements BaseRemoteDataSource {
       ));
     } else {
       throw ServerException(errorMessageModel: response.data);
+    }
+  }
+
+  @override
+  Future<UserDataModel> getInfo()async {
+    Dio dio = Dio();
+
+    dio.options.headers = {"token": ApiConstaces.token};  
+    final response=await dio.get("${ApiConstaces.getProfilePath}");
+    if (response.statusCode == 200) {
+      print(response.data);
+    UserDataModel userDataModel=UserDataModel.fromJson(response.data["data"]);
+    return userDataModel;
+    }else{
+      throw ServerException(errorMessageModel: response.data);
+
     }
   }
 }

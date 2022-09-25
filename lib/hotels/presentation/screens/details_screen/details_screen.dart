@@ -82,7 +82,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   color: Colors.white60),
                               child: IconButton(
                                   onPressed: () {
-                                    cubit.getAllHotels(1);
+                                    // cubit.getAllHotels(1);
                                     Navigator.pop(context);
                                   },
                                   icon: const Icon(
@@ -254,7 +254,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         height: 10,
                                       ),
                                       MyButtonWidget(
-                                        onTap: () {},
+                                        onTap: () {
+                                          cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
+                                        },
                                         text: 'Book now',
                                       )
                                     ],

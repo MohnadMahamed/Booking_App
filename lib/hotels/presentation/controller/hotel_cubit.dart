@@ -1,3 +1,4 @@
+
 import 'package:booking_app/core/error/failure.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/domain/entity/hotel_entity.dart';
@@ -6,6 +7,7 @@ import 'package:booking_app/hotels/domain/usecases/get_all_hotels_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_bookings_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_facilitis_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_search_hotels_usecase.dart';
+import 'package:booking_app/hotels/domain/usecases/get_user_info_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/update_booking_status_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/update_user_info_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_log_in_usecase.dart';
@@ -16,6 +18,7 @@ import 'package:booking_app/hotels/presentation/screens/user_profile_screen/user
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 part 'hotel_state.dart';
 
@@ -29,7 +32,7 @@ class HotelCubit extends Cubit<HotelState> {
       this.getFacilitiesUseCase,
       this.getBookingsUseCase,
       this.getAllHotelsUseCase,
-      this.createBookingUseCase)
+      this.createBookingUseCase, this.getUserInfo)
       : super(HotelInitial());
 
   static HotelCubit get(context) => BlocProvider.of(context);
@@ -40,13 +43,15 @@ class HotelCubit extends Cubit<HotelState> {
   final SearchHotelsUseCase searchHotelsUseCase;
   final UpdateBookingStatusUseCase updateBookingStatusUseCase;
   final UpdateUserInfoUseCase updateUserInfoUseCase;
+  final GetUserInfo getUserInfo;
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
   UserDataModel? registerDataModel;
   UserDataModel? loginDataModel;
   UserDataModel? updateInfoDataModel;
+  UserDataModel? userInfo;
   AllDataModel? allHotelsData;
-  List<BookingModel>? listOfBooking;
+  List<BookingModel> listOfBooking=[];
   StatusModel? createBookingResult;
   StatusModel? updateBookingResult;
   List<HotelFacilityModel>? listOfHotelFacility;
@@ -58,6 +63,12 @@ class HotelCubit extends Cubit<HotelState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   HotelDetails? hotelDetails;
+  int userId=0;
+  List<BookingModel> listOfUpcomingBooking=[];
+  List<BookingModel> listOfCancelledBooking=[];
+  List<BookingModel> listOfCompletedBooking=[];
+
+
 
   int currentIndex = 0;
 
@@ -119,9 +130,11 @@ class HotelCubit extends Cubit<HotelState> {
     }, (r) {
       registerDataModel = r;
       print(r);
+      userId=registerDataModel!.id!;
       emit(UserRegisterSuccessState());
     });
     getAllHotels(3);
+    print(userId);
 
     return result;
   }
@@ -136,19 +149,39 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       loginDataModel = r;
+      userInfo = r;
+
       emit(UserLoginSuccessState());
       print(loginDataModel);
     });
+    // userId=registerDataModel!.id!;
+
     getAllHotels(3);
+    print(userId);
 
     return result;
   }
 
+  Future<Either<Failure, UserDataModel>> getInfo()async{
+    emit(UserInfoLoadingState());
+
+    final result = await getUserInfo.call();
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      userInfo = r;
+      emit(UserInfoSuccessState());
+      print(userInfo);
+    });
+    return result;
+
+  }
   Future<Either<Failure, UserDataModel>> updateUserInfo(
-      RegisterRequestModel updateUserInfoRequest) async {
+      String name,String email) async {
     emit(UserUpdateInfoLoadingState());
 
-    final result = await updateUserInfoUseCase.call(updateUserInfoRequest);
+    final result = await updateUserInfoUseCase.call(name,email);
     result.fold((l) {
       ServerFailure(l.message);
       emit(HotelErrorState());
@@ -190,6 +223,17 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       listOfBooking = r;
+      // listOfBooking!.forEach((element) {
+      //   // if(element.type==upcomming cancelled  completed)
+      //   if(element.type=="upcomming" ){
+      //     listOfUpcomingBooking.add(element);
+      //   }if(element.type=="cancelled" ){
+      //     listOfCancelledBooking.add(element);
+      //   }
+      //   if(element.type=="completed" ){
+      //     listOfCompletedBooking.add(element);
+      //   }
+      // });
       print(listOfBooking);
       emit(GetAllBookingSuccessState());
     });
@@ -274,4 +318,12 @@ class HotelCubit extends Cubit<HotelState> {
     });
     return result;
   }
+
+
+
+
+
+
+
+
 }

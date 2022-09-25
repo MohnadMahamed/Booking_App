@@ -3,8 +3,8 @@ import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
-class Test1 extends StatelessWidget {
-  const Test1({super.key});
+class EmptyList extends StatelessWidget {
+  const EmptyList({super.key});
 
   @override
   Widget build(BuildContext context) {

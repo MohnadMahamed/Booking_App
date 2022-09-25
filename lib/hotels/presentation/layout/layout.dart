@@ -51,6 +51,12 @@ class LayoutScreen extends StatelessWidget {
             initialActiveIndex: 0,
             onTap: (index) {
               cubit.changeNavBar(index);
+              if(index==0){
+                cubit.getAllHotels(1);
+              }
+              if(index==1){
+                cubit.getAllBookings("upcomming", 10);
+              }
             },
           ),
           // bottomNavigationBar: BubbleBottomBar(

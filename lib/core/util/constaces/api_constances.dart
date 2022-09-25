@@ -16,7 +16,9 @@ class ApiConstaces {
   static const getBookingsPath = "$basUrl/get-bookings";
   static const getFacilitiesPath = "$basUrl/facilities";
   static const searchHotelsPath = "$basUrl/search-hotels";
+  static const getProfilePath = "$basUrl/auth/profile-info";
   // static const token = "AFhxM8ch7WPLH4GNrNW8MwmvxoQZPLkpgQbDGKC5stB7IBe5Bnl0GhOa0qB8";
   // static const token = "r4zyWr9bnAPluNcmjpPbOlidI4Xx6C6LpeJyvQ7PMs9oAlAq8ASmg6pOwG2b";
-  static const token = "NczOsFGcz3J7K7vjLajOHCm2762P8TK0eDe29yMsFzV6AgvSyjJDwNUsS7cG";
+  // static const token = "NczOsFGcz3J7K7vjLajOHCm2762P8TK0eDe29yMsFzV6AgvSyjJDwNUsS7cG";
+  static const token = "qt4ZzZE9aCuJBordbZ7csvSfifrPnjw9zBEjMBtELtu5iA9v2CftranF2LYy";
 }

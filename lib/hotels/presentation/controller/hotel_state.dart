@@ -15,6 +15,9 @@ class UserLoginSuccessState extends HotelState {}
 class UserUpdateInfoLoadingState extends HotelState {}
 
 class UserUpdateInfoSuccessState extends HotelState {}
+class UserInfoLoadingState extends HotelState {}
+
+class UserInfoSuccessState extends HotelState {}
 
 class GetAllBookingSuccessState extends HotelState {}
 

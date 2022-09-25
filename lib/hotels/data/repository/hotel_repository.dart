@@ -40,8 +40,8 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
   @override
-  Future<Either<Failure, UserDataModel>> getUpdateUserInfo(RegisterRequestModel updateUserInfoRequest) async {
-    final result=await baseHotelRemoteDataSource.updateUserInfo(updateUserInfoRequest);
+  Future<Either<Failure, UserDataModel>> getUpdateUserInfo(String name,String email) async {
+    final result=await baseHotelRemoteDataSource.updateUserInfo(name,email);
 
     try{
       return Right(result);
@@ -106,6 +106,17 @@ class HotelsRepository extends BaseHotelsRepository{
             String? count,
            String? name}) async {
     final result=await baseHotelRemoteDataSource.searchHotels() ;
+
+    try{
+      return Right(result);
+    }on ServerException catch(failure){
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserDataModel>> getInfo()async {
+    final result=await baseHotelRemoteDataSource.getInfo();
 
     try{
       return Right(result);
