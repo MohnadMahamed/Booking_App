@@ -6,7 +6,6 @@ import 'package:booking_app/hotels/presentation/components/widgets/small_text.da
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
-import 'package:booking_app/hotels/presentation/screens/home_screen/home_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/search_filtter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +39,7 @@ class SearchResultScreen extends StatelessWidget {
                     height: Dimensions.height30 * 1.8,
                     decoration: BoxDecoration(
                         color: Colors.transparent.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(50.0)),
+                        borderRadius: BorderRadius.circular(10.0)),
                     child: IconButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(
@@ -103,7 +102,7 @@ class SearchResultScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SmallText(text: '530 Hotel Found'),
+                     SmallText(text: '${cubit.searchHotelLis.length} Hotel Found'),
                     InkWell(
                       onTap: () {
                         Navigator.pushReplacementNamed(
@@ -165,7 +164,7 @@ class SearchResultScreen extends StatelessWidget {
                       hotelPrice:
                           '\$${cubit.allHotelsData!.hotelData![index].price!}',
                     ),
-                    itemCount: cubit.allHotelsData!.hotelData!.length,
+                    itemCount: cubit.searchHotelLis.length,
                   ),
                 ),
               ),

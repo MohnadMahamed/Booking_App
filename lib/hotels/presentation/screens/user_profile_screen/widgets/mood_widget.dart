@@ -13,7 +13,7 @@ class MoodWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const SmallText(
-          text: 'Mood',
+          text: 'Mood',size: 18,
         ),
         RollingSwitch.icon(
           onChanged: (bool state) {

@@ -117,6 +117,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
             )),
             // My Button Widget
             MyButtonWidget(
+
               onTap: () {
                 Navigator.pushReplacementNamed(
                     context, SearchResultScreen.routeName);

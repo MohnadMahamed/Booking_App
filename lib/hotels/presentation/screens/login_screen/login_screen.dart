@@ -85,74 +85,78 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                            child: Container(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              width: Dimensions.width30 * 7,
-                              height: Dimensions.height30 * 2.2,
-                              decoration: BoxDecoration(
-                                color: AppColors.faceBackGroundColor,
-                                borderRadius: BorderRadius.circular(
-                                    Dimensions.radius20 * 2),
+                          Expanded(
+                            child: GestureDetector(
+                              child: Container(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                width: Dimensions.width30 * 7,
+                                height: Dimensions.height30 * 2.2,
+                                decoration: BoxDecoration(
+                                  color: AppColors.faceBackGroundColor,
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius20 * 2),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/facebook.png',
+                                      width: Dimensions.iconSize16 * 2.5,
+                                      height: Dimensions.iconSize16 * 2.5,
+                                    ),
+                                    SizedBox(
+                                      width: Dimensions.width10 / 2,
+                                    ),
+                                    SmallText(
+                                      text: 'Facebook',
+                                      color: Colors.white,
+                                      size: Dimensions.font12 * 2,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/facebook.png',
-                                    width: Dimensions.iconSize16 * 2.5,
-                                    height: Dimensions.iconSize16 * 2.5,
-                                  ),
-                                  SizedBox(
-                                    width: Dimensions.width10 / 2,
-                                  ),
-                                  SmallText(
-                                    text: 'Facebook',
-                                    color: Colors.white,
-                                    size: Dimensions.font12 * 2,
-                                  ),
-                                ],
-                              ),
+                              onTap: () {
+                                signInWithFacebook();
+                              },
                             ),
-                            onTap: () {
-                              signInWithFacebook();
-                            },
                           ),
                           SizedBox(
                             width: Dimensions.width20,
                           ),
-                          GestureDetector(
-                            child: Container(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              width: Dimensions.width30 * 7,
-                              height: Dimensions.height30 * 2.2,
-                              decoration: BoxDecoration(
-                                color: AppColors.gmailBackGroundColor,
-                                borderRadius: BorderRadius.circular(
-                                    Dimensions.radius20 * 2),
+                          Expanded(
+                            child: GestureDetector(
+                              child: Container(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                width: Dimensions.width30 * 7,
+                                height: Dimensions.height30 * 2.2,
+                                decoration: BoxDecoration(
+                                  color: AppColors.gmailBackGroundColor,
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius20 * 2),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/gmail.png',
+                                      width: Dimensions.iconSize16 * 2.5,
+                                      height: Dimensions.iconSize16 * 2.5,
+                                    ),
+                                    SizedBox(
+                                      width: Dimensions.width10 / 2,
+                                    ),
+                                    SmallText(
+                                      text: 'Gmail',
+                                      color: Colors.white,
+                                      size: Dimensions.font12 * 2,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/gmail.png',
-                                    width: Dimensions.iconSize16 * 2.5,
-                                    height: Dimensions.iconSize16 * 2.5,
-                                  ),
-                                  SizedBox(
-                                    width: Dimensions.width10 / 2,
-                                  ),
-                                  SmallText(
-                                    text: 'Gmail',
-                                    color: Colors.white,
-                                    size: Dimensions.font12 * 2,
-                                  ),
-                                ],
-                              ),
+                              onTap: () {
+                                loginInWithGoogle();
+                              },
                             ),
-                            onTap: () {
-                              loginInWithGoogle();
-                            },
                           ),
                         ],
                       ),

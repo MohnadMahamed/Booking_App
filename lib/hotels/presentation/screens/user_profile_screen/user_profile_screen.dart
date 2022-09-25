@@ -75,23 +75,25 @@ class UserProfileScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
+                                // mainAxisAlignment: MainAxisAlignment
+                                //     .spaceBetween,
                                 children: [
-                                  const SmallText(text: 'User Name'),
+                                  const SmallText(text: 'User Name',size: 18),
+                                  Spacer(),
                                   SmallText(
                                     text: cubit.userInfo!.name!,
                                     size: Dimensions.font20,
                                     color: Colors.white,
+
                                   )
                                 ],
                               ),
                               myDivider(),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
+
                                 children: [
-                                  const SmallText(text: 'Email'),
+                                  const SmallText(text: 'Email',size: 18),
+Spacer(),
                                   SmallText(
                                     text: cubit.userInfo!.email!,
                                     size: Dimensions.font20,
