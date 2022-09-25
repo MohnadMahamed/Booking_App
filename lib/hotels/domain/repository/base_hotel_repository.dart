@@ -15,6 +15,8 @@ abstract class BaseHotelsRepository{
       int pageNumber);
   Future<Either<Failure,UserDataModel>> getUpdateUserInfo(
       String name,String email);
+  Future<Either<Failure,UserDataModel>> getInfo(
+     );
   Future<Either<Failure,StatusModel>> getCreateBooking(
       int userId, int hotelId);
   Future<Either<Failure,StatusModel>> getUpdateBookingStatus(

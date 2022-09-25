@@ -7,6 +7,7 @@ import 'package:booking_app/hotels/domain/usecases/get_all_hotels_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_bookings_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_facilitis_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_search_hotels_usecase.dart';
+import 'package:booking_app/hotels/domain/usecases/get_user_info_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/update_booking_status_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/update_user_info_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_log_in_usecase.dart';
@@ -31,7 +32,7 @@ class HotelCubit extends Cubit<HotelState> {
       this.getFacilitiesUseCase,
       this.getBookingsUseCase,
       this.getAllHotelsUseCase,
-      this.createBookingUseCase)
+      this.createBookingUseCase, this.getUserInfo)
       : super(HotelInitial());
 
   static HotelCubit get(context) => BlocProvider.of(context);
@@ -42,11 +43,13 @@ class HotelCubit extends Cubit<HotelState> {
   final SearchHotelsUseCase searchHotelsUseCase;
   final UpdateBookingStatusUseCase updateBookingStatusUseCase;
   final UpdateUserInfoUseCase updateUserInfoUseCase;
+  final GetUserInfo getUserInfo;
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
   UserDataModel? registerDataModel;
   UserDataModel? loginDataModel;
   UserDataModel? updateInfoDataModel;
+  UserDataModel? userInfo;
   AllDataModel? allHotelsData;
   List<BookingModel> listOfBooking=[];
   StatusModel? createBookingResult;
@@ -146,11 +149,12 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       loginDataModel = r;
+      userInfo = r;
 
       emit(UserLoginSuccessState());
       print(loginDataModel);
     });
-    userId=registerDataModel!.id!;
+    // userId=registerDataModel!.id!;
 
     getAllHotels(3);
     print(userId);
@@ -158,6 +162,21 @@ class HotelCubit extends Cubit<HotelState> {
     return result;
   }
 
+  Future<Either<Failure, UserDataModel>> getInfo()async{
+    emit(UserInfoLoadingState());
+
+    final result = await getUserInfo.call();
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      userInfo = r;
+      emit(UserInfoSuccessState());
+      print(userInfo);
+    });
+    return result;
+
+  }
   Future<Either<Failure, UserDataModel>> updateUserInfo(
       String name,String email) async {
     emit(UserUpdateInfoLoadingState());

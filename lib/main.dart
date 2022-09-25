@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          HotelCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
+          HotelCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(),sl()),
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home: const RegisterScreen(),

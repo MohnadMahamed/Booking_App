@@ -6,6 +6,7 @@ import 'package:booking_app/hotels/domain/usecases/get_all_hotels_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_bookings_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_facilitis_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_search_hotels_usecase.dart';
+import 'package:booking_app/hotels/domain/usecases/get_user_info_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/update_booking_status_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/update_user_info_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_log_in_usecase.dart';
@@ -18,7 +19,7 @@ class ServiceLocator{
   void init(){
 
     ///bloc
-   sl.registerFactory(() => HotelCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+   sl.registerFactory(() => HotelCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl()));
     /// Use Case
     sl.registerLazySingleton(() => CreateBookingUseCase(sl()));
     sl.registerLazySingleton(() => GetAllHotelsUseCase(sl()));
@@ -29,6 +30,7 @@ class ServiceLocator{
     sl.registerLazySingleton(() => UpdateUserInfoUseCase(sl()));
     sl.registerLazySingleton(() => LoginUseCase(sl()));
     sl.registerLazySingleton(() => RegisterUseCase(sl()));
+    sl.registerLazySingleton(() => GetUserInfo(sl()));
     /// Repository
     sl.registerLazySingleton<BaseHotelsRepository>(() => HotelsRepository(sl()));
     /// Data Source

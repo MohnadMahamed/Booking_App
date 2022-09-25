@@ -153,6 +153,7 @@ class EditProfileScreen extends StatelessWidget {
                     // RegisterRequestModel updateInfo=RegisterRequestModel(name: userNameController.text, email: emailController.text, password: "", passwordConfirmation: "", image: "");
 
                     cubit.updateUserInfo(userNameController.text,emailController.text);
+                    cubit.getInfo();
                     Navigator.pop(context);
                   },
                 ),

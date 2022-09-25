@@ -114,6 +114,17 @@ class HotelsRepository extends BaseHotelsRepository{
     }
   }
 
+  @override
+  Future<Either<Failure, UserDataModel>> getInfo()async {
+    final result=await baseHotelRemoteDataSource.getInfo();
+
+    try{
+      return Right(result);
+    }on ServerException catch(failure){
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
 }
 
 

@@ -80,7 +80,7 @@ class UserProfileScreen extends StatelessWidget {
                                 children: [
                                   const SmallText(text: 'User Name'),
                                   SmallText(
-                                    text: cubit.loginDataModel!.name!,
+                                    text: cubit.userInfo!.name!,
                                     size: Dimensions.font20,
                                     color: Colors.white,
                                   )
@@ -93,7 +93,7 @@ class UserProfileScreen extends StatelessWidget {
                                 children: [
                                   const SmallText(text: 'Email'),
                                   SmallText(
-                                    text: cubit.loginDataModel!.email!,
+                                    text: cubit.userInfo!.email!,
                                     size: Dimensions.font20,
                                     color: Colors.white,
                                   )

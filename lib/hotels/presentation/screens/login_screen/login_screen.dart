@@ -339,8 +339,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
       String name=userData["name"];
       String email=userData["email"];
-      String password=profile["id"]%10000;
-      String confirmPassword=profile["id"]%10000;
+      String password=profile["id"];
+      String confirmPassword=profile["id"];
       RegisterRequestModel registerRequestModel =RegisterRequestModel(name: name, email: email, password: password, passwordConfirmation: confirmPassword, image: "image");
      HotelCubit.get(context).register(registerRequestModel);
 
