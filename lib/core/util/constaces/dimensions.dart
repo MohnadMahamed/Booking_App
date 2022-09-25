@@ -38,4 +38,9 @@ class Dimensions {
   static double iconSize16 = screenHeight / 52.75;
   static double iconSize24 = screenHeight / 35.17;
   static double iconSize30 = screenHeight / 28.13;
+
+  //sliver app bar
+  static double carouselrHeight = screenHeight / 1.688;
+  static double expandedHeight = screenHeight / 2.22;
+  static double toolBarHeight = screenHeight / 8.44;
 }

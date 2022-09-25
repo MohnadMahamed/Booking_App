@@ -1,293 +1,264 @@
-import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../components/widgets/details/background_details_page.dart';
-import '../../components/widgets/details/hotel_details.dart';
-import '../../components/widgets/details/photohotel.dart';
-import '../../components/widgets/details/ratinghotel.dart';
-import '../../components/widgets/details/reviews_of_hotel.dart';
-import '../component/my_buttom.dart';
+// import 'package:booking_app/core/util/constaces/app_colors.dart';
+// import 'package:booking_app/core/util/constaces/dimensions.dart';
+// import 'package:booking_app/hotels/presentation/components/components.dart';
+// import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
+// import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
+// import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+// import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'widgets/background_details_page.dart';
+// import 'widgets/hotel_details.dart';
+// import 'widgets/photohotel.dart';
+// import 'widgets/ratinghotel.dart';
 
-class DetailsWidget extends StatefulWidget {
+// class DetailsWidget extends StatefulWidget {
+//   const DetailsWidget({
+//     Key? key,
+//   }) : super(key: key);
 
-  const DetailsWidget({
-    Key? key,
+//   @override
+//   State<DetailsWidget> createState() => _DetailsWidgetState();
+// }
 
-  }) : super(key: key);
+// class _DetailsWidgetState extends State<DetailsWidget> {
+//   late ScrollController scrollController;
+//   bool showTitle = false;
 
-  @override
-  State<DetailsWidget> createState() => _DetailsWidgetState();
-}
+//   @override
+//   void initState() {
+//     scrollController = ScrollController();
+//     scrollController.addListener(() {
+//       if (scrollController.position.pixels >= 645) {
+//         setState(() {
+//           showTitle = true;
+//         });
+//       } else {
+//         setState(() {
+//           showTitle = false;
+//         });
+//       }
+//     });
+//     super.initState();
+//   }
 
-class _DetailsWidgetState extends State<DetailsWidget> {
-  late ScrollController scrollController;
-  bool showTitle = false;
+//   @override
+//   void dispose() {
+//     scrollController.dispose();
+//     super.dispose();
+//   }
 
-  @override
-  void initState() {
-    scrollController = ScrollController();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels >= 645) {
-        setState(() {
-          showTitle = true;
-        });
-      } else {
-        setState(() {
-          showTitle = false;
-        });
-      }
-    });
-    super.initState();
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     var cubit = HotelCubit.get(context);
+//     return SafeArea(
+//       child: BlocConsumer<HotelCubit, HotelState>(
+//         listener: (context, state) {},
+//         builder: (context, state) {
+//           return Scaffold(
+//             body: CustomScrollView(controller: scrollController, slivers: [
+//               SliverAppBar(
+//                 elevation: 0,
+//                 actionsIconTheme: const IconThemeData(size: 25),
+//                 backgroundColor: Colors.transparent,
+//                 expandedHeight: MediaQuery.of(context).size.height,
+//                 pinned: true,
+//                 toolbarHeight: 150,
+//                 leadingWidth: 100,
+//                 automaticallyImplyLeading: false,
+//                 leading: Padding(
+//                   padding:
+//                       const EdgeInsets.symmetric(horizontal: 30, vertical: 55),
+//                   child: Container(
+//                     clipBehavior: Clip.antiAliasWithSaveLayer,
+//                     decoration: const BoxDecoration(
+//                         borderRadius: BorderRadius.all(Radius.circular(50)),
+//                         color: Colors.white60),
+//                     child: IconButton(
+//                         onPressed: () {
+//                           cubit.getAllHotels(1);
+//                           Navigator.pop(context);
+//                         },
+//                         icon: const Icon(
+//                           Icons.arrow_back,
+//                           color: Colors.black,
+//                           size: 20,
+//                         )),
+//                   ),
+//                 ),
+//                 actions: [
+//                   Padding(
+//                     padding: const EdgeInsets.symmetric(
+//                         horizontal: 20, vertical: 53),
+//                     child: Container(
+//                       clipBehavior: Clip.antiAliasWithSaveLayer,
+//                       decoration: const BoxDecoration(
+//                           borderRadius: BorderRadius.all(Radius.circular(50)),
+//                           color: Colors.black87),
+//                       child: IconButton(
+//                           onPressed: () {},
+//                           icon: const Icon(
+//                             Icons.favorite_border,
+//                             color: Colors.teal,
+//                             size: 20,
+//                           )),
+//                     ),
+//                   )
+//                 ],
+//                 //flexibleSpace
+//                 flexibleSpace: FlexibleSpaceBar(
+//                   centerTitle: true,
+//                   background: showTitle == false
+//                       ? const BackGroundDetailsPage()
+//                       : const SizedBox(
+//                           height: 0,
+//                         ),
+//                   title: showTitle == true
+//                       ? Container(
+//                           clipBehavior: Clip.antiAliasWithSaveLayer,
+//                           decoration: const BoxDecoration(
+//                               borderRadius: BorderRadius.only(
+//                             bottomLeft: Radius.circular(20.0),
+//                             bottomRight: Radius.circular(20.0),
+//                           )),
+//                           child: Image(
+//                             image: NetworkImage(
+//                                 "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+//                             height: double.infinity,
+//                             width: double.infinity,
+//                             fit: BoxFit.cover,
+//                           ),
+//                         )
+//                       : const SizedBox(
+//                           height: 0,
+//                         ),
+//                 ),
+//               ),
+//               SliverToBoxAdapter(
+//                 child: Container(
+//                   color: AppColors.backGroundColor,
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Padding(
+//                         padding: const EdgeInsets.all(12.0),
+//                         child: Column(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             const HotelViewDetails(),
+//                             myDivider(),
+//                             BigText(
+//                               text: 'Summary',
+//                               size: Dimensions.font12 * 2,
+//                             ),
+//                             SizedBox(
+//                               height: Dimensions.height10 / 2,
+//                             ),
+//                             SmallText(
+//                               // 'Featuring a fitness center, Grand Royale Park Hote is located in Sweden, 4.7 km frome National Museum...',
+//                               text: cubit.hotelDetails!.description!,
+//                             ),
+//                             const SizedBox(
+//                               height: 10,
+//                             ),
+//                             const RatingHotel(),
+//                             const SizedBox(
+//                               height: 15,
+//                             ),
+//                             Row(
+//                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                               children: [
+//                                 BigText(
+//                                   text: 'Photo',
+//                                   size: Dimensions.font12 * 2,
+//                                 ),
+//                                 Row(
+//                                   children: [
+//                                     InkWell(
+//                                       child: SmallText(
+//                                         text: 'View all',
+//                                         size: Dimensions.font12 * 2,
+//                                         color: AppColors.mainColor,
+//                                       ),
+//                                       onTap: () {},
+//                                     ),
+//                                     SizedBox(
+//                                       width: Dimensions.height10 * 2,
+//                                     ),
+//                                     const Icon(
+//                                       Icons.arrow_forward,
+//                                       color: Colors.teal,
+//                                     )
+//                                   ],
+//                                 ),
+//                               ],
+//                             ),
+//                             const SizedBox(height: 15),
+//                             const PhotoOfHotel(),
+//                             const SizedBox(height: 20),
+//                             // Row(
+//                             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                             //   children: [
+//                             //     const Text(
+//                             //       'Reviews',
+//                             //       style: TextStyle(
+//                             //           fontSize: 16,
+//                             //           color: Colors.white,
+//                             //           fontWeight: FontWeight.bold),
+//                             //     ),
+//                             //     Row(
+//                             //       children: [
+//                             //         InkWell(
+//                             //           child: const Text(
+//                             //             'View all',
+//                             //             style: TextStyle(
+//                             //                 fontSize: 16,
+//                             //                 color: Colors.teal,
+//                             //                 fontWeight: FontWeight.bold),
+//                             //           ),
+//                             //           onTap: () {},
+//                             //         ),
+//                             //         const Icon(
+//                             //           Icons.arrow_forward,
+//                             //           color: Colors.teal,
+//                             //         )
+//                             //       ],
+//                             //     ),
+//                             //   ],
+//                             // ),
+//                             // ReviewsOfHotel(),
+//                             myDivider(),
+//                             const SizedBox(height: 10),
 
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
-    return SafeArea(
-      child: BlocConsumer<HotelCubit, HotelState>(
-  listener: (context, state) {
-  },
-  builder: (context, state) {
-    return Scaffold(
-        body: CustomScrollView(controller: scrollController, slivers: [
-          SliverAppBar(
-            elevation: 0,
-            actionsIconTheme: const IconThemeData(size: 25),
-            backgroundColor: Colors.transparent,
-            expandedHeight: MediaQuery.of(context).size.height,
-            pinned: true,
-            toolbarHeight: 150,
-            leadingWidth: 100,
-            automaticallyImplyLeading: false,
-            leading: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 55),
-              child: Container(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                    color: Colors.white60),
-                child: IconButton(
-                    onPressed: () {
-                      cubit.getAllHotels(1);
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                      size: 20,
-                    )),
-              ),
-            ),
-            actions: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 53),
-                child: Container(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      color: Colors.black87),
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.favorite_border,
-                        color: Colors.teal,
-                        size: 20,
-                      )),
-                ),
-              )
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              background: showTitle == false
-                  ? BackGroundDetailsPage()
-                  : const SizedBox(
-                      height: 0,
-                    ),
-              title: showTitle == true
-                  ? Container(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30.0),
-                        bottomRight: Radius.circular(30.0),
-                      )),
-                      // child: Image.asset(
-                      //   'assets/images/1.jpg',
-                      //   height: double.infinity,
-                      //   width: double.infinity,
-                      //   fit: BoxFit.cover,
-                      // ),
-                      child: Image(
-                        image: NetworkImage("http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
-                        height: double.infinity,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : const SizedBox(
-                      height: 0,
-                    ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: const Color(0XFF1A1A1A),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        HotelViewDetails(),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Divider(
-                          height: 1,
-                          color: Colors.grey.shade700,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'Summary',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          // 'Featuring a fitness center, Grand Royale Park Hote is located in Sweden, 4.7 km frome National Museum...',
-                          cubit.hotelDetails!.description!,
-                          style: const TextStyle(
-                              wordSpacing: 5,
-                              fontSize: 14,
-                              color: Colors.white60,
-                              fontWeight: FontWeight.normal),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        RatingHotel(),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Photo',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Row(
-                              children: [
-                                InkWell(
-                                  child: const Text(
-                                    'View all',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.teal,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  onTap: () {},
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.teal,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        PhotoOfHotel(),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Reviews',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Row(
-                              children: [
-                                InkWell(
-                                  child: const Text(
-                                    'View all',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.teal,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  onTap: () {},
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.teal,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        ReviewsOfHotel(),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 280,
-                          // child: Image.asset(
-                          //   'assets/images/onboard.png',
-                          //   fit: BoxFit.fill,
-                          // ),
-                          child: Image(
-                            image: NetworkImage("http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
-                            height: double.infinity,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                       const SizedBox(
-                          height: 20,
-                        ),
-                        MyButton(
-                          onClick: () {},
-                          text: 'Book now',
-                          background: Colors.teal,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ]),
-      );
-  },
-),
-    );
-  }
-}
+//                             SizedBox(
+//                               width: double.infinity,
+//                               height: 280,
+//                               child: Image(
+//                                 image: NetworkImage(
+//                                     "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+//                                 height: double.infinity,
+//                                 width: double.infinity,
+//                                 fit: BoxFit.cover,
+//                               ),
+//                             ),
+//                             const SizedBox(
+//                               height: 10,
+//                             ),
+//                             MyButtonWidget(
+//                               onTap: () {},
+//                               text: 'Book now',
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ]),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LayoutScreen extends StatelessWidget {
+  static const routeName = 'LayoutScreen';
+
   const LayoutScreen({Key? key}) : super(key: key);
 
   @override

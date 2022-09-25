@@ -2,25 +2,26 @@ import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/search/count_and_page.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/search/distance_slider.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/search/price_slider.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/search/name_adrees_lat_long.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/search/popular_facilities.dart';
+import 'package:booking_app/hotels/presentation/screens/search_screen/search_result_screen.dart';
+import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/count_and_page.dart';
+import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/distance_slider.dart';
+import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/name_adrees_lat_long.dart';
+import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/popular_facilities.dart';
+import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/price_slider.dart';
 import 'package:flutter/material.dart';
 
-class SearchScreen extends StatefulWidget {
-  static const routeName = 'SearchScreen';
+class SearchFiltterScreen extends StatefulWidget {
+  static const routeName = 'SearchFiltterScreen';
 
-  const SearchScreen({super.key});
+  const SearchFiltterScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<SearchFiltterScreen> createState() => _SearchFiltterScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,7 +42,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     color: Colors.transparent.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(50.0)),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, SearchResultScreen.routeName);
+                    },
                     icon: Icon(
                       Icons.close,
                       size: Dimensions.iconSize30 * 1.5,
@@ -112,7 +116,11 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             )),
             // My Button Widget
-            const MyButtonWidget(
+            MyButtonWidget(
+              onTap: () {
+                Navigator.pushReplacementNamed(
+                    context, SearchResultScreen.routeName);
+              },
               text: 'Apply',
             ),
           ],

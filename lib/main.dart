@@ -1,9 +1,12 @@
 import 'package:booking_app/core/services/blocobserver.dart';
 import 'package:booking_app/core/services/services_locator.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:booking_app/hotels/presentation/screens/home_screen/hotels_main_screen.dart';
+import 'package:booking_app/hotels/presentation/layout/layout.dart';
+import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
+import 'package:booking_app/hotels/presentation/screens/home_screen/home_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
-import 'package:booking_app/hotels/presentation/screens/search_screen/search_screen.dart';
+import 'package:booking_app/hotels/presentation/screens/search_screen/search_result_screen.dart';
+import 'package:booking_app/hotels/presentation/screens/search_screen/search_filtter_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -15,7 +18,6 @@ void main() async {
   ServiceLocator().init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
 
   Bloc.observer = MyBlocObserver();
 
@@ -43,18 +45,20 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           HotelCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
-      child:  GetMaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home:  LoginScreen(),
-      routes: {
-        // WeatherMainScreen.routeName:(context)=>WeatherMainScreen(),
-        RegisterScreen.routeName:(context) => const RegisterScreen(),
-        LoginScreen.routeName:(context) => const LoginScreen(),
-        HomeScreen.routeName:(context) => HomeScreen(),
-        // DetailsScreen.routeName:(context) => DetailsScreen(),
-        SearchScreen.routeName:(context) => const SearchScreen(),
-
-      },
+        home: const RegisterScreen(),
+        routes: {
+          // WeatherMainScreen.routeName:(context)=>WeatherMainScreen(),
+          RegisterScreen.routeName: (context) => const RegisterScreen(),
+          LoginScreen.routeName: (context) => const LoginScreen(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
+          DetailsScreen.routeName: (context) => const DetailsScreen(),
+          SearchFiltterScreen.routeName: (context) =>
+              const SearchFiltterScreen(),
+          SearchResultScreen.routeName: (context) => const SearchResultScreen(),
+          LayoutScreen.routeName: (context) => const LayoutScreen(),
+        },
       ),
     );
   }

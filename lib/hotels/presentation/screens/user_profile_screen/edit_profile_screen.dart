@@ -142,11 +142,12 @@ class EditProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const MyButtonWidget(text: 'Apply')),
+            MyButtonWidget(
+              text: 'Apply',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),
