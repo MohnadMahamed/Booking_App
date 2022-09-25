@@ -35,9 +35,9 @@ Widget defaultTextFormFeild({
           //   color: Colors.red,
           //   fontSize: Dimensions.font30,
           // ),
-          border: const OutlineInputBorder(),
+          border:  OutlineInputBorder( borderRadius:BorderRadius.circular(10.0), ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(10.0),
             borderSide: const BorderSide(width: 0.0, color: Colors.transparent),
           ),
         ),
@@ -68,9 +68,9 @@ Widget editTextFormFeild({
               TextStyle(color: Colors.white, fontSize: Dimensions.font20),
           filled: true,
           fillColor: Colors.transparent.withOpacity(.2),
-          border: const OutlineInputBorder(),
+          border:  OutlineInputBorder( borderRadius:BorderRadius.circular(10.0), ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(10.0),
             borderSide: const BorderSide(width: 0.0, color: Colors.transparent),
           ),
         ),

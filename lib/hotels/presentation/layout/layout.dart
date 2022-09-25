@@ -1,3 +1,4 @@
+import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -20,7 +21,7 @@ class LayoutScreen extends StatelessWidget {
           bottomNavigationBar: ConvexAppBar(
             style: TabStyle.custom,
             color: Colors.white,
-            backgroundColor: Colors.teal,
+            backgroundColor: AppColors.backGroundColor1,
             // gradient: LinearGradient(colors: [Colors.grey, Colors.teal]),
             // curveSize: 10,
             // height: Dimensions.height30 * 2,

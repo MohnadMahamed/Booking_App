@@ -43,14 +43,14 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                 },
                 icon: Icon(
                   Icons.add,
-                  size: Dimensions.iconSize24 * 1.5,
+                  size: Dimensions.iconSize24 ,
                   color: Colors.white,
                 ),
               ),
               SmallText(
                 text: 'Count($countValue)',
                 color: Colors.white,
-                size: Dimensions.font12 * 2,
+                size: Dimensions.font12 * 1.7,
               ),
               IconButton(
                 onPressed: () {
@@ -66,7 +66,7 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                 },
                 icon: Icon(
                   Icons.remove,
-                  size: Dimensions.iconSize24 * 1.5,
+                  size: Dimensions.iconSize24 ,
                   color: Colors.white,
                 ),
               ),
@@ -96,14 +96,14 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                 },
                 icon: Icon(
                   Icons.add,
-                  size: Dimensions.iconSize24 * 1.5,
+                  size: Dimensions.iconSize24 ,
                   color: Colors.white,
                 ),
               ),
               SmallText(
                 text: 'Page($pageValue)',
                 color: Colors.white,
-                size: Dimensions.font12 * 2,
+                size: Dimensions.font12 * 1.7,
               ),
               IconButton(
                 onPressed: () {
@@ -119,7 +119,7 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                 },
                 icon: Icon(
                   Icons.remove,
-                  size: Dimensions.iconSize24 * 1.5,
+                  size: Dimensions.iconSize24 ,
                   color: Colors.white,
                 ),
               ),
@@ -128,6 +128,5 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
         ),
       ],
     );
-    ;
   }
 }

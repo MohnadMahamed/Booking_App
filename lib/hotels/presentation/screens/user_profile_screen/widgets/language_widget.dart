@@ -13,7 +13,7 @@ class LanguageWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const SmallText(
-          text: 'Language',
+          text: 'Language',size: 18,
         ),
         RollingSwitch.icon(
           onChanged: (bool state) {
