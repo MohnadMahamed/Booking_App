@@ -8,6 +8,7 @@ class SmallText extends StatelessWidget {
   final double size;
   final double height;
   const SmallText(
+
       {Key? key,
       this.color = Colors.white70,
       required this.text,
@@ -19,11 +20,13 @@ class SmallText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+
       style: GoogleFonts.kanit(
         height: height,
         color: color,
         fontSize: size == 0 ? Dimensions.font26 : size,
       ),
+
     );
   }
 }

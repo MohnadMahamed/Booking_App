@@ -32,26 +32,31 @@ class HotelItemWidget extends StatelessWidget {
             color: Colors.white.withOpacity(0.1),
           ),
           height: 140,
+
           child: Row(
             children: [
-              Container(
-                  height: 150,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadiusDirectional.only(
-                      topStart: Radius.circular(17),
-                      bottomStart: Radius.circular(17),
-                    ),
-                  ),
-                  child: ClipRRect(
-                      borderRadius: const BorderRadiusDirectional.only(
+              Expanded(
+                flex: 2,
+                child: Container(
+                    height: 150,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadiusDirectional.only(
                         topStart: Radius.circular(17),
                         bottomStart: Radius.circular(17),
                       ),
-                      child: hotelImage)),
+                    ),
+                    child: ClipRRect(
+                        borderRadius: const BorderRadiusDirectional.only(
+                          topStart: Radius.circular(17),
+                          bottomStart: Radius.circular(17),
+                        ),
+                        child: hotelImage)),
+              ),
               SizedBox(
                 width: Dimensions.width20,
               ),
               Expanded(
+                flex: 3,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

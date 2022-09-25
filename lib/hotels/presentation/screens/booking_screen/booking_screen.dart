@@ -6,6 +6,7 @@ import 'package:booking_app/hotels/presentation/screens/booking_screen/cancelled
 import 'package:booking_app/hotels/presentation/screens/booking_screen/completed_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/upcoming_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // import 'package:to_do_app/modules/all_task_screen.dart';
@@ -27,6 +28,7 @@ class BookingScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
+
               backgroundColor: AppColors.backGroundColor,
               body: Column(
                 children: [
@@ -38,9 +40,12 @@ class BookingScreen extends StatelessWidget {
                         length: 3,
 
                         child: Scaffold(
+                          backgroundColor: AppColors.backGroundColor,
                           appBar: AppBar(
                             toolbarHeight: 90,
                             centerTitle: true,
+                            elevation: 0,
+
                             backgroundColor: AppColors.backGroundColor,
                             title: Column(
                               children: [
@@ -69,13 +74,15 @@ cubit.getAllBookings("upcomming", 10);
                                     color: Colors.white,
                                   ),
                                   indicator: BoxDecoration(
-                                    color: Colors.teal.withOpacity(.5),
-                                    borderRadius: BorderRadius.circular(50.0),
+                                    // color: Colors.teal.withOpacity(.5),
+                                    color: AppColors.backGroundColor1,
+                                    borderRadius: BorderRadius.circular(10.0),
                                   ),
                                   padding: const EdgeInsets.only(
                                       top: 20.0, right: 10.0, left: 10.0),
                                   tabs: const [
                                     Tab(
+
                                       height: 70.0,
                                       child: Center(
                                         child: Text(
@@ -106,6 +113,7 @@ cubit.getAllBookings("upcomming", 10);
                             ),
                           ),
                           body: const TabBarView(
+
                             children: [
                               UpcomingScreen(),
                               CancelledScreen(),

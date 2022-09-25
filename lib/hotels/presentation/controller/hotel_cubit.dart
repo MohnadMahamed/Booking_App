@@ -55,7 +55,8 @@ class HotelCubit extends Cubit<HotelState> {
   StatusModel? createBookingResult;
   StatusModel? updateBookingResult;
   List<HotelFacilityModel>? listOfHotelFacility;
-  List<HotelDetailsForBookingModel>? searchHotelList;
+  List<HotelDetailsForBookingModel> searchHotelList=[];
+  List<HotelDetails> searchHotelLis=[];
   List<HotelImage> imageList = [];
   List<HotelImages> listOfImagesForEachHotel = [];
   TextEditingController emailController = TextEditingController();
