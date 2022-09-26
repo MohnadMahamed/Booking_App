@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           HotelCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(),sl()),
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const LoginScreen(),
+        home: const RegisterScreen(),
         routes: {
           // WeatherMainScreen.routeName:(context)=>WeatherMainScreen(),
           RegisterScreen.routeName: (context) => const RegisterScreen(),
