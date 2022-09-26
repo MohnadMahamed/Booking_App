@@ -18,7 +18,7 @@ class _RatingHotelState extends State<RatingHotel> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 220,
+      height: 230,
       child: Card(
         color: Colors.transparent.withOpacity(.4),
         shape: RoundedRectangleBorder(
@@ -109,6 +109,6 @@ class _RatingHotelState extends State<RatingHotel> {
         ),
       ),
     );
-    ;
+    
   }
 }

@@ -31,7 +31,8 @@ class HotelItemWidget extends StatelessWidget {
                 Radius.circular(Dimensions.radius15)),
             color: Colors.white.withOpacity(0.1),
           ),
-          height: 140,
+          height: 150,
+          width: double.infinity,
 
           child: Row(
             children: [
@@ -53,10 +54,10 @@ class HotelItemWidget extends StatelessWidget {
                         child: hotelImage)),
               ),
               SizedBox(
-                width: Dimensions.width20,
+                width:10,
               ),
               Expanded(
-                flex: 3,
+                flex: 5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

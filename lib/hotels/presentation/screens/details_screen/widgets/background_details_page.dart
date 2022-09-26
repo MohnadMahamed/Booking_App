@@ -46,7 +46,7 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
             Padding(
               padding: const EdgeInsets.only(top: 380, left: 15.0, right: 15.0),
               child: SizedBox(
-                height: 200,
+                height: 250,
                 width: double.infinity,
                 child: ClipRect(
                   child: Card(
@@ -54,11 +54,11 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                     shape: RoundedRectangleBorder(
                       side:
                           const BorderSide(width: 2, color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsets.only(left: 16.0, right: 16, top: 16),
+                          const EdgeInsets.only(left: 16.0, right: 15, top: 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -74,11 +74,11 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SmallText(
-                                        size: Dimensions.font12 * 2,
+                                        size: Dimensions.font12*1.7 ,
                                         text: cubit.hotelDetails!.address!,
                                       ),
                                       SizedBox(
-                                        width: Dimensions.width10 / 2.0,
+                                        width: Dimensions.width10 / 1.7,
                                       ),
                                       Icon(
                                         Icons.location_pin,
@@ -87,12 +87,12 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                                       ),
                                       SmallText(
                                         text: '40.0 Km to city',
-                                        size: Dimensions.font12 * 2,
+                                        size: Dimensions.font12 * 1.7,
                                       ),
                                     ],
                                   ),
                                   SizedBox(
-                                    height: Dimensions.height10 / 2,
+                                    height: Dimensions.height10 ,
                                   ),
                                   //rate
                                   Row(
@@ -117,7 +117,7 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                                       ),
                                       SmallText(
                                         text: '80Reviews',
-                                        size: Dimensions.font12 * 2,
+                                        size: Dimensions.font12 * 1.7,
                                       ),
                                     ],
                                   ),
@@ -125,11 +125,11 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                               ),
                               Column(
                                 children: [
-                                  BigText(
+                                  SmallText(
                                     text: "\$ ${cubit.hotelDetails!.price!}",
                                   ),
                                   const SmallText(
-                                    text: "/per night",
+                                    text: "/per night,",size: 18,
                                   ),
                                 ],
                               )

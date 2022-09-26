@@ -107,6 +107,7 @@ cubit.getAllBookings("upcomming", 10);
                                       ),
                                     ),
                                   ],
+                                  labelPadding: EdgeInsets.zero,
                                 ),
                                 myDivider()
                               ],
