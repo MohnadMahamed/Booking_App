@@ -57,7 +57,7 @@ class HotelItemWidget extends StatelessWidget {
                 width:10,
               ),
               Expanded(
-                flex: 5,
+                flex: 4,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -138,7 +138,7 @@ class HotelItemWidget extends StatelessWidget {
                                 text: hotelPrice,
                               ),
                               SmallText(
-                                text: '/per night',
+                                text: 'per night',
                                 size: Dimensions.font12 * 1.7,
                               ),
                             ],

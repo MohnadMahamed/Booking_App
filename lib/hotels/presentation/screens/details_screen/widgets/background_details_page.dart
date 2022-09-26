@@ -44,9 +44,9 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
             ),
             //card
             Padding(
-              padding: const EdgeInsets.only(top: 380, left: 15.0, right: 15.0),
+              padding: const EdgeInsets.only(top: 300, left: 15.0, right: 15.0),
               child: SizedBox(
-                height: 250,
+                height: 260,
                 width: double.infinity,
                 child: ClipRect(
                   child: Card(
@@ -135,7 +135,7 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                               )
                             ],
                           ),
-                          const Spacer(),
+                          // const Spacer(),
                           MyButtonWidget(
                             text: 'Book now',
                             height: Dimensions.height30 * 1.8,
@@ -151,7 +151,7 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
             //more details
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 550),
+                padding: const EdgeInsets.only(top: 400),
                 child: SizedBox(
                   height: 55,
                   width: 180,
