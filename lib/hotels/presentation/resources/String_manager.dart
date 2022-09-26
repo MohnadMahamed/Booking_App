@@ -3,19 +3,22 @@ abstract class LocaleKeys {
   static const String upcoming = 'upcoming';
   static const String completed = 'completed';
   static const String cancelled = 'cancelled';
+  static const String home_screen = 'home_screen';
+  static const String booking_new = 'booking_new';
 
-  static const String no_booking_to_show = 'no_booking_to_show';
+  static const String no_booking_to_show = 'no_booking_to_show';  static const String view_all = 'view_all';
   static const String no_tasks_to_show = 'no_tasks_to_show';
   static const String detailsScreen = 'detailsScreen';
   static const String summary = 'summary';
+  static const String view_hotel = 'view_hotel';
 
 
-  static const String your_email = 'your_email';
+  static const String your_email = 'your_email';  static const String photo = 'photo';
   static const String email_must_not_be_empty = 'email_must_not_be_empty';
   static const String please_a_valid_Email = 'please_a_valid_Email';
   static const String enter_your_email = 'enter_your_email';
   static const String password_hint = 'password_hint';
-  static const String login_button = 'login_button';
+  static const String login = 'login';
   static const String Password_must_not_be_empty = 'Password_must_not_be_empty';
   static const String enter_password = 'enter_password';
   static const String forget_your_password = 'forget_your_password';
@@ -46,7 +49,7 @@ abstract class LocaleKeys {
   static const String english = 'english';
   static const String arabic = 'arabic';
   static const String splash = 'splash';
-
+  static const String change_photo = 'change_photo';
 
   static const String search_screen = 'search_screen';
   static const String filtter = 'filtter';
@@ -54,6 +57,8 @@ abstract class LocaleKeys {
   static const String popular_facilities = 'popular_facilities';
   static const String price_room = 'price_room';
   static const String distance_from_your_location = 'summary';
+  static const String london = 'london';
+
 
   static const String address = 'address';
   static const String latitude = 'latitude';

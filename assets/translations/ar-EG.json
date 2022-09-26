@@ -7,25 +7,28 @@
   "no_tasks_to_show": "لا توجد مهام لإظهارها",
   "detailsScreen": "شاشة التفاصيل",
   "summary": "ملخص",
+  "booking_new": "حجز جديد",
 
-
+  "home_screen": "الصفحه الرئيسية",
   "your_email": "بريدك الإلكتروني",
   "email_must_not_be_empty": "يجب ألا يكون البريد الإلكتروني فارغا",
   "please_a_valid_Email": "يرجى إرسال بريد إلكتروني صالح",
   "enter_your_email": "أدخل بريدك الإلكتروني",
   "password_hint": "كلمه المرور",
-  "login_button": "تسجيل الدخول",
+  "login": "تسجيل الدخول",
   "Password_must_not_be_empty": "يجب ألا تكون كلمة المرور فارغة",
   "enter_password": "أدخل كلمة المرور",
   "forget_your_password": "هل نسيت كلمة المرور الخاصة بك؟",
-  "or": "أو",
+  "or": "أو قم بتسجيل الدخول باستخدام البريد الإلكتروني",
   "facebook": "الفيس بوك",
   "gmail": "جوجل",
   "sign_up": "التسجيل",
   "user_name": "الاسم",
 
   "name_must_not_be_empty": "يجب ألا يكون الاسم فارغا",
-
+  "photo": "صورة",
+  "view_all": "عرض الكل",
+  "view_hotel": "عرض الفندق",
   "enter_your_name": "أدخل اسمك",
   "confirm_password": "تأكيد كلمة المرور",
   "password_not_match": "كلمة المرور غير متطابقة",
@@ -44,6 +47,8 @@
   "english": "انجليزي",
   "arabic": "عربي",
   "splash": "البدايه",
+  "change_photo": "تغيير الصورة",
+
 
   " search_screen": "شاشة البحث",
   "filtter": "فيلتر",
@@ -51,7 +56,7 @@
   "popular_facilities": "مرافق شعبية",
   "price_room": "السعر (لمدة 1 ليلة)",
   "distance_from_your_location": "المسافة من موقعك",
-
+  "london": "لندن",
 
 
   "address": "العنوان",

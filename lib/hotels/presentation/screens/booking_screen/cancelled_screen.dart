@@ -12,7 +12,7 @@ class CancelledScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backGroundColor,
+      //backgroundColor: AppColors.backGroundColor,
       body: BlocConsumer<HotelCubit, HotelState>(
         listener: (context, state) {},
         builder: (context, state) {

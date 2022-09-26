@@ -1,4 +1,3 @@
-
 import 'package:booking_app/core/error/failure.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/domain/entity/hotel_entity.dart';
@@ -19,7 +18,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 part 'hotel_state.dart';
 
 class HotelCubit extends Cubit<HotelState> {
@@ -32,7 +30,8 @@ class HotelCubit extends Cubit<HotelState> {
       this.getFacilitiesUseCase,
       this.getBookingsUseCase,
       this.getAllHotelsUseCase,
-      this.createBookingUseCase, this.getUserInfo)
+      this.createBookingUseCase,
+      this.getUserInfo)
       : super(HotelInitial());
 
   static HotelCubit get(context) => BlocProvider.of(context);
@@ -51,12 +50,12 @@ class HotelCubit extends Cubit<HotelState> {
   UserDataModel? updateInfoDataModel;
   UserDataModel? userInfo;
   AllDataModel? allHotelsData;
-  List<BookingModel> listOfBooking=[];
+  List<BookingModel> listOfBooking = [];
   StatusModel? createBookingResult;
   StatusModel? updateBookingResult;
   List<HotelFacilityModel>? listOfHotelFacility;
-  List<HotelDetailsForBookingModel> searchHotelList=[];
-  List<HotelDetails> searchHotelLis=[];
+  List<HotelDetailsForBookingModel> searchHotelList = [];
+  List<HotelDetails> searchHotelLis = [];
   List<HotelImage> imageList = [];
   List<HotelImages> listOfImagesForEachHotel = [];
   TextEditingController emailController = TextEditingController();
@@ -64,12 +63,23 @@ class HotelCubit extends Cubit<HotelState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   HotelDetails? hotelDetails;
-  int userId=0;
-  List<BookingModel> listOfUpcomingBooking=[];
-  List<BookingModel> listOfCancelledBooking=[];
-  List<BookingModel> listOfCompletedBooking=[];
+  int userId = 0;
+  List<BookingModel> listOfUpcomingBooking = [];
+  List<BookingModel> listOfCancelledBooking = [];
+  List<BookingModel> listOfCompletedBooking = [];
 
 
+
+ bool lang = true;
+  void langStateEn() {
+  //  lang=!lang;
+
+    emit(LangEnStateSuccess());
+  }
+  void langStateAr() {
+    //lang=!lang;
+      emit(LangArStateSuccess());
+  }
 
   int currentIndex = 0;
 
@@ -131,7 +141,7 @@ class HotelCubit extends Cubit<HotelState> {
     }, (r) {
       registerDataModel = r;
       print(r);
-      userId=registerDataModel!.id!;
+      userId = registerDataModel!.id!;
       emit(UserRegisterSuccessState());
     });
     getAllHotels(3);
@@ -163,7 +173,7 @@ class HotelCubit extends Cubit<HotelState> {
     return result;
   }
 
-  Future<Either<Failure, UserDataModel>> getInfo()async{
+  Future<Either<Failure, UserDataModel>> getInfo() async {
     emit(UserInfoLoadingState());
 
     final result = await getUserInfo.call();
@@ -176,13 +186,13 @@ class HotelCubit extends Cubit<HotelState> {
       print(userInfo);
     });
     return result;
-
   }
+
   Future<Either<Failure, UserDataModel>> updateUserInfo(
-      String name,String email) async {
+      String name, String email) async {
     emit(UserUpdateInfoLoadingState());
 
-    final result = await updateUserInfoUseCase.call(name,email);
+    final result = await updateUserInfoUseCase.call(name, email);
     result.fold((l) {
       ServerFailure(l.message);
       emit(HotelErrorState());
@@ -322,6 +332,12 @@ class HotelCubit extends Cubit<HotelState> {
 
 
 
+  bool isDark= true;
+  void changeAppMode() {
+    isDark = !isDark;
+    emit(AppChangeAppMode());
+
+  }
 
 
 

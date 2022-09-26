@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rolling_switch/rolling_switch.dart';
 
+import '../../../controller/hotel_cubit.dart';
+
 class MoodWidget extends StatelessWidget {
   const MoodWidget({super.key});
 
@@ -17,8 +19,8 @@ class MoodWidget extends StatelessWidget {
         ),
         RollingSwitch.icon(
           onChanged: (bool state) {
-            print('turned ${(state) ? 'on' : 'off'}');
-          },
+            HotelCubit.get(context).changeAppMode();
+            },
           rollingInfoRight: RollingIconInfo(
             icon: Icons.nightlight,
             iconColor: Colors.black,
@@ -38,7 +40,7 @@ class MoodWidget extends StatelessWidget {
             text: Text(
               'Light',
               style: GoogleFonts.kanit(
-                color: Colors.white70,
+                color: Colors.white,
                 fontSize: Dimensions.font20,
               ),
             ),

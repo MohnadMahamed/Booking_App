@@ -4,10 +4,12 @@ import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/background_details_page.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/hotel_details.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/photohotel.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/ratinghotel.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
 
@@ -59,7 +61,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         builder: (context, state) {
           return SafeArea(
             child: Scaffold(
-                backgroundColor: AppColors.backGroundColor,
+                //backgroundColor: AppColors.backGroundColor,
                 body: state is GetHotelDetailsSuccessState
                     ? CustomScrollView(controller: scrollController, slivers: [
                         SliverAppBar(
@@ -143,7 +145,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                         SliverToBoxAdapter(
                           child: Container(
-                            color: AppColors.backGroundColor,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -155,8 +156,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     children: [
                                       const HotelViewDetails(),
                                       myDivider(),
-                                      BigText(
-                                        text: 'Summary',
+
+                                      MediumText(
+                          text: LocaleKeys.summary.tr(),
+
                                         size: Dimensions.font12 * 2,
                                       ),
                                       SizedBox(
@@ -177,15 +180,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          BigText(
-                                            text: 'Photo',
+
+                                          MediumText(
+                                      text: LocaleKeys.photo.tr(),
+
+
+
+
                                             size: Dimensions.font12 * 2,
                                           ),
                                           Row(
                                             children: [
                                               InkWell(
                                                 child: SmallText(
-                                                  text: 'View all',
+                                                  text: LocaleKeys.view_all.tr(),
                                                   size: Dimensions.font12 * 2,
                                                   color: AppColors.mainColor,
                                                 ),
@@ -257,7 +265,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         onTap: () {
                                           cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
                                         },
-                                        text: 'Book now',
+                                        text: LocaleKeys.booking_new.tr(),
                                       )
                                     ],
                                   ),

@@ -4,16 +4,18 @@ import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/search_result_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/count_and_page.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/distance_slider.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/name_adrees_lat_long.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/popular_facilities.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/price_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class SearchFiltterScreen extends StatefulWidget {
-  static const routeName = 'SearchFiltterScreen';
+  static  String routeName = LocaleKeys.search_screen.tr();
 
   const SearchFiltterScreen({super.key});
 
@@ -57,9 +59,9 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
             SizedBox(
               height: Dimensions.height20,
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 10.0),
-              child: BigText(text: 'Filtter'),
+              child: BigText(text: LocaleKeys.filtter.tr()),
             ),
             SizedBox(
               height: Dimensions.height20,
@@ -78,7 +80,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                         SizedBox(
                           height: Dimensions.height20,
                         ),
-                        const SmallText(text: 'price (for 1 night)'),
+                         SmallText(text:LocaleKeys.price_room.tr()),
                         SizedBox(
                           height: Dimensions.height10,
                         ),
@@ -87,7 +89,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                         //Divider
                         myDivider(),
                         //Popular facilities
-                        const SmallText(text: 'Popular facilities'),
+                         SmallText(text: LocaleKeys.popular_facilities.tr()),
                         SizedBox(
                           height: Dimensions.height10,
                         ),
@@ -96,7 +98,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                         //name address lat and lon
                         const NameAdressLatAndLonWidget(),
                         myDivider(),
-                        const SmallText(text: 'Distance From your location'),
+                         SmallText(text: LocaleKeys.distance_from_your_location.tr()),
                         SizedBox(
                           height: Dimensions.height10,
                         ),
@@ -122,7 +124,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                 Navigator.pushReplacementNamed(
                     context, SearchResultScreen.routeName);
               },
-              text: 'Apply',
+              text: LocaleKeys.apply.tr(),
             ),
           ],
         ),

@@ -1,6 +1,8 @@
+
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,12 +53,16 @@ Widget editTextFormFeild({
   void Function(String)? onTap,
   void Function(String)? onChanged,
   String? Function(String?)? valdide,
+  required Color? TextColor,
+
 }) =>
     SizedBox(
       height: Dimensions.height30 * 2,
       // width: Dimensions.width30 * 9,
       child: TextFormField(
-        style: TextStyle(fontSize: Dimensions.font26, color: Colors.white),
+        style: TextStyle(fontSize: Dimensions.font26,
+            color: Colors.white
+        ),
         controller: controller,
         keyboardType: type,
         onChanged: onChanged,
@@ -65,7 +71,7 @@ Widget editTextFormFeild({
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle:
-              TextStyle(color: Colors.white, fontSize: Dimensions.font20),
+              TextStyle(color: TextColor, fontSize: Dimensions.font20),
           filled: true,
           fillColor: Colors.transparent.withOpacity(.2),
           border:  OutlineInputBorder( borderRadius:BorderRadius.circular(10.0), ),
@@ -110,18 +116,26 @@ Widget myForm({
   void Function()? onTap,
   void Function(String)? onChanged,
   String? validation,
+  required Color? colorsBorderSide,
+  required Color? fillColor,
+  required Color? hitTextColor,
+  required Color? TextColor,
+
   String? Function(String?)? validate,
   double maxLenght = 10,
   bool isPassword = false,
 }) =>
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 8,bottom: 8),
       child: SizedBox(
         height: Dimensions.height30 * 2.3,
         child: TextFormField(
           onTap: onTap,
           obscureText: isPassword,
-          style: TextStyle(fontSize: Dimensions.font26, color: Colors.white),
+          style: TextStyle(
+              fontSize: Dimensions.font26,
+              color: TextColor
+          ),
           controller: controller,
           keyboardType: type,
           onChanged: onChanged,
@@ -129,21 +143,26 @@ Widget myForm({
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
-                color: Colors.white38, fontSize: Dimensions.font12 * 2),
+                color: hitTextColor,
+                fontSize: Dimensions.font12 * 2
+            ),
             filled: true,
-            fillColor: AppColors.myTFFColor,
+            fillColor:fillColor,
             suffixIcon: suffixIcon,
             // suffix: Icon(prefixIcon,color: Colors.white38,),
             prefixIcon: prefixIcon,
             border: const OutlineInputBorder(),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(Dimensions.radius20 * 1.5),
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
                 borderSide:
-                    const BorderSide(width: 2.0, color: AppColors.mainColor)),
+                     BorderSide(width: 2.0, color: AppColors.mainColor)),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Dimensions.radius20 * 2),
+              borderRadius: BorderRadius.circular(Dimensions.radius20 ),
               borderSide:
-                  const BorderSide(width: 0.0, color: Colors.transparent),
+                   BorderSide(
+                     color: colorsBorderSide!
+                      // color: HotelCubit.get(context).isDark ? Colors.black:
+                  ),
             ),
           ),
         ),
@@ -153,6 +172,7 @@ Widget myForm({
 Widget searchButton({
   required String text,
   void Function()? onTap,
+  required Color? color,
 }) =>
     Padding(
       padding: EdgeInsets.symmetric(
@@ -162,7 +182,7 @@ Widget searchButton({
         child: Container(
           // margin: EdgeInsets.all(20.0),
           decoration: BoxDecoration(
-            color: AppColors.myTFFColor,
+            color: color,
             borderRadius: BorderRadius.circular(50.0),
           ),
           height: Dimensions.height30 * 2.5,

@@ -22,14 +22,16 @@ class CodegenLoader extends AssetLoader {
     "no_tasks_to_show": "لا توجد مهام لإظهارها",
     "detailsScreen": "شاشة التفاصيل",
     "summary": "ملخص",
+    "booking_new": "حجز جديد",
 
 
+    "view_hotel": "عرض الفندق",
     "your_email": "بريدك الإلكتروني",
     "email_must_not_be_empty": "يجب ألا يكون البريد الإلكتروني فارغا",
     "please_a_valid_Email": "يرجى إرسال بريد إلكتروني صالح",
     "enter_your_email": "أدخل بريدك الإلكتروني",
     "password_hint": "كلمه المرور",
-    "login_button": "تسجيل الدخول",
+    "login": "تسجيل الدخول",
     "Password_must_not_be_empty": "يجب ألا تكون كلمة المرور فارغة",
     "enter_password": "أدخل كلمة المرور",
     "forget_your_password": "هل نسيت كلمة المرور الخاصة بك؟",
@@ -59,6 +61,7 @@ class CodegenLoader extends AssetLoader {
     "english": "انجليزي",
     "arabic": "عربي",
     "splash": "البدايه",
+    "change_photo": "تغيير الصورة",
 
     " search_screen": "شاشة البحث",
     "filtter": "فيلتر",
@@ -66,9 +69,9 @@ class CodegenLoader extends AssetLoader {
     "popular_facilities": "مرافق شعبية",
     "price_room": "السعر (لمدة 1 ليلة)",
     "distance_from_your_location": "المسافة من موقعك",
+    "london": "لندن",
 
-
-
+    "home_screen": "الصفحه الرئيسية",
     "address": "العنوان",
     "latitude": "العرض",
     "longitude": "خط الطول",
@@ -76,6 +79,10 @@ class CodegenLoader extends AssetLoader {
     "search_place": "إلى أين تذهب؟",
     "search_place_validate": "أدخل إلى أين أنت ذاهب؟",
     "other_hotel": "فندق آخر",
+    "view_all": "عرض الكل",
+    "photo": "صورة",
+
+
   };
   static const Map<String, dynamic> en = {
     "upcoming": "Upcoming",
@@ -85,14 +92,18 @@ class CodegenLoader extends AssetLoader {
     "no_tasks_to_show": "No tasks to show",
     "detailsScreen": "DetailsScreen",
     "summary": "Summary",
+    "booking_new": "Booking New",
 
-
+    "view_all": "View All",
+    "photo": "Photo",
+    "home_screen": "Home Screen",
+    "view_hotel": "View Hotel",
     "your_email": "Your email",
     "email_must_not_be_empty": "Email  must  not be empty",
     "please_a_valid_Email": "Please a valid Email",
     "enter_your_email": "Enter your email",
     "password_hint": "Password",
-    "login_button": "Login",
+    "login": "Login",
     "Password_must_not_be_empty": "Password must  not be empty",
     "enter_password": "Enter password",
     "forget_your_password": "Forget your password ?",
@@ -121,6 +132,8 @@ class CodegenLoader extends AssetLoader {
     "english": "English",
     "arabic": "Arabic",
     "splash": "Splash",
+    "change_photo": "Change photo",
+
 
     " search_screen": " SearchScreen",
     "filtter": "Filtter",
@@ -128,7 +141,7 @@ class CodegenLoader extends AssetLoader {
     "popular_facilities": "Popular facilities",
     "price_room": "price (for 1 night)",
     "distance_from_your_location": "Distance From your location",
-
+    "london": "London",
 
 
     "address": "Address",

@@ -3,9 +3,11 @@ import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/widgets/language_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/widgets/mood_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/edit_profile_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +23,7 @@ class UserProfileScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: AppColors.backGroundColor,
+            //backgroundColor: AppColors.backGroundColor,
             body: Column(
               children: [
                 SizedBox(
@@ -35,15 +37,15 @@ class UserProfileScreen extends StatelessWidget {
                       width: Dimensions.width30 * 2,
                       height: Dimensions.height30 * 2,
                       decoration: BoxDecoration(
-                          color: Colors.transparent.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(50.0)),
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(20.0)),
                       child: IconButton(
                           onPressed: () {
                             navigateeeTo(context, const EditProfileScreen());
                           },
                           icon: Icon(
                             Icons.edit,
-                            size: Dimensions.iconSize30 * 1.5,
+                            size: Dimensions.iconSize30 *1.5,
                             color: AppColors.mainColor,
                           )),
                     ),
@@ -78,22 +80,22 @@ class UserProfileScreen extends StatelessWidget {
                                 // mainAxisAlignment: MainAxisAlignment
                                 //     .spaceBetween,
                                 children: [
-                                  const SmallText(text: 'User Name',size: 18),
+                                   SmallText(text: LocaleKeys.name.tr(),size: 18),
                                   Spacer(),
                                   SmallText(
                                     text: cubit.userInfo!.name!,
                                     size: Dimensions.font20,
                                     color: Colors.white,
-
                                   )
                                 ],
                               ),
                               myDivider(),
                               Row(
-
                                 children: [
-                                  const SmallText(text: 'Email',size: 18),
-Spacer(),
+
+                              SmallText(text: LocaleKeys.email.tr(),size: 18),
+                                  Spacer(),
+
                                   SmallText(
                                     text: cubit.userInfo!.email!,
                                     size: Dimensions.font20,
@@ -102,9 +104,9 @@ Spacer(),
                                 ],
                               ),
                               myDivider(),
-                              const MoodWidget(),
+                               MoodWidget(),
                               myDivider(),
-                              const LanguageWidget(),
+                               LanguageWidget(),
                             ],
                           ),
                         ),

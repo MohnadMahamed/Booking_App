@@ -1,15 +1,17 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/Hotal_Card.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_app_bar.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_adapter.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const routeName = 'HomeScreen';
+  static  String routeName = LocaleKeys.home_screen.tr();
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.backGroundColor,
+          //backgroundColor: AppColors.backGroundColor,
           body: state is GetAllHotelsSuccessState
               ? CustomScrollView(
                   physics: const ScrollPhysics(),
@@ -26,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                     SliverApp(
                       images: buildListView(),
                     ),
-                    const SliverAdapter(),
+                     SliverAdapter(),
                   ],
                 )
               : const Center(

@@ -2,6 +2,7 @@ import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 
 class HotelItemWidget extends StatelessWidget {
@@ -26,12 +27,15 @@ class HotelItemWidget extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
+
           decoration: BoxDecoration(
+
             borderRadius: BorderRadiusDirectional.all(
                 Radius.circular(Dimensions.radius15)),
-            color: Colors.white.withOpacity(0.1),
+            color: HotelCubit.get(context).isDark?  Colors.black26
+              : Colors.black.withOpacity(0.5),
           ),
-          height: 150,
+          height: 170,
           width: double.infinity,
 
           child: Row(
@@ -57,7 +61,7 @@ class HotelItemWidget extends StatelessWidget {
                 width:10,
               ),
               Expanded(
-                flex: 5,
+                flex: 4,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -67,8 +71,8 @@ class HotelItemWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        BigText(
-                          size: Dimensions.font12 * 2,
+                        MediumText(
+                          size: Dimensions.font12 * 1.7,
                           text: hotelName,
                         ),
                         SmallText(
@@ -97,7 +101,7 @@ class HotelItemWidget extends StatelessWidget {
                                 ),
                                 SmallText(
                                   text: '40.0 Km to city',
-                                  size: Dimensions.font16,
+                                  size: Dimensions.font10*1.4,
                                 ),
                               ],
                             ),
@@ -115,14 +119,14 @@ class HotelItemWidget extends StatelessWidget {
                                         (index) => Icon(
                                           Icons.star_sharp,
                                           color: AppColors.mainColor,
-                                          size: Dimensions.iconSize24,
+                                          size: Dimensions.iconSize16*1.5,
                                         ),
                                       ),
                                     ),
                                     Icon(
                                       Icons.star_half,
                                       color: Colors.teal,
-                                      size: Dimensions.iconSize24,
+                                      size: Dimensions.iconSize16*1.5,
                                     ),
                                   ],
                                 )),
@@ -138,8 +142,8 @@ class HotelItemWidget extends StatelessWidget {
                                 text: hotelPrice,
                               ),
                               SmallText(
-                                text: '/per night',
-                                size: Dimensions.font20,
+                                text: 'per night',
+                                size: Dimensions.font12 * 1.7,
                               ),
                             ],
                           ),
@@ -226,7 +230,7 @@ class HotelItemWidget extends StatelessWidget {
                   //                       CrossAxisAlignment.start,
                   //                   children: [
                   //                     BigText(
-                  //                       size: Dimensions.font12 * 2,
+                  //                       size: Dimensions.font12 * 1.7,
                   // text: cubit.allHotelsData!
                   //     .hotelData![index].name!,
                   //                     ),
@@ -365,7 +369,7 @@ class HotelItemWidget extends StatelessWidget {
 //                       crossAxisAlignment: CrossAxisAlignment.start,
 //                       children: [
 //                         BigText(
-//                           size: Dimensions.font12 * 2,
+//                           size: Dimensions.font12 * 1.7,
 //                           text: hotelName,
 //                         ),
 //                         SmallText(
