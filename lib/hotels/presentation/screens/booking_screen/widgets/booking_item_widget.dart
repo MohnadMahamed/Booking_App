@@ -26,7 +26,7 @@ class BookingItemWidget extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          height: 270,
+          height: 280,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
@@ -49,7 +49,6 @@ class BookingItemWidget extends StatelessWidget {
               //hotel info
               Expanded(
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: Dimensions.width10,

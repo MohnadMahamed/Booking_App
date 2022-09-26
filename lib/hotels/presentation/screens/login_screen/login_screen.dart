@@ -116,7 +116,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               onTap: () {
-                                signInWithFacebook();
+                                signInWithFacebook(
+
+                                );
                               },
                             ),
                           ),
@@ -256,14 +258,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (formKey.currentState!.validate()) {
                                     cubit.login(LoginRequestModel(
                                         email: cubit.emailController.text,
-                                        password:
-                                            cubit.passwordController.text));
+                                        password: cubit.passwordController.text
+                                    ));
                                     cubit.getAllHotels(1);
                                     Navigator.pushReplacementNamed(
                                         context, LayoutScreen.routeName);
                                   }
                                 },
                               ),
+
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SmallText(
+                                    text: 'Don\'t have an account?',
+                                    size: Dimensions.font12 * 2,
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, RegisterScreen.routeName);
+                                    },
+                                    child: SmallText(
+                                      text: 'Register',
+                                      size: Dimensions.font12 * 2,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -278,8 +304,6 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-
-
 
   bool loading = false;
 
@@ -330,25 +354,29 @@ class _LoginScreenState extends State<LoginScreen> {
   // }
   void signInWithFacebook() async {
     try {
-      final LoginResult result = await FacebookAuth.instance.login(
-          permissions: (['email', 'public_profile']));
+      final LoginResult result = await FacebookAuth.instance
+          .login(permissions: (['email', 'public_profile']));
       final token = result.accessToken!.token;
       print(
           'Facebook token userID : ${result.accessToken!.grantedPermissions}');
-      final graphResponse = await http.get(
-          Uri.parse('https://graph.facebook.com/'
-              'v2.12/me?fields=name,first_name,last_name,email&access_token=${token}'));
+      final graphResponse = await http.get(Uri.parse(
+          'https://graph.facebook.com/'
+          'v2.12/me?fields=name,first_name,last_name,email&access_token=${token}'));
       final userData = await FacebookAuth.instance.getUserData();
       final profile = jsonDecode(graphResponse.body);
+      String name = userData["name"];
+      String email = userData["email"];
+      String password = profile["id"].substring(0, 9);
+      String confirmPassword = profile["id"].substring(0, 9);
+      RegisterRequestModel registerRequestModel = RegisterRequestModel(
+          name: name,
+          email: email,
+          password: password,
+          passwordConfirmation: confirmPassword,
+          image: "image");
+      HotelCubit.get(context).register(registerRequestModel);
 
-      String name=userData["name"];
-      String email=userData["email"];
-      String password=profile["id"];
-      String confirmPassword=profile["id"];
-      RegisterRequestModel registerRequestModel =RegisterRequestModel(name: name, email: email, password: password, passwordConfirmation: confirmPassword, image: "image");
-     HotelCubit.get(context).register(registerRequestModel);
-
-      print(profile['id']);
+      print(profile['id'].substring(0, 9));
       print(userData['']);
       print("Profile is equal to $profile");
       try {
@@ -376,7 +404,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-
   void loginInWithGoogle() async {
     setState(() {
       loading = true;
@@ -391,12 +418,18 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
 
-      final googleSignInAuthentication = await googleSignInAccount.authentication;
-      String name=googleSignInAccount.displayName!;
-      String email=googleSignInAccount.email;
-      String password=googleSignInAccount.id;
-      String confirmPassword=googleSignInAccount.id;
-      RegisterRequestModel registerRequestModel =RegisterRequestModel(name: name, email: email, password: password, passwordConfirmation: confirmPassword, image: "image");
+      final googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      String name = googleSignInAccount.displayName!;
+      String email = googleSignInAccount.email;
+      String password = googleSignInAccount.id;
+      String confirmPassword = googleSignInAccount.id;
+      RegisterRequestModel registerRequestModel = RegisterRequestModel(
+          name: name,
+          email: email,
+          password: password,
+          passwordConfirmation: confirmPassword,
+          image: "image");
       HotelCubit.get(context).register(registerRequestModel);
       // print(googleSignInAccount.);
       final credential = GoogleAuthProvider.credential(
@@ -430,29 +463,37 @@ class _LoginScreenState extends State<LoginScreen> {
           break;
       }
 
-      showDialog(context: context, builder: (context) =>
-          AlertDialog(
-            title: Text('log in with google failed'),
-            content: Text(content),
-            actions: [TextButton(onPressed: () {
-              Navigator.of(context).pop();
-            }, child: Text('OK'))
-            ],
-          ));
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('log in with google failed'),
+                content: Text(content),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('OK'))
+                ],
+              ));
     } catch (e) {
-      showDialog(context: context, builder: (context) => AlertDialog(
-        title: Text('log in with google failed') ,
-        content: Text('An unknow error occurred'),
-        actions: [TextButton(onPressed: (){
-          Navigator.of(context).pop();
-        }, child: Text('OK'))],));
-
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('log in with google failed'),
+                content: Text('An unknow error occurred'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('OK'))
+                ],
+              ));
     } finally {
       setState(() {
-        loading=false;
+        loading = false;
       });
     }
-
   }
-
 }
