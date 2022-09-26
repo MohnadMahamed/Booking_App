@@ -28,7 +28,7 @@ class RegisterScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: AppColors.backGroundColor,
             body: Padding(
-              padding: EdgeInsets.all(Dimensions.height20),
+              padding: EdgeInsets.all(20),
               child: Form(
                 key: formKey,
                 child: SingleChildScrollView(
@@ -106,7 +106,7 @@ class RegisterScreen extends StatelessWidget {
                                     SmallText(
                                       text: 'Gmail',
                                       color: Colors.white,
-                                      size: Dimensions.font12 * 2,
+                                      size: Dimensions.font12 * 1.7,
                                     ),
                                   ],
                                 ),
@@ -123,19 +123,15 @@ class RegisterScreen extends StatelessWidget {
                       Center(
                         child: SmallText(
                           text: 'or log with email',
-                          size: Dimensions.font12 * 2,
+                          size: Dimensions.font12* 1.7,
                         ),
                       ),
                       SizedBox(
                         height: Dimensions.height30,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Dimensions.width15 * 2),
-                        child: SmallText(
-                          text: 'Your name',
-                          size: Dimensions.font12 * 2,
-                        ),
+                      SmallText(
+                        text: 'Your name',
+                        size: Dimensions.font12 * 1.7,
                       ),
                       myForm(
                         validate: (value) {
@@ -151,13 +147,9 @@ class RegisterScreen extends StatelessWidget {
                         height: Dimensions.height20,
                       ),
                       //email
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Dimensions.width15 * 2),
-                        child: SmallText(
-                          text: 'Your Email',
-                          size: Dimensions.font12 * 2,
-                        ),
+                      SmallText(
+                        text: 'Your Email',
+                        size: Dimensions.font12 * 1.7,
                       ),
                       myForm(
                         validate: (value) {
@@ -179,13 +171,9 @@ class RegisterScreen extends StatelessWidget {
                         height: Dimensions.height20,
                       ),
                       //password
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Dimensions.width15 * 2),
-                        child: SmallText(
-                          text: 'Password',
-                          size: Dimensions.font12 * 2,
-                        ),
+                      SmallText(
+                        text: 'Password',
+                        size: Dimensions.font12 * 1.7,
                       ),
                       myForm(
                         isPassword: cubit.isPassword,
@@ -212,13 +200,9 @@ class RegisterScreen extends StatelessWidget {
                         height: Dimensions.height20,
                       ),
                       //confirm password
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Dimensions.width15 * 2),
-                        child: SmallText(
-                          text: 'Confirm password',
-                          size: Dimensions.font12 * 2,
-                        ),
+                      SmallText(
+                        text: 'Confirm password',
+                        size: Dimensions.font12 * 1.7,
                       ),
                       myForm(
                         isPassword: cubit.isPasswordConfirm,

@@ -121,7 +121,7 @@ class BookingItemWidget extends StatelessWidget {
                             children: [
                               SmallText(
                                 color: Colors.white,
-                                text: hotelAddress,
+                                text: hotelPrice,
                               ),
                               SmallText(
                                 text: '/per night',

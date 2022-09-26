@@ -68,7 +68,7 @@ class HotelItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BigText(
-                          size: Dimensions.font12 * 2,
+                          size: Dimensions.font12 * 1.7,
                           text: hotelName,
                         ),
                         SmallText(
@@ -139,7 +139,7 @@ class HotelItemWidget extends StatelessWidget {
                               ),
                               SmallText(
                                 text: '/per night',
-                                size: Dimensions.font16,
+                                size: Dimensions.font12 * 1.7,
                               ),
                             ],
                           ),
@@ -226,7 +226,7 @@ class HotelItemWidget extends StatelessWidget {
                   //                       CrossAxisAlignment.start,
                   //                   children: [
                   //                     BigText(
-                  //                       size: Dimensions.font12 * 2,
+                  //                       size: Dimensions.font12 * 1.7,
                   // text: cubit.allHotelsData!
                   //     .hotelData![index].name!,
                   //                     ),
@@ -365,7 +365,7 @@ class HotelItemWidget extends StatelessWidget {
 //                       crossAxisAlignment: CrossAxisAlignment.start,
 //                       children: [
 //                         BigText(
-//                           size: Dimensions.font12 * 2,
+//                           size: Dimensions.font12 * 1.7,
 //                           text: hotelName,
 //                         ),
 //                         SmallText(

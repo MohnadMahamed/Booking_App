@@ -35,15 +35,15 @@ class UserProfileScreen extends StatelessWidget {
                       width: Dimensions.width30 * 2,
                       height: Dimensions.height30 * 2,
                       decoration: BoxDecoration(
-                          color: Colors.transparent.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(50.0)),
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(20.0)),
                       child: IconButton(
                           onPressed: () {
                             navigateeeTo(context, const EditProfileScreen());
                           },
                           icon: Icon(
                             Icons.edit,
-                            size: Dimensions.iconSize30 * 1.5,
+                            size: Dimensions.iconSize30 *1.5,
                             color: AppColors.mainColor,
                           )),
                     ),

@@ -28,16 +28,18 @@ class LayoutScreen extends StatelessWidget {
             activeColor: Colors.white70,
             items: [
               TabItem(
+
                   title: 'Explor',
                   activeIcon: Icon(
+
                     Icons.search,
-                    size: Dimensions.iconSize30 * 2,
+                    size: Dimensions.iconSize30 *1.5,
                   ),
                   icon: Icons.search),
               TabItem(
                   activeIcon: Icon(
                     Icons.history,
-                    size: Dimensions.iconSize30 * 2,
+                    size: Dimensions.iconSize30 *1.5,
                   ),
                   title: 'Booking',
                   icon: Icons.history),
@@ -45,7 +47,7 @@ class LayoutScreen extends StatelessWidget {
                   title: 'Profile',
                   activeIcon: Icon(
                     Icons.person_outline,
-                    size: Dimensions.iconSize30 * 2,
+                    size: Dimensions.iconSize30 *1.5,
                   ),
                   icon: Icons.person_outline),
             ],

@@ -60,7 +60,7 @@ class SliverBackgroundWidget extends StatelessWidget {
                   text: 'View Hotel',
                   isPadding: false,
                   width: Dimensions.width30 * 6.5,
-                  height: Dimensions.width30 * 2.5,
+                  height: Dimensions.width30 * 1.7,
                 ),
               ],
             )),
