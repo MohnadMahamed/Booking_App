@@ -52,3 +52,8 @@ class HotelErrorState extends HotelState {}
 class ChangeNavBarState extends HotelState {}
 
 class ChangPassVisibilityState extends HotelState {}
+
+
+
+
+class AppChangeAppMode extends HotelState {}

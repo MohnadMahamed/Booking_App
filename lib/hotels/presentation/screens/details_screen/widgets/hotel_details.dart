@@ -26,7 +26,7 @@ class _HotelViewDetailsState extends State<HotelViewDetails> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BigText(text: cubit.hotelDetails!.name!),
+                MediumText(text: cubit.hotelDetails!.name!),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -52,7 +52,7 @@ class _HotelViewDetailsState extends State<HotelViewDetails> {
             ),
             Column(
               children: [
-                BigText(
+                MediumText(
                   text: "\$ ${cubit.hotelDetails!.price!}",
                 ),
                 const SmallText(

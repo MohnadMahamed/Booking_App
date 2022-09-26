@@ -11,18 +11,19 @@ TextEditingController userNameController = TextEditingController();
 TextEditingController emailController = TextEditingController();
 
 class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({super.key});
+  const EditProfileScreen
+
+  ({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
+    var cubit = HotelCubit.get(context);
     return SafeArea(
       child: BlocConsumer<HotelCubit, HotelState>(
-        listener: (context, state) {
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: AppColors.backGroundColor,
+            //backgroundColor: AppColors.backGroundColor,
             body: Column(
               children: [
                 SizedBox(
@@ -111,9 +112,12 @@ class EditProfileScreen extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: editTextFormFeild(
+
+                                        TextColor:HotelCubit.get(context).isDark ?Colors.black :Colors.white70,
                                         controller: userNameController,
                                         type: TextInputType.name,
-                                        hintText: cubit.loginDataModel!.name!),
+                                        hintText: cubit.loginDataModel!.name!
+                                    ),
                                   ),
                                 ],
                               ),
@@ -129,6 +133,7 @@ class EditProfileScreen extends StatelessWidget {
 
                                   Expanded(
                                     child: editTextFormFeild(
+                                        TextColor:HotelCubit.get(context).isDark ?Colors.black :Colors.white70,
                                         controller: emailController,
                                         type: TextInputType.emailAddress,
                                         hintText: cubit.loginDataModel!.email!),
@@ -152,7 +157,8 @@ class EditProfileScreen extends StatelessWidget {
                   onTap: () {
                     // RegisterRequestModel updateInfo=RegisterRequestModel(name: userNameController.text, email: emailController.text, password: "", passwordConfirmation: "", image: "");
 
-                    cubit.updateUserInfo(userNameController.text,emailController.text);
+                    cubit.updateUserInfo(
+                        userNameController.text, emailController.text);
                     cubit.getInfo();
                     Navigator.pop(context);
                   },

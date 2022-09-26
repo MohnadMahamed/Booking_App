@@ -24,7 +24,7 @@ class SliverAdapter extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                     top: Dimensions.width20, left: Dimensions.width10),
-                child: const BigText(
+                child:  MediumText(
                   text: 'Other hotel',
                 ),
               ),

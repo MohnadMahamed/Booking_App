@@ -4,6 +4,8 @@ import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../../controller/hotel_cubit.dart';
+
 class BookingItemWidget extends StatelessWidget {
   final void Function() onTap;
   final Widget hotelImage;
@@ -30,7 +32,10 @@ class BookingItemWidget extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: Colors.white.withOpacity(.1),
+            color:
+            HotelCubit.get(context).isDark? Colors.black54.withOpacity(.2):Colors.white70.withOpacity(.6)  ,
+
+          //  Colors.white.withOpacity(.1),
           ),
           child: Column(
             children: [
@@ -64,7 +69,7 @@ class BookingItemWidget extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              BigText(
+                              MediumText(
                                 size: Dimensions.font12 * 1.7,
                                 text: hotelName,
                               ),
