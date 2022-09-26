@@ -26,7 +26,7 @@ class RegisterScreen extends StatelessWidget {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: AppColors.backGroundColor,
+           // backgroundColor: HotelCubit.get(context).isDark ?AppColors.backGroundColor :Colors.white,
             body: Padding(
               padding: EdgeInsets.all(20),
               child: Form(
@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const BigText(
+                       BigText(
                         text: 'Sign Up',
                       ),
                       SizedBox(
@@ -75,7 +75,9 @@ class RegisterScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              onTap: () {},
+                              onTap: () {
+
+                              },
                             ),
                           ),
                           SizedBox(
@@ -134,6 +136,14 @@ class RegisterScreen extends StatelessWidget {
                         size: Dimensions.font12 * 1.7,
                       ),
                       myForm(
+                        TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+
+                        hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+                        fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+                        colorsBorderSide:HotelCubit.get(context).isDark? Colors.black:Colors.transparent ,
+
+                        //Colors.red,
+
                         validate: (value) {
                           if (value!.isEmpty) {
                             return 'Name  must  not be empty';
@@ -152,6 +162,14 @@ class RegisterScreen extends StatelessWidget {
                         size: Dimensions.font12 * 1.7,
                       ),
                       myForm(
+                        TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+
+                        hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+
+                        fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+
+                        colorsBorderSide:HotelCubit.get(context).isDark? Colors.black:Colors.transparent ,
+
                         validate: (value) {
                           if (value!.isEmpty) {
                             return 'Email must  not be empty';
@@ -176,6 +194,14 @@ class RegisterScreen extends StatelessWidget {
                         size: Dimensions.font12 * 1.7,
                       ),
                       myForm(
+                        TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+
+                        hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+
+                        fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+
+                        colorsBorderSide:HotelCubit.get(context).isDark? Colors.black:Colors.transparent ,
+
                         isPassword: cubit.isPassword,
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -205,6 +231,14 @@ class RegisterScreen extends StatelessWidget {
                         size: Dimensions.font12 * 1.7,
                       ),
                       myForm(
+                        TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+
+                        hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+
+                        fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+
+                        colorsBorderSide:HotelCubit.get(context).isDark? Colors.black:Colors.transparent ,
+
                         isPassword: cubit.isPasswordConfirm,
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -285,11 +319,20 @@ class RegisterScreen extends StatelessWidget {
                               Navigator.pushReplacementNamed(
                                   context, LoginScreen.routeName);
                             },
-                            child: SmallText(
-                              text: 'Login',
-                              color: AppColors.mainColor,
-                              size: Dimensions.font20,
-                            ),
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,                                fontSize: 23,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal
+                              ),
+
+                            )
+                            // SmallText(
+                            //   text: 'Login',
+                            //   color: AppColors.mainColor,
+                            //   size: Dimensions.font20,
+                            // ),
                           ),
                         ],
                       ),

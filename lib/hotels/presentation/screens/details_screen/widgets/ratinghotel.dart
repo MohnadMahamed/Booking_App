@@ -4,6 +4,8 @@ import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../../controller/hotel_cubit.dart';
+
 class RatingHotel extends StatefulWidget {
   const RatingHotel({Key? key}) : super(key: key);
 
@@ -20,7 +22,9 @@ class _RatingHotelState extends State<RatingHotel> {
       width: double.infinity,
       height: 230,
       child: Card(
-        color: Colors.transparent.withOpacity(.4),
+        color:
+        HotelCubit.get(context).isDark? Colors.white70.withOpacity(.1): Colors.black54.withOpacity(.2),
+
         shape: RoundedRectangleBorder(
           side: const BorderSide(width: 1, color: Colors.transparent),
           borderRadius: BorderRadius.circular(20),
@@ -32,7 +36,8 @@ class _RatingHotelState extends State<RatingHotel> {
             children: [
               Row(
                 children: const [
-                  BigText(text: '8.8', color: Colors.teal),
+                  Text('8.8',style: TextStyle(color: Colors.teal,fontSize: 30),),
+                 // BigText(text: '8.8', color: Colors.teal),
                   SizedBox(
                     width: 10,
                   ),

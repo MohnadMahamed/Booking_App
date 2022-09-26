@@ -40,7 +40,9 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: AppColors.backGroundColor,
+            //backgroundColor: HotelCubit.get(context).isDark ?AppColors.backGroundColor   :Colors.white,
+
+            //backgroundColor: AppColors.backGroundColor,
             body: Padding(
               padding: EdgeInsets.all(Dimensions.height20),
               child: Form(
@@ -52,27 +54,31 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: Dimensions.height20,
                       ),
-                      Container(
-                        width: Dimensions.width30 * 1.8,
-                        height: Dimensions.height30 * 1.8,
-                        decoration: BoxDecoration(
-                            color: Colors.transparent.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(50.0)),
-                        child: IconButton(
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, RegisterScreen.routeName);
-                            },
-                            icon: Icon(
-                              Icons.arrow_back_ios,
-                              size: Dimensions.iconSize30 * 1.3,
-                              color: AppColors.mainColor,
-                            )),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Container(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          width: Dimensions.width30 * 1.8,
+                          height: Dimensions.height30 * 1.8,
+                          decoration: BoxDecoration(
+                              color: Colors.transparent.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(25.0)),
+                          child: IconButton(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, RegisterScreen.routeName);
+                              },
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                size: Dimensions.iconSize30 * 1.2,
+                                color: cubit.isDark? Colors.black:AppColors.mainColor ,
+                              )),
+                        ),
                       ),
                       SizedBox(
                         height: Dimensions.height20,
                       ),
-                      const BigText(
+                       BigText(
                         text: 'Login',
                       ),
                       SizedBox(
@@ -180,6 +186,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             size: Dimensions.font12 * 1.7,
                           ),
                           myForm(
+                            TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+
+                            hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+
+                            fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+
+                            colorsBorderSide:HotelCubit.get(context).isDark? Colors.black:Colors.transparent ,
                             validate: (value) {
                               if (value!.isEmpty) {
                                 return 'Email  must  not be empty';
@@ -203,6 +216,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             size: Dimensions.font12 * 1.7,
                           ),
                           myForm(
+                            TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+
+                            hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+
+                            fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+
+                            colorsBorderSide:HotelCubit.get(context).isDark? Colors.black:Colors.transparent ,
+
                             isPassword: cubit.isPassword,
                             suffixIcon: IconButton(
                                 onPressed: () {
@@ -247,8 +268,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (formKey.currentState!.validate()) {
                                   cubit.login(LoginRequestModel(
                                       email: cubit.emailController.text,
-                                      password:
-                                      cubit.passwordController.text));
+                                      password: cubit.passwordController.text));
                                   cubit.getAllHotels(1);
                                   Navigator.pushReplacementNamed(
                                       context, LayoutScreen.routeName);
@@ -348,7 +368,10 @@ class _LoginScreenState extends State<LoginScreen> {
         //     .credential(result.accessToken!.token);
         // final userCredential = await FirebaseAuth.instance.signInWithCredential(
         //     facebookCredential);
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+
+        HotelCubit.get(context).getAllHotels(1);
+
+        Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
       } catch (e) {
         final snackBar = SnackBar(
           margin: const EdgeInsets.all(20),

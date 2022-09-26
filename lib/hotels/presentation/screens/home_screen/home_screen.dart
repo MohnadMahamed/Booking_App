@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.backGroundColor,
+          //backgroundColor: AppColors.backGroundColor,
           body: state is GetAllHotelsSuccessState
               ? CustomScrollView(
                   physics: const ScrollPhysics(),
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                     SliverApp(
                       images: buildListView(),
                     ),
-                    const SliverAdapter(),
+                     SliverAdapter(),
                   ],
                 )
               : const Center(

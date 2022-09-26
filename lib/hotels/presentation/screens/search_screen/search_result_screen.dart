@@ -24,7 +24,7 @@ class SearchResultScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = HotelCubit.get(context);
         return Scaffold(
-          backgroundColor: AppColors.backGroundColor,
+          //backgroundColor: AppColors.backGroundColor,
           body: Column(
             children: [
               SizedBox(
@@ -62,6 +62,10 @@ class SearchResultScreen extends StatelessWidget {
                   children: [
                     Expanded(
                         child: myForm(
+                            TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+                            hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+                            fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+                            colorsBorderSide:HotelCubit.get(context).isDark? Colors.transparent:Colors.black ,
                             controller: searchResultController,
                             hintText: 'London')),
                     SizedBox(

@@ -1,4 +1,5 @@
 import 'package:booking_app/hotels/presentation/components/components.dart';
+import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_background.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/search_result_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,15 @@ class SliverApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       elevation: 0,
-      backgroundColor: Colors.transparent,
+     // backgroundColor: Colors.transparent,
       expandedHeight: 380,
       pinned: true,
       toolbarHeight: 100,
       title: Padding(
         padding: const EdgeInsets.only(top: 30.0),
         child: searchButton(
+          color: HotelCubit.get(context).isDark?  Colors.black26
+              : Colors.black.withOpacity(0.5) ,
           onTap: () {
             Navigator.pushReplacementNamed(
                 context, SearchResultScreen.routeName);
