@@ -4,6 +4,9 @@ import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/layout/test1.dart';
 import 'package:booking_app/hotels/presentation/layout/test2.dart';
 import 'package:booking_app/hotels/presentation/layout/test3.dart';
+import 'package:booking_app/hotels/presentation/screens/booking_screen/cancelled_screen.dart';
+import 'package:booking_app/hotels/presentation/screens/booking_screen/completed_screen.dart';
+import 'package:booking_app/hotels/presentation/screens/booking_screen/upcoming_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:to_do_app/modules/all_task_screen.dart';
 // import 'package:to_do_app/modules/completed_screen.dart';
@@ -22,9 +25,8 @@ class BookingScreen extends StatelessWidget {
           backgroundColor: AppColors.backGroundColor,
           body: Column(
             children: [
-              myDivider(),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: Dimensions.height30,
               ),
               Expanded(
                 child: DefaultTabController(
@@ -86,9 +88,9 @@ class BookingScreen extends StatelessWidget {
                       ),
                       body: const TabBarView(
                         children: [
-                          Test1(),
-                          Test2(),
-                          Test3(),
+                          UpcomingScreen(),
+                          CancelledScreen(),
+                          CompletedScreen(),
                         ],
                       ),
                     )),

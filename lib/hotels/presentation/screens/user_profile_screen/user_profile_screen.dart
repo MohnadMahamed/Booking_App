@@ -1,14 +1,11 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/user_profile/language_widget.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/user_profile/mood_widget.dart';
-import 'package:booking_app/hotels/presentation/screens/component/component.dart';
+import 'package:booking_app/hotels/presentation/screens/user_profile_screen/widgets/language_widget.dart';
+import 'package:booking_app/hotels/presentation/screens/user_profile_screen/widgets/mood_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});

@@ -11,7 +11,7 @@ import 'package:booking_app/hotels/domain/usecases/update_user_info_usecase.dart
 import 'package:booking_app/hotels/domain/usecases/user_log_in_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_register_usecase.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/booking_screen.dart';
-import 'package:booking_app/hotels/presentation/screens/home_screen/hotels_main_screen.dart';
+import 'package:booking_app/hotels/presentation/screens/home_screen/home_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/user_profile_screen.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +51,8 @@ class HotelCubit extends Cubit<HotelState> {
   StatusModel? updateBookingResult;
   List<HotelFacilityModel>? listOfHotelFacility;
   List<HotelDetailsForBookingModel>? searchHotelList;
-  List<HotelImage> imageList=[];
-  List<HotelImages> listOfImagesForEachHotel=[];
+  List<HotelImage> imageList = [];
+  List<HotelImages> listOfImagesForEachHotel = [];
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -77,90 +77,108 @@ class HotelCubit extends Cubit<HotelState> {
     currentIndex = index;
     emit(ChangeNavBarState());
   }
-getDetails(int index){
-  emit(GetHotelDetailsLoadingState());
-  hotelDetails= allHotelsData!.hotelData![index];
-  print(hotelDetails!.name);
-  emit(GetHotelDetailsSuccessState());
 
-}
+  bool isPassword = true;
+  IconData passwordSuffix = Icons.visibility_outlined;
 
-  Future<Either<Failure, UserDataModel>> register(  RegisterRequestModel registerRequest
-      )async{
+  void changPassVisibility() {
+    isPassword = !isPassword;
+    passwordSuffix =
+        isPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined;
 
+    emit(ChangPassVisibilityState());
+  }
+
+  bool isPasswordConfirm = true;
+  IconData confirmSuffix = Icons.visibility_outlined;
+
+  void changConfirmPassVisibility() {
+    isPasswordConfirm = !isPasswordConfirm;
+    confirmSuffix = isPasswordConfirm
+        ? Icons.visibility_off_outlined
+        : Icons.visibility_outlined;
+
+    emit(ChangPassVisibilityState());
+  }
+
+  getDetails(int index) {
+    emit(GetHotelDetailsLoadingState());
+    hotelDetails = allHotelsData!.hotelData![index];
+    print(hotelDetails!.name);
+    emit(GetHotelDetailsSuccessState());
+  }
+
+  Future<Either<Failure, UserDataModel>> register(
+      RegisterRequestModel registerRequest) async {
     emit(UserRegisterLoadingState());
-  final result=await registerUseCase.call( registerRequest);
-   result.fold((l) {
-    print(l.message);
-    ServerFailure(l.message);  emit(HotelErrorState()
-  );
-  }, (r) {
-     registerDataModel=r;
-  print(r);
-     emit(UserRegisterSuccessState());
-
-   });
+    final result = await registerUseCase.call(registerRequest);
+    result.fold((l) {
+      print(l.message);
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      registerDataModel = r;
+      print(r);
+      emit(UserRegisterSuccessState());
+    });
     getAllHotels(3);
 
-  return result;
-
-
-
+    return result;
   }
-  Future<Either<Failure, UserDataModel>> login(LoginRequestModel loginRequestModel)async{
-  emit(UserLoginLoadingState());
 
-  final result=await loginUseCase.call(loginRequestModel);
-  result.fold((l){ ServerFailure(l.message);  emit(HotelErrorState());
-  }, (r) {loginDataModel=r;
-  emit(UserLoginSuccessState());
-  print(loginDataModel);
+  Future<Either<Failure, UserDataModel>> login(
+      LoginRequestModel loginRequestModel) async {
+    emit(UserLoginLoadingState());
 
-  });
-  getAllHotels(3);
+    final result = await loginUseCase.call(loginRequestModel);
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      loginDataModel = r;
+      emit(UserLoginSuccessState());
+      print(loginDataModel);
+    });
+    getAllHotels(3);
 
-  return result;
+    return result;
+  }
 
+  Future<Either<Failure, UserDataModel>> updateUserInfo(
+      RegisterRequestModel updateUserInfoRequest) async {
+    emit(UserUpdateInfoLoadingState());
 
-}
-  Future<Either<Failure, UserDataModel>> updateUserInfo(RegisterRequestModel updateUserInfoRequest)async{
-  emit(UserUpdateInfoLoadingState());
+    final result = await updateUserInfoUseCase.call(updateUserInfoRequest);
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      updateInfoDataModel = r;
+      emit(UserUpdateInfoSuccessState());
+      print(updateInfoDataModel);
+    });
+    return result;
+  }
 
-  final result=await updateUserInfoUseCase.call(updateUserInfoRequest);
-  result.fold((l) { ServerFailure(l.message);  emit(HotelErrorState());
-  }, (r) { updateInfoDataModel=r;
-  emit(UserUpdateInfoSuccessState());
-print(updateInfoDataModel);
-  });
-  return result;
+  Future<Either<Failure, AllDataModel>> getAllHotels(int pageNumber) async {
+    emit(GetAllHotelsLoadingState());
 
-}
-  Future<Either<Failure, AllDataModel>> getAllHotels(int pageNumber)async{
-  emit(GetAllHotelsLoadingState());
+    final result = await getAllHotelsUseCase.call(pageNumber);
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      allHotelsData = r;
+      print(allHotelsData);
+      allHotelsData!.hotelData!.forEach((element) {
+        // element.
+        imageList = element.hotelImages!;
+      });
 
-  final result=await getAllHotelsUseCase.call(pageNumber);
-  result.fold((l) { ServerFailure(l.message);  emit(HotelErrorState());
-  }, (r) {allHotelsData=r;
-  print(allHotelsData);
-allHotelsData!.hotelData!.forEach((element) {
-  // element.
-  imageList=element.hotelImages!;
-});
-
-  emit(GetAllHotelsSuccessState());
-
-  } );
-  return result;
-
-}
-
-
-
-
-
-
-
-
+      emit(GetAllHotelsSuccessState());
+    });
+    return result;
+  }
 
   Future<Either<Failure, List<BookingModel>>> getAllBookings(
       String type, int count) async {

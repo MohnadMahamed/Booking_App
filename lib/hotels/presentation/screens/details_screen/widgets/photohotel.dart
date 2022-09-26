@@ -12,43 +12,34 @@ class PhotoOfHotel extends StatefulWidget {
 class _PhotoOfHotelState extends State<PhotoOfHotel> {
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
+    var cubit = HotelCubit.get(context);
     return BlocConsumer<HotelCubit, HotelState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return SizedBox(
-          height: 100,
+          height: 150,
           child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) =>
-                  Container(
+              itemBuilder: (context, index) => Container(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    width: 100,
-                    height: 100,
+                    width: 150,
+                    // height: 400,
                     decoration: BoxDecoration(
-                      //color: Colors.red,
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    // child: Image.asset(
-                    //   'assets/images/1.jpg',
-                    //   height: double.infinity,
-                    //   width: double.infinity,
-                    //   fit: BoxFit.fill,
-                    // ),
+                        //color: Colors.red,
+                        borderRadius: BorderRadius.circular(10)),
                     child: Image(
-                      image: NetworkImage("http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                      image: NetworkImage(
+                          "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
                       height: double.infinity,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
-
                   ),
-
-              separatorBuilder: (context, index) => const SizedBox(width: 20,),
-              itemCount: 5
-          ),
+              separatorBuilder: (context, index) => const SizedBox(
+                    width: 15,
+                  ),
+              itemCount: 5),
         );
       },
     );
