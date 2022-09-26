@@ -29,41 +29,39 @@ class SliverAdapter extends StatelessWidget {
                 ),
               ),
               //list of hotel
-              SizedBox(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 16,
-                  ),
-                  itemBuilder: (context, index) => HotelItemWidget(
-                    onTap: () {
-                      cubit.getDetails(index);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
-                          ));
-                    },
-                    hotelImage: (cubit.allHotelsData!.hotelData![index]
-                            .hotelImages!.isEmpty)
-                        ? const Image(
-                            image: AssetImage("assets/images/no.png"),
-                            fit: BoxFit.cover,
-                          )
-                        : Image(
-                            image: NetworkImage(
-                                "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
-                            fit: BoxFit.cover,
-                          ),
-                    hotelName: cubit.allHotelsData!.hotelData![index].name!,
-                    hotelAddress:
-                        cubit.allHotelsData!.hotelData![index].address!,
-                    hotelPrice:
-                        '\$${cubit.allHotelsData!.hotelData![index].price!}',
-                  ),
-                  itemCount: cubit.allHotelsData!.hotelData!.length,
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 16,
                 ),
+                itemBuilder: (context, index) => HotelItemWidget(
+                  onTap: () {
+                    cubit.getDetails(index);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(),
+                        ));
+                  },
+                  hotelImage: (cubit.allHotelsData!.hotelData![index]
+                          .hotelImages!.isEmpty)
+                      ? const Image(
+                          image: AssetImage("assets/images/no.png"),
+                          fit: BoxFit.cover,
+                        )
+                      : Image(
+                          image: NetworkImage(
+                              "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+                          fit: BoxFit.cover,
+                        ),
+                  hotelName: cubit.allHotelsData!.hotelData![index].name!,
+                  hotelAddress:
+                      cubit.allHotelsData!.hotelData![index].address!,
+                  hotelPrice:
+                      '\$${cubit.allHotelsData!.hotelData![index].price!}',
+                ),
+                itemCount: cubit.allHotelsData!.hotelData!.length,
               ),
               SizedBox(
                 height: Dimensions.height30,
