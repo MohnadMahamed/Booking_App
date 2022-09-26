@@ -26,7 +26,7 @@ class BookingItemWidget extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          height: 250,
+          height: 280,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
@@ -35,24 +35,20 @@ class BookingItemWidget extends StatelessWidget {
           child: Column(
             children: [
               //hotel photo
-              
-              Expanded(
-                child: SizedBox(
-                  // height: 170,
-                  width: double.infinity,
-                  child: ClipRRect(
-                    borderRadius: BorderRadiusDirectional.only(
-                      topStart: Radius.circular(Dimensions.width15),
-                      topEnd: Radius.circular(Dimensions.width15),
-                    ),
-                    child: hotelImage,
+              SizedBox(
+                height: 170,
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadiusDirectional.only(
+                    topStart: Radius.circular(Dimensions.width15),
+                    topEnd: Radius.circular(Dimensions.width15),
                   ),
+                  child: hotelImage,
                 ),
               ),
               //hotel info
               Expanded(
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: Dimensions.width10,
@@ -136,9 +132,9 @@ class BookingItemWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // SizedBox(
-                    //   height: Dimensions.height10,
-                    // ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
                   ],
                 ),
               ),

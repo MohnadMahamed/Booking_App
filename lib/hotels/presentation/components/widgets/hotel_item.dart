@@ -97,7 +97,7 @@ class HotelItemWidget extends StatelessWidget {
                                 ),
                                 SmallText(
                                   text: '40.0 Km to city',
-                                  size: Dimensions.font16,
+                                  size: Dimensions.font10*1.4,
                                 ),
                               ],
                             ),
@@ -115,14 +115,14 @@ class HotelItemWidget extends StatelessWidget {
                                         (index) => Icon(
                                           Icons.star_sharp,
                                           color: AppColors.mainColor,
-                                          size: Dimensions.iconSize24,
+                                          size: Dimensions.iconSize16*1.5,
                                         ),
                                       ),
                                     ),
                                     Icon(
                                       Icons.star_half,
                                       color: Colors.teal,
-                                      size: Dimensions.iconSize24,
+                                      size: Dimensions.iconSize16*1.5,
                                     ),
                                   ],
                                 )),
@@ -139,7 +139,7 @@ class HotelItemWidget extends StatelessWidget {
                               ),
                               SmallText(
                                 text: '/per night',
-                                size: Dimensions.font20,
+                                size: Dimensions.font16,
                               ),
                             ],
                           ),
