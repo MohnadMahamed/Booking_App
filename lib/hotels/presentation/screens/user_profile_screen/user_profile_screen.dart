@@ -93,7 +93,7 @@ class UserProfileScreen extends StatelessWidget {
 
                                 children: [
                                   const SmallText(text: 'Email',size: 18),
-                                  Spacer(),
+Spacer(),
                                   SmallText(
                                     text: cubit.userInfo!.email!,
                                     size: Dimensions.font20,

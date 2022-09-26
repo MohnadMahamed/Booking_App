@@ -1,4 +1,3 @@
-import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +23,7 @@ class SmallText extends StatelessWidget {
       style: GoogleFonts.kanit(
         height: height,
         color: color,
-        fontSize: size == 0 ? Dimensions.font26 : size,
+        fontSize: size == 0 ? 20 : size,
       ),
 
     );
