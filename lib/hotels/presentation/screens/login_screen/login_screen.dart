@@ -45,32 +45,29 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: EdgeInsets.all(Dimensions.height20),
               child: Form(
                 key: formKey,
-                child: Center(
+                child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
                         height: Dimensions.height20,
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          width: Dimensions.width30 * 1.8,
-                          height: Dimensions.height30 * 1.8,
-                          decoration: BoxDecoration(
-                              color: Colors.transparent.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(50.0)),
-                          child: IconButton(
-                              onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, RegisterScreen.routeName);
-                              },
-                              icon: Icon(
-                                Icons.arrow_back_ios,
-                                size: Dimensions.iconSize30 * 1.3,
-                                color: AppColors.mainColor,
-                              )),
-                        ),
+                      Container(
+                        width: Dimensions.width30 * 1.8,
+                        height: Dimensions.height30 * 1.8,
+                        decoration: BoxDecoration(
+                            color: Colors.transparent.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(50.0)),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, RegisterScreen.routeName);
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              size: Dimensions.iconSize30 * 1.3,
+                              color: AppColors.mainColor,
+                            )),
                       ),
                       SizedBox(
                         height: Dimensions.height20,
@@ -110,15 +107,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SmallText(
                                       text: 'Facebook',
                                       color: Colors.white,
-                                      size: Dimensions.font12 * 2,
+                                      size: Dimensions.font12 * 1.7,
                                     ),
                                   ],
                                 ),
                               ),
                               onTap: () {
-                                signInWithFacebook(
-
-                                );
+                                signInWithFacebook();
                               },
                             ),
                           ),
@@ -150,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SmallText(
                                       text: 'Gmail',
                                       color: Colors.white,
-                                      size: Dimensions.font12 * 2,
+                                      size: Dimensions.font12 * 1.7,
                                     ),
                                   ],
                                 ),
@@ -168,131 +163,100 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(
                         child: SmallText(
                           text: 'or log with email',
-                          size: Dimensions.font12 * 2,
+                          size: Dimensions.font12 * 1.7,
                         ),
                       ),
                       SizedBox(
                         height: Dimensions.height30,
                       ),
 
-                      Expanded(
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //email
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: Dimensions.width15 * 2),
-                                child: SmallText(
-                                  text: 'Your Email',
-                                  size: Dimensions.font12 * 2,
-                                ),
-                              ),
-                              myForm(
-                                validate: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Email  must  not be empty';
-                                  }
-                                  if (!RegExp(
-                                          "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                      .hasMatch(value)) {
-                                    return 'Please a valid Email';
-                                  }
-                                },
-                                type: TextInputType.emailAddress,
-                                controller: cubit.emailController,
-                                hintText: 'enter your email',
-                              ),
-                              SizedBox(
-                                height: Dimensions.height20,
-                              ),
-                              //password
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: Dimensions.width15 * 2),
-                                child: SmallText(
-                                  text: 'Password',
-                                  size: Dimensions.font12 * 2,
-                                ),
-                              ),
-                              myForm(
-                                isPassword: cubit.isPassword,
-                                suffixIcon: IconButton(
-                                    onPressed: () {
-                                      cubit.changPassVisibility();
-                                      print(cubit.isPassword);
-                                    },
-                                    icon: Icon(
-                                      cubit.passwordSuffix,
-                                      color: Colors.white38,
-                                    )),
-                                validate: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Password must  not be empty';
-                                  }
-                                },
-                                type: TextInputType.visiblePassword,
-                                controller: cubit.passwordController,
-                                hintText: 'enter password',
-                              ),
-                              SizedBox(
-                                height: Dimensions.font20,
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: SmallText(
-                                      text: 'Forget your password ?',
-                                      size: Dimensions.font12 * 2),
-                                ),
-                              ),
-                              SizedBox(
-                                height: Dimensions.height30,
-                              ),
-                              MyButtonWidget(
-                                text: 'Login',
-                                onTap: () {
-                                  if (formKey.currentState!.validate()) {
-                                    cubit.login(LoginRequestModel(
-                                        email: cubit.emailController.text,
-                                        password: cubit.passwordController.text
-                                    ));
-                                    cubit.getAllHotels(1);
-                                    Navigator.pushReplacementNamed(
-                                        context, LayoutScreen.routeName);
-                                  }
-                                },
-                              ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //email
 
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SmallText(
-                                    text: 'Don\'t have an account?',
-                                    size: Dimensions.font12 * 2,
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pushReplacementNamed(
-                                          context, RegisterScreen.routeName);
-                                    },
-                                    child: SmallText(
-                                      text: 'Register',
-                                      size: Dimensions.font12 * 2,
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
+                          SmallText(
+                            text: 'Your Email',
+                            size: Dimensions.font12 * 1.7,
                           ),
-                        ),
+                          myForm(
+                            validate: (value) {
+                              if (value!.isEmpty) {
+                                return 'Email  must  not be empty';
+                              }
+                              if (!RegExp(
+                                  "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                  .hasMatch(value)) {
+                                return 'Please a valid Email';
+                              }
+                            },
+                            type: TextInputType.emailAddress,
+                            controller: cubit.emailController,
+                            hintText: 'enter your email',
+                          ),
+                          SizedBox(
+                            height: Dimensions.height20,
+                          ),
+                          //password
+                          SmallText(
+                            text: 'Password',
+                            size: Dimensions.font12 * 1.7,
+                          ),
+                          myForm(
+                            isPassword: cubit.isPassword,
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  cubit.changPassVisibility();
+                                  print(cubit.isPassword);
+                                },
+                                icon: Icon(
+                                  cubit.passwordSuffix,
+                                  color: Colors.white38,
+                                )),
+                            validate: (value) {
+                              if (value!.isEmpty) {
+                                return 'Password must  not be empty';
+                              }
+                            },
+                            type: TextInputType.visiblePassword,
+                            controller: cubit.passwordController,
+                            hintText: 'enter password',
+                          ),
+                          SizedBox(
+                            height: Dimensions.font20,
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: InkWell(
+                              onTap: () {},
+                              child: SmallText(
+                                  text: 'Forget your password ?',
+                                  size: Dimensions.font12 * 1.7),
+                            ),
+                          ),
+                          SizedBox(
+                            height: Dimensions.height45,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0,bottom: 8),
+                            child: MyButtonWidget(
+
+                              isPadding: false,
+                              text: 'Login',
+                              onTap: () {
+                                if (formKey.currentState!.validate()) {
+                                  cubit.login(LoginRequestModel(
+                                      email: cubit.emailController.text,
+                                      password:
+                                      cubit.passwordController.text));
+                                  cubit.getAllHotels(1);
+                                  Navigator.pushReplacementNamed(
+                                      context, LayoutScreen.routeName);
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

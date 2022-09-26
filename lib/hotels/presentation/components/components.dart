@@ -115,7 +115,8 @@ Widget myForm({
   bool isPassword = false,
 }) =>
     Padding(
-      padding: const EdgeInsets.all(8.0),
+
+      padding: const EdgeInsets.only(top: 8,bottom: 8),
       child: SizedBox(
         height: Dimensions.height30 * 2.3,
         child: TextFormField(
@@ -137,11 +138,11 @@ Widget myForm({
             prefixIcon: prefixIcon,
             border: const OutlineInputBorder(),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(Dimensions.radius20 * 1.5),
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
                 borderSide:
                     const BorderSide(width: 2.0, color: AppColors.mainColor)),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Dimensions.radius20 * 2),
+              borderRadius: BorderRadius.circular(Dimensions.radius20 ),
               borderSide:
                   const BorderSide(width: 0.0, color: Colors.transparent),
             ),

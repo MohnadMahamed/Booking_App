@@ -1,4 +1,3 @@
-import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,7 +26,7 @@ class LanguageWidget extends StatelessWidget {
               'عربي',
               style: GoogleFonts.kanit(
                 color: Colors.black,
-                fontSize: Dimensions.font26,
+                fontSize: 18,
               ),
             ),
           ),
@@ -38,8 +37,8 @@ class LanguageWidget extends StatelessWidget {
             text: Text(
               'English',
               style: GoogleFonts.kanit(
-                color: Colors.white70,
-                fontSize: Dimensions.font20,
+                color: Colors.white,
+                fontSize:18,
               ),
             ),
           ),

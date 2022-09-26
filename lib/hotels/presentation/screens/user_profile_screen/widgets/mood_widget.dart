@@ -38,7 +38,7 @@ class MoodWidget extends StatelessWidget {
             text: Text(
               'Light',
               style: GoogleFonts.kanit(
-                color: Colors.white70,
+                color: Colors.white,
                 fontSize: Dimensions.font20,
               ),
             ),
