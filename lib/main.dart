@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'hotels/presentation/screens/register_screen/register_screen.dart';
+import 'hotels/presentation/styles/themes.dart';
 
 void main() async {
   ServiceLocator().init();
@@ -34,7 +35,7 @@ void main() async {
   //  remoteDataSource.searchHotels(page: "",count: "10",maxPrice: "5000",minPrice: "100",address: "",name: "",distance: "",latitude: "",longitude: "");
   //  var cubit=HotelCubit.get(context);
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,21 +44,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          HotelCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(),sl()),
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: const RegisterScreen(),
-        routes: {
-          // WeatherMainScreen.routeName:(context)=>WeatherMainScreen(),
-          RegisterScreen.routeName: (context) => const RegisterScreen(),
-          LoginScreen.routeName: (context) => const LoginScreen(),
-          HomeScreen.routeName: (context) => const HomeScreen(),
-          DetailsScreen.routeName: (context) => const DetailsScreen(),
-          SearchFiltterScreen.routeName: (context) =>
-              const SearchFiltterScreen(),
-          SearchResultScreen.routeName: (context) => const SearchResultScreen(),
-          LayoutScreen.routeName: (context) => const LayoutScreen(),
+      create: (context) => HotelCubit(
+          sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl())..changeAppMode(),
+      child: BlocConsumer<HotelCubit, HotelState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return GetMaterialApp(
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            //themeMode: ThemeMode.dark,
+            themeMode: HotelCubit.get(context).isDark ? ThemeMode.light : ThemeMode.dark,
+            debugShowCheckedModeBanner: false,
+            home: RegisterScreen(),
+            routes: {
+              // WeatherMainScreen.routeName:(context)=>WeatherMainScreen(),
+              RegisterScreen.routeName: (context) => RegisterScreen(),
+              LoginScreen.routeName: (context) => const LoginScreen(),
+              HomeScreen.routeName: (context) => const HomeScreen(),
+              DetailsScreen.routeName: (context) => const DetailsScreen(),
+              SearchFiltterScreen.routeName: (context) =>
+                  const SearchFiltterScreen(),
+              SearchResultScreen.routeName: (context) =>
+                  const SearchResultScreen(),
+              LayoutScreen.routeName: (context) => const LayoutScreen(),
+            },
+          );
         },
       ),
     );

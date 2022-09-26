@@ -40,26 +40,29 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: AppColors.backGroundColor,
+            //backgroundColor: HotelCubit.get(context).isDark ?AppColors.backGroundColor   :Colors.white,
+
+            //backgroundColor: AppColors.backGroundColor,
             body: Padding(
               padding: EdgeInsets.all(Dimensions.height20),
               child: Form(
                 key: formKey,
-                child: Center(
+                child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
                         height: Dimensions.height20,
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
                         child: Container(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
                           width: Dimensions.width30 * 1.8,
                           height: Dimensions.height30 * 1.8,
                           decoration: BoxDecoration(
                               color: Colors.transparent.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(50.0)),
+                              borderRadius: BorderRadius.circular(25.0)),
                           child: IconButton(
                               onPressed: () {
                                 Navigator.pushReplacementNamed(
@@ -67,15 +70,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               icon: Icon(
                                 Icons.arrow_back_ios,
-                                size: Dimensions.iconSize30 * 1.3,
-                                color: AppColors.mainColor,
+                                size: Dimensions.iconSize30 * 1.2,
+                                color: cubit.isDark? Colors.black:AppColors.mainColor ,
                               )),
                         ),
                       ),
                       SizedBox(
                         height: Dimensions.height20,
                       ),
-                      const BigText(
+                       BigText(
                         text: 'Login',
                       ),
                       SizedBox(
@@ -110,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SmallText(
                                       text: 'Facebook',
                                       color: Colors.white,
-                                      size: Dimensions.font12 * 2,
+                                      size: Dimensions.font12 * 1.7,
                                     ),
                                   ],
                                 ),
@@ -148,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SmallText(
                                       text: 'Gmail',
                                       color: Colors.white,
-                                      size: Dimensions.font12 * 2,
+                                      size: Dimensions.font12 * 1.7,
                                     ),
                                   ],
                                 ),
@@ -166,107 +169,114 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(
                         child: SmallText(
                           text: 'or log with email',
-                          size: Dimensions.font12 * 2,
+                          size: Dimensions.font12 * 1.7,
                         ),
                       ),
                       SizedBox(
                         height: Dimensions.height30,
                       ),
 
-                      Expanded(
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //email
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: Dimensions.width15 * 2),
-                                child: SmallText(
-                                  text: 'Your Email',
-                                  size: Dimensions.font12 * 2,
-                                ),
-                              ),
-                              myForm(
-                                validate: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Email  must  not be empty';
-                                  }
-                                  if (!RegExp(
-                                          "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                      .hasMatch(value)) {
-                                    return 'Please a valid Email';
-                                  }
-                                },
-                                type: TextInputType.emailAddress,
-                                controller: cubit.emailController,
-                                hintText: 'enter your email',
-                              ),
-                              SizedBox(
-                                height: Dimensions.height20,
-                              ),
-                              //password
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: Dimensions.width15 * 2),
-                                child: SmallText(
-                                  text: 'Password',
-                                  size: Dimensions.font12 * 2,
-                                ),
-                              ),
-                              myForm(
-                                isPassword: cubit.isPassword,
-                                suffixIcon: IconButton(
-                                    onPressed: () {
-                                      cubit.changPassVisibility();
-                                      print(cubit.isPassword);
-                                    },
-                                    icon: Icon(
-                                      cubit.passwordSuffix,
-                                      color: Colors.white38,
-                                    )),
-                                validate: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Password must  not be empty';
-                                  }
-                                },
-                                type: TextInputType.visiblePassword,
-                                controller: cubit.passwordController,
-                                hintText: 'enter password',
-                              ),
-                              SizedBox(
-                                height: Dimensions.font20,
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: SmallText(
-                                      text: 'Forget your password ?',
-                                      size: Dimensions.font12 * 2),
-                                ),
-                              ),
-                              SizedBox(
-                                height: Dimensions.height30,
-                              ),
-                              MyButtonWidget(
-                                text: 'Login',
-                                onTap: () {
-                                  if (formKey.currentState!.validate()) {
-                                    cubit.login(LoginRequestModel(
-                                        email: cubit.emailController.text,
-                                        password:
-                                            cubit.passwordController.text));
-                                    cubit.getAllHotels(1);
-                                    Navigator.pushReplacementNamed(
-                                        context, LayoutScreen.routeName);
-                                  }
-                                },
-                              ),
-                            ],
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //email
+
+                          SmallText(
+                            text: 'Your Email',
+                            size: Dimensions.font12 * 1.7,
                           ),
-                        ),
+                          myForm(
+                            TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+
+                            hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+
+                            fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+
+                            colorsBorderSide:HotelCubit.get(context).isDark? Colors.black:Colors.transparent ,
+                            validate: (value) {
+                              if (value!.isEmpty) {
+                                return 'Email  must  not be empty';
+                              }
+                              if (!RegExp(
+                                  "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                  .hasMatch(value)) {
+                                return 'Please a valid Email';
+                              }
+                            },
+                            type: TextInputType.emailAddress,
+                            controller: cubit.emailController,
+                            hintText: 'enter your email',
+                          ),
+                          SizedBox(
+                            height: Dimensions.height20,
+                          ),
+                          //password
+                          SmallText(
+                            text: 'Password',
+                            size: Dimensions.font12 * 1.7,
+                          ),
+                          myForm(
+                            TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
+
+                            hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
+
+                            fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
+
+                            colorsBorderSide:HotelCubit.get(context).isDark? Colors.black:Colors.transparent ,
+
+                            isPassword: cubit.isPassword,
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  cubit.changPassVisibility();
+                                  print(cubit.isPassword);
+                                },
+                                icon: Icon(
+                                  cubit.passwordSuffix,
+                                  color: Colors.white38,
+                                )),
+                            validate: (value) {
+                              if (value!.isEmpty) {
+                                return 'Password must  not be empty';
+                              }
+                            },
+                            type: TextInputType.visiblePassword,
+                            controller: cubit.passwordController,
+                            hintText: 'enter password',
+                          ),
+                          SizedBox(
+                            height: Dimensions.font20,
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: InkWell(
+                              onTap: () {},
+                              child: SmallText(
+                                  text: 'Forget your password ?',
+                                  size: Dimensions.font12 * 1.7),
+                            ),
+                          ),
+                          SizedBox(
+                            height: Dimensions.height45,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0,bottom: 8),
+                            child: MyButtonWidget(
+
+                              isPadding: false,
+                              text: 'Login',
+                              onTap: () {
+                                if (formKey.currentState!.validate()) {
+                                  cubit.login(LoginRequestModel(
+                                      email: cubit.emailController.text,
+                                      password: cubit.passwordController.text));
+                                  cubit.getAllHotels(1);
+                                  Navigator.pushReplacementNamed(
+                                      context, LayoutScreen.routeName);
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -278,8 +288,6 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-
-
 
   bool loading = false;
 
@@ -330,25 +338,29 @@ class _LoginScreenState extends State<LoginScreen> {
   // }
   void signInWithFacebook() async {
     try {
-      final LoginResult result = await FacebookAuth.instance.login(
-          permissions: (['email', 'public_profile']));
+      final LoginResult result = await FacebookAuth.instance
+          .login(permissions: (['email', 'public_profile']));
       final token = result.accessToken!.token;
       print(
           'Facebook token userID : ${result.accessToken!.grantedPermissions}');
-      final graphResponse = await http.get(
-          Uri.parse('https://graph.facebook.com/'
-              'v2.12/me?fields=name,first_name,last_name,email&access_token=${token}'));
+      final graphResponse = await http.get(Uri.parse(
+          'https://graph.facebook.com/'
+          'v2.12/me?fields=name,first_name,last_name,email&access_token=${token}'));
       final userData = await FacebookAuth.instance.getUserData();
       final profile = jsonDecode(graphResponse.body);
+      String name = userData["name"];
+      String email = userData["email"];
+      String password = profile["id"].substring(0, 9);
+      String confirmPassword = profile["id"].substring(0, 9);
+      RegisterRequestModel registerRequestModel = RegisterRequestModel(
+          name: name,
+          email: email,
+          password: password,
+          passwordConfirmation: confirmPassword,
+          image: "image");
+      HotelCubit.get(context).register(registerRequestModel);
 
-      String name=userData["name"];
-      String email=userData["email"];
-      String password=profile["id"];
-      String confirmPassword=profile["id"];
-      RegisterRequestModel registerRequestModel =RegisterRequestModel(name: name, email: email, password: password, passwordConfirmation: confirmPassword, image: "image");
-     HotelCubit.get(context).register(registerRequestModel);
-
-      print(profile['id']);
+      print(profile['id'].substring(0, 9));
       print(userData['']);
       print("Profile is equal to $profile");
       try {
@@ -356,7 +368,10 @@ class _LoginScreenState extends State<LoginScreen> {
         //     .credential(result.accessToken!.token);
         // final userCredential = await FirebaseAuth.instance.signInWithCredential(
         //     facebookCredential);
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+
+        HotelCubit.get(context).getAllHotels(1);
+
+        Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
       } catch (e) {
         final snackBar = SnackBar(
           margin: const EdgeInsets.all(20),
@@ -376,7 +391,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-
   void loginInWithGoogle() async {
     setState(() {
       loading = true;
@@ -391,12 +405,18 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
 
-      final googleSignInAuthentication = await googleSignInAccount.authentication;
-      String name=googleSignInAccount.displayName!;
-      String email=googleSignInAccount.email;
-      String password=googleSignInAccount.id;
-      String confirmPassword=googleSignInAccount.id;
-      RegisterRequestModel registerRequestModel =RegisterRequestModel(name: name, email: email, password: password, passwordConfirmation: confirmPassword, image: "image");
+      final googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      String name = googleSignInAccount.displayName!;
+      String email = googleSignInAccount.email;
+      String password = googleSignInAccount.id;
+      String confirmPassword = googleSignInAccount.id;
+      RegisterRequestModel registerRequestModel = RegisterRequestModel(
+          name: name,
+          email: email,
+          password: password,
+          passwordConfirmation: confirmPassword,
+          image: "image");
       HotelCubit.get(context).register(registerRequestModel);
       // print(googleSignInAccount.);
       final credential = GoogleAuthProvider.credential(
@@ -430,29 +450,37 @@ class _LoginScreenState extends State<LoginScreen> {
           break;
       }
 
-      showDialog(context: context, builder: (context) =>
-          AlertDialog(
-            title: Text('log in with google failed'),
-            content: Text(content),
-            actions: [TextButton(onPressed: () {
-              Navigator.of(context).pop();
-            }, child: Text('OK'))
-            ],
-          ));
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('log in with google failed'),
+                content: Text(content),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('OK'))
+                ],
+              ));
     } catch (e) {
-      showDialog(context: context, builder: (context) => AlertDialog(
-        title: Text('log in with google failed') ,
-        content: Text('An unknow error occurred'),
-        actions: [TextButton(onPressed: (){
-          Navigator.of(context).pop();
-        }, child: Text('OK'))],));
-
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('log in with google failed'),
+                content: Text('An unknow error occurred'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('OK'))
+                ],
+              ));
     } finally {
       setState(() {
-        loading=false;
+        loading = false;
       });
     }
-
   }
-
 }

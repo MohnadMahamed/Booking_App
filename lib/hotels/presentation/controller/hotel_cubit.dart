@@ -322,7 +322,19 @@ class HotelCubit extends Cubit<HotelState> {
 
 
 
+  bool isDark= true;
+  void changeAppMode({ bool? fromShared}) {
+    if (fromShared != null) {
+      isDark = fromShared;
+      emit(AppChangeAppMode());
+    } else {
+      isDark = !isDark;
+      // CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+      //   emit(AppChangeAppMode());
+      // }
 
+    }
+  }
 
 
 

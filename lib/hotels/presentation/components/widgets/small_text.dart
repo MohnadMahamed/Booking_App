@@ -20,11 +20,13 @@ class SmallText extends StatelessWidget {
     return Text(
       text,
 
-      style: GoogleFonts.kanit(
-        height: height,
-        color: color,
-        fontSize: size == 0 ? 20 : size,
-      ),
+      style:Theme.of(context).textTheme.bodyText1
+
+    // GoogleFonts.kanit(
+    //     height: height,
+    //     color: color,
+    //     fontSize: size == 0 ? 20 : size,
+    //   ),
 
     );
   }

@@ -59,7 +59,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         builder: (context, state) {
           return SafeArea(
             child: Scaffold(
-                backgroundColor: AppColors.backGroundColor,
+                //backgroundColor: AppColors.backGroundColor,
                 body: state is GetHotelDetailsSuccessState
                     ? CustomScrollView(controller: scrollController, slivers: [
                         SliverAppBar(
@@ -143,7 +143,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                         SliverToBoxAdapter(
                           child: Container(
-                            color: AppColors.backGroundColor,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -155,7 +154,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     children: [
                                       const HotelViewDetails(),
                                       myDivider(),
-                                      BigText(
+                                      MediumText(
                                         text: 'Summary',
                                         size: Dimensions.font12 * 2,
                                       ),
@@ -177,7 +176,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          BigText(
+                                          MediumText(
                                             text: 'Photo',
                                             size: Dimensions.font12 * 2,
                                           ),

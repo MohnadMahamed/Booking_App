@@ -21,7 +21,7 @@ class UserProfileScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: AppColors.backGroundColor,
+            //backgroundColor: AppColors.backGroundColor,
             body: Column(
               children: [
                 SizedBox(
@@ -84,16 +84,14 @@ class UserProfileScreen extends StatelessWidget {
                                     text: cubit.userInfo!.name!,
                                     size: Dimensions.font20,
                                     color: Colors.white,
-
                                   )
                                 ],
                               ),
                               myDivider(),
                               Row(
-
                                 children: [
                                   const SmallText(text: 'Email',size: 18),
-Spacer(),
+                                  Spacer(),
                                   SmallText(
                                     text: cubit.userInfo!.email!,
                                     size: Dimensions.font20,
