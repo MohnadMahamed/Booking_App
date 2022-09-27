@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:dartz/dartz.dart';
 import '../../../core/error/exceptions.dart';
@@ -40,8 +42,8 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
   @override
-  Future<Either<Failure, UserDataModel>> getUpdateUserInfo(String name,String email) async {
-    final result=await baseHotelRemoteDataSource.updateUserInfo(name,email);
+  Future<Either<Failure, UserDataModel>> getUpdateUserInfo(String name,String email,File image) async {
+    final result=await baseHotelRemoteDataSource.updateUserInfo(name,email,image);
 
     try{
       return Right(result);
@@ -96,16 +98,21 @@ class HotelsRepository extends BaseHotelsRepository{
 
   @override
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> getSearch(
-      { String? address,
-          String? maxPrice,
-           String? minPrice,
-           String? latitude,
-           String? longitude,
-           String? distance,
-           String? page,
-            String? count,
-           String? name}) async {
-    final result=await baseHotelRemoteDataSource.searchHotels() ;
+       String address,
+           ) async {
+    final result=await baseHotelRemoteDataSource.searchHotels(address) ;
+
+    try{
+      return Right(result);
+    }on ServerException catch(failure){
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+  @override
+  Future<Either<Failure, List<HotelDetailsForBookingModel>>> filterHotels(
+  String? name, String? lat, String? lon, String? minPrice, String? maxPrice, String? distance
+           ) async {
+    final result=await baseHotelRemoteDataSource.filterHotels(name, lat, lon, minPrice, maxPrice, distance) ;
 
     try{
       return Right(result);

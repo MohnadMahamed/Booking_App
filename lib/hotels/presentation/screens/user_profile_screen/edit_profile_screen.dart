@@ -4,6 +4,9 @@ import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:booking_app/hotels/presentation/screens/image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +26,7 @@ class EditProfileScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            //backgroundColor: AppColors.backGroundColor,
+            backgroundColor: AppColors.backGroundColor,
             body: Column(
               children: [
                 SizedBox(
@@ -66,8 +69,8 @@ class EditProfileScreen extends StatelessWidget {
                               radius: Dimensions.radius83,
                               backgroundColor: AppColors.mainColor,
                               child: CircleAvatar(
-                                backgroundImage: const AssetImage(
-                                  'assets/me.jpg',
+                                backgroundImage:  NetworkImage(
+                                 "http://api.mahmoudtaha.com/images/${cubit.userInfo!.image!}",
                                 ),
                                 radius: Dimensions.radius83,
                               ),
@@ -75,10 +78,15 @@ class EditProfileScreen extends StatelessWidget {
                             Positioned(
                               bottom: 0,
                               right: 1,
-                              child: InkWell(
+                              child: GestureDetector(
+
                                 onTap: () {
-                                  print('change photo');
-                                },
+                                  print(LocaleKeys.change_photo.tr);
+                                  Navigator.pushNamed(context, SelectImage.routeName);
+
+          },
+
+
                                 child: Container(
                                   width: Dimensions.width20 * 2.5,
                                   height: Dimensions.height20 * 2.5,
@@ -92,10 +100,10 @@ class EditProfileScreen extends StatelessWidget {
                                     size: Dimensions.iconSize30,
                                   ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
+                                ),
+                                ),
+                        ],
+                                ),
                         SizedBox(
                           height: Dimensions.height20 * 2,
                         ),
@@ -106,7 +114,7 @@ class EditProfileScreen extends StatelessWidget {
                               Row(
                                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const SmallText(text: 'User Name'),
+                                   SmallText(text:LocaleKeys.name.tr()),
                                   SizedBox(
                                     width: Dimensions.width30,
                                   ),
@@ -116,7 +124,7 @@ class EditProfileScreen extends StatelessWidget {
                                         TextColor:HotelCubit.get(context).isDark ?Colors.black :Colors.white70,
                                         controller: userNameController,
                                         type: TextInputType.name,
-                                        hintText: cubit.loginDataModel!.name!
+                                        hintText: cubit.userInfo!.name!
                                     ),
                                   ),
                                 ],
@@ -126,7 +134,7 @@ class EditProfileScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment
                                     .spaceBetween,
                                 children: [
-                                  const SmallText(text: 'Email'),
+                                   SmallText(text: LocaleKeys.email.tr()),
                                   SizedBox(
                                     width: Dimensions.width30,
                                   ),
@@ -136,7 +144,7 @@ class EditProfileScreen extends StatelessWidget {
                                         TextColor:HotelCubit.get(context).isDark ?Colors.black :Colors.white70,
                                         controller: emailController,
                                         type: TextInputType.emailAddress,
-                                        hintText: cubit.loginDataModel!.email!),
+                                        hintText: cubit.userInfo!.email!),
                                   ),
                                   // SmallText(
                                   //   text: 'mohnad_mahamed@gmail.com',
@@ -148,17 +156,20 @@ class EditProfileScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
+                ],
+    ),
+    ),
+    ),
                 MyButtonWidget(
-                  text: 'Apply',
+                  text: LocaleKeys.apply.tr(),
                   onTap: () {
                     // RegisterRequestModel updateInfo=RegisterRequestModel(name: userNameController.text, email: emailController.text, password: "", passwordConfirmation: "", image: "");
 
                     cubit.updateUserInfo(
-                        userNameController.text, emailController.text);
+                        userNameController.text, emailController.text,
+                        HotelCubit
+                            .get(context)
+                            .image!);
                     cubit.getInfo();
                     Navigator.pop(context);
                   },
@@ -171,3 +182,4 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 }
+

@@ -1,8 +1,11 @@
+import 'dart:io';
 
 import 'package:booking_app/core/error/failure.dart';
+import 'package:booking_app/core/util/constaces/api_constances.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/domain/entity/hotel_entity.dart';
 import 'package:booking_app/hotels/domain/usecases/create_booking_usecase.dart';
+import 'package:booking_app/hotels/domain/usecases/filter_hotel_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_all_hotels_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_bookings_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_facilitis_usecase.dart';
@@ -16,24 +19,29 @@ import 'package:booking_app/hotels/presentation/screens/booking_screen/booking_s
 import 'package:booking_app/hotels/presentation/screens/home_screen/home_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/user_profile_screen.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'hotel_state.dart';
 
 class HotelCubit extends Cubit<HotelState> {
   HotelCubit(
-      this.registerUseCase,
-      this.loginUseCase,
-      this.updateUserInfoUseCase,
-      this.updateBookingStatusUseCase,
-      this.searchHotelsUseCase,
-      this.getFacilitiesUseCase,
-      this.getBookingsUseCase,
+
+
+      this.createBookingUseCase,
       this.getAllHotelsUseCase,
-      this.createBookingUseCase, this.getUserInfo)
-      : super(HotelInitial());
+      this.getBookingsUseCase,
+      this.getFacilitiesUseCase,
+      this.searchHotelsUseCase,
+      this.updateBookingStatusUseCase,
+      this.updateUserInfoUseCase,
+      this.filterHotelsUseCase,
+      this.getUserInfo,
+      this.loginUseCase,
+      this.registerUseCase):super(HotelInitial());
 
   static HotelCubit get(context) => BlocProvider.of(context);
   final CreateBookingUseCase createBookingUseCase;
@@ -43,6 +51,7 @@ class HotelCubit extends Cubit<HotelState> {
   final SearchHotelsUseCase searchHotelsUseCase;
   final UpdateBookingStatusUseCase updateBookingStatusUseCase;
   final UpdateUserInfoUseCase updateUserInfoUseCase;
+  final FilterHotelsUseCase filterHotelsUseCase;
   final GetUserInfo getUserInfo;
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
@@ -51,12 +60,12 @@ class HotelCubit extends Cubit<HotelState> {
   UserDataModel? updateInfoDataModel;
   UserDataModel? userInfo;
   AllDataModel? allHotelsData;
-  List<BookingModel> listOfBooking=[];
+  List<BookingModel> listOfBooking = [];
   StatusModel? createBookingResult;
   StatusModel? updateBookingResult;
   List<HotelFacilityModel>? listOfHotelFacility;
-  List<HotelDetailsForBookingModel> searchHotelList=[];
-  List<HotelDetails> searchHotelLis=[];
+  List<HotelDetailsForBookingModel> searchHotelList = [];
+  List<HotelDetails> searchHotelLis = [];
   List<HotelImage> imageList = [];
   List<HotelImages> listOfImagesForEachHotel = [];
   TextEditingController emailController = TextEditingController();
@@ -64,12 +73,24 @@ class HotelCubit extends Cubit<HotelState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   HotelDetails? hotelDetails;
-  int userId=0;
-  List<BookingModel> listOfUpcomingBooking=[];
-  List<BookingModel> listOfCancelledBooking=[];
-  List<BookingModel> listOfCompletedBooking=[];
+  int userId = 0;
+  List<BookingModel> listOfUpcomingBooking = [];
+  List<BookingModel> listOfCancelledBooking = [];
+  List<BookingModel> listOfCompletedBooking = [];
+  double priceSliderStartValue = 100.0;
+  double priceSliderEndValue = 1000.0;
+  bool wifiCheckBoxVaule = false;
+  bool acCheckBoxVaule = false;
+  TextEditingController hotelNameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController latitudeController = TextEditingController();
+  TextEditingController longitudeController = TextEditingController();
+  TextEditingController searchResultController = TextEditingController();
 
+  double distaceSliderValue = 20.0;
 
+  int pageValue = 0;
+  int countValue = 0;
 
   int currentIndex = 0;
 
@@ -131,11 +152,13 @@ class HotelCubit extends Cubit<HotelState> {
     }, (r) {
       registerDataModel = r;
       print(r);
-      userId=registerDataModel!.id!;
+      userInfo=r;
+      userId = registerDataModel!.id!;
       emit(UserRegisterSuccessState());
     });
     getAllHotels(3);
     print(userId);
+    ApiConstance.token = registerDataModel!.apiToken!;
 
     return result;
   }
@@ -156,6 +179,7 @@ class HotelCubit extends Cubit<HotelState> {
       print(loginDataModel);
     });
     // userId=registerDataModel!.id!;
+    ApiConstance.token = loginDataModel!.apiToken!;
 
     getAllHotels(3);
     print(userId);
@@ -163,7 +187,7 @@ class HotelCubit extends Cubit<HotelState> {
     return result;
   }
 
-  Future<Either<Failure, UserDataModel>> getInfo()async{
+  Future<Either<Failure, UserDataModel>> getInfo() async {
     emit(UserInfoLoadingState());
 
     final result = await getUserInfo.call();
@@ -174,20 +198,51 @@ class HotelCubit extends Cubit<HotelState> {
       userInfo = r;
       emit(UserInfoSuccessState());
       print(userInfo);
+      // print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmm${userInfo!.image}");
     });
     return result;
-
   }
+
+  File? image;
+
+  Future getImageFromGallery() async {
+    final picker = await ImagePicker().pickImage(source: ImageSource.gallery);
+    image = File(picker!.path);
+    // String fileName = image!.path.split('/').last;
+
+    // FormData data = FormData.fromMap({
+    //   "image": await MultipartFile.fromFile(
+    //     image!.path,
+    //     filename: fileName,
+    //   ),
+    // });
+  }
+
+  Future getImageFromCamera() async {
+    final picker = await ImagePicker().pickImage(source: ImageSource.camera);
+    image = File(picker!.path);
+    // String fileName = image!.path.split('/').last;
+    // FormData data = FormData.fromMap({
+    //   "image": await MultipartFile.fromFile(
+    //     image!.path,
+    //     filename: fileName,
+    //   ),
+    // });
+
+    // _upload(image!);
+  }
+
   Future<Either<Failure, UserDataModel>> updateUserInfo(
-      String name,String email) async {
+      String name, String email, File image) async {
     emit(UserUpdateInfoLoadingState());
 
-    final result = await updateUserInfoUseCase.call(name,email);
+    final result = await updateUserInfoUseCase.call(name, email, image);
     result.fold((l) {
       ServerFailure(l.message);
       emit(HotelErrorState());
     }, (r) {
       updateInfoDataModel = r;
+      userInfo=r;
       emit(UserUpdateInfoSuccessState());
       print(updateInfoDataModel);
     });
@@ -288,27 +343,14 @@ class HotelCubit extends Cubit<HotelState> {
     return result;
   }
 
-  Future<Either<Failure, List<HotelDetailsForBookingModel>>> searchHotels(
-      {required String address,
-      required String maxPrice,
-      required String minPrice,
-      required String name,
-      required String latitude,
-      required String longitude,
-      required String distance,
-      required String page,
-      required String count}) async {
+  Future<Either<Failure, List<HotelDetailsForBookingModel>>>
+      searchHotels() async {
+    String address = searchResultController.text;
+
     emit(SearchHotelsLoadingState());
     final result = await searchHotelsUseCase.call(
-        name: name,
-        address: address,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        count: count,
-        page: page,
-        longitude: longitude,
-        latitude: latitude,
-        distance: distance);
+      address: address,
+    );
     result.fold((l) {
       ServerFailure(l.message);
       emit(HotelErrorState());
@@ -320,23 +362,128 @@ class HotelCubit extends Cubit<HotelState> {
     return result;
   }
 
+  Future<Either<Failure, List<HotelDetailsForBookingModel>>>
+      filterHotels() async {
+    emit(SearchHotelsLoadingState());
+    final result = await filterHotelsUseCase.call(
+      distance: distaceSliderValue.toString(),
+      maxPrice: priceSliderEndValue.toString(),
+      minPrice: priceSliderStartValue.toString(),
+      name: hotelNameController.text,
+      lat: latitudeController.text,
+      lon: longitudeController.text,
+    );
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      searchHotelList = r;
+      print(searchHotelList);
+      emit(SearchHotelsSuccessState());
+    });
+    return result;
+  }
 
+// Future getImage() async {
+//   File _image;
+//   final picker = ImagePicker();
+//
+//   var _pickedFile = await picker.pickImage(
+//       source: ImageSource.camera,
+//       imageQuality: 50, // <- Reduce Image quality
+//       maxHeight: 500,  // <- reduce the image size
+//       maxWidth: 500);
+//
+//   _image = File(_pickedFile!.path);
+//
+//
+//   _upload(_image);
+//
+// }
+// void _upload(File file) async {
+//   String fileName = file.path.split('/').last;
+//
+//   FormData data = FormData.fromMap({
+//     "file":  MultipartFile.fromFileSync(
+//       file.path,
+//       filename: fileName,
+//     ),
+//   });
+//
+//   Dio dio = new Dio();
+//
+//   dio.post("http://192.168.43.225/api/media", data: data)
+//       .then((response) => print(response))
+//       .catchError((error) => print(error));
+// }
 
-  bool isDark= true;
-  void changeAppMode({ bool? fromShared}) {
-    if (fromShared != null) {
-      isDark = fromShared;
-      emit(AppChangeAppMode());
-    } else {
-      isDark = !isDark;
+  bool lang = true;
+
+  void langStateEn() {
+    //  lang=!lang;
+
+    emit(LangEnStateSuccess());
+  }
+
+  void langStateAr() {
+    lang=!lang;
+    emit(LangArStateSuccess());
+  }
+
+  bool isDark = true;
+
+  void changeAppMode() {
+
+    isDark = !isDark;
+
+    emit(AppChangeAppMode());
+
       // CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
       //   emit(AppChangeAppMode());
       // }
 
     }
-  }
 
 
+
+
+  //
+  // EasyLocalization(
+  //     path: "assets/translations",
+  //     supportedLocales: [
+  //    const   Locale('en'),
+  //       Locale('ar'),
+  //     ],
+  //     fallbackLocale:   Locale('en'),
+  //     assetLoader:  CodegenLoader(),
+  //     child:  RegisterScreen(),
+  //   ));
+  //
+  //
+
+changeLang(BuildContext context)async{
+  // lang=!lang;
+
+   if ( context.locale==Locale('ar')) {
+
+
+     await context.setLocale(const Locale('en'));
+     Get.updateLocale(Locale('en'));
+     // emit(LangEnStateSuccess());
+
+   }
+ else {
+
+
+     await context.setLocale(const Locale('ar'));
+     Get.updateLocale(Locale('ar'));
+
+     // emit(LangArStateSuccess());
+
+
+
+ }
+}
 
 
 }

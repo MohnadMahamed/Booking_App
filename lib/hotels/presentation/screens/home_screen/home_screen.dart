@@ -1,6 +1,4 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
-import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/Hotal_Card.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_app_bar.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_adapter.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
@@ -9,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const routeName = 'HomeScreen';
+  static  const routeName = "HomeScreen";
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

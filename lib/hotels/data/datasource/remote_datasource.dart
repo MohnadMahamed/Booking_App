@@ -1,14 +1,20 @@
+import 'dart:io';
+
 import 'package:booking_app/core/error/exceptions.dart';
 import 'package:booking_app/core/util/constaces/api_constances.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:dio/dio.dart';
+
+import 'package:http_parser/http_parser.dart';
+
+
 
 abstract class BaseRemoteDataSource {
   Future<UserDataModel> userRegister(RegisterRequestModel registerRequest);
   Future<UserDataModel> userLogin(LoginRequestModel loginRequestModel);
   Future<AllDataModel> getAllHotelsDetails(int pageNumber);
   Future<UserDataModel> updateUserInfo(
-      String name,String email);
+      String name,String email,File image);
   Future<UserDataModel> getInfo(
       );
   Future<StatusModel> createBooking(int userId, int hotelId);
@@ -17,17 +23,16 @@ abstract class BaseRemoteDataSource {
 
   Future<List<HotelFacilityModel>> getFacilities();
   Future<List<HotelDetailsForBookingModel>> searchHotels(
-      {String address,
-      String maxPrice,
-      String minPrice,
-      // String facilities0,
-      // String facilities1,
-      String latitude,
-      String longitude,
-      String distance,
-      String page,
-      String count,
-      String name});
+      String address,
+      );
+  Future<List<HotelDetailsForBookingModel>> filterHotels(
+      String? name,
+      String? lat,
+      String? lon,
+      String? minPrice,
+      String? maxPrice,
+      String? distance,
+      );
 }
 
 class RemoteDataSource implements BaseRemoteDataSource {
@@ -42,7 +47,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     //   'Connection': 'keep-alive',
     // };
 
-    final response = await dio.post(ApiConstaces.registerPath, data: {
+    final response = await dio.post(ApiConstance.registerPath, data: {
       'name': registerRequest.name,
       'email': registerRequest.email,
       'image': registerRequest.image,
@@ -70,7 +75,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
   Future<UserDataModel> userLogin(LoginRequestModel loginRequestModel) async {
     Dio dio = Dio();
 
-    final response = await dio.post(ApiConstaces.loginPath, data: {
+    final response = await dio.post(ApiConstance.loginPath, data: {
       'email': loginRequestModel.email,
       'password': loginRequestModel.password,
     });
@@ -88,7 +93,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     Dio dio = Dio();
 
     final response = await dio
-        .get("${ApiConstaces.getAllHottelsDetailsPath}");
+        .get("${ApiConstance.getAllHottelsDetailsPath}");
     if (response.statusCode == 200) {
       print(response.data);
       // return List<HotelFacilityModel>.from((response.data['data'] as List).map(
@@ -105,16 +110,26 @@ class RemoteDataSource implements BaseRemoteDataSource {
 
   @override
   Future<UserDataModel> updateUserInfo(
-      String name,String email) async {
+      String name,String email,File image) async {
     Dio dio = Dio();
-
-    dio.options.headers = {"token": ApiConstaces.token};
-
-    final response = await dio.post(ApiConstaces.updatePath, data: {
-      'name': name,
+    String fileName = image.path.split('/').last;
+    print(fileName);
+    print(image.path);
+    FormData formData =  FormData.fromMap({
+      "name":name,
       'email': email,
-      // 'image': updateUserInfoRequest.image,
+      "image": await MultipartFile.fromFile(image.path,
+          filename: fileName, contentType: MediaType('image', 'png') ),
+      "type": "image/png"
     });
+    dio.options.headers = {"token": ApiConstance.token};
+    // {
+    //   'name': name,
+    // 'email': email,
+    // 'image': formData
+    // // 'image': updateUserInfoRequest.image,
+    // }
+    final response = await dio.post(ApiConstance.updatePath, data:formData );
     if (response.statusCode == 200) {
       print(response.data);
       UserDataModel userData = UserDataModel.fromJson(response.data["data"]);
@@ -128,9 +143,9 @@ class RemoteDataSource implements BaseRemoteDataSource {
   Future<StatusModel> createBooking(int userId,int hotelId) async {
     Dio dio = Dio();
 
-    dio.options.headers = {'token': ApiConstaces.token};
+    dio.options.headers = {'token': ApiConstance.token};
 
-    final response = await dio.post(ApiConstaces.creatBookingPath, data: {
+    final response = await dio.post(ApiConstance.creatBookingPath, data: {
       'user_id': userId,
       'hotel_id': hotelId,
     });
@@ -147,9 +162,9 @@ class RemoteDataSource implements BaseRemoteDataSource {
   @override
   Future<StatusModel> updateBookingStatus(int bookingId, String type) async {
     Dio dio = Dio();
-    dio.options.headers = {"token": ApiConstaces.token};
+    dio.options.headers = {"token": ApiConstance.token};
     final response =
-        await dio.post(ApiConstaces.updateBookingStatusPath, data: {
+        await dio.post(ApiConstance.updateBookingStatusPath, data: {
       'booking_id': bookingId,
       'type': type,
     });
@@ -166,10 +181,10 @@ class RemoteDataSource implements BaseRemoteDataSource {
   @override
   Future<List<BookingModel>> getBookings(String type, int count) async {
     Dio dio = Dio();
-    dio.options.headers = {"token": ApiConstaces.token};
+    dio.options.headers = {"token": ApiConstance.token};
 
     final response = await dio
-        .get("${ApiConstaces.getBookingsPath}?type=$type&count=$count");
+        .get("${ApiConstance.getBookingsPath}?type=$type&count=$count");
     if (response.statusCode == 200) {
       print(response.data["data"]["data"]);
       return List<BookingModel>.from(
@@ -185,7 +200,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
   Future<List<HotelFacilityModel>> getFacilities() async {
     Dio dio = Dio();
 
-    final response = await dio.get(ApiConstaces.getFacilitiesPath);
+    final response = await dio.get(ApiConstance.getFacilitiesPath);
     if (response.statusCode == 200) {
       print(response.data);
       return List<HotelFacilityModel>.from((response.data['data'] as List).map(
@@ -198,21 +213,12 @@ class RemoteDataSource implements BaseRemoteDataSource {
 
   @override
   Future<List<HotelDetailsForBookingModel>> searchHotels(
-      {String? address,
-      String? maxPrice,
-      String? minPrice,
-      // String? facilities0,
-      // String? facilities1,
-      String? latitude,
-      String? longitude,
-      String? distance,
-      String? count,
-      String? page,
-      String? name}) async {
+      String address,
+      ) async {
     Dio dio = Dio();
 
     final response = await dio.get(
-        "${ApiConstaces.searchHotelsPath}?address=$address&max_price=$maxPrice&min_price=$minPrice&latitude=$latitude&longitude=$longitude&distance=$distance&count=$count&page=$page&name=$name");
+        "${ApiConstance.searchHotelsPath}?address=$address&count=10&page=1");
     if (response.statusCode == 200) {
       print(response.data);
       return List<HotelDetailsForBookingModel>.from(
@@ -228,8 +234,8 @@ class RemoteDataSource implements BaseRemoteDataSource {
   Future<UserDataModel> getInfo()async {
     Dio dio = Dio();
 
-    dio.options.headers = {"token": ApiConstaces.token};  
-    final response=await dio.get("${ApiConstaces.getProfilePath}");
+    dio.options.headers = {"token": ApiConstance.token};
+    final response=await dio.get("${ApiConstance.getProfilePath}");
     if (response.statusCode == 200) {
       print(response.data);
     UserDataModel userDataModel=UserDataModel.fromJson(response.data["data"]);
@@ -237,6 +243,23 @@ class RemoteDataSource implements BaseRemoteDataSource {
     }else{
       throw ServerException(errorMessageModel: response.data);
 
+    }
+  }
+
+  @override
+  Future<List<HotelDetailsForBookingModel>> filterHotels(String? name, String? latitude, String? longitude, String? minPrice, String? maxPrice, String? distance) async{
+    Dio dio = Dio();
+
+    final response = await dio.get(
+        "${ApiConstance.searchHotelsPath}?max_price=$maxPrice&min_price=$minPrice&latitude=$latitude&longitude=$longitude&distance=$distance&count=10&page=1&name=$name");
+    if (response.statusCode == 200) {
+      print(response.data);
+      return List<HotelDetailsForBookingModel>.from(
+          (response.data['data']['data'] ).map(
+                (e) => HotelDetailsForBookingModel.fromJson(e),
+          ));
+    } else {
+      throw ServerException(errorMessageModel: response.data);
     }
   }
 }

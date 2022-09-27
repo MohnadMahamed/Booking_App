@@ -1,5 +1,7 @@
 import 'package:booking_app/hotels/presentation/layout/layout.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
@@ -12,23 +14,32 @@ import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterScreen extends StatelessWidget {
-  static const routeName = 'RegisterScreen';
+  static  const routeName = "RegisterScreen" ;
 
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
-
     var cubit = HotelCubit.get(context);
     return BlocConsumer<HotelCubit, HotelState>(
       listener: (context, state) {},
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
+            appBar: AppBar(
+              actions: [
+                IconButton(onPressed: ()
+                {
+                  HotelCubit.get(context).changeAppMode();
+                },
+                    icon: Icon(Icons.brightness_4_outlined)),
+
+              ],
+            ),
            // backgroundColor: HotelCubit.get(context).isDark ?AppColors.backGroundColor :Colors.white,
             body: Padding(
-              padding: EdgeInsets.all(Dimensions.height20),
+              padding: EdgeInsets.all(20),
               child: Form(
                 key: formKey,
                 child: SingleChildScrollView(
@@ -36,7 +47,9 @@ class RegisterScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                        BigText(
-                        text: 'Sign Up',
+
+                  text: LocaleKeys.sign_up.tr(),
+
                       ),
                       SizedBox(
                         height: Dimensions.height30,
@@ -68,7 +81,7 @@ class RegisterScreen extends StatelessWidget {
                                       width: Dimensions.width10 / 2,
                                     ),
                                     SmallText(
-                                      text: 'Facebook',
+                                      text:LocaleKeys.facebook.tr(),
                                       color: Colors.white,
                                       size: Dimensions.font12 * 2,
                                     ),
@@ -106,9 +119,9 @@ class RegisterScreen extends StatelessWidget {
                                       width: Dimensions.width10 / 2,
                                     ),
                                     SmallText(
-                                      text: 'Gmail',
+                                      text: LocaleKeys.gmail.tr(),
                                       color: Colors.white,
-                                      size: Dimensions.font12 * 2,
+                                      size: Dimensions.font12 * 1.7,
                                     ),
                                   ],
                                 ),
@@ -124,20 +137,20 @@ class RegisterScreen extends StatelessWidget {
                       ),
                       Center(
                         child: SmallText(
-                          text: 'or log with email',
-                          size: Dimensions.font12 * 2,
+
+                        text: LocaleKeys.or.tr(),
+                          size: Dimensions.font12* 1.7,
+
                         ),
                       ),
                       SizedBox(
                         height: Dimensions.height30,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Dimensions.width15 * 2),
-                        child: SmallText(
-                          text: 'Your name',
-                          size: Dimensions.font12 * 2,
-                        ),
+
+                      SmallText(
+              text: LocaleKeys.user_name.tr(),
+                        size: Dimensions.font12 * 1.7,
+
                       ),
                       myForm(
                         TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
@@ -150,24 +163,22 @@ class RegisterScreen extends StatelessWidget {
 
                         validate: (value) {
                           if (value!.isEmpty) {
-                            return 'Name  must  not be empty';
+                            return LocaleKeys.name_must_not_be_empty.tr() ;
                           }
                         },
                         type: TextInputType.name,
                         controller: cubit.nameController,
-                        hintText: 'Enter your name',
+                        hintText: LocaleKeys.enter_your_name.tr(),
                       ),
                       SizedBox(
                         height: Dimensions.height20,
                       ),
                       //email
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Dimensions.width15 * 2),
-                        child: SmallText(
-                          text: 'Your Email',
-                          size: Dimensions.font12 * 2,
-                        ),
+
+                      SmallText(
+              text:  LocaleKeys.your_email.tr(),
+                        size: Dimensions.font12 * 1.7,
+
                       ),
                       myForm(
                         TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
@@ -180,30 +191,28 @@ class RegisterScreen extends StatelessWidget {
 
                         validate: (value) {
                           if (value!.isEmpty) {
-                            return 'Email must  not be empty';
+                            return LocaleKeys.email_must_not_be_empty.tr();
                           }
                           if (!RegExp(
                                   "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                               .hasMatch(value)) {
-                            return 'Please a valid Email';
+                            return LocaleKeys.please_a_valid_Email.tr();
                           }
                         },
-                        validation: 'Email must  not be empty',
+                        validation: LocaleKeys.please_a_valid_Email.tr(),
                         type: TextInputType.emailAddress,
                         controller: cubit.emailController,
-                        hintText: 'enter your email',
+                        hintText: LocaleKeys.enter_your_email.tr(),
                       ),
                       SizedBox(
                         height: Dimensions.height20,
                       ),
                       //password
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Dimensions.width15 * 2),
-                        child: SmallText(
-                          text: 'Password',
-                          size: Dimensions.font12 * 2,
-                        ),
+
+                      SmallText(
+              text: LocaleKeys.password_hint.tr(),
+                        size: Dimensions.font12 * 1.7,
+
                       ),
                       myForm(
                         TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
@@ -226,25 +235,23 @@ class RegisterScreen extends StatelessWidget {
                             )),
                         validate: (value) {
                           if (value!.isEmpty) {
-                            return 'password  must  not be empty';
+                            return  LocaleKeys.Password_must_not_be_empty.tr();
                           }
                         },
                         // validation: 'password must  not be empty',
                         type: TextInputType.visiblePassword,
                         controller: cubit.passwordController,
-                        hintText: 'enter password',
+                        hintText: LocaleKeys.enter_password.tr(),
                       ),
                       SizedBox(
                         height: Dimensions.height20,
                       ),
                       //confirm password
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Dimensions.width15 * 2),
-                        child: SmallText(
-                          text: 'Confirm password',
-                          size: Dimensions.font12 * 2,
-                        ),
+
+                      SmallText(
+              text: LocaleKeys.confirm_password.tr(),
+                        size: Dimensions.font12 * 1.7,
+
                       ),
                       myForm(
                         TextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white70,
@@ -267,23 +274,23 @@ class RegisterScreen extends StatelessWidget {
 
                         validate: (value) {
                           if (value!.isEmpty) {
-                            return 'password confirm must  not be empty';
+                            return  LocaleKeys.password_confirm_must_not_be_empty.tr();
                           }
                           if (cubit.confirmPasswordController.text !=
                               cubit.passwordController.text) {
-                            return ' Password Not match';
+                            return  LocaleKeys.password_not_match.tr();
                           }
                         },
                         // validation: 'password must  not be empty',
                         type: TextInputType.visiblePassword,
                         controller: cubit.confirmPasswordController,
-                        hintText: 'enter confirm password',
+                        hintText:  LocaleKeys.enter_confirm_password.tr(),
                       ),
                       SizedBox(
                         height: Dimensions.height20,
                       ),
                       MyButtonWidget(
-                        text: 'Sign Up',
+                        text:  LocaleKeys.sign_up.tr(),
                         onTap: () {
                           if (formKey.currentState!.validate()) {
                             cubit.register(RegisterRequestModel(

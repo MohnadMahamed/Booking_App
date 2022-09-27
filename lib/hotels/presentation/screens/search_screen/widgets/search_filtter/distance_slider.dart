@@ -1,5 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
+import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DistanceSliderWidget extends StatefulWidget {
   const DistanceSliderWidget({super.key});
@@ -9,23 +11,27 @@ class DistanceSliderWidget extends StatefulWidget {
 }
 
 class _DistanceSliderWidgetState extends State<DistanceSliderWidget> {
-  double distaceSliderValue = 20.0;
 
   @override
   Widget build(BuildContext context) {
-    return Slider(
-      label: '${distaceSliderValue.toInt()} Km',
-      divisions: 20,
-      min: 0,
-      max: 100,
-      value: distaceSliderValue,
-      onChanged: (value) {
-        setState(() {
-          distaceSliderValue = value;
-        });
+    var cubit=HotelCubit.get(context);
+    return BlocBuilder<HotelCubit, HotelState>(
+      builder: (context, state) {
+        return Slider(
+          label: '${cubit.distaceSliderValue.toInt()} Km',
+          divisions: 20,
+          min: 0,
+          max: 100,
+          value: cubit.distaceSliderValue,
+          onChanged: (value) {
+            setState(() {
+              cubit.distaceSliderValue = value;
+            });
+          },
+          activeColor: AppColors.mainColor,
+          inactiveColor: Colors.grey,
+        );
       },
-      activeColor: AppColors.mainColor,
-      inactiveColor: Colors.grey,
     );
   }
 }

@@ -2,7 +2,9 @@ import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/hotel_item.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,8 +26,10 @@ class SliverAdapter extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                     top: Dimensions.width20, left: Dimensions.width10),
+
                 child:  MediumText(
-                  text: 'Other hotel',
+          text: LocaleKeys.other_hotel.tr(),
+
                 ),
               ),
               //list of hotel

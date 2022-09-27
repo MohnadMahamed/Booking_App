@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:dartz/dartz.dart';
 import '../../../core/error/failure.dart';
@@ -14,7 +16,7 @@ abstract class BaseHotelsRepository{
   Future<Either<Failure,AllDataModel>> getAllHotelsDetails(
       int pageNumber);
   Future<Either<Failure,UserDataModel>> getUpdateUserInfo(
-      String name,String email);
+      String name,String email,File image);
   Future<Either<Failure,UserDataModel>> getInfo(
      );
   Future<Either<Failure,StatusModel>> getCreateBooking(
@@ -25,15 +27,15 @@ abstract class BaseHotelsRepository{
       String type, int count);
   Future<Either<Failure,List<HotelFacilityModel>>> getFacilities();
   Future<Either<Failure,List<HotelDetailsForBookingModel>>> getSearch(
-      { String? address,
-        String? maxPrice,
-        String? minPrice,
-      // String facilities0,
-      // String facilities1,
-         String? latitude,
-          String? longitude,
-         String? distance,
-          String? page,
-          String? count,
-          String? name});
+       String address,
+         );
+  Future<Either<Failure,List<HotelDetailsForBookingModel>>> filterHotels(
+       String? name,
+       String? lat,
+       String? lon,
+       String? minPrice,
+       String? maxPrice,
+       String? distance,
+
+         );
 }

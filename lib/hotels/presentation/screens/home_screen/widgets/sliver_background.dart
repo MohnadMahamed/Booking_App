@@ -2,8 +2,10 @@ import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class SliverBackgroundWidget extends StatelessWidget {
@@ -57,7 +59,7 @@ class SliverBackgroundWidget extends StatelessWidget {
                     Navigator.pushReplacementNamed(
                         context, DetailsScreen.routeName);
                   },
-                  text: 'View Hotel',
+                  text: LocaleKeys.view_hotel.tr(),
                   isPadding: false,
                   width: Dimensions.width30 * 6.5,
                   height: Dimensions.width30 * 2,

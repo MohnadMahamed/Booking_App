@@ -1,10 +1,11 @@
-import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/cancelled_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/completed_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/upcoming_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,7 @@ class BookingScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
+
 
             body: Column(
               children: [
@@ -74,7 +76,7 @@ class BookingScreen extends StatelessWidget {
                                   Tab(
                                     child: Center(
                                       child: Text(
-                                        'Upcoming',
+                            LocaleKeys.upcoming.tr(),
                                         style: Theme.of(context).textTheme.bodyText1,
                                       ),
                                     ),
@@ -82,7 +84,7 @@ class BookingScreen extends StatelessWidget {
                                   Tab(
                                     child: Center(
                                       child: Text(
-                                        'Cancelled ',
+        LocaleKeys.cancelled.tr(),
                                         style: Theme.of(context).textTheme.bodyText1,
 
 
@@ -92,8 +94,9 @@ class BookingScreen extends StatelessWidget {
                                   Tab(
                                     child: Center(
                                       child: Text(
-                                        'Completed',
+        LocaleKeys.completed.tr(),
                                         style: Theme.of(context).textTheme.bodyText1,
+
 
                                       ),
                                     ),
