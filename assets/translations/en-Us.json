@@ -1,0 +1,74 @@
+{
+  "upcoming": "Upcoming",
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+  "no_booking_to_show": "No booking to show",
+  "booking_new": "Booking New",
+
+  "no_tasks_to_show": "No tasks to show",
+  "detailsScreen": "DetailsScreen",
+  "summary": "Summary",
+"home_screen": "Home Screen",
+
+
+  "view_all": "View All",  "photo": "Photo",
+  "view_hotel": "View Hotel",
+  "your_email": "Your email",
+  "email_must_not_be_empty": "Email  must  not be empty",
+  "please_a_valid_Email": "Please a valid Email",
+  "enter_your_email": "Enter your email",
+  "password_hint": "Password",
+  "login": "Login",
+  "Password_must_not_be_empty": "Password must  not be empty",
+  "enter_password": "Enter password",
+  "forget_your_password": "Forget your password ?",
+  "or": "Or log with email",
+  "facebook": "Facebook",
+  "gmail": "Gmail",
+  "sign_up": "Sign Up",
+  "user_name": "Your name",
+
+  "name_must_not_be_empty": "Name  must  not be empty",
+  "enter_your_name": "Enter your name",
+"confirm_password": "Confirm password",
+  "password_not_match": "Password Not match",
+  "enter_confirm_password": "Enter confirm password",
+  "password_confirm_must_not_be_empty": "Password Confirm Must  Not Be Empty",
+  "by_signing_up_your_agreed_with_our_terms_of": "By Signing up, your agreed with our terms of",
+ "service_and_privacy_policy": "Service And Privacy Policy",
+  "already_have_account": "Already have an account? login",
+
+  "name": "Name",
+  "email": "Email",
+  "mood": "Mood",
+  "dark": "Dark",
+  "light": "Light",
+  "language": "Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "splash": "Splash",
+  "change_photo": "Change photo",
+
+  " search_screen": " SearchScreen",
+  "filtter": "Filtter",
+  "apply": "Apply",
+  "popular_facilities": "Popular facilities",
+  "price_room": "price (for 1 night)",
+  "distance_from_your_location": "Distance From your location",
+  "london": "London",
+
+
+  "address": "Address",
+  "latitude": "Latitude",
+  "longitude": "Longitude",
+  "item_count": "Item count', \"You can't add more !",
+  "search_place": "Where are you going ?",
+  "search_place_validate": "Enter Where are you going ?",
+  "other_hotel": "Other hotel"
+
+
+
+
+
+
+}

@@ -4,6 +4,8 @@ import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -77,7 +79,7 @@ class EditProfileScreen extends StatelessWidget {
                               right: 1,
                               child: InkWell(
                                 onTap: () {
-                                  print('change photo');
+                                  print(LocaleKeys.change_photo.tr);
                                 },
                                 child: Container(
                                   width: Dimensions.width20 * 2.5,
@@ -106,7 +108,7 @@ class EditProfileScreen extends StatelessWidget {
                               Row(
                                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const SmallText(text: 'User Name'),
+                                   SmallText(text:LocaleKeys.name.tr()),
                                   SizedBox(
                                     width: Dimensions.width30,
                                   ),
@@ -126,7 +128,7 @@ class EditProfileScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment
                                     .spaceBetween,
                                 children: [
-                                  const SmallText(text: 'Email'),
+                                   SmallText(text: LocaleKeys.email.tr()),
                                   SizedBox(
                                     width: Dimensions.width30,
                                   ),
@@ -153,7 +155,7 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                 ),
                 MyButtonWidget(
-                  text: 'Apply',
+                  text: LocaleKeys.apply.tr(),
                   onTap: () {
                     // RegisterRequestModel updateInfo=RegisterRequestModel(name: userNameController.text, email: emailController.text, password: "", passwordConfirmation: "", image: "");
 

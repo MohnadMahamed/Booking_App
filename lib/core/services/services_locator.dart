@@ -13,6 +13,7 @@ import 'package:booking_app/hotels/domain/usecases/user_log_in_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_register_usecase.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final sl=GetIt.instance;
 class ServiceLocator{
@@ -37,7 +38,19 @@ class ServiceLocator{
    sl.registerLazySingleton<BaseRemoteDataSource>(() => RemoteDataSource());
   }
 }
+final instance = GetIt.instance;
 
+Future<void> initAppModule() async {
+ // app module, its a module where we put all generic dependencies
+
+ // shared prefs instance
+ final sharedPrefs = await SharedPreferences.getInstance();
+
+ instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
+
+ // app prefs instance
+
+}
 // class BaseHotelRemoteDataSource {
 // }
 //  class HotelRemoteDataSource extends BaseHotelRemoteDataSource{

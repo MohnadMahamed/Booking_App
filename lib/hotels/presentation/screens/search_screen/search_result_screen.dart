@@ -5,15 +5,17 @@ import 'package:booking_app/hotels/presentation/components/widgets/hotel_item.da
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/layout/layout.dart';
+import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/search_filtter_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 var searchResultController = TextEditingController();
 
 class SearchResultScreen extends StatelessWidget {
-  static const routeName = 'SearchResultScreen';
+  static  String routeName = LocaleKeys.search_screen.tr();
 
   const SearchResultScreen({super.key});
 
@@ -67,7 +69,7 @@ class SearchResultScreen extends StatelessWidget {
                             fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
                             colorsBorderSide:HotelCubit.get(context).isDark? Colors.transparent:Colors.black ,
                             controller: searchResultController,
-                            hintText: 'London')),
+                            hintText: LocaleKeys.london.tr())),
                     SizedBox(
                       width: Dimensions.width10,
                     ),
@@ -115,7 +117,7 @@ class SearchResultScreen extends StatelessWidget {
                       child: Row(
                         // mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          const SmallText(text: 'Filtter'),
+                           SmallText(text:  LocaleKeys.filtter.tr()),
                           SizedBox(
                             width: Dimensions.width10,
                           ),
