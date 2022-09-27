@@ -5,8 +5,10 @@ const String PREFS_KEY_LANG = "PREFS_KEY_LANG";
 const String PREFS_KEY_ONBOARDING_SCREEN_VIEWED =
     "PREFS_KEY_ONBOARDING_SCREEN_VIEWED";
 const String PREFS_KEY_IS_USER_LOGGED_IN = "PREFS_KEY_IS_USER_LOGGED_IN";
-
-class AppPreferences {
+abstract class AppPreference{
+  Future<String> getAppLanguage();
+}
+class AppPreferences extends AppPreference{
   final SharedPreferences _sharedPreferences;
 
   AppPreferences(this._sharedPreferences);

@@ -12,6 +12,7 @@ class UserRegisterSuccessState extends HotelState {}
 class LangEnStateSuccess extends HotelState {}
 class LangArStateSuccess extends HotelState {}
 
+class ChangeLanguageSuccessState extends HotelState {}
 
 
 class UserLoginLoadingState extends HotelState {}

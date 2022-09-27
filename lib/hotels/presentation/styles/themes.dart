@@ -13,13 +13,12 @@ ThemeData darkTheme =ThemeData(
   appBarTheme: AppBarTheme(
       titleSpacing: 20,
 
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
           color: Colors.white
       ),
-      backwardsCompatibility: false,
       backgroundColor: HexColor('6B7579'),
       elevation: 0.0,
-      titleTextStyle:TextStyle(
+      titleTextStyle:const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
         fontSize: 20.0,
@@ -37,7 +36,7 @@ ThemeData darkTheme =ThemeData(
       backgroundColor: HexColor('6B7579'),
       unselectedItemColor: Colors.grey
   ),
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
       bodyText1: TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w900,
@@ -66,12 +65,11 @@ ThemeData darkTheme =ThemeData(
 ThemeData lightTheme = ThemeData(
   primarySwatch: defualtColor,
   scaffoldBackgroundColor: Colors.white,
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
       titleSpacing: 20,
       iconTheme: IconThemeData(
           color: Colors.black
       ),
-      backwardsCompatibility: false,
       backgroundColor: Colors.white,
       elevation: 0.0,
       titleTextStyle:TextStyle(
@@ -85,7 +83,7 @@ ThemeData lightTheme = ThemeData(
 
       )
   ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedItemColor: defualtColor,
       unselectedItemColor: Colors.grey,
@@ -93,7 +91,7 @@ ThemeData lightTheme = ThemeData(
       elevation: 20.0
   ),
   textTheme:
-  TextTheme(
+  const TextTheme(
       bodyText1: TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w700,

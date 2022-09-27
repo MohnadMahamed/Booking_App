@@ -14,7 +14,7 @@ import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterScreen extends StatelessWidget {
-  static  String routeName = LocaleKeys.sign_up.tr() ;
+  static  const routeName = "RegisterScreen" ;
 
   const RegisterScreen({Key? key}) : super(key: key);
 

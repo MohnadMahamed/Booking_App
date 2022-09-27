@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:booking_app/core/error/failure.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/domain/repository/base_hotel_repository.dart';
@@ -10,8 +12,8 @@ class UpdateUserInfoUseCase {
 
 
 
-  Future<Either<Failure, UserDataModel>> call(String name,String email) async {
-    return await baseHotelsRepository.getUpdateUserInfo(name,email);
+  Future<Either<Failure, UserDataModel>> call(String name,String email,File image) async {
+    return await baseHotelsRepository.getUpdateUserInfo(name,email,image);
   }
 }
 

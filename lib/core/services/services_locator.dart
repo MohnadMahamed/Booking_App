@@ -2,6 +2,7 @@ import 'package:booking_app/hotels/data/datasource/remote_datasource.dart';
 import 'package:booking_app/hotels/data/repository/hotel_repository.dart';
 import 'package:booking_app/hotels/domain/repository/base_hotel_repository.dart';
 import 'package:booking_app/hotels/domain/usecases/create_booking_usecase.dart';
+import 'package:booking_app/hotels/domain/usecases/filter_hotel_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_all_hotels_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_bookings_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/get_facilitis_usecase.dart';
@@ -20,7 +21,7 @@ class ServiceLocator{
   void init(){
 
     ///bloc
-   sl.registerFactory(() => HotelCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+   sl.registerFactory(() => HotelCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl()));
     /// Use Case
     sl.registerLazySingleton(() => CreateBookingUseCase(sl()));
     sl.registerLazySingleton(() => GetAllHotelsUseCase(sl()));
@@ -32,13 +33,19 @@ class ServiceLocator{
     sl.registerLazySingleton(() => LoginUseCase(sl()));
     sl.registerLazySingleton(() => RegisterUseCase(sl()));
     sl.registerLazySingleton(() => GetUserInfo(sl()));
+    sl.registerLazySingleton(() => FilterHotelsUseCase(sl()));
     /// Repository
     sl.registerLazySingleton<BaseHotelsRepository>(() => HotelsRepository(sl()));
     /// Data Source
    sl.registerLazySingleton<BaseRemoteDataSource>(() => RemoteDataSource());
+   // shared prefs instance
+   // final sharedPrefs =  SharedPreferences.getInstance();
+   // sl.registerLazySingleton(() => sharedPrefs);
+   // sl.registerLazySingleton<AppPreference>(() => AppPreferences(sl()));
   }
 }
 final instance = GetIt.instance;
+
 
 Future<void> initAppModule() async {
  // app module, its a module where we put all generic dependencies
@@ -51,8 +58,3 @@ Future<void> initAppModule() async {
  // app prefs instance
 
 }
-// class BaseHotelRemoteDataSource {
-// }
-//  class HotelRemoteDataSource extends BaseHotelRemoteDataSource{
-//
-//  }

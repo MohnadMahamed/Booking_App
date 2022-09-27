@@ -1,6 +1,4 @@
 
-import 'package:booking_app/app/app_prefs.dart';
-import 'package:booking_app/core/services/services_locator.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
@@ -24,12 +22,12 @@ class _LanguageWidgetState extends State<LanguageWidget> {
 
     return BlocConsumer<HotelCubit,HotelState>(
         listener: (context,state){
-          if(state is LangEnStateSuccess)
-          {
-            context.setLocale( Locale('en'));
-          } else if (state is LangArStateSuccess){
-            context.setLocale( Locale('ar'));
-          }
+          // if(state is LangEnStateSuccess)
+          // {
+          //   context.setLocale( Locale('en'));
+          // } else if (state is LangArStateSuccess){
+          //   context.setLocale( Locale('ar'));
+          // }
         },
         builder: (context,state) {
           return Row(
@@ -40,20 +38,23 @@ class _LanguageWidgetState extends State<LanguageWidget> {
               size: 18,
             ),
             RollingSwitch.icon(
-              onChanged: (bool lang) async {
-               // HotelCubit.get(context).lang ? HotelCubit.get(context).langStateEn(lang:lang) : HotelCubit.get(context).langStateAr(lang:lang);
+
+              onChanged: (b){
+                HotelCubit.get(context).changeLang(context);
+
+                // HotelCubit.get(context).lang ? HotelCubit.get(context).langStateEn(lang:lang) : HotelCubit.get(context).langStateAr(lang:lang);
                 // print('turned ${(state) ? 'on' : 'off'}');
                // print(lang);
-
-                if ( lang ==true) {
-                   await context.setLocale(const Locale('en'));
-                   HotelCubit.get(context).langStateEn();
-                 }
-                 else {
-                  await context.setLocale(const Locale('ar'));
-                   HotelCubit.get(context).langStateAr();
-
-                 }
+               //
+               //  if ( lang ==true) {
+               //    await context.setLocale(const Locale('en'));
+               //    HotelCubit.get(context).langStateEn();
+               //  }
+               //  else {
+               //    await context.setLocale(const Locale('ar'));
+               //    HotelCubit.get(context).langStateAr();
+               //
+               //  }
                //lang ? context.setLocale( Locale('en')) : context.setLocale( Locale('ar'));
                //HotelCubit.get(context).langStateAr() : HotelCubit.get(context).langStateEn();
 
@@ -70,6 +71,7 @@ class _LanguageWidgetState extends State<LanguageWidget> {
                 //   HotelCubit.get(context).langStateAr();
                 //
                 // }
+
               },
               rollingInfoRight: RollingIconInfo(
                 icon: Icons.language,

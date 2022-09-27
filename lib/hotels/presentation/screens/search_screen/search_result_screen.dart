@@ -4,7 +4,6 @@ import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/hotel_item.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/search_filtter_screen.dart';
@@ -12,7 +11,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-var searchResultController = TextEditingController();
 
 class SearchResultScreen extends StatelessWidget {
   static  String routeName = LocaleKeys.search_screen.tr();
@@ -21,13 +19,19 @@ class SearchResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocConsumer<HotelCubit, HotelState>(
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = HotelCubit.get(context);
         return Scaffold(
           //backgroundColor: AppColors.backGroundColor,
-          body: Column(
+          backgroundColor: AppColors.backGroundColor,
+          body: BlocConsumer<HotelCubit, HotelState>(
+  listener: (context, state) {
+  },
+  builder: (context, state) {
+    return Column(
             children: [
               SizedBox(
                 height: Dimensions.height45,
@@ -44,8 +48,9 @@ class SearchResultScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.0)),
                     child: IconButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, LayoutScreen.routeName);
+                          // Navigator.pushReplacementNamed(
+                          //     context, LayoutScreen.routeName);
+                          Navigator.pop(context);
                         },
                         icon: Icon(
                           Icons.arrow_back_ios,
@@ -68,8 +73,9 @@ class SearchResultScreen extends StatelessWidget {
                             hitTextColor:HotelCubit.get(context).isDark?Colors.black : Colors.white38,
                             fillColor: HotelCubit.get(context).isDark?Colors.transparent :AppColors.myTFFColor ,
                             colorsBorderSide:HotelCubit.get(context).isDark? Colors.transparent:Colors.black ,
-                            controller: searchResultController,
+    controller: cubit.searchResultController,
                             hintText: LocaleKeys.london.tr())),
+
                     SizedBox(
                       width: Dimensions.width10,
                     ),
@@ -81,7 +87,7 @@ class SearchResultScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50.0)),
                       child: IconButton(
                           onPressed: () {
-                            //Search Methood
+cubit.searchHotels();
                           },
                           icon: Icon(
                             Icons.search,
@@ -108,7 +114,7 @@ class SearchResultScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     SmallText(text: '${cubit.searchHotelLis.length} Hotel Found'),
+                     SmallText(text: '${cubit.searchHotelList.length} Hotel Found'),
                     InkWell(
                       onTap: () {
                         Navigator.pushReplacementNamed(
@@ -135,7 +141,7 @@ class SearchResultScreen extends StatelessWidget {
               SizedBox(
                 height: Dimensions.height10,
               ),
-
+              if(state is SearchHotelsSuccessState)
               Expanded(
                 child: SingleChildScrollView(
                   child: ListView.separated(
@@ -153,7 +159,7 @@ class SearchResultScreen extends StatelessWidget {
                               builder: (context) => const DetailsScreen(),
                             ));
                       },
-                      hotelImage: (cubit.allHotelsData!.hotelData![index]
+                      hotelImage: (cubit.searchHotelList[index]
                               .hotelImages!.isEmpty)
                           ? const Image(
                               image: AssetImage("assets/images/no.png"),
@@ -161,24 +167,27 @@ class SearchResultScreen extends StatelessWidget {
                             )
                           : Image(
                               image: NetworkImage(
-                                  "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+                                  "http://api.mahmoudtaha.com/images/${cubit.searchHotelList[index].hotelImages![0].image!}"),
                               fit: BoxFit.cover,
                             ),
-                      hotelName: cubit.allHotelsData!.hotelData![index].name!,
+                      hotelName: cubit.searchHotelList[index].name!,
                       hotelAddress:
-                          cubit.allHotelsData!.hotelData![index].address!,
+                          cubit.searchHotelList[index].address!,
                       hotelPrice:
-                          '\$${cubit.allHotelsData!.hotelData![index].price!}',
+                          '\$${cubit.searchHotelList[index].price!}',
                     ),
-                    itemCount: cubit.searchHotelLis.length,
+                    itemCount: cubit.searchHotelList.length,
                   ),
                 ),
               ),
+
               SizedBox(
                 height: Dimensions.height15,
               ),
             ],
-          ),
+          );
+  },
+),
         );
       },
     );

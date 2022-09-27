@@ -63,8 +63,11 @@ class UserProfileScreen extends StatelessWidget {
                           radius: Dimensions.radius70,
                           backgroundColor: AppColors.mainColor,
                           child: CircleAvatar(
-                            backgroundImage: const AssetImage(
-                              'assets/me.jpg',
+                            backgroundImage:  NetworkImage(
+                               "http://api.mahmoudtaha.com/images/${cubit.userInfo!.image}",
+                                    scale: .5
+
+                                    // 'assets/me.jpg',
                             ),
                             radius: Dimensions.radius73,
                           ),
