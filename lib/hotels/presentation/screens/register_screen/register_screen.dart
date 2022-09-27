@@ -326,7 +326,7 @@ class RegisterScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SmallText(
-                            text: 'Already have account? ',
+                            text:     LocaleKeys.already_have_account.tr(),
                             size: Dimensions.font20,
                           ),
                           InkWell(
@@ -335,10 +335,11 @@ class RegisterScreen extends StatelessWidget {
                               Navigator.pushReplacementNamed(
                                   context, LoginScreen.routeName);
                             },
-                            child: const Text(
-                              'Login',
+                            child:  Text(
+                              LocaleKeys.login.tr(),
                               style: TextStyle(
-                                  decoration: TextDecoration.underline,                                fontSize: 23,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 23,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.teal
                               ),
