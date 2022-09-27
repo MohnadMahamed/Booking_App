@@ -37,7 +37,7 @@ abstract class LocaleKeys {
   static const String password_confirm_must_not_be_empty = 'password_confirm_must_not_be_empty';
   static const String by_signing_up_your_agreed_with_our_terms_of = 'by_signing_up_your_agreed_with_our_terms_of';
   static const String service_and_privacy_policy = 'service_and_privacy_policy';
-  static const String already_have_account = 'already_have_account';
+  static const String already_have_account = 'already_have_account ?';
 
 
   static const String name = 'name';
