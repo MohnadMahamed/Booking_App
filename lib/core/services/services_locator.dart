@@ -44,8 +44,8 @@ class ServiceLocator{
    // sl.registerLazySingleton<AppPreference>(() => AppPreferences(sl()));
   }
 }
-
 final instance = GetIt.instance;
+
 
 Future<void> initAppModule() async {
  // app module, its a module where we put all generic dependencies
