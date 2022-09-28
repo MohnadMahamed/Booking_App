@@ -32,7 +32,7 @@ class SliverApp extends StatelessWidget {
           color: HotelCubit.get(context).isDark?  Colors.black26
               : Colors.black.withOpacity(0.5) ,
           onTap: () {
-            Navigator.pushReplacementNamed(
+            Navigator.pushNamed(
                 context, SearchResultScreen.routeName);
           },
           text: LocaleKeys.search_place.tr(),

@@ -117,7 +117,7 @@ cubit.searchHotels();
                      SmallText(text: '${cubit.searchHotelList.length} Hotel Found'),
                     InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(
+                        Navigator.pushNamed(
                             context, SearchFiltterScreen.routeName);
                       },
                       child: Row(
