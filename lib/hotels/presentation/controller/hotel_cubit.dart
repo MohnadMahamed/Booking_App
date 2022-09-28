@@ -77,8 +77,8 @@ class HotelCubit extends Cubit<HotelState> {
   List<BookingModel> listOfUpcomingBooking = [];
   List<BookingModel> listOfCancelledBooking = [];
   List<BookingModel> listOfCompletedBooking = [];
-  double priceSliderStartValue = 100.0;
-  double priceSliderEndValue = 1000.0;
+  double priceSliderStartValue = 10.0;
+  double priceSliderEndValue = 100.0;
   bool wifiCheckBoxVaule = false;
   bool acCheckBoxVaule = false;
   TextEditingController hotelNameController = TextEditingController();
