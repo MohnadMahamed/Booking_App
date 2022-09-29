@@ -7,6 +7,7 @@ import 'package:booking_app/hotels/presentation/screens/details_screen/details_s
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math' as math;
 
 class SliverAdapter extends StatelessWidget {
   const SliverAdapter({
@@ -54,8 +55,10 @@ class SliverAdapter extends StatelessWidget {
                           fit: BoxFit.cover,
                         )
                       : Image(
-                          image: NetworkImage(
-                              "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+          // 'http://api.mahmoudtaha.com/images/${AppBloc.get(context).hotels[index].images[math.Random().nextInt(AppBloc.get(context).hotels[index].images.length)]}'),
+
+          image: NetworkImage(
+                              "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![math.Random().nextInt(cubit.allHotelsData!.hotelData![index].hotelImages!.length)].image!}"),
                           fit: BoxFit.cover,
                         ),
                   hotelName: cubit.allHotelsData!.hotelData![index].name!,

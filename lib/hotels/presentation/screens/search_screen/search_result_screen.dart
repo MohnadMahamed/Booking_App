@@ -58,9 +58,9 @@ class SearchResultScreen extends StatelessWidget {
                               width: Dimensions.width30 * 2,
                               height: Dimensions.width30 * 2,
                               decoration: BoxDecoration(
-                                  color: HotelCubit.get(context).isDark
-                                      ? Colors.grey[200]
-                                      : Colors.black87,
+                                  // color: HotelCubit.get(context).isDark
+                                  //     ? Colors.grey[200]
+                                  //     : Colors.black87,
                                   borderRadius: BorderRadius.circular(50.0)),
                               child: IconButton(
                                   onPressed: () {
@@ -88,9 +88,9 @@ class SearchResultScreen extends StatelessWidget {
                               width: Dimensions.width30 * 2,
                               height: Dimensions.width30 * 2,
                               decoration: BoxDecoration(
-                                  color: HotelCubit.get(context).isDark
-                                      ? Colors.grey[200]
-                                      : Colors.black87,
+                                  // color: HotelCubit.get(context).isDark
+                                  //     ? Colors.grey[200]
+                                  //     : Colors.black87,
                                   borderRadius: BorderRadius.circular(50.0)),
                               child: IconButton(
                                   onPressed: () {
@@ -99,7 +99,7 @@ class SearchResultScreen extends StatelessWidget {
                                     // Navigator.pop(context);
                                   },
                                   icon: Icon(
-                                    Icons.map,
+                                    Icons.location_on_sharp,
                                     size: Dimensions.iconSize30 * 1.2,
                                     color: cubit.isDark
                                         ? Colors.black
@@ -116,6 +116,9 @@ class SearchResultScreen extends StatelessWidget {
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: Dimensions.width20),
+
+
+
                       child: Row(
                         children: [
                           Expanded(
@@ -180,6 +183,7 @@ class SearchResultScreen extends StatelessWidget {
                                   '${cubit.searchHotelList.length} Hotel Found'),
                           InkWell(
                             onTap: () {
+                              cubit.getAllFacilities();
                               Navigator.pushNamed(
                                   context, SearchFiltterScreen.routeName);
                             },

@@ -6,7 +6,9 @@ import 'package:booking_app/hotels/presentation/components/widgets/expanded_text
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
+import 'package:booking_app/hotels/presentation/screens/booking_screen/booking_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/background_details_page.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/details_map_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/hotel_details.dart';
@@ -17,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math' as math;
 
 class DetailsScreen extends StatefulWidget {
   static const routeName = 'DetailsScreen';
@@ -85,7 +88,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               decoration: const BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(50)),
-                                  color: Colors.white60),
+                                  // color: Colors.white60
+                              ),
                               child: IconButton(
                                   onPressed: () {
                                     // cubit.getAllHotels(1);
@@ -94,7 +98,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   icon: const Icon(
                                     Icons.arrow_back,
                                     color: Colors.black,
-                                    size: 20,
+                                    size: 30,
                                   )),
                             ),
                           ),
@@ -107,13 +111,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 decoration: const BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50)),
-                                    color: Colors.black87),
+                                    color: Colors.transparent
+                                ),
                                 child: IconButton(
                                     onPressed: () {},
                                     icon: const Icon(
                                       Icons.favorite_border,
+
                                       color: Colors.teal,
-                                      size: 20,
+                                      size: 30,
                                     )),
                               ),
                             )
@@ -136,7 +142,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     )),
                                     child: Image(
                                       image: NetworkImage(
-                                          "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                                          // "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                                          "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
+
                                       height: double.infinity,
                                       width: double.infinity,
                                       fit: BoxFit.cover,
@@ -226,6 +234,31 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       SizedBox(height: Dimensions.height20),
                                       myDivider(),
                                       SizedBox(height: Dimensions.height10),
+                                      const SizedBox(height: 10),
+
+                                      SizedBox(
+                                        width: double.infinity,
+                                        height: 280,
+                                        child: Image(
+                                          image: NetworkImage(
+                                              // "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                                              "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
+
+                                          height: double.infinity,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      MyButtonWidget(
+                                        onTap: () {
+                                          cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
+                                          Navigator.pushNamed(context, BookingScreen.routeName );
+                                        },
+                                        text: LocaleKeys.booking_new.tr(),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -242,6 +275,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       cubit.createBookings(
                                           cubit.hotelDetails!.id!,
                                           cubit.userId);
+                                      // Navigator.popAndPushNamed(context, DetailsScreen.routeName);
                                     },
                                     text: LocaleKeys.booking_new.tr(),
                                   ),

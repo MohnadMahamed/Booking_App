@@ -31,7 +31,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
     var cubit = HotelCubit.get(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.backGroundColor,
+        // backgroundColor: AppColors.backGroundColor,
         body: BlocConsumer<HotelCubit, HotelState>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -47,7 +47,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                     width: Dimensions.width30 * 2,
                     height: Dimensions.height30 * 2,
                     decoration: BoxDecoration(
-                        color: Colors.transparent.withOpacity(0.3),
+                        // color: Colors.transparent.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(50.0)),
                     child: IconButton(
                         onPressed: () {
@@ -122,6 +122,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                               height: 30.0,
                             ),
                           ],
+
                         ),
                       ),
                     ],

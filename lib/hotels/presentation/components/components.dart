@@ -15,6 +15,8 @@ Widget defaultTextFormFeild({
   TextInputType? type,
   void Function(String)? onTap,
   void Function(String)? onChanged,
+  Color? filColor=Colors.grey,
+  Color? iconColor=Colors.white,
   String? Function(String?)? valdide,
 }) =>
     SizedBox(
@@ -29,12 +31,12 @@ Widget defaultTextFormFeild({
         // onSubmitted: onTap,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.grey[800],
+          fillColor:Colors.grey,
           label: SmallText(
             text: '$labelText',
             color: Colors.white,
           ),
-          suffixIcon: Icon(suffix, color: Colors.white),
+          suffixIcon: Icon(suffix, color: iconColor),
           // labelStyle: TextStyle(
           //   color: Colors.red,
           //   fontSize: Dimensions.font30,

@@ -59,12 +59,22 @@ class UserProfileScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        CircleAvatar(
+                        if(cubit.userInfo!.image==null)
+                           CircleAvatar(
                           radius: Dimensions.radius70,
                           backgroundColor: AppColors.mainColor,
                           child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                "http://api.mahmoudtaha.com/images/${cubit.userInfo!.image}",
+                            backgroundImage: AssetImage("assets/images/no.png"),
+                            radius: Dimensions.radius73,
+                          ),
+                        ),
+                        if(cubit.userInfo!.image!=null)
+                          CircleAvatar(
+                          radius: Dimensions.radius70,
+                          backgroundColor: AppColors.mainColor,
+                          child: CircleAvatar(
+                            backgroundImage:NetworkImage(
+                                "${cubit.userInfo!.image}",
                                 scale: .5
 
                                 // 'assets/me.jpg',
@@ -72,6 +82,8 @@ class UserProfileScreen extends StatelessWidget {
                             radius: Dimensions.radius73,
                           ),
                         ),
+
+
                         SizedBox(
                           height: Dimensions.height20 * 2,
                         ),

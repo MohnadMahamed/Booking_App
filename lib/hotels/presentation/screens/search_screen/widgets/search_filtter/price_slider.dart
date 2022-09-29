@@ -19,7 +19,7 @@ class _PriceSliderStateWidget extends State<PriceSliderWidget> {
           '\$${cubit.priceSliderEndValue.toInt()}'),
       divisions: 20,
       min: 100,
-      max:7000,
+      max:10000,
       values: RangeValues( cubit.priceSliderStartValue, cubit.priceSliderEndValue),
       onChanged: (values) {
         setState(() {

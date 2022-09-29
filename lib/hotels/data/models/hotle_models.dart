@@ -134,13 +134,17 @@ class HotelFacilityModel extends HotelFacility {
   const HotelFacilityModel(
       {required super.id,
       required super.hotelId,
+      required super.image,
+      required super.name,
       required super.facilityId,
       required super.createdAt,
       required super.updatedAt});
 
   factory HotelFacilityModel.fromJson(Map<String, dynamic> json) {
     return HotelFacilityModel(
+      name: json["name"],
         id: json["id"],
+        image: json["image"],
         hotelId: json["hotel_id"],
         facilityId: json["facility_id"],
         createdAt: json["created_at"],
