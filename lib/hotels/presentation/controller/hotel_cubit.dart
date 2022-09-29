@@ -63,7 +63,7 @@ class HotelCubit extends Cubit<HotelState> {
   List<BookingModel> listOfBooking = [];
   StatusModel? createBookingResult;
   StatusModel? updateBookingResult;
-  List<HotelFacilityModel>? listOfHotelFacility;
+  List<HotelFacilityModel> listOfHotelFacility=[];
   List<HotelDetailsForBookingModel> searchHotelList = [];
   List<HotelDetails> searchHotelLis = [];
   List<HotelImage> imageList = [];
@@ -77,8 +77,8 @@ class HotelCubit extends Cubit<HotelState> {
   List<BookingModel> listOfUpcomingBooking = [];
   List<BookingModel> listOfCancelledBooking = [];
   List<BookingModel> listOfCompletedBooking = [];
-  double priceSliderStartValue = 10.0;
-  double priceSliderEndValue = 100.0;
+  double priceSliderStartValue=100.0 ;
+  double priceSliderEndValue=10000.0;
   bool wifiCheckBoxVaule = false;
   bool acCheckBoxVaule = false;
   TextEditingController hotelNameController = TextEditingController();
@@ -93,7 +93,16 @@ class HotelCubit extends Cubit<HotelState> {
   int countValue = 0;
 
   int currentIndex = 0;
+  List<int> selectedFacilities = [];
+  void selectFacility(int id) {
+    if (selectedFacilities.contains(id)) {
+      selectedFacilities.remove(id);
+    } else {
+      selectedFacilities.add(id);
+    }
 
+    emit(SelectFacilityState());
+  }
   List<Widget> screens = [
     HomeScreen(),
     const BookingScreen(),
@@ -174,7 +183,6 @@ class HotelCubit extends Cubit<HotelState> {
     }, (r) {
       loginDataModel = r;
       userInfo = r;
-
       emit(UserLoginSuccessState());
       print(loginDataModel);
     });
@@ -242,7 +250,6 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       updateInfoDataModel = r;
-      userInfo=r;
       emit(UserUpdateInfoSuccessState());
       print(updateInfoDataModel);
     });
@@ -345,11 +352,11 @@ class HotelCubit extends Cubit<HotelState> {
 
   Future<Either<Failure, List<HotelDetailsForBookingModel>>>
       searchHotels() async {
-    String address = searchResultController.text;
+    String name = searchResultController.text;
 
     emit(SearchHotelsLoadingState());
     final result = await searchHotelsUseCase.call(
-      address: address,
+      name: name,
     );
     result.fold((l) {
       ServerFailure(l.message);

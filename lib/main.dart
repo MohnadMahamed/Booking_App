@@ -4,6 +4,7 @@ import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/resources/codegen_loader.g.dart';
+import 'package:booking_app/hotels/presentation/screens/booking_screen/booking_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/home_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/image_screen.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
               SearchMapScreen.routeName: (context) => const SearchMapScreen(),
               LayoutScreen.routeName: (context) => const LayoutScreen(),
               SelectImage.routeName: (context) => const SelectImage(),
+              BookingScreen.routeName: (context) => const BookingScreen(),
             },
           );
         },

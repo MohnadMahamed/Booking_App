@@ -5,6 +5,7 @@ import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math' as math;
 
 class HomeScreen extends StatelessWidget {
   static const routeName = "HomeScreen";
@@ -47,7 +48,7 @@ class HomeScreen extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              if (cubit.allHotelsData!.hotelData![index].hotelImages![0].image!
+              if (cubit.allHotelsData!.hotelData![index].hotelImages![index].image!
                   .isEmpty) {
                 return const Image(
                   image: AssetImage("assets/images/no.png"),
@@ -56,7 +57,9 @@ class HomeScreen extends StatelessWidget {
               } else {
                 return Image(
                   image: NetworkImage(
-                      "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+                      // "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![index].image!}"),
+                      "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![math.Random().nextInt(cubit.allHotelsData!.hotelData![index].hotelImages!.length)].image!}"),
+
                   fit: BoxFit.cover,
                 );
               }

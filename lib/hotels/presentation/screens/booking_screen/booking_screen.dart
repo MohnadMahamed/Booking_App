@@ -20,6 +20,7 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'package:to_do_app/shared/components/component.dart';
 
 class BookingScreen extends StatelessWidget {
+  static const routeName="BookingScreen";
   const BookingScreen({Key? key}) : super(key: key);
 
   @override
@@ -58,9 +59,11 @@ class BookingScreen extends StatelessWidget {
                                   cubit.getAllBookings("completed", 10);
                                 }
                               },
+
                               unselectedLabelColor: Colors.white70,
                               unselectedLabelStyle: GoogleFonts.kanit(
                                 fontSize: Dimensions.font16,
+
                                 fontWeight: FontWeight.bold,
                               ),
                               labelColor: Colors.white,

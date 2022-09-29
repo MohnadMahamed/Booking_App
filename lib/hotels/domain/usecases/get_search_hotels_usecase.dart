@@ -10,8 +10,8 @@ class SearchHotelsUseCase {
 
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> call(
       {
-    required String address,
+    required String name,
   }) async {
-    return await baseHotelsRepository.getSearch(address);
+    return await baseHotelsRepository.getSearch(name);
   }
 }

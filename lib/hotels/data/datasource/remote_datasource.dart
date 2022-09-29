@@ -32,6 +32,7 @@ abstract class BaseRemoteDataSource {
       String? minPrice,
       String? maxPrice,
       String? distance,
+
       );
 }
 
@@ -213,12 +214,12 @@ class RemoteDataSource implements BaseRemoteDataSource {
 
   @override
   Future<List<HotelDetailsForBookingModel>> searchHotels(
-      String address,
+      String name,
       ) async {
     Dio dio = Dio();
 
     final response = await dio.get(
-        "${ApiConstance.searchHotelsPath}?address=$address&count=10&page=1");
+        "${ApiConstance.searchHotelsPath}?name=$name&count=10&page=1");
     if (response.statusCode == 200) {
       print(response.data);
       return List<HotelDetailsForBookingModel>.from(

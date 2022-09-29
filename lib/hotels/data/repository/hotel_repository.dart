@@ -98,9 +98,9 @@ class HotelsRepository extends BaseHotelsRepository{
 
   @override
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> getSearch(
-       String address,
+       String name,
            ) async {
-    final result=await baseHotelRemoteDataSource.searchHotels(address) ;
+    final result=await baseHotelRemoteDataSource.searchHotels(name) ;
 
     try{
       return Right(result);

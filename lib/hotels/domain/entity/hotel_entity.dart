@@ -132,17 +132,21 @@ class HotelImages extends Equatable {
 }
 
 class HotelFacility extends Equatable {
+  final String? name;
   final int? id;
   final String? hotelId;
+  final String? image;
   final String? facilityId;
   final String? createdAt;
   final String? updatedAt;
 
   @override
-  List<Object?> get props => [id, hotelId, facilityId, createdAt, updatedAt];
+  List<Object?> get props => [id, hotelId, facilityId, createdAt, updatedAt,name,image];
 
   const HotelFacility({
     required this.id,
+    required this.image,
+    required this.name,
     required this.hotelId,
     required this.facilityId,
     required this.createdAt,

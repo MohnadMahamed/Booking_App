@@ -27,7 +27,12 @@ class NameAdressLatAndLonWidget extends StatelessWidget {
                   child: defaultTextFormFeild(
                       controller: cubit.hotelNameController,
                       labelText: 'Name',
-                      type: TextInputType.name),
+                      type: TextInputType.name,
+                      filColor: cubit.isDark? Colors.black26:Colors.white,
+                      iconColor: cubit.isDark? Colors.white:Colors.black,
+
+
+                  ),
                 ),
                 SizedBox(
                   width: Dimensions.width10,
@@ -36,7 +41,12 @@ class NameAdressLatAndLonWidget extends StatelessWidget {
                   child: defaultTextFormFeild(
                       controller:cubit .addressController,
                       type: TextInputType.name,
-                      labelText: 'Address'),
+                      labelText: 'Address',
+                    filColor: cubit.isDark? Colors.black26:Colors.white,
+                    iconColor: cubit.isDark? Colors.white:Colors.black,
+
+
+                  ),
                 ),
               ],
             ),
@@ -50,7 +60,12 @@ class NameAdressLatAndLonWidget extends StatelessWidget {
                   child: defaultTextFormFeild(
                       controller:cubit .latitudeController,
                       labelText: 'Latitude',
-                      type: TextInputType.number),
+                      type: TextInputType.number,
+                      filColor: cubit.isDark? Colors.black26:Colors.white,
+                    iconColor: cubit.isDark? Colors.white:Colors.black,
+
+
+                  ),
                 ),
                 SizedBox(
                   width: Dimensions.width10,
@@ -59,7 +74,12 @@ class NameAdressLatAndLonWidget extends StatelessWidget {
                   child: defaultTextFormFeild(
                       controller: cubit.longitudeController,
                       labelText: 'Longitude',
-                      type: TextInputType.number),
+                      type: TextInputType.number,
+                      filColor: cubit.isDark? Colors.black26:Colors.white,
+                    iconColor: cubit.isDark? Colors.white:Colors.black,
+
+
+                  ),
                 ),
               ],
             ),
