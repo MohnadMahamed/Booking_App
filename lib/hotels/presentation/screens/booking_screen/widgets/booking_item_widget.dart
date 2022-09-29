@@ -1,7 +1,9 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../controller/hotel_cubit.dart';
@@ -12,6 +14,7 @@ class BookingItemWidget extends StatelessWidget {
   final String hotelName;
   final String hotelAddress;
   final String hotelPrice;
+  final String hotelRate;
 
   const BookingItemWidget(
       {super.key,
@@ -19,7 +22,8 @@ class BookingItemWidget extends StatelessWidget {
       required this.hotelImage,
       required this.hotelName,
       required this.hotelAddress,
-      required this.hotelPrice});
+      required this.hotelPrice,
+      required this.hotelRate});
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +32,42 @@ class BookingItemWidget extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          height: 250,
+          height: Dimensions.bookingItemHeight,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color:
-            HotelCubit.get(context).isDark? Colors.black54.withOpacity(.2):Colors.white70.withOpacity(.6)  ,
+            boxShadow: [
+              BoxShadow(
+                color: HotelCubit.get(context).isDark
+                    ? Colors.black12
+                    : Colors.white12,
+                blurRadius: 5.0,
+                offset: Offset(0, 5),
+              ),
+              BoxShadow(
+                color: HotelCubit.get(context).isDark
+                    ? Colors.black12
+                    : Colors.white12,
+                offset: Offset(-5, 0),
+              ),
+              BoxShadow(
+                color: HotelCubit.get(context).isDark
+                    ? Colors.black12
+                    : Colors.white12,
+                offset: Offset(5, 0),
+              ),
+            ],
 
-          //  Colors.white.withOpacity(.1),
+            borderRadius: BorderRadius.circular(Dimensions.radius15),
+            color: HotelCubit.get(context).isDark
+                ? Colors.grey[200]
+                : Colors.black87,
+
+            //  Colors.white.withOpacity(.1),
           ),
           child: Column(
             children: [
               //hotel photo
-              
+
               Expanded(
                 child: SizedBox(
                   // height: 170,
@@ -60,90 +87,72 @@ class BookingItemWidget extends StatelessWidget {
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: Dimensions.width10,
+                      height: Dimensions.height10,
                     ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: Dimensions.width10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Dimensions.width20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SmallHeadLineText(
+                            size: Dimensions.font20,
+                            text: hotelName,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height10,
+                          ),
+                          Row(
                             children: [
-                              MediumText(
-                                size: Dimensions.font12 * 1.7,
-                                text: hotelName,
-                              ),
-                              SizedBox(
-                                height: Dimensions.height10 / 2,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SmallText(
-                                    size: Dimensions.font20,
-                                    text: hotelAddress,
-                                  ),
-                                  SizedBox(
-                                    width: Dimensions.width10 / 2.0,
-                                  ),
-                                  Icon(
-                                    Icons.location_pin,
-                                    color: Colors.teal,
-                                    size: Dimensions.iconSize24,
-                                  ),
-                                  SmallText(
-                                    text: '40.0 Km to city',
-                                    size: Dimensions.font16,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: Dimensions.height10 / 2,
-                              ),
-                              Row(
-                                children: [
-                                  Wrap(
-                                    children: List.generate(
-                                      4,
-                                      (index) => Icon(
-                                        Icons.star_sharp,
-                                        color: AppColors.mainColor,
-                                        size: Dimensions.iconSize24,
-                                      ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    SmallText(
+                                      maxLines: 2,
+                                      text: hotelAddress,
                                     ),
+                                    SizedBox(
+                                      height: Dimensions.height10 / 2,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SmallText(
+                                          text: hotelRate,
+                                        ),
+                                        SizedBox(
+                                          width: Dimensions.width10 / 2,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.teal,
+                                          size: Dimensions.iconSize16 * 1.7,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: Dimensions.width10 / 2,
+                              ),
+                              Column(
+                                children: [
+                                  SmallHeadLineText(
+                                    size: Dimensions.font20,
+                                    text: hotelPrice,
                                   ),
-                                  Icon(
-                                    Icons.star_half,
-                                    color: Colors.teal,
-                                    size: Dimensions.iconSize24,
+                                  const SmallText(
+                                    text: '/per night',
                                   ),
                                 ],
-                              )
-                            ],
-                          ),
-                        ),
-                        const Spacer(),
-                        Padding(
-                          padding: EdgeInsets.only(right: Dimensions.width10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SmallText(
-                                color: Colors.white,
-                                text: hotelPrice,
-                              ),
-                              SmallText(
-                                text: '/per night',
-                                size: Dimensions.font20,
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    // SizedBox(
-                    //   height: Dimensions.height10,
-                    // ),
                   ],
                 ),
               ),

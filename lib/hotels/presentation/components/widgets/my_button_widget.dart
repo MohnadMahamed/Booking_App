@@ -1,6 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:flutter/material.dart';
 
 class MyButtonWidget extends StatelessWidget {
@@ -30,16 +31,15 @@ class MyButtonWidget extends StatelessWidget {
           // margin: EdgeInsets.all(20.0),
           decoration: BoxDecoration(
             color: AppColors.mainColor,
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(Dimensions.radius30),
           ),
           // height: ,
           width: width == 0 ? double.infinity : width,
           height: height == 0 ? Dimensions.height30 * 2 : height,
           child: Center(
-            child: SmallText(
+            child: StaticColorText(
               text: text,
-             // color: Colors.white,
-
+              // color: Colors.white,
             ),
           ),
         ),

@@ -19,96 +19,50 @@ class LayoutScreen extends StatelessWidget {
         return Scaffold(
           body: cubit.screens[cubit.currentIndex],
           bottomNavigationBar: ConvexAppBar(
+            // height: 50,
             style: TabStyle.custom,
-            color: Colors.white,
+            color: Colors.white70,
             backgroundColor: AppColors.backGroundColor1,
             // gradient: LinearGradient(colors: [Colors.grey, Colors.teal]),
             // curveSize: 10,
-            // height: Dimensions.height30 * 2,
-            activeColor: Colors.white70,
+            // height: 70,
+            activeColor: AppColors.mainColor,
+
             items: [
               TabItem(
-
-                  title: 'Explor',
-                  activeIcon: Icon(
-
-                    Icons.search,
-                    size: Dimensions.iconSize30 *1.5,
-                  ),
-                  icon: Icons.search),
+                // title: 'Explor',
+                // activeIcon: Icon(
+                //   Icons.search,
+                //   size: Dimensions.iconSize30 * 1.2,
+                // ),
+                icon: Icons.search,
+              ),
               TabItem(
-                  activeIcon: Icon(
-                    Icons.history,
-                    size: Dimensions.iconSize30 *1.5,
-                  ),
-                  title: 'Booking',
+                  // activeIcon: Icon(
+                  //   Icons.history,
+                  //   size: Dimensions.iconSize30 * 1.2,
+                  // ),
+                  // title: 'Booking',
                   icon: Icons.history),
               TabItem(
-                  title: 'Profile',
-                  activeIcon: Icon(
-                    Icons.person_outline,
-                    size: Dimensions.iconSize30 *1.5,
-                  ),
+                  // title: 'Profile',
+                  // activeIcon: Icon(
+                  //   Icons.person_outline,
+                  //   size: Dimensions.iconSize30 * 1.2,
+                  // ),
                   icon: Icons.person_outline),
             ],
             initialActiveIndex: 0,
             onTap: (index) {
               cubit.changeNavBar(index);
-              if(index==0){
+              if (index == 0) {
                 cubit.getAllHotels(1);
               }
-              if(index==1){
+              if (index == 1) {
                 cubit.getAllBookings("upcomming", 10);
               }
             },
           ),
-          // bottomNavigationBar: BubbleBottomBar(
-          //   backgroundColor: Colors.white70,
-          //   tilesPadding: const EdgeInsets.all(15.0),
-          //   opacity: .2,
-          //   onTap: (index) {
-          //     cubit.changeNavBar(index);
-          //   },
-          //   currentIndex: cubit.currentIndex,
-          //   items: const <BubbleBottomBarItem>[
-          //     BubbleBottomBarItem(
-          //       backgroundColor: Colors.grey,
-          //       icon: Icon(
-          //         Icons.list,
-          //         color: Colors.grey,
-          //       ),
-          //       activeIcon: Icon(
-          //         Icons.list,
-          //         color: Colors.amber,
-          //       ),
-          //       title: Text('Test 1'),
-          //     ),
-          //     BubbleBottomBarItem(
-          //       backgroundColor: Colors.grey,
-          //       icon: Icon(
-          //         Icons.list,
-          //         color: Colors.grey,
-          //       ),
-          //       activeIcon: Icon(
-          //         Icons.list,
-          //         color: Colors.deepOrange,
-          //       ),
-          //       title: Text('Test 2'),
-          //     ),
-          //     BubbleBottomBarItem(
-          //       backgroundColor: Colors.grey,
-          //       icon: Icon(
-          //         Icons.list,
-          //         color: Colors.grey,
-          //       ),
-          //       activeIcon: Icon(
-          //         Icons.list,
-          //         color: Colors.red,
-          //       ),
-          //       title: Text('Test 3'),
-          //     ),
-          //   ],
-          // ),
         );
       },
     );

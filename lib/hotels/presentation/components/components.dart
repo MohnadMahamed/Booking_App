@@ -1,10 +1,12 @@
-
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget defaultTextFormFeild({
   required TextEditingController? controller,
@@ -37,7 +39,9 @@ Widget defaultTextFormFeild({
           //   color: Colors.red,
           //   fontSize: Dimensions.font30,
           // ),
-          border:  OutlineInputBorder( borderRadius:BorderRadius.circular(10.0), ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: const BorderSide(width: 0.0, color: Colors.transparent),
@@ -54,15 +58,12 @@ Widget editTextFormFeild({
   void Function(String)? onChanged,
   String? Function(String?)? valdide,
   required Color? TextColor,
-
 }) =>
     SizedBox(
       height: Dimensions.height30 * 2,
       // width: Dimensions.width30 * 9,
       child: TextFormField(
-        style: TextStyle(fontSize: Dimensions.font26,
-            color: Colors.white
-        ),
+        style: TextStyle(fontSize: Dimensions.font26, color: Colors.white),
         controller: controller,
         keyboardType: type,
         onChanged: onChanged,
@@ -70,11 +71,12 @@ Widget editTextFormFeild({
         // onSubmitted: onTap,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle:
-              TextStyle(color: TextColor, fontSize: Dimensions.font20),
+          hintStyle: TextStyle(color: TextColor, fontSize: Dimensions.font20),
           filled: true,
           fillColor: Colors.transparent.withOpacity(.2),
-          border:  OutlineInputBorder( borderRadius:BorderRadius.circular(10.0), ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: const BorderSide(width: 0.0, color: Colors.transparent),
@@ -120,34 +122,35 @@ Widget myForm({
   required Color? fillColor,
   required Color? hitTextColor,
   required Color? TextColor,
-
   String? Function(String?)? validate,
   double maxLenght = 10,
   bool isPassword = false,
 }) =>
     Padding(
-      padding: const EdgeInsets.only(top: 8,bottom: 8),
+      padding: EdgeInsets.symmetric(
+        vertical: Dimensions.height10 / 1.5,
+      ),
       child: SizedBox(
-        height: Dimensions.height30 * 2.3,
+        height: Dimensions.height30 * 1.7,
         child: TextFormField(
           onTap: onTap,
           obscureText: isPassword,
-          style: TextStyle(
-              fontSize: Dimensions.font26,
-              color: TextColor
-          ),
+          style: GoogleFonts.cairo(
+              fontSize: Dimensions.font16,
+              fontWeight: FontWeight.w700,
+              color: TextColor),
           controller: controller,
           keyboardType: type,
           onChanged: onChanged,
           validator: (T) => validate!(T),
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(
+            hintStyle: GoogleFonts.cairo(
+                fontWeight: FontWeight.w500,
                 color: hitTextColor,
-                fontSize: Dimensions.font12 * 2
-            ),
+                fontSize: Dimensions.font16),
             filled: true,
-            fillColor:fillColor,
+            fillColor: fillColor,
             suffixIcon: suffixIcon,
             // suffix: Icon(prefixIcon,color: Colors.white38,),
             prefixIcon: prefixIcon,
@@ -155,13 +158,11 @@ Widget myForm({
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
                 borderSide:
-                     BorderSide(width: 2.0, color: AppColors.mainColor)),
+                    const BorderSide(width: 2.0, color: AppColors.mainColor)),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Dimensions.radius20 ),
-              borderSide:
-                   BorderSide(
-                     color: colorsBorderSide!
-                      // color: HotelCubit.get(context).isDark ? Colors.black:
+              borderRadius: BorderRadius.circular(Dimensions.radius30),
+              borderSide: BorderSide(color: colorsBorderSide!, width: 2.0
+                  // color: HotelCubit.get(context).isDark ? Colors.black:
                   ),
             ),
           ),
@@ -185,22 +186,22 @@ Widget searchButton({
             color: color,
             borderRadius: BorderRadius.circular(50.0),
           ),
-          height: Dimensions.height30 * 2.5,
+          height: Dimensions.height30 * 2.0,
           width: double.infinity,
           child: Padding(
             padding: EdgeInsets.only(left: Dimensions.width20),
             child: Row(children: [
-              const Icon(
+              Icon(
                 Icons.search,
                 color: AppColors.mainColor,
+                size: Dimensions.iconSize24 * 1.5,
               ),
               SizedBox(
-                width: Dimensions.width10,
+                width: Dimensions.width10 / 2,
               ),
               SmallText(
+                size: Dimensions.font20,
                 text: text,
-                color: Colors.white38,
-                size: Dimensions.font12 * 2,
               )
             ]),
           ),

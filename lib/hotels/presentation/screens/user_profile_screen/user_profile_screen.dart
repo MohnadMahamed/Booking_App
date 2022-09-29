@@ -1,9 +1,10 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
+import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/widgets/language_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/widgets/mood_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/edit_profile_screen.dart';
@@ -16,11 +17,10 @@ class UserProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
+    var cubit = HotelCubit.get(context);
     return SafeArea(
       child: BlocConsumer<HotelCubit, HotelState>(
-        listener: (context, state) {
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
             //backgroundColor: AppColors.backGroundColor,
@@ -45,7 +45,7 @@ class UserProfileScreen extends StatelessWidget {
                           },
                           icon: Icon(
                             Icons.edit,
-                            size: Dimensions.iconSize30 *1.5,
+                            size: Dimensions.iconSize30 * 1.3,
                             color: AppColors.mainColor,
                           )),
                     ),
@@ -63,12 +63,12 @@ class UserProfileScreen extends StatelessWidget {
                           radius: Dimensions.radius70,
                           backgroundColor: AppColors.mainColor,
                           child: CircleAvatar(
-                            backgroundImage:  NetworkImage(
-                               "http://api.mahmoudtaha.com/images/${cubit.userInfo!.image}",
-                                    scale: .5
+                            backgroundImage: NetworkImage(
+                                "http://api.mahmoudtaha.com/images/${cubit.userInfo!.image}",
+                                scale: .5
 
-                                    // 'assets/me.jpg',
-                            ),
+                                // 'assets/me.jpg',
+                                ),
                             radius: Dimensions.radius73,
                           ),
                         ),
@@ -83,33 +83,31 @@ class UserProfileScreen extends StatelessWidget {
                                 // mainAxisAlignment: MainAxisAlignment
                                 //     .spaceBetween,
                                 children: [
-                                   SmallText(text: LocaleKeys.name.tr(),size: 18),
-                                  Spacer(),
+                                  SmallHeadLineText(text: LocaleKeys.name.tr()),
+                                  const Spacer(),
                                   SmallText(
                                     text: cubit.userInfo!.name!,
-                                    size: Dimensions.font20,
-                                    color: Colors.white,
                                   )
                                 ],
                               ),
                               myDivider(),
                               Row(
                                 children: [
-
-                              SmallText(text: LocaleKeys.email.tr(),size: 18),
-                                  Spacer(),
-
+                                  SmallHeadLineText(
+                                      text: LocaleKeys.email.tr()),
+                                  const Spacer(),
                                   SmallText(
                                     text: cubit.userInfo!.email!,
-                                    size: Dimensions.font20,
-                                    color: Colors.white,
                                   )
                                 ],
                               ),
                               myDivider(),
-                               MoodWidget(),
+                              const MoodWidget(),
                               myDivider(),
-                               LanguageWidget(),
+                              const LanguageWidget(),
+                              SizedBox(
+                                height: Dimensions.height20,
+                              )
                             ],
                           ),
                         ),

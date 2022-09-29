@@ -16,12 +16,14 @@ import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final sl=GetIt.instance;
-class ServiceLocator{
-  void init(){
+final sl = GetIt.instance;
 
+class ServiceLocator {
+  void init() {
     ///bloc
-   sl.registerFactory(() => HotelCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+    sl.registerFactory(() => HotelCubit(
+        sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+
     /// Use Case
     sl.registerLazySingleton(() => CreateBookingUseCase(sl()));
     sl.registerLazySingleton(() => GetAllHotelsUseCase(sl()));
@@ -34,27 +36,29 @@ class ServiceLocator{
     sl.registerLazySingleton(() => RegisterUseCase(sl()));
     sl.registerLazySingleton(() => GetUserInfo(sl()));
     sl.registerLazySingleton(() => FilterHotelsUseCase(sl()));
+
     /// Repository
-    sl.registerLazySingleton<BaseHotelsRepository>(() => HotelsRepository(sl()));
+    sl.registerLazySingleton<BaseHotelsRepository>(
+        () => HotelsRepository(sl()));
+
     /// Data Source
-   sl.registerLazySingleton<BaseRemoteDataSource>(() => RemoteDataSource());
-   // shared prefs instance
-   // final sharedPrefs =  SharedPreferences.getInstance();
-   // sl.registerLazySingleton(() => sharedPrefs);
-   // sl.registerLazySingleton<AppPreference>(() => AppPreferences(sl()));
+    sl.registerLazySingleton<BaseRemoteDataSource>(() => RemoteDataSource());
+    // shared prefs instance
+    // final sharedPrefs =  SharedPreferences.getInstance();
+    // sl.registerLazySingleton(() => sharedPrefs);
+    // sl.registerLazySingleton<AppPreference>(() => AppPreferences(sl()));
   }
 }
+
 final instance = GetIt.instance;
 
-
 Future<void> initAppModule() async {
- // app module, its a module where we put all generic dependencies
+  // app module, its a module where we put all generic dependencies
 
- // shared prefs instance
- final sharedPrefs = await SharedPreferences.getInstance();
+  // shared prefs instance
+  final sharedPrefs = await SharedPreferences.getInstance();
 
- instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
+  instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
 
- // app prefs instance
-
+  // app prefs instance
 }

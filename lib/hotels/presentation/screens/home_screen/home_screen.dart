@@ -7,9 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-  static  const routeName = "HomeScreen";
+  static const routeName = "HomeScreen";
   const HomeScreen({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                     SliverApp(
                       images: buildListView(),
                     ),
-                     SliverAdapter(),
+                    const SliverAdapter(),
                   ],
                 )
               : const Center(
@@ -45,7 +44,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           var cubit = HotelCubit.get(context);
           return ListView.builder(
-            scrollDirection: Axis.vertical,
+            scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               if (cubit.allHotelsData!.hotelData![index].hotelImages![0].image!

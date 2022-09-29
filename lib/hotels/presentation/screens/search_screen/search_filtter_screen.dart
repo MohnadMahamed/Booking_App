@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchFiltterScreen extends StatefulWidget {
-  static  const routeName = "SearchFiltterScreen";
+  static const routeName = "SearchFiltterScreen";
 
   const SearchFiltterScreen({super.key});
 
@@ -28,13 +28,12 @@ class SearchFiltterScreen extends StatefulWidget {
 class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
+    var cubit = HotelCubit.get(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.backGroundColor,
         body: BlocConsumer<HotelCubit, HotelState>(
-          listener: (context, state) {
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,83 +62,82 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                   ),
                 ),
 
-
                 // My Button Widget
 
-            SizedBox(
-              height: Dimensions.height20,
-            ),
-             Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: BigText(text: LocaleKeys.filtter.tr()),
-            ),
-            SizedBox(
-              height: Dimensions.height20,
-            ),
-            Expanded(
-                child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: Dimensions.width20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: Dimensions.height20,
+                SizedBox(
+                  height: Dimensions.height20,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: BigText(text: LocaleKeys.filtter.tr()),
+                ),
+                SizedBox(
+                  height: Dimensions.height20,
+                ),
+                Expanded(
+                    child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.width20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: Dimensions.height20,
+                            ),
+                            SmallText(text: LocaleKeys.price_room.tr()),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            //Money Slider
+                            const PriceSliderWidget(),
+                            //Divider
+                            myDivider(),
+                            //Popular facilities
+                            SmallText(text: LocaleKeys.popular_facilities.tr()),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            const PopularFacilitiesWidget(),
+                            myDivider(),
+                            //name address lat and lon
+                            const NameAdressLatAndLonWidget(),
+                            myDivider(),
+                            SmallText(
+                                text: LocaleKeys.distance_from_your_location
+                                    .tr()),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            //Distance Slider
+                            const DistanceSliderWidget(),
+                            //Divider
+                            myDivider(),
+                            //count and page
+                            const CountAndPageWiget(),
+                            const SizedBox(
+                              height: 30.0,
+                            ),
+                          ],
                         ),
-                         SmallText(text:LocaleKeys.price_room.tr()),
-                        SizedBox(
-                          height: Dimensions.height10,
-                        ),
-                        //Money Slider
-                        const PriceSliderWidget(),
-                        //Divider
-                        myDivider(),
-                        //Popular facilities
-                         SmallText(text: LocaleKeys.popular_facilities.tr()),
-                        SizedBox(
-                          height: Dimensions.height10,
-                        ),
-                        const PopularFacilitiesWidget(),
-                        myDivider(),
-                        //name address lat and lon
-                        const NameAdressLatAndLonWidget(),
-                        myDivider(),
-                         SmallText(text: LocaleKeys.distance_from_your_location.tr()),
-                        SizedBox(
-                          height: Dimensions.height10,
-                        ),
-                        //Distance Slider
-                        const DistanceSliderWidget(),
-                        //Divider
-                        myDivider(),
-                        //count and page
-                        const CountAndPageWiget(),
-                        const SizedBox(
-                          height: 30.0,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )),
-            // My Button Widget
-            MyButtonWidget(
-
-              onTap: () {
-                // Navigator.pushReplacementNamed(
-                //     context, SearchResultScreen.routeName);
-                cubit.filterHotels();
-                Navigator.pop(context);
-
-              },
-              text: LocaleKeys.apply.tr(),
-            ),
-          ],
+                )),
+                // My Button Widget
+                MyButtonWidget(
+                  onTap: () {
+                    // Navigator.pushReplacementNamed(
+                    //     context, SearchResultScreen.routeName);
+                    cubit.filterHotels();
+                    Navigator.pop(context);
+                  },
+                  text: LocaleKeys.apply.tr(),
+                ),
+              ],
             );
           },
         ),
