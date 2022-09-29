@@ -2,7 +2,7 @@ import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/hotel_item.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
+import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -25,19 +25,18 @@ class SliverAdapter extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    top: Dimensions.width20, left: Dimensions.width10),
-
-                child:  MediumText(
-          text: LocaleKeys.other_hotel.tr(),
-
+                    top: Dimensions.height10, left: Dimensions.width10),
+                child: BigText(
+                  text: LocaleKeys.other_hotel.tr(),
+                  size: Dimensions.font20,
                 ),
               ),
               //list of hotel
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 16,
+                separatorBuilder: (context, index) => SizedBox(
+                  height: Dimensions.height15,
                 ),
                 itemBuilder: (context, index) => HotelItemWidget(
                   onTap: () {
@@ -60,10 +59,10 @@ class SliverAdapter extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                   hotelName: cubit.allHotelsData!.hotelData![index].name!,
-                  hotelAddress:
-                      cubit.allHotelsData!.hotelData![index].address!,
+                  hotelAddress: cubit.allHotelsData!.hotelData![index].address!,
                   hotelPrice:
                       '\$${cubit.allHotelsData!.hotelData![index].price!}',
+                  hotelRate: cubit.allHotelsData!.hotelData![index].rate!,
                 ),
                 itemCount: cubit.allHotelsData!.hotelData!.length,
               ),

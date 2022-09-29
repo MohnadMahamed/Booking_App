@@ -1,3 +1,4 @@
+import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,13 +18,13 @@ class _PhotoOfHotelState extends State<PhotoOfHotel> {
       listener: (context, state) {},
       builder: (context, state) {
         return SizedBox(
-          height: 150,
+          height: Dimensions.height15 * 10,
           child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => Container(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    width: 150,
+                    width: Dimensions.width15 * 10,
                     // height: 400,
                     decoration: BoxDecoration(
                         //color: Colors.red,
@@ -36,8 +37,8 @@ class _PhotoOfHotelState extends State<PhotoOfHotel> {
                       fit: BoxFit.cover,
                     ),
                   ),
-              separatorBuilder: (context, index) => const SizedBox(
-                    width: 15,
+              separatorBuilder: (context, index) => SizedBox(
+                    width: Dimensions.width15,
                   ),
               itemCount: 5),
         );

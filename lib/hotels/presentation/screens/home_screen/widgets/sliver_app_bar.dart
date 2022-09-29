@@ -1,7 +1,8 @@
+import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
+import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
 
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_background.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/search_result_screen.dart';
@@ -22,18 +23,18 @@ class SliverApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       elevation: 0,
-     // backgroundColor: Colors.transparent,
-      expandedHeight: 380,
+      // backgroundColor: Colors.transparent,
+      expandedHeight: Dimensions.homeExpandedHeight,
       pinned: true,
-      toolbarHeight: 100,
+      toolbarHeight: Dimensions.homeToolBarHeight,
       title: Padding(
-        padding: const EdgeInsets.only(top: 30.0),
+        padding: EdgeInsets.only(top: Dimensions.height30),
         child: searchButton(
-          color: HotelCubit.get(context).isDark?  Colors.black26
-              : Colors.black.withOpacity(0.5) ,
+          color: HotelCubit.get(context).isDark
+              ? Colors.grey[400]
+              : Colors.black87,
           onTap: () {
-            Navigator.pushNamed(
-                context, SearchResultScreen.routeName);
+            Navigator.pushNamed(context, SearchResultScreen.routeName);
           },
           text: LocaleKeys.search_place.tr(),
         ),

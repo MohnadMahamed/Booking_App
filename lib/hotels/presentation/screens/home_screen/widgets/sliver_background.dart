@@ -1,8 +1,10 @@
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
+import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -41,8 +43,9 @@ class SliverBackgroundWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MediumText(
+                SmallHeadLineText(
                   text: 'Cape Town',
+                  size: Dimensions.font20,
                 ),
                 SizedBox(
                   height: Dimensions.height10,
@@ -61,7 +64,7 @@ class SliverBackgroundWidget extends StatelessWidget {
                   },
                   text: LocaleKeys.view_hotel.tr(),
                   isPadding: false,
-                  width: Dimensions.width30 * 6.5,
+                  width: Dimensions.width30 * 6,
                   height: Dimensions.width30 * 2,
                 ),
               ],
