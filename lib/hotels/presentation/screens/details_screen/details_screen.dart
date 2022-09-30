@@ -92,7 +92,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                               child: IconButton(
                                   onPressed: () {
-                                    // cubit.getAllHotels(1);
+                                     cubit.getAllHotels(1);
                                     Navigator.pop(context);
                                   },
                                   icon: const Icon(

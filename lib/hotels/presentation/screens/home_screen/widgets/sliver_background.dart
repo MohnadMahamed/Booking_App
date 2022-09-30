@@ -61,7 +61,8 @@ class SliverBackgroundWidget extends StatelessWidget {
                 MyButtonWidget(
                   onTap: () {
                     HotelCubit.get(context).getDetails(1);
-                    Navigator.pushReplacementNamed(context, DetailsScreen.routeName);
+                    Navigator.pushNamed(context, DetailsScreen.routeName);
+
                   },
                   text: LocaleKeys.view_hotel.tr(),
                   isPadding: false,
