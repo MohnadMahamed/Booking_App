@@ -11,7 +11,7 @@ class GetUserInfo {
 
 
 
-  Future<Either<Failure, UserDataModel>> call() async {
+  Future<Either<Failure, UserDataDetailsModel>> call() async {
     return await baseHotelsRepository.getInfo();
   }
 }

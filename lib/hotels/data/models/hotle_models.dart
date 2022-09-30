@@ -64,24 +64,32 @@ factory ResponseTitleModel.fromJson(Map<String, dynamic> json) {
 
 class UserDataModel extends UserData {
   const UserDataModel(
-      {required super.id,
-      required super.name,
-      required super.email,
-      required super.apiToken,
-      required super.image,
-      required super.createdAt,
-      required super.updatedAt});
+      {
+      required super.status,
+      required super.userDataDetails,
+    });
 
   factory UserDataModel.fromJson(Map<String, dynamic> json) {
     return UserDataModel(
-        id: json["id"],
-        name: json["name"],
-        email: json["email"],
-        apiToken: json["api_token"],
-        image: json["image"],
-        createdAt: json["created_at"],
-        updatedAt: json["updated_at"]);
+        userDataDetails:UserDataDetailsModel.fromJson( json["data"]),
+        status: StatusModel.fromJson(json["status"]),
+        );
   }
+}
+class UserDataDetailsModel extends UserDataDetails{
+ const UserDataDetailsModel({required super.id, required super.name, required super.email, required super.apiToken, required super.image, required super.createdAt, required super.updatedAt});
+
+ factory UserDataDetailsModel.fromJson(Map<String, dynamic> json) {
+   return UserDataDetailsModel(
+       id: json["id"],
+       name: json["name"],
+       email: json["email"],
+       apiToken: json["api_token"],
+       image: json["image"],
+       createdAt: json["created_at"],
+       updatedAt: json["updated_at"]);
+ }
+
 }
 
 class LoginRequestModel extends LoginRequest {

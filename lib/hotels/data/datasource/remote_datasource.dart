@@ -15,7 +15,7 @@ abstract class BaseRemoteDataSource {
   Future<AllDataModel> getAllHotelsDetails(int pageNumber);
   Future<UserDataModel> updateUserInfo(
       String name,String email,File image);
-  Future<UserDataModel> getInfo(
+  Future<UserDataDetailsModel> getInfo(
       );
   Future<StatusModel> createBooking(int userId, int hotelId);
   Future<StatusModel> updateBookingStatus(int bookingId, String type);
@@ -65,7 +65,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
       //     image: response.data.image,
       //     createdAt: response.data.createdAt,
       //     updatedAt: response.data.updatedAt);
-      UserDataModel userData = UserDataModel.fromJson(response.data["data"]);
+      UserDataModel userData = UserDataModel.fromJson(response.data);
       return userData;
     } else {
       throw ServerException(errorMessageModel: response.data);
@@ -82,7 +82,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     });
     if (response.statusCode == 200) {
       print(response.data);
-      UserDataModel userData = UserDataModel.fromJson(response.data["data"]);
+      UserDataModel userData = UserDataModel.fromJson(response.data);
       return userData;
     } else {
       throw ServerException(errorMessageModel: response.data);
@@ -133,7 +133,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     final response = await dio.post(ApiConstance.updatePath, data:formData );
     if (response.statusCode == 200) {
       print(response.data);
-      UserDataModel userData = UserDataModel.fromJson(response.data["data"]);
+      UserDataModel userData = UserDataModel.fromJson(response.data);
       return userData;
     } else {
       throw ServerException(errorMessageModel: response.data);
@@ -232,14 +232,14 @@ class RemoteDataSource implements BaseRemoteDataSource {
   }
 
   @override
-  Future<UserDataModel> getInfo()async {
+  Future<UserDataDetailsModel> getInfo()async {
     Dio dio = Dio();
 
     dio.options.headers = {"token": ApiConstance.token};
     final response=await dio.get("${ApiConstance.getProfilePath}");
     if (response.statusCode == 200) {
       print(response.data);
-    UserDataModel userDataModel=UserDataModel.fromJson(response.data["data"]);
+    UserDataDetailsModel userDataModel=UserDataDetailsModel.fromJson(response.data["data"]);
     return userDataModel;
     }else{
       throw ServerException(errorMessageModel: response.data);

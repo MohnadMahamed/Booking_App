@@ -58,7 +58,7 @@ class HotelCubit extends Cubit<HotelState> {
   UserDataModel? registerDataModel;
   UserDataModel? loginDataModel;
   UserDataModel? updateInfoDataModel;
-  UserDataModel? userInfo;
+  UserDataDetails? userInfo;
   AllDataModel? allHotelsData;
   List<BookingModel> listOfBooking = [];
   StatusModel? createBookingResult;
@@ -161,13 +161,13 @@ class HotelCubit extends Cubit<HotelState> {
     }, (r) {
       registerDataModel = r;
       print(r);
-      userInfo=r;
-      userId = registerDataModel!.id!;
+      userInfo=r.userDataDetails;
+      userId = registerDataModel!.userDataDetails.id!;
       emit(UserRegisterSuccessState());
     });
     getAllHotels(3);
     print(userId);
-    ApiConstance.token = registerDataModel!.apiToken!;
+    ApiConstance.token = registerDataModel!.userDataDetails.apiToken!;
 
     return result;
   }
@@ -182,12 +182,12 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       loginDataModel = r;
-      userInfo = r;
+      userInfo = r.userDataDetails;
       emit(UserLoginSuccessState());
       print(loginDataModel);
     });
     // userId=registerDataModel!.id!;
-    ApiConstance.token = loginDataModel!.apiToken!;
+    ApiConstance.token = loginDataModel!.userDataDetails.apiToken!;
 
     getAllHotels(3);
     print(userId);
@@ -195,7 +195,7 @@ class HotelCubit extends Cubit<HotelState> {
     return result;
   }
 
-  Future<Either<Failure, UserDataModel>> getInfo() async {
+  Future<Either<Failure, UserDataDetailsModel>> getInfo() async {
     emit(UserInfoLoadingState());
 
     final result = await getUserInfo.call();
@@ -205,7 +205,7 @@ class HotelCubit extends Cubit<HotelState> {
     }, (r) {
       userInfo = r;
       emit(UserInfoSuccessState());
-      print(userInfo);
+      print("userInfo===================$userInfo");
       // print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmm${userInfo!.image}");
     });
     return result;

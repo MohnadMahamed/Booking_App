@@ -122,7 +122,7 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
   @override
-  Future<Either<Failure, UserDataModel>> getInfo()async {
+  Future<Either<Failure, UserDataDetailsModel>> getInfo()async {
     final result=await baseHotelRemoteDataSource.getInfo();
 
     try{
