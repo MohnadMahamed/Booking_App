@@ -12,6 +12,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../data/datasource/network/local/shared_preferences.dart';
+
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
 
@@ -119,7 +121,28 @@ class UserProfileScreen extends StatelessWidget {
                               const LanguageWidget(),
                               SizedBox(
                                 height: Dimensions.height20,
-                              )
+                              ),SizedBox(
+                                height: 40,
+                              ),
+                              Container(
+                                height: 50,
+                                width: 400,
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    signOut(context);
+                                  },
+                                  child: Text(
+                                    'Logout',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Colors.teal,
+                                ),
+                              ),
                             ],
                           ),
                         ),

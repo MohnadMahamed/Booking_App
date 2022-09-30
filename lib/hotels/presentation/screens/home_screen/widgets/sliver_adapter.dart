@@ -43,9 +43,7 @@ class SliverAdapter extends StatelessWidget {
                   onTap: () {
                     cubit.getDetails(index);
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const DetailsScreen(),
+                        context, MaterialPageRoute(builder: (context) => const DetailsScreen(),
                         ));
                   },
                   hotelImage: (cubit.allHotelsData!.hotelData![index]

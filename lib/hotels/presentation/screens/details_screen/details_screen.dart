@@ -252,13 +252,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      MyButtonWidget(
-                                        onTap: () {
-                                          cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
-                                          Navigator.pushNamed(context, BookingScreen.routeName );
-                                        },
-                                        text: LocaleKeys.booking_new.tr(),
-                                      )
+
                                     ],
                                   ),
                                 ),
@@ -269,16 +263,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: Dimensions.width10),
-                                  child: MyButtonWidget(
-                                    isPadding: false,
+                                  child:
+                                  MyButtonWidget(
                                     onTap: () {
-                                      cubit.createBookings(
-                                          cubit.hotelDetails!.id!,
-                                          cubit.userId);
-                                      // Navigator.popAndPushNamed(context, DetailsScreen.routeName);
+                                      cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
+                                      Navigator.pushNamed(context, BookingScreen.routeName );
+
                                     },
                                     text: LocaleKeys.booking_new.tr(),
                                   ),
+
                                 )
                               ],
                             ),

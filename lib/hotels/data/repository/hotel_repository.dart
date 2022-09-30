@@ -98,8 +98,8 @@ class HotelsRepository extends BaseHotelsRepository{
 
   @override
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> getSearch(
-       String name,
-           ) async {
+      String name,
+      ) async {
     final result=await baseHotelRemoteDataSource.searchHotels(name) ;
 
     try{
@@ -110,8 +110,8 @@ class HotelsRepository extends BaseHotelsRepository{
   }
   @override
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> filterHotels(
-  String? name, String? lat, String? lon, String? minPrice, String? maxPrice, String? distance
-           ) async {
+      String? name, String? lat, String? lon, String? minPrice, String? maxPrice, String? distance
+      ) async {
     final result=await baseHotelRemoteDataSource.filterHotels(name, lat, lon, minPrice, maxPrice, distance) ;
 
     try{
@@ -122,7 +122,7 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
   @override
-  Future<Either<Failure, UserDataModel>> getInfo()async {
+  Future<Either<Failure, UserDataDetailsModel>> getInfo()async {
     final result=await baseHotelRemoteDataSource.getInfo();
 
     try{
@@ -133,7 +133,6 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
 }
-
 
 
 
