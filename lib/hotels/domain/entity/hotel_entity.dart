@@ -65,6 +65,20 @@ class ResponseTitle extends Equatable {
 }
 
 class UserData extends Equatable {
+  final Status? status;
+final UserDataDetails userDataDetails;
+
+  @override
+  List<Object?> get props =>
+      [userDataDetails,status];
+
+  const UserData({
+    required this.status,
+    required this.userDataDetails,
+
+  });
+}
+class UserDataDetails extends Equatable {
   final int? id;
   final String? name;
   final String? email;
@@ -75,9 +89,9 @@ class UserData extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, email, apiToken, image, createdAt, updatedAt];
+      [id, name, email, apiToken, image, createdAt, updatedAt,];
 
-  const UserData({
+  const UserDataDetails({
     required this.id,
     required this.name,
     required this.email,
