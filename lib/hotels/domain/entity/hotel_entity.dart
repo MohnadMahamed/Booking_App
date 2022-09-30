@@ -66,7 +66,7 @@ class ResponseTitle extends Equatable {
 
 class UserData extends Equatable {
   final Status? status;
-  final UserDataDetails userDataDetails;
+final UserDataDetails userDataDetails;
 
   @override
   List<Object?> get props =>
@@ -78,9 +78,6 @@ class UserData extends Equatable {
 
   });
 }
-
-
-
 class UserDataDetails extends Equatable {
   final int? id;
   final String? name;
@@ -104,7 +101,6 @@ class UserDataDetails extends Equatable {
     required this.updatedAt,
   });
 }
-
 
 class LoginRequest extends Equatable {
   final String? email;
