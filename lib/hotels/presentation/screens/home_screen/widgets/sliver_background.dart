@@ -4,6 +4,7 @@ import 'package:booking_app/hotels/presentation/components/widgets/my_button_wid
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
+import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -59,8 +60,8 @@ class SliverBackgroundWidget extends StatelessWidget {
                 //my button
                 MyButtonWidget(
                   onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, DetailsScreen.routeName);
+                    HotelCubit.get(context).getDetails(1);
+                    Navigator.pushReplacementNamed(context, DetailsScreen.routeName);
                   },
                   text: LocaleKeys.view_hotel.tr(),
                   isPadding: false,

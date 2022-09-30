@@ -22,4 +22,6 @@ class ApiConstance {
   // static const token = "NczOsFGcz3J7K7vjLajOHCm2762P8TK0eDe29yMsFzV6AgvSyjJDwNUsS7cG";
   // static var token = "qt4ZzZE9aCuJBordbZ7csvSfifrPnjw9zBEjMBtELtu5iA9v2CftranF2LYy";
   static var token = "3WffOf5uNFLv9ilHf7k6214R80GrNkKgjoJpcZGg97Qh2dt3TKuuL2wM9cOR";
+
 }
+String? token='';

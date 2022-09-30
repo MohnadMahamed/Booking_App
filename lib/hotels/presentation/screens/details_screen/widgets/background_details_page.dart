@@ -11,6 +11,8 @@ import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../booking_screen/booking_screen.dart';
+
 class BackGroundDetailsPage extends StatefulWidget {
   const BackGroundDetailsPage({Key? key}) : super(key: key);
 
@@ -159,7 +161,11 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                                   text: 'Book now',
                                   isPadding: false,
                                   height: Dimensions.height30 * 1.7,
-                                  onTap: () {},
+                                  onTap: () {
+                                    cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
+                                    Navigator.pushNamed(context, BookingScreen.routeName );
+
+                                  },
                                 ),
                                 SizedBox(
                                   height: Dimensions.height15,

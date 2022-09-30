@@ -57,6 +57,8 @@ dependencies:
 
 
 
+
+
   #firebase
   firebase_core: ^1.23.0
   firebase_auth: ^3.10.0
@@ -71,6 +73,8 @@ dependencies:
   flutter_phoenix: ^1.1.0
   shared_preferences: ^2.0.15
   image_picker: ^0.8.5+3
+  smooth_page_indicator: ^1.0.0+2
+  fluttertoast: ^8.0.9
 
 
 

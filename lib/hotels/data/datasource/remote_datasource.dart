@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:booking_app/core/error/exceptions.dart';
 import 'package:booking_app/core/util/constaces/api_constances.dart';
+import 'package:booking_app/hotels/data/datasource/network/local/shared_preferences.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:dio/dio.dart';
 
@@ -35,18 +36,11 @@ abstract class BaseRemoteDataSource {
 
       );
 }
-
 class RemoteDataSource implements BaseRemoteDataSource {
   @override
   Future<UserDataModel> userRegister(
       RegisterRequestModel registerRequest) async {
     Dio dio = Dio();
-    // dio.options.headers = {
-    //   'token': 'PostmanRuntime/7.29.2',
-    //   'Accept': '*/*',
-    //   'Accept-Encoding': 'gzip, deflate, br',
-    //   'Connection': 'keep-alive',
-    // };
 
     final response = await dio.post(ApiConstance.registerPath, data: {
       'name': registerRequest.name,
@@ -123,13 +117,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
           filename: fileName, contentType: MediaType('image', 'png') ),
       "type": "image/png"
     });
-    dio.options.headers = {"token": ApiConstance.token};
-    // {
-    //   'name': name,
-    // 'email': email,
-    // 'image': formData
-    // // 'image': updateUserInfoRequest.image,
-    // }
+    dio.options.headers = {"token": CacheHelper.getData(key: 'token')};
     final response = await dio.post(ApiConstance.updatePath, data:formData );
     if (response.statusCode == 200) {
       print(response.data);
@@ -144,7 +132,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
   Future<StatusModel> createBooking(int userId,int hotelId) async {
     Dio dio = Dio();
 
-    dio.options.headers = {'token': ApiConstance.token};
+    dio.options.headers = {'token': CacheHelper.getData(key: 'token')};
 
     final response = await dio.post(ApiConstance.creatBookingPath, data: {
       'user_id': userId,
@@ -163,9 +151,9 @@ class RemoteDataSource implements BaseRemoteDataSource {
   @override
   Future<StatusModel> updateBookingStatus(int bookingId, String type) async {
     Dio dio = Dio();
-    dio.options.headers = {"token": ApiConstance.token};
+    dio.options.headers = {"token": CacheHelper.getData(key: 'token')};
     final response =
-        await dio.post(ApiConstance.updateBookingStatusPath, data: {
+    await dio.post(ApiConstance.updateBookingStatusPath, data: {
       'booking_id': bookingId,
       'type': type,
     });
@@ -182,7 +170,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
   @override
   Future<List<BookingModel>> getBookings(String type, int count) async {
     Dio dio = Dio();
-    dio.options.headers = {"token": ApiConstance.token};
+    dio.options.headers = {"token": CacheHelper.getData(key: 'token')};
 
     final response = await dio
         .get("${ApiConstance.getBookingsPath}?type=$type&count=$count");
@@ -190,8 +178,8 @@ class RemoteDataSource implements BaseRemoteDataSource {
       print(response.data["data"]["data"]);
       return List<BookingModel>.from(
           (response.data['data']["data"]).map(
-        (e) => BookingModel.fromJson(e),
-      ));
+                (e) => BookingModel.fromJson(e),
+          ));
     } else {
       throw ServerException(errorMessageModel: response.data);
     }
@@ -205,7 +193,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     if (response.statusCode == 200) {
       print(response.data);
       return List<HotelFacilityModel>.from((response.data['data'] as List).map(
-        (e) => HotelFacilityModel.fromJson(e),
+            (e) => HotelFacilityModel.fromJson(e),
       ));
     } else {
       throw ServerException(errorMessageModel: response.data);
@@ -224,8 +212,8 @@ class RemoteDataSource implements BaseRemoteDataSource {
       print(response.data);
       return List<HotelDetailsForBookingModel>.from(
           (response.data['data']['data'] ).map(
-        (e) => HotelDetailsForBookingModel.fromJson(e),
-      ));
+                (e) => HotelDetailsForBookingModel.fromJson(e),
+          ));
     } else {
       throw ServerException(errorMessageModel: response.data);
     }
@@ -235,12 +223,12 @@ class RemoteDataSource implements BaseRemoteDataSource {
   Future<UserDataDetailsModel> getInfo()async {
     Dio dio = Dio();
 
-    dio.options.headers = {"token": ApiConstance.token};
+    dio.options.headers = {"token": CacheHelper.getData(key: 'token')};
     final response=await dio.get("${ApiConstance.getProfilePath}");
     if (response.statusCode == 200) {
       print(response.data);
-    UserDataDetailsModel userDataModel=UserDataDetailsModel.fromJson(response.data["data"]);
-    return userDataModel;
+      UserDataDetailsModel userDataModel=UserDataDetailsModel.fromJson(response.data["data"]);
+      return userDataModel;
     }else{
       throw ServerException(errorMessageModel: response.data);
 

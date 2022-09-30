@@ -15,6 +15,8 @@ import 'package:booking_app/hotels/presentation/components/widgets/small_text.da
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../data/datasource/network/local/shared_preferences.dart';
+
 class RegisterScreen extends StatelessWidget {
   static const routeName = "RegisterScreen";
 
@@ -25,7 +27,26 @@ class RegisterScreen extends StatelessWidget {
     var formKey = GlobalKey<FormState>();
     var cubit = HotelCubit.get(context);
     return BlocConsumer<HotelCubit, HotelState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+
+
+        if  (state is UserRegisterSuccessState )
+        {
+
+          showToast(
+              text:'Register successfully',
+              state: ToastStates.SUCCESS
+          );
+          Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
+        }
+        else
+        {
+          showToast(
+              text: 'Try again',
+              state: ToastStates.ERROR
+          );
+        }
+      },
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
@@ -362,6 +383,8 @@ class RegisterScreen extends StatelessWidget {
                     MyButtonWidget(
                       text: LocaleKeys.sign_up.tr(),
                       onTap: () {
+
+
                         if (formKey.currentState!.validate()) {
                           cubit.register(RegisterRequestModel(
                               name: cubit.nameController.text,
@@ -370,8 +393,9 @@ class RegisterScreen extends StatelessWidget {
                               passwordConfirmation:
                                   cubit.confirmPasswordController.text,
                               image: ""));
-                          Navigator.pushReplacementNamed(
-                              context, LayoutScreen.routeName);
+                          CacheHelper.saveData(key: 'email', value: cubit.emailController.text);
+                          CacheHelper.saveData(key: 'password', value: cubit.passwordController.text);
+
                         }
                       },
                     ),

@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:booking_app/core/error/failure.dart';
-import 'package:booking_app/core/util/constaces/api_constances.dart';
 import 'package:booking_app/hotels/data/models/hotle_models.dart';
 import 'package:booking_app/hotels/domain/entity/hotel_entity.dart';
 import 'package:booking_app/hotels/domain/usecases/create_booking_usecase.dart';
@@ -22,15 +20,16 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../data/datasource/network/local/shared_preferences.dart';
 
 part 'hotel_state.dart';
 
 class HotelCubit extends Cubit<HotelState> {
   HotelCubit(
-
-
       this.createBookingUseCase,
       this.getAllHotelsUseCase,
       this.getBookingsUseCase,
@@ -163,11 +162,14 @@ class HotelCubit extends Cubit<HotelState> {
       print(r);
       userInfo=r.userDataDetails;
       userId = registerDataModel!.userDataDetails.id!;
+      errorMassage=registerDataModel!.status!.titleEntity!.en!;
       emit(UserRegisterSuccessState());
     });
     getAllHotels(3);
     print(userId);
-    ApiConstance.token = registerDataModel!.userDataDetails.apiToken!;
+   // ApiConstance.token = registerDataModel!.apiToken!;
+    CacheHelper.saveData(key: 'token', value: registerDataModel!.userDataDetails.apiToken!);
+
 
     return result;
   }
@@ -179,15 +181,22 @@ class HotelCubit extends Cubit<HotelState> {
     final result = await loginUseCase.call(loginRequestModel);
     result.fold((l) {
       ServerFailure(l.message);
+      print(l.message);
+
       emit(HotelErrorState());
     }, (r) {
       loginDataModel = r;
       userInfo = r.userDataDetails;
+      errorMassage=loginDataModel!.status!.titleEntity!.en!;
+
       emit(UserLoginSuccessState());
+
       print(loginDataModel);
     });
     // userId=registerDataModel!.id!;
-    ApiConstance.token = loginDataModel!.userDataDetails.apiToken!;
+    //ApiConstance.token = loginDataModel!.apiToken!;
+    CacheHelper.saveData(key: 'token', value: loginDataModel!.userDataDetails.apiToken);
+
 
     getAllHotels(3);
     print(userId);
@@ -205,8 +214,7 @@ class HotelCubit extends Cubit<HotelState> {
     }, (r) {
       userInfo = r;
       emit(UserInfoSuccessState());
-      print("userInfo===================$userInfo");
-      // print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmm${userInfo!.image}");
+      print(userInfo);
     });
     return result;
   }
@@ -439,19 +447,79 @@ class HotelCubit extends Cubit<HotelState> {
 
   bool isDark = true;
 
-  void changeAppMode() {
+  void changeAppMode({ bool? fromShared}) {
+    if (fromShared != null) {
+      isDark = fromShared;
+      emit(AppChangeHotelMode());
+    } else {
+      isDark = !isDark;
+      CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+        emit(AppChangeHotelMode());
+      });
+    }
+  }
 
-    isDark = !isDark;
 
-    emit(AppChangeAppMode());
 
-      // CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
-      //   emit(AppChangeAppMode());
-      // }
+  changeLang(BuildContext context)async{
+    // lang=!lang;
+
+    if ( context.locale==Locale('ar')) {
+
+
+      await context.setLocale(const Locale('en'));
+      Get.updateLocale(Locale('en'));
+      // emit(LangEnStateSuccess());
 
     }
+    else {
 
 
+      await context.setLocale(const Locale('ar'));
+      Get.updateLocale(Locale('ar'));
+
+      // emit(LangArStateSuccess());
+    }
+  }
+
+
+String errorMassage='';
+
+
+
+
+}
+enum ToastStates {SUCCESS,ERROR,WARNING}
+Color chooseToastColor (ToastStates state)
+{
+  Color color ;
+  switch(state)
+  {
+    case ToastStates.SUCCESS:
+      color= Colors.green;
+      break;
+    case ToastStates.ERROR:
+      color= Colors.red;
+      break;
+    case ToastStates.WARNING:
+      color= Colors.yellow;
+      break;
+  }
+  return color;
+}
+
+void showToast({
+   String text ='',
+  required ToastStates state,
+})=> Fluttertoast.showToast(
+    msg: text,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 3,
+    backgroundColor: chooseToastColor (state),
+    textColor: Colors.white,
+    fontSize: 16.0
+);
 
 
   //
@@ -468,29 +536,4 @@ class HotelCubit extends Cubit<HotelState> {
   //
   //
 
-changeLang(BuildContext context)async{
-  // lang=!lang;
 
-   if ( context.locale==Locale('ar')) {
-
-
-     await context.setLocale(const Locale('en'));
-     Get.updateLocale(Locale('en'));
-     // emit(LangEnStateSuccess());
-
-   }
- else {
-
-
-     await context.setLocale(const Locale('ar'));
-     Get.updateLocale(Locale('ar'));
-
-     // emit(LangArStateSuccess());
-
-
-
- }
-}
-
-
-}

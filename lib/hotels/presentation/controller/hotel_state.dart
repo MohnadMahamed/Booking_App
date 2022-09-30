@@ -64,4 +64,4 @@ class ChangPassVisibilityState extends HotelState {}
 
 
 
-class AppChangeAppMode extends HotelState {}
+class AppChangeHotelMode extends HotelState {}

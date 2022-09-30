@@ -1,3 +1,4 @@
+import 'package:booking_app/core/network/error_message_model.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
@@ -16,6 +17,10 @@ import 'package:booking_app/hotels/presentation/screens/register_screen/register
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/error/exceptions.dart';
+import '../../../data/datasource/network/local/shared_preferences.dart';
+import '../../../domain/entity/hotel_entity.dart';
+
 class LoginScreen extends StatefulWidget {
   static const routeName = 'LoginScreen';
 
@@ -33,7 +38,40 @@ class _LoginScreenState extends State<LoginScreen> {
     var cubit = HotelCubit.get(context);
 
     return BlocConsumer<HotelCubit, HotelState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        // if  (state is UserLoginSuccessState )
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(HotelCubit.snackBar);
+        //   Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
+        //
+        //   }
+        //
+        // else
+        //   {
+        //     ScaffoldMessenger.of(context).showSnackBar(HotelCubit.snackBar);
+        //
+        //
+        //   }
+
+        if  (state is UserLoginSuccessState )
+
+        {
+
+          showToast(
+              text:'Login success',
+              state: ToastStates.SUCCESS
+          );
+          Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
+        }
+          else
+          {
+            showToast(
+                text: 'Try again',
+                state: ToastStates.ERROR
+            );
+          }
+
+      },
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
@@ -283,10 +321,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (formKey.currentState!.validate()) {
                                 cubit.login(LoginRequestModel(
                                     email: cubit.emailController.text,
-                                    password: cubit.passwordController.text));
+                                    password: cubit.passwordController.text)
+                                );
+                                CacheHelper.saveData(key: 'email', value: cubit.emailController.text);
+                                CacheHelper.saveData(key: 'password', value: cubit.passwordController.text);
+
+                                //print(CacheHelper.getData(key: 'token'));
                                 cubit.getAllHotels(1);
-                                Navigator.pushReplacementNamed(
-                                    context, LayoutScreen.routeName);
+                               // Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
                               }
                             },
                           ),
