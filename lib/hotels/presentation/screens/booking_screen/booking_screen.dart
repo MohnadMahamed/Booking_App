@@ -2,6 +2,7 @@ import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
+import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/cancelled_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/completed_screen.dart';
@@ -40,6 +41,13 @@ class BookingScreen extends StatelessWidget {
                   length: 3,
                   child: Scaffold(
                     appBar: AppBar(
+                      leading: IconButton(
+                        onPressed: (){
+                          cubit.getAllHotels(1);
+                          Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
+                        }
+                        ,icon: Icon(Icons.arrow_back_ios_rounded),
+                      ),
                       centerTitle: true,
                       elevation: 0,
                       // backgroundColor: AppColors.backGroundColor,

@@ -163,6 +163,8 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                                   height: Dimensions.height30 * 1.7,
                                   onTap: () {
                                     cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
+                                    cubit.getAllBookings("upcomming", 10);
+
                                     Navigator.pushNamed(context, BookingScreen.routeName );
 
                                   },

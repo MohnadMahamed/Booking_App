@@ -267,6 +267,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   MyButtonWidget(
                                     onTap: () {
                                       cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
+                                      cubit.getAllBookings("upcomming", 10);
                                       Navigator.pushNamed(context, BookingScreen.routeName );
 
                                     },
