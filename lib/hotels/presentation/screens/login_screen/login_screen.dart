@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
         {
 
           showToast(
-              text:HotelCubit.get(context).errorMassage,
+              text:'Login success',
               state: ToastStates.SUCCESS
           );
           Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
           else
           {
             showToast(
-                text: HotelCubit.get(context).errorMassage,
+                text: 'Try again',
                 state: ToastStates.ERROR
             );
           }
