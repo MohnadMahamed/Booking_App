@@ -399,38 +399,6 @@ class HotelCubit extends Cubit<HotelState> {
     return result;
   }
 
-// Future getImage() async {
-//   File _image;
-//   final picker = ImagePicker();
-//
-//   var _pickedFile = await picker.pickImage(
-//       source: ImageSource.camera,
-//       imageQuality: 50, // <- Reduce Image quality
-//       maxHeight: 500,  // <- reduce the image size
-//       maxWidth: 500);
-//
-//   _image = File(_pickedFile!.path);
-//
-//
-//   _upload(_image);
-//
-// }
-// void _upload(File file) async {
-//   String fileName = file.path.split('/').last;
-//
-//   FormData data = FormData.fromMap({
-//     "file":  MultipartFile.fromFileSync(
-//       file.path,
-//       filename: fileName,
-//     ),
-//   });
-//
-//   Dio dio = new Dio();
-//
-//   dio.post("http://192.168.43.225/api/media", data: data)
-//       .then((response) => print(response))
-//       .catchError((error) => print(error));
-// }
 
   bool lang = true;
 
