@@ -39,7 +39,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   void initState() {
     scrollController = ScrollController();
     scrollController.addListener(() {
-      print(scrollController.position.pixels);
+     // print(scrollController.position.pixels);
       if (scrollController.position.pixels >= Dimensions.detailsTogleHeight) {
         setState(() {
           showTitle = true;
@@ -142,8 +142,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     )),
                                     child: Image(
                                       image: NetworkImage(
-                                          // "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
-                                          "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
+                                           "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                                          //"http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
 
                                       height: double.infinity,
                                       width: double.infinity,
@@ -189,10 +189,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         ],
                                       ),
 
-                                      // SmallText(
-                                      //   text: cubit.hotelDetails!.description!,
-                                      //   maxLines: 3,
-                                      // ),
                                       SizedBox(
                                         height: Dimensions.height10,
                                       ),
@@ -236,19 +232,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       SizedBox(height: Dimensions.height10),
                                       const SizedBox(height: 10),
 
-                                      SizedBox(
-                                        width: double.infinity,
-                                        height: 280,
-                                        child: Image(
-                                          image: NetworkImage(
-                                              // "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
-                                              "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
-
-                                          height: double.infinity,
-                                          width: double.infinity,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
+                                      // SizedBox(
+                                      //   width: double.infinity,
+                                      //   height: 280,
+                                      //   child: Image(
+                                      //     image: NetworkImage(
+                                      //          "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                                      //         //"http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
+                                      //
+                                      //     height: double.infinity,
+                                      //     width: double.infinity,
+                                      //     fit: BoxFit.cover,
+                                      //   ),
+                                      // ),
                                       const SizedBox(
                                         height: 10,
                                       ),
@@ -256,7 +252,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ],
                                   ),
                                 ),
-                                const DetailMapWidget(),
+                                 Padding(
+                                   padding: const EdgeInsets.all(8.0),
+                                   child: DetailMapWidget(),
+                                 ),
                                 SizedBox(
                                   height: Dimensions.height30,
                                 ),
