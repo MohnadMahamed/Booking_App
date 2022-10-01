@@ -285,7 +285,19 @@ class HotelDetailsForBooking extends Equatable {
     required this.hotelImages,
   });
 }
+class BookingState extends Equatable{
 
+  final Status? status;
+ final  int? bookingId;
+
+  @override
+  List<Object?> get props => [status,bookingId];
+
+  const BookingState({
+   required this.status,
+    required this.bookingId,
+  });
+}
 class Booking extends Equatable {
   final int? bookingId;
   final String? userId;

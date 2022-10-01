@@ -6,6 +6,7 @@ import 'package:booking_app/hotels/presentation/components/widgets/small_headlin
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
+import 'package:booking_app/hotels/presentation/screens/user_profile_screen/user_profile_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:booking_app/hotels/presentation/screens/image_screen.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class EditProfileScreen extends StatelessWidget {
 
                                  child: CircleAvatar(
                                 backgroundImage: NetworkImage(
-                                  "${cubit.userInfo!.image!}",
+                                  "http://api.mahmoudtaha.com/images/${cubit.imageUrl}",
                                 ),
                                 radius: Dimensions.radius83,
                               ),
@@ -186,7 +187,9 @@ class EditProfileScreen extends StatelessWidget {
                     cubit.updateUserInfo(userNameController.text,
                         emailController.text, HotelCubit.get(context).image!);
                     cubit.getInfo();
+
                     Navigator.pop(context);
+
                   },
                 ),
               ],

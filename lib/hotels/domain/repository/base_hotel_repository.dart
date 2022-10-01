@@ -19,7 +19,7 @@ abstract class BaseHotelsRepository{
      String name,String email,File image);
  Future<Either<Failure,UserDataDetailsModel>> getInfo(
      );
- Future<Either<Failure,StatusModel>> getCreateBooking(
+ Future<Either<Failure,BookingStateModel>> getCreateBooking(
      int userId, int hotelId);
  Future<Either<Failure,StatusModel>> getUpdateBookingStatus(
      int bookingId, String type);

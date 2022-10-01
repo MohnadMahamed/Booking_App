@@ -59,7 +59,9 @@ class LayoutScreen extends StatelessWidget {
                 cubit.getAllHotels(1);
               }
               if (index == 1) {
-                cubit.getAllBookings("upcomming", 10);
+                cubit.getCompletedBook("completed", 10);
+                cubit.getUpComingBook("upcomming", 10);
+                cubit.getCanceledBook("cancelled ", 10);
               }
               if(index==2){
                 cubit.getInfo();

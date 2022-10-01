@@ -97,10 +97,6 @@ void signOut(context)
 
  CacheHelper.removeData(key: 'email');
  CacheHelper.removeData(key: 'password');
- CacheHelper.removeData(key: 'token').then((value)
- {
-  if (value)
-  {
-   Navigator.pushReplacementNamed(context, LoginScreen.routeName);  }
- });
-}
+ CacheHelper.removeData(key: 'token');
+   Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+ }
