@@ -14,6 +14,7 @@ var searchAppBarController = TextEditingController();
 class SliverApp extends StatelessWidget {
   const SliverApp({
     Key? key,
+
     required this.images,
   }) : super(key: key);
 
@@ -34,7 +35,7 @@ class SliverApp extends StatelessWidget {
               ? Colors.grey[400]
               : Colors.black87,
           onTap: () {
-            Navigator.pushNamed(context, SearchResultScreen.routeName);
+            Navigator.pushReplacementNamed(context, SearchResultScreen.routeName);
           },
           text: LocaleKeys.search_place.tr(),
         ),

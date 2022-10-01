@@ -18,7 +18,7 @@ abstract class BaseRemoteDataSource {
       String name,String email,File image);
   Future<UserDataDetailsModel> getInfo(
       );
-  Future<StatusModel> createBooking(int userId, int hotelId);
+  Future<BookingStateModel> createBooking(int userId, int hotelId);
   Future<StatusModel> updateBookingStatus(int bookingId, String type);
   Future<List<BookingModel>> getBookings(String type, int count);
 
@@ -129,7 +129,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
   }
 
   @override
-  Future<StatusModel> createBooking(int userId,int hotelId) async {
+  Future<BookingStateModel> createBooking(int userId,int hotelId) async {
     Dio dio = Dio();
 
     dio.options.headers = {'token': CacheHelper.getData(key: 'token')};
@@ -140,7 +140,7 @@ class RemoteDataSource implements BaseRemoteDataSource {
     });
     if (response.statusCode == 200) {
       print(response.data);
-      StatusModel statusData = StatusModel.fromJson(response.data["status"]);
+      BookingStateModel statusData = BookingStateModel.fromJson(response.data);
 
       return statusData;
     } else {
@@ -151,7 +151,8 @@ class RemoteDataSource implements BaseRemoteDataSource {
   @override
   Future<StatusModel> updateBookingStatus(int bookingId, String type) async {
     Dio dio = Dio();
-    dio.options.headers = {"token": CacheHelper.getData(key: 'token')};
+    // dio.options.headers = {"token": CacheHelper.getData(key: 'token')};
+
     final response =
     await dio.post(ApiConstance.updateBookingStatusPath, data: {
       'booking_id': bookingId,

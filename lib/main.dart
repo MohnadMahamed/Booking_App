@@ -23,6 +23,7 @@ import 'package:get/get.dart';
 import 'hotels/data/datasource/network/local/shared_preferences.dart';
 import 'hotels/presentation/screens/on_boarding/on_boarding_screen.dart';
 import 'hotels/presentation/screens/register_screen/register_screen.dart';
+import 'hotels/presentation/screens/user_profile_screen/user_profile_screen.dart';
 
 void main() async {
    ServiceLocator().init();
@@ -96,6 +97,7 @@ class MyApp extends StatelessWidget {
               LayoutScreen.routeName: (context) => const LayoutScreen(),
               SelectImage.routeName: (context) => const SelectImage(),
               BookingScreen.routeName: (context) => const BookingScreen(),
+              UserProfileScreen.routeName: (context) => const UserProfileScreen(),
             },
           );
         },

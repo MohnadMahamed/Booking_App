@@ -5,6 +5,7 @@ import 'package:booking_app/hotels/presentation/components/widgets/small_headlin
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
+import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/widgets/language_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/widgets/mood_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/edit_profile_screen.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/datasource/network/local/shared_preferences.dart';
 
 class UserProfileScreen extends StatelessWidget {
+  static const routeName="UserProfileScreen";
   const UserProfileScreen({super.key});
 
   @override
@@ -66,7 +68,7 @@ class UserProfileScreen extends StatelessWidget {
                           radius: Dimensions.radius70,
                           backgroundColor: AppColors.mainColor,
                           child: CircleAvatar(
-                            backgroundImage: AssetImage("assets/images/no.png"),
+                            backgroundImage: const AssetImage("assets/images/no.png"),
                             radius: Dimensions.radius73,
                           ),
                         ),
@@ -76,7 +78,7 @@ class UserProfileScreen extends StatelessWidget {
                           backgroundColor: AppColors.mainColor,
                           child: CircleAvatar(
                             backgroundImage:NetworkImage(
-                                "${cubit.userInfo!.image}",
+                                "http://api.mahmoudtaha.com/images/${cubit.imageUrl}",
                                 scale: .5
 
                                 // 'assets/me.jpg',
@@ -121,26 +123,29 @@ class UserProfileScreen extends StatelessWidget {
                               const LanguageWidget(),
                               SizedBox(
                                 height: Dimensions.height20,
-                              ),SizedBox(
+                              ),const SizedBox(
                                 height: 40,
                               ),
                               Container(
                                 height: 50,
                                 width: 400,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Colors.teal,
+                                ),
                                 child: MaterialButton(
                                   onPressed: () {
-                                    signOut(context);
+                                    Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+
+                                   cubit.signOut(context);
+
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Logout',
                                     style: TextStyle(
                                       color: Colors.white,
                                     ),
                                   ),
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  color: Colors.teal,
                                 ),
                               ),
                             ],

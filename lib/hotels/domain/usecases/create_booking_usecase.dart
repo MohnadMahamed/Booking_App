@@ -8,7 +8,7 @@ class CreateBookingUseCase {
 
   CreateBookingUseCase(this.baseHotelsRepository);
 
-  Future<Either<Failure, StatusModel>> call(
+  Future<Either<Failure, BookingStateModel>> call(
       int userId,
       int hotelId,
   ) async {

@@ -41,13 +41,13 @@ class BookingScreen extends StatelessWidget {
                   length: 3,
                   child: Scaffold(
                     appBar: AppBar(
-                      leading: IconButton(
-                        onPressed: (){
-                          cubit.getAllHotels(1);
-                          Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
-                        }
-                        ,icon: Icon(Icons.arrow_back_ios_rounded),
-                      ),
+                      // leading: IconButton(
+                      //   onPressed: (){
+                      //     cubit.getAllHotels(1);
+                      //     Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
+                      //   }
+                      //   ,icon: Icon(Icons.arrow_back_ios_rounded),
+                      // ),
                       centerTitle: true,
                       elevation: 0,
                       // backgroundColor: AppColors.backGroundColor,
@@ -58,13 +58,13 @@ class BookingScreen extends StatelessWidget {
                             child: TabBar(
                               onTap: (int index) {
                                 if (index == 0) {
-                                  cubit.getAllBookings("upcomming", 10);
+                                  cubit.getUpComingBook("upcomming", 10);
                                 }
                                 if (index == 1) {
-                                  cubit.getAllBookings("cancelled", 10);
+                                  cubit.getCanceledBook("cancelled", 10);
                                 }
                                 if (index == 2) {
-                                  cubit.getAllBookings("completed", 10);
+                                  cubit.getCompletedBook("completed", 10);
                                 }
                               },
 

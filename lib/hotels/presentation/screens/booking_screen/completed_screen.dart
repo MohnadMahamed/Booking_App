@@ -40,7 +40,7 @@ class CompletedScreen extends StatelessWidget {
                                 builder: (context) => const DetailsScreen(),
                               ));
                         },
-                        hotelImage: (cubit.allHotelsData!.hotelData![index]
+                        hotelImage: (cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!
                                 .hotelImages!.isEmpty)
                             ? const Image(
                                 image: AssetImage("assets/images/no.png"),
@@ -48,17 +48,17 @@ class CompletedScreen extends StatelessWidget {
                               )
                             : Image(
                                 image: NetworkImage(
-                                    "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+                                    "http://api.mahmoudtaha.com/images/${cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.hotelImages![0].image!}"),
                                 fit: BoxFit.cover,
                               ),
-                        hotelName: cubit.allHotelsData!.hotelData![index].name!,
+                        hotelName: cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.name!,
                         hotelAddress:
-                            cubit.allHotelsData!.hotelData![index].address!,
+                        cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.address!,
                         hotelPrice:
-                            '\$${cubit.allHotelsData!.hotelData![index].price!}',
-                        hotelRate: cubit.allHotelsData!.hotelData![index].rate!,
+                            '\$${cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.price!}',
+                        hotelRate: cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.rate!,
                       ),
-                      itemCount: cubit.listOfBooking.length,
+                      itemCount: cubit.listOfCompletedBooking.length,
                     ),
                   ),
                 ),

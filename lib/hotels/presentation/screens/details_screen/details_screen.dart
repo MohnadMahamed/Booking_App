@@ -69,7 +69,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           return SafeArea(
             child: Scaffold(
                 //backgroundColor: AppColors.backGroundColor,
-                body: state is GetHotelDetailsSuccessState
+                body: state is GetHotelDetailsSuccessState ||state is CreateBookingSuccessState
                     ? CustomScrollView(controller: scrollController, slivers: [
                         SliverAppBar(
                           elevation: 0,
@@ -266,8 +266,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   MyButtonWidget(
                                     onTap: () {
                                       cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
-                                      cubit.getAllBookings("upcomming", 10);
-                                      Navigator.pushNamed(context, BookingScreen.routeName );
+                                      // cubit.getAllBookings("upcomming", 10);
+                                      // Navigator.pushNamed(context, BookingScreen.routeName );
 
                                     },
                                     text: LocaleKeys.booking_new.tr(),

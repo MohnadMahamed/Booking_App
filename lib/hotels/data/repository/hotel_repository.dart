@@ -53,7 +53,7 @@ class HotelsRepository extends BaseHotelsRepository{
   }
 
   @override
-  Future<Either<Failure, StatusModel>> getCreateBooking(int userId, int hotelId) async {
+  Future<Either<Failure, BookingStateModel>> getCreateBooking(int userId, int hotelId) async {
     final result=await baseHotelRemoteDataSource.createBooking( userId, hotelId);
 
     try{

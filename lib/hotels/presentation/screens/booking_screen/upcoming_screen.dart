@@ -33,14 +33,17 @@ class UpcomingScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: Dimensions.height20),
                       child: BookingItemWidget(
                         onTap: () {
-                          cubit.getDetails(index);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DetailsScreen(),
-                              ));
+                          // cubit.updateBookings("cancelled", cubit.allHotelsData!.hotelData![index].id!);
+                          cubit.updateBookings("cancelled", cubit.listOfUpcomingBooking[index].bookingId!);
+
+                          // cubit.getDetails(index);
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const DetailsScreen(),
+                          //     ));
                         },
-                        hotelImage: (cubit.allHotelsData!.hotelData![index]
+                        hotelImage: (cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!
                                 .hotelImages!.isEmpty)
                             ? const Image(
                                 image: AssetImage("assets/images/no.png"),
@@ -48,18 +51,18 @@ class UpcomingScreen extends StatelessWidget {
                               )
                             : Image(
                                 image: NetworkImage(
-                                    "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+                                    "http://api.mahmoudtaha.com/images/${cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.hotelImages![0].image!}"),
                                 fit: BoxFit.cover,
                               ),
-                        hotelName: cubit.allHotelsData!.hotelData![index].name!,
+                        hotelName: cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.name!,
                         hotelAddress:
-                            cubit.allHotelsData!.hotelData![index].address!,
+                        cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.address!,
                         hotelPrice:
-                            '\$${cubit.allHotelsData!.hotelData![index].price!}',
-                        hotelRate: cubit.allHotelsData!.hotelData![index].rate!,
+                            '\$${cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.price!}',
+                        hotelRate:cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.rate!,
                       ),
                     ),
-                    itemCount: cubit.listOfBooking.length,
+                    itemCount: cubit.listOfUpcomingBooking.length,
                   ),
                 ),
                 SizedBox(

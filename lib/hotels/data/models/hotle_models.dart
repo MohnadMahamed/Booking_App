@@ -38,7 +38,15 @@ class UserResponseModel extends UserResponse {
         userDataEntity: UserDataModel.fromJson(json["data"]));
   }
 }
+class BookingStateModel extends BookingState{
+ const BookingStateModel({required super.status, required super.bookingId});
+ factory BookingStateModel.fromJson(Map<String, dynamic> json) {
+   return BookingStateModel(
+       status: StatusModel.fromJson(json["status"]),
+       bookingId:json["booking_id"]);
+ }
 
+}
 class StatusModel extends Status {
   const StatusModel({required super.type, required super.titleEntity});
 

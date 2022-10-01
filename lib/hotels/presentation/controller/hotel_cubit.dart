@@ -15,6 +15,7 @@ import 'package:booking_app/hotels/domain/usecases/user_log_in_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_register_usecase.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/booking_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/home_screen.dart';
+import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/user_profile_screen.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -60,7 +61,7 @@ class HotelCubit extends Cubit<HotelState> {
   UserDataDetails? userInfo;
   AllDataModel? allHotelsData;
   List<BookingModel> listOfBooking = [];
-  StatusModel? createBookingResult;
+  BookingStateModel? createBookingResult;
   StatusModel? updateBookingResult;
   List<HotelFacilityModel> listOfHotelFacility=[];
   List<HotelDetailsForBookingModel> searchHotelList = [];
@@ -76,8 +77,8 @@ class HotelCubit extends Cubit<HotelState> {
   List<BookingModel> listOfUpcomingBooking = [];
   List<BookingModel> listOfCancelledBooking = [];
   List<BookingModel> listOfCompletedBooking = [];
-  double priceSliderStartValue=100.0 ;
-  double priceSliderEndValue=10000.0;
+  double priceSliderStartValue=10.0 ;
+  double priceSliderEndValue=500.0;
   bool wifiCheckBoxVaule = false;
   bool acCheckBoxVaule = false;
   TextEditingController hotelNameController = TextEditingController();
@@ -87,7 +88,7 @@ class HotelCubit extends Cubit<HotelState> {
   TextEditingController searchResultController = TextEditingController();
 
   double distaceSliderValue = 20.0;
-
+int pageNumber=0;
   int pageValue = 0;
   int countValue = 0;
 
@@ -247,7 +248,7 @@ class HotelCubit extends Cubit<HotelState> {
 
     // _upload(image!);
   }
-
+String imageUrl="";
   Future<Either<Failure, UserDataModel>> updateUserInfo(
       String name, String email, File image) async {
     emit(UserUpdateInfoLoadingState());
@@ -258,6 +259,7 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       updateInfoDataModel = r;
+      imageUrl=r.userDataDetails.image!;
       emit(UserUpdateInfoSuccessState());
       print(updateInfoDataModel);
     });
@@ -310,8 +312,92 @@ class HotelCubit extends Cubit<HotelState> {
     });
     return result;
   }
+  Future<Either<Failure, List<BookingModel>>> getUpComingBook(
+      String type, int count) async {
+    listOfUpcomingBooking=[];
+    emit(GetAllBookingLoadingState());
 
-  Future<Either<Failure, StatusModel>> createBookings(
+    final result = await getBookingsUseCase.call(type, count);
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      listOfUpcomingBooking = r;
+      // listOfBooking!.forEach((element) {
+      //   // if(element.type==upcomming cancelled  completed)
+      //   if(element.type=="upcomming" ){
+      //     listOfUpcomingBooking.add(element);
+      //   }if(element.type=="cancelled" ){
+      //     listOfCancelledBooking.add(element);
+      //   }
+      //   if(element.type=="completed" ){
+      //     listOfCompletedBooking.add(element);
+      //   }
+      // });
+      print(listOfBooking);
+      emit(GetAllBookingSuccessState());
+    });
+    return result;
+  }
+  Future<Either<Failure, List<BookingModel>>> getCompletedBook(
+      String type, int count) async {
+    listOfCompletedBooking=[];
+
+    emit(GetAllBookingLoadingState());
+
+    final result = await getBookingsUseCase.call(type, count);
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      listOfCompletedBooking = r;
+      // listOfBooking!.forEach((element) {
+      //   // if(element.type==upcomming cancelled  completed)
+      //   if(element.type=="upcomming" ){
+      //     listOfUpcomingBooking.add(element);
+      //   }if(element.type=="cancelled" ){
+      //     listOfCancelledBooking.add(element);
+      //   }
+      //   if(element.type=="completed" ){
+      //     listOfCompletedBooking.add(element);
+      //   }
+      // });
+      print(listOfBooking);
+      emit(GetAllBookingSuccessState());
+    });
+    return result;
+  }
+  Future<Either<Failure, List<BookingModel>>> getCanceledBook(
+
+      String type, int count) async {
+    listOfCancelledBooking=[];
+
+    emit(GetAllBookingLoadingState());
+
+    final result = await getBookingsUseCase.call(type, count);
+    result.fold((l) {
+      ServerFailure(l.message);
+      emit(HotelErrorState());
+    }, (r) {
+      listOfCancelledBooking = r;
+      // listOfBooking!.forEach((element) {
+      //   // if(element.type==upcomming cancelled  completed)
+      //   if(element.type=="upcomming" ){
+      //     listOfUpcomingBooking.add(element);
+      //   }if(element.type=="cancelled" ){
+      //     listOfCancelledBooking.add(element);
+      //   }
+      //   if(element.type=="completed" ){
+      //     listOfCompletedBooking.add(element);
+      //   }
+      // });
+      print(listOfBooking);
+      emit(GetAllBookingSuccessState());
+    });
+    return result;
+  }
+
+  Future<Either<Failure, BookingStateModel>> createBookings(
       int hotelId, int userId) async {
     emit(CreateBookingLoadingState());
 
@@ -453,7 +539,28 @@ class HotelCubit extends Cubit<HotelState> {
 
 String errorMassage='';
 
+   signOut(context)
+  {
+    CacheHelper.removeData(key: 'email');
+    CacheHelper.removeData(key: 'password');
+    CacheHelper.removeData(key: 'token');
+    // Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+    // Navigator.pushReplacement(
+    //     context, MaterialPageRoute(builder: (context) => LoginScreen()));
 
+
+    // Navigator.of(context)
+    //     .popUntil(ModalRoute.withName(Navigator.defaultRouteName));
+
+    // Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(
+    //       builder: (BuildContext context) =>
+    //           LoginScreen(),
+    //     ));
+
+    emit(HotelInitial());
+
+  }
 
 
 }

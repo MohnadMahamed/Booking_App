@@ -38,6 +38,61 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  // List<Widget> buildListView() {
+  //   return [
+  //     BlocConsumer<HotelCubit, HotelState>(
+  //       listener: (context, state) {},
+  //       builder: (context, state) {
+  //         var cubit = HotelCubit.get(context);
+  //         return Stack(
+  //
+  //                       children: [
+  //                         Container(
+  //                           height: 1000,
+  //                           child: Image(
+  //                             image: NetworkImage(
+  //                                 // "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![index].image!}"),
+  //                                 "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData![cubit.pageNumber].hotelImages!.length)].hotelImages![0].image!}"),
+  //
+  //                             // fit: BoxFit.cover,
+  //                           ),
+  //                         ),
+  //                         Positioned(
+  //
+  //                             child: Text(cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData![cubit.pageNumber].hotelImages!.length)].name!),
+  //                             // child: Text(cubit.allHotelsData!.hotelData![cubit.pageNumber].name!),
+  //                           bottom: 120,
+  //                           left: 20,
+  //                         )
+  //
+  //                       ],
+  //                     );
+  //         return ListView.builder(
+  //           scrollDirection: Axis.horizontal,
+  //           physics: const NeverScrollableScrollPhysics(),
+  //           itemBuilder: (context, index) {
+  //             if (cubit.allHotelsData!.hotelData![index].hotelImages![index].image!
+  //                 .isEmpty) {
+  //               return const Image(
+  //                 image: AssetImage("assets/images/no.png"),
+  //                 fit: BoxFit.cover,
+  //               );
+  //             } else {
+  //               return Image(
+  //                 image: NetworkImage(
+  //                     // "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![index].image!}"),
+  //                     "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![math.Random().nextInt(cubit.allHotelsData!.hotelData![index].hotelImages!.length)].image!}"),
+  //
+  //                 fit: BoxFit.cover,
+  //               );
+  //             }
+  //           },
+  //           itemCount: 1,
+  //         );
+  //       },
+  //     )
+  //   ];
+  // }
   List<Widget> buildListView() {
     return [
       BlocConsumer<HotelCubit, HotelState>(
@@ -55,12 +110,25 @@ class HomeScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 );
               } else {
-                return Image(
-                  image: NetworkImage(
-                      // "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![index].image!}"),
-                      "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![math.Random().nextInt(cubit.allHotelsData!.hotelData![index].hotelImages!.length)].image!}"),
+                return Stack(
 
-                  fit: BoxFit.cover,
+                  children: [
+                    Image(
+                      image: NetworkImage(
+                          // "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![index].image!}"),
+                                                "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData![cubit.pageNumber].hotelImages!.length)].hotelImages![0].image!}"),
+
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                      //                             child: Text(cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData![cubit.pageNumber].hotelImages!.length)].name!),
+
+                                                  child: Text(cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData!.length)].name!,style: TextStyle(color: Colors.grey[900],fontWeight: FontWeight.bold,fontSize: 30),),
+                      bottom: 100,
+                      left: 20,
+                    )
+
+                  ],
                 );
               }
             },

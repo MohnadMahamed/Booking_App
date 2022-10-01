@@ -19,6 +19,9 @@ class SelectFacilityState extends HotelState {}
 class UserLoginLoadingState extends HotelState {}
 
 class UserLoginSuccessState extends HotelState {}
+class UserLogOutLoadingState extends HotelState {}
+
+class UserLogOutSuccessState extends HotelState {}
 
 class UserUpdateInfoLoadingState extends HotelState {}
 

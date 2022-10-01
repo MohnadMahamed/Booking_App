@@ -17,9 +17,9 @@ class _PriceSliderStateWidget extends State<PriceSliderWidget> {
     return RangeSlider(
       labels: RangeLabels('\$${cubit.priceSliderStartValue.toInt()}',
           '\$${cubit.priceSliderEndValue.toInt()}'),
-      divisions: 20,
-      min: 100,
-      max:10000,
+      divisions: 100,
+      min: 10,
+      max:500,
       values: RangeValues( cubit.priceSliderStartValue, cubit.priceSliderEndValue),
       onChanged: (values) {
         setState(() {

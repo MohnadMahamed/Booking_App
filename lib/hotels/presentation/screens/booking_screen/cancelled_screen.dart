@@ -33,14 +33,14 @@ class CancelledScreen extends StatelessWidget {
                       ),
                       itemBuilder: (context, index) => BookingItemWidget(
                         onTap: () {
-                          cubit.getDetails(index);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DetailsScreen(),
-                              ));
+                          cubit.updateBookings("completed", cubit.listOfCancelledBooking[index].bookingId!);
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const DetailsScreen(),
+                          //     ));
                         },
-                        hotelImage: (cubit.allHotelsData!.hotelData![index]
+                        hotelImage: (cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!
                                 .hotelImages!.isEmpty)
                             ? const Image(
                                 image: AssetImage("assets/images/no.png"),
@@ -48,17 +48,17 @@ class CancelledScreen extends StatelessWidget {
                               )
                             : Image(
                                 image: NetworkImage(
-                                    "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+                                    "http://api.mahmoudtaha.com/images/${cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.hotelImages![0].image!}"),
                                 fit: BoxFit.cover,
                               ),
-                        hotelName: cubit.allHotelsData!.hotelData![index].name!,
+                        hotelName: cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.name!,
                         hotelAddress:
-                            cubit.allHotelsData!.hotelData![index].address!,
+                        cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.address!,
                         hotelPrice:
-                            '\$${cubit.allHotelsData!.hotelData![index].price!}',
-                        hotelRate: cubit.allHotelsData!.hotelData![index].rate!,
+                            '\$${cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.price!}',
+                        hotelRate: cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.rate!,
                       ),
-                      itemCount: cubit.listOfBooking.length,
+                      itemCount: cubit.listOfCancelledBooking.length,
                     ),
                   ),
                 ),
