@@ -1,4 +1,8 @@
 import 'package:booking_app/app/app_prefs.dart';
+import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/components.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
@@ -29,21 +33,18 @@ class OnBoradingScreen extends StatefulWidget {
   State<OnBoradingScreen> createState() => _OnBoradingScreenState();
 }
 
- class _OnBoradingScreenState extends State<OnBoradingScreen> {
-
-
+class _OnBoradingScreenState extends State<OnBoradingScreen> {
   var boardController = PageController();
-
 
   List<BordingModel> boarding = [
     BordingModel(
-      image: 'assets/images/onboard.png',
-      title: 'Booking Anything',
-      body: 'Find your hotel from , thousands of hotels !',
+      image: 'assets/images/board2.jpeg',
+      title: 'Booking Hotel Become Easily',
+      body: 'Find your hotel from thousands hotels !',
     ),
     BordingModel(
-      image: 'assets/images/1.jpg',
-      title: 'Booking Easily',
+      image: 'assets/images/bord3.jpeg',
+      title: 'Go Booking Now',
       body: 'Easily booking any hotel , you want to stay in !',
     ),
   ];
@@ -51,8 +52,6 @@ class OnBoradingScreen extends StatefulWidget {
 
   void submit() {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
-
-
       if (value) {
         print(value);
         Navigator.pushReplacementNamed(context, LoginScreen.routeName);
@@ -63,22 +62,29 @@ class OnBoradingScreen extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          MyButtonWidget(
-            width: 60,
-            text: 'Skip',
-            onTap: () {
-              Navigator.pushReplacementNamed(
-                  context, RegisterScreen.routeName);
-            },
-          )
-        ],
-      ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(Dimensions.width10),
         child: Column(
           children: [
+            SizedBox(
+              height: Dimensions.height30,
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: MyButtonWidget(
+                isPadding: false,
+                width: 100,
+                height: 50,
+                text: 'Skip',
+                onTap: () {
+                  Navigator.pushReplacementNamed(
+                      context, RegisterScreen.routeName);
+                },
+              ),
+            ),
+            SizedBox(
+              height: Dimensions.height20,
+            ),
             Expanded(
               child: PageView.builder(
                 onPageChanged: (int index) {
@@ -92,47 +98,49 @@ class OnBoradingScreen extends StatefulWidget {
                     });
                   }
                 },
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 controller: boardController,
                 itemBuilder: (context, index) =>
                     buildBoardingItem(boarding[index]),
                 itemCount: boarding.length,
               ),
             ),
-            SizedBox(
-              height: 35,
-            ),
+            SizedBox(height: Dimensions.height20),
             Row(
               children: [
                 SmoothPageIndicator(
                   controller: boardController,
                   count: boarding.length,
-                  effect: ExpandingDotsEffect(
+                  effect: const ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    dotHeight: 10,
-                    expansionFactor: 4,
-                    dotWidth: 10,
-                    spacing: 5,
+                    dotHeight: 20,
+                    expansionFactor: 2,
+                    dotWidth: 25,
+                    spacing: 8,
                     activeDotColor: Colors.teal,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 FloatingActionButton(
-                  backgroundColor: HotelCubit.get(context).isDark? Colors.black54 : Colors.white70,
-
+                  backgroundColor: HotelCubit.get(context).isDark
+                      ? Colors.white70
+                      : Colors.black,
                   onPressed: () {
                     if (isLast) {
                       submit();
                     } else {
                       boardController.nextPage(
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 750,
                         ),
                         curve: Curves.fastLinearToSlowEaseIn,
                       );
                     }
                   },
-                  child: Icon(Icons.arrow_forward_ios,color: Colors.teal,),
+                  child: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.teal,
+                  ),
                 ),
               ],
             ),
@@ -147,32 +155,28 @@ class OnBoradingScreen extends StatefulWidget {
         children: [
           Expanded(
             child: Center(
-              child: Container(
-                height: 400,
+              child: SizedBox(
                 width: double.infinity,
                 child: Image(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    '${model.image}',
-
+                    model.image,
                   ),
-
                 ),
               ),
             ),
           ),
-          SizedBox(height: 20.0),
-          Text(
-            '${model.title}',
-            style:Theme.of(context).textTheme.headline5
+          SizedBox(height: Dimensions.height20),
+          BigText(
+            text: model.title,
+            size: Dimensions.font30,
+            maxLines: 2,
           ),
-          SizedBox(height: 15.0),
-          Text(
-            '${model.body}',
-            style:Theme.of(context).textTheme.bodyText1
-
-  ),
-          SizedBox(height: 30.0),
+          SizedBox(height: Dimensions.height15),
+          SmallText(
+            text: model.body,
+            size: Dimensions.font20,
+          ),
         ],
       );
 }

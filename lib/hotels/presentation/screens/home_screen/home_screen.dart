@@ -1,4 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
+import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_app_bar.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_adapter.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
@@ -103,31 +106,40 @@ class HomeScreen extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              if (cubit.allHotelsData!.hotelData![index].hotelImages![index].image!
-                  .isEmpty) {
+              if (cubit.allHotelsData!.hotelData![index].hotelImages![index]
+                  .image!.isEmpty) {
                 return const Image(
                   image: AssetImage("assets/images/no.png"),
                   fit: BoxFit.cover,
                 );
               } else {
                 return Stack(
-
                   children: [
                     Image(
                       image: NetworkImage(
                           // "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![index].image!}"),
-                                                "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData![cubit.pageNumber].hotelImages!.length)].hotelImages![0].image!}"),
-
+                          "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData![cubit.pageNumber].hotelImages!.length)].hotelImages![0].image!}"),
                       fit: BoxFit.cover,
                     ),
                     Positioned(
                       //                             child: Text(cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData![cubit.pageNumber].hotelImages!.length)].name!),
 
-                                                  child: Text(cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData!.length)].name!,style: TextStyle(color: Colors.grey[900],fontWeight: FontWeight.bold,fontSize: 30),),
+                      child: SizedBox(
+                        width: Dimensions.screenWidth - 100,
+                        child: StaticColorText(
+                          text: cubit
+                              .allHotelsData!
+                              .hotelData![math.Random().nextInt(
+                                  cubit.allHotelsData!.hotelData!.length)]
+                              .name!,
+                          color: Colors.black,
+                          size: Dimensions.font26,
+                          maxLines: 2,
+                        ),
+                      ),
                       bottom: 100,
                       left: 20,
                     )
-
                   ],
                 );
               }

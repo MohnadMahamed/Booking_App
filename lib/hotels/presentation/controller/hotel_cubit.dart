@@ -41,7 +41,8 @@ class HotelCubit extends Cubit<HotelState> {
       this.filterHotelsUseCase,
       this.getUserInfo,
       this.loginUseCase,
-      this.registerUseCase):super(HotelInitial());
+      this.registerUseCase)
+      : super(HotelInitial());
 
   static HotelCubit get(context) => BlocProvider.of(context);
   final CreateBookingUseCase createBookingUseCase;
@@ -63,7 +64,7 @@ class HotelCubit extends Cubit<HotelState> {
   List<BookingModel> listOfBooking = [];
   BookingStateModel? createBookingResult;
   StatusModel? updateBookingResult;
-  List<HotelFacilityModel> listOfHotelFacility=[];
+  List<HotelFacilityModel> listOfHotelFacility = [];
   List<HotelDetailsForBookingModel> searchHotelList = [];
   List<HotelDetails> searchHotelLis = [];
   List<HotelImage> imageList = [];
@@ -77,8 +78,8 @@ class HotelCubit extends Cubit<HotelState> {
   List<BookingModel> listOfUpcomingBooking = [];
   List<BookingModel> listOfCancelledBooking = [];
   List<BookingModel> listOfCompletedBooking = [];
-  double priceSliderStartValue=10.0 ;
-  double priceSliderEndValue=500.0;
+  double priceSliderStartValue = 10.0;
+  double priceSliderEndValue = 500.0;
   bool wifiCheckBoxVaule = false;
   bool acCheckBoxVaule = false;
   TextEditingController hotelNameController = TextEditingController();
@@ -88,7 +89,7 @@ class HotelCubit extends Cubit<HotelState> {
   TextEditingController searchResultController = TextEditingController();
 
   double distaceSliderValue = 20.0;
-int pageNumber=0;
+  int pageNumber = 0;
   int pageValue = 0;
   int countValue = 0;
 
@@ -103,6 +104,7 @@ int pageNumber=0;
 
     emit(SelectFacilityState());
   }
+
   List<Widget> screens = [
     HomeScreen(),
     const BookingScreen(),
@@ -161,16 +163,16 @@ int pageNumber=0;
     }, (r) {
       registerDataModel = r;
       print(r);
-      userInfo=r.userDataDetails;
+      userInfo = r.userDataDetails;
       userId = registerDataModel!.userDataDetails.id!;
-      errorMassage=registerDataModel!.status!.titleEntity!.en!;
+      errorMassage = registerDataModel!.status!.titleEntity!.en!;
       emit(UserRegisterSuccessState());
     });
     getAllHotels(3);
     print(userId);
-   // ApiConstance.token = registerDataModel!.apiToken!;
-    CacheHelper.saveData(key: 'token', value: registerDataModel!.userDataDetails.apiToken!);
-
+    // ApiConstance.token = registerDataModel!.apiToken!;
+    CacheHelper.saveData(
+        key: 'token', value: registerDataModel!.userDataDetails.apiToken!);
 
     return result;
   }
@@ -188,7 +190,7 @@ int pageNumber=0;
     }, (r) {
       loginDataModel = r;
       userInfo = r.userDataDetails;
-      errorMassage=loginDataModel!.status!.titleEntity!.en!;
+      errorMassage = loginDataModel!.status!.titleEntity!.en!;
 
       emit(UserLoginSuccessState());
 
@@ -196,8 +198,8 @@ int pageNumber=0;
     });
     // userId=registerDataModel!.id!;
     //ApiConstance.token = loginDataModel!.apiToken!;
-    CacheHelper.saveData(key: 'token', value: loginDataModel!.userDataDetails.apiToken);
-
+    CacheHelper.saveData(
+        key: 'token', value: loginDataModel!.userDataDetails.apiToken);
 
     getAllHotels(3);
     print(userId);
@@ -248,7 +250,8 @@ int pageNumber=0;
 
     // _upload(image!);
   }
-String imageUrl="";
+
+  String imageUrl = "";
   Future<Either<Failure, UserDataModel>> updateUserInfo(
       String name, String email, File image) async {
     emit(UserUpdateInfoLoadingState());
@@ -259,7 +262,7 @@ String imageUrl="";
       emit(HotelErrorState());
     }, (r) {
       updateInfoDataModel = r;
-      imageUrl=r.userDataDetails.image!;
+      imageUrl = r.userDataDetails.image!;
       emit(UserUpdateInfoSuccessState());
       print(updateInfoDataModel);
     });
@@ -312,9 +315,10 @@ String imageUrl="";
     });
     return result;
   }
+
   Future<Either<Failure, List<BookingModel>>> getUpComingBook(
       String type, int count) async {
-    listOfUpcomingBooking=[];
+    listOfUpcomingBooking = [];
     emit(GetAllBookingLoadingState());
 
     final result = await getBookingsUseCase.call(type, count);
@@ -339,9 +343,10 @@ String imageUrl="";
     });
     return result;
   }
+
   Future<Either<Failure, List<BookingModel>>> getCompletedBook(
       String type, int count) async {
-    listOfCompletedBooking=[];
+    listOfCompletedBooking = [];
 
     emit(GetAllBookingLoadingState());
 
@@ -367,10 +372,10 @@ String imageUrl="";
     });
     return result;
   }
-  Future<Either<Failure, List<BookingModel>>> getCanceledBook(
 
+  Future<Either<Failure, List<BookingModel>>> getCanceledBook(
       String type, int count) async {
-    listOfCancelledBooking=[];
+    listOfCancelledBooking = [];
 
     emit(GetAllBookingLoadingState());
 
@@ -485,7 +490,6 @@ String imageUrl="";
     return result;
   }
 
-
   bool lang = true;
 
   void langStateEn() {
@@ -495,13 +499,13 @@ String imageUrl="";
   }
 
   void langStateAr() {
-    lang=!lang;
+    lang = !lang;
     emit(LangArStateSuccess());
   }
 
   bool isDark = true;
 
-  void changeAppMode({ bool? fromShared}) {
+  void changeAppMode({bool? fromShared}) {
     if (fromShared != null) {
       isDark = fromShared;
       emit(AppChangeHotelMode());
@@ -513,22 +517,15 @@ String imageUrl="";
     }
   }
 
-
-
-  changeLang(BuildContext context)async{
+  changeLang(BuildContext context) async {
     // lang=!lang;
 
-    if ( context.locale==Locale('ar')) {
-
-
+    if (context.locale == Locale('ar')) {
       await context.setLocale(const Locale('en'));
       Get.updateLocale(Locale('en'));
       // emit(LangEnStateSuccess());
 
-    }
-    else {
-
-
+    } else {
       await context.setLocale(const Locale('ar'));
       Get.updateLocale(Locale('ar'));
 
@@ -536,18 +533,15 @@ String imageUrl="";
     }
   }
 
+  String errorMassage = '';
 
-String errorMassage='';
-
-   signOut(context)
-  {
+  signOut(context) {
     CacheHelper.removeData(key: 'email');
     CacheHelper.removeData(key: 'password');
     CacheHelper.removeData(key: 'token');
     // Navigator.pushReplacementNamed(context, LoginScreen.routeName);
     // Navigator.pushReplacement(
     //     context, MaterialPageRoute(builder: (context) => LoginScreen()));
-
 
     // Navigator.of(context)
     //     .popUntil(ModalRoute.withName(Navigator.defaultRouteName));
@@ -559,42 +553,8 @@ String errorMassage='';
     //     ));
 
     emit(HotelInitial());
-
   }
-
-
 }
-enum ToastStates {SUCCESS,ERROR,WARNING}
-Color chooseToastColor (ToastStates state)
-{
-  Color color ;
-  switch(state)
-  {
-    case ToastStates.SUCCESS:
-      color= Colors.green;
-      break;
-    case ToastStates.ERROR:
-      color= Colors.red;
-      break;
-    case ToastStates.WARNING:
-      color= Colors.yellow;
-      break;
-  }
-  return color;
-}
-
-void showToast({
-   String text ='',
-  required ToastStates state,
-})=> Fluttertoast.showToast(
-    msg: text,
-    toastLength: Toast.LENGTH_LONG,
-    gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 3,
-    backgroundColor: chooseToastColor (state),
-    textColor: Colors.white,
-    fontSize: 16.0
-);
 
 
   //

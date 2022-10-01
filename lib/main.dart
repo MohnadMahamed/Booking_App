@@ -23,51 +23,47 @@ import 'package:get/get.dart';
 import 'hotels/data/datasource/network/local/shared_preferences.dart';
 import 'hotels/presentation/screens/on_boarding/on_boarding_screen.dart';
 import 'hotels/presentation/screens/register_screen/register_screen.dart';
-import 'hotels/presentation/screens/user_profile_screen/user_profile_screen.dart';
 
 void main() async {
-   ServiceLocator().init();
+  ServiceLocator().init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await CacheHelper.init();
 
-
   //Bloc.observer = MyBlocObserver();
   await EasyLocalization.ensureInitialized();
 
-   BlocOverrides.runZoned(
-         () {
-       bool? isDark = CacheHelper.getData(key: 'isDark');
+  BlocOverrides.runZoned(
+    () {
+      bool? isDark = CacheHelper.getData(key: 'isDark');
 
-
-       runApp(EasyLocalization(
-         path: "assets/translations",
-         supportedLocales: [
-           Locale('en'),
-           Locale('ar'),
-         ],
-         // fallbackLocale:   Locale('en'),
-         assetLoader: CodegenLoader(),
-         child: MyApp(
-           isDark: isDark,
-           // startWidget: widget
-
-         ),
-       ));
-     },
-     blocObserver: MyBlocObserver(),
-   );
-
+      runApp(EasyLocalization(
+        path: "assets/translations",
+        supportedLocales: [
+          Locale('en'),
+          Locale('ar'),
+        ],
+        // fallbackLocale:   Locale('en'),
+        assetLoader: CodegenLoader(),
+        child: MyApp(
+          isDark: isDark,
+          // startWidget: widget
+        ),
+      ));
+    },
+    blocObserver: MyBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
   bool? isDark;
-  MyApp({ this.isDark});
+  MyApp({this.isDark});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HotelCubit(
-          sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl())..changeAppMode(fromShared: isDark),
+          sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl())
+        ..changeAppMode(fromShared: isDark),
       child: BlocConsumer<HotelCubit, HotelState>(
         listener: (context, state) async {},
         builder: (context, state) {
@@ -97,7 +93,6 @@ class MyApp extends StatelessWidget {
               LayoutScreen.routeName: (context) => const LayoutScreen(),
               SelectImage.routeName: (context) => const SelectImage(),
               BookingScreen.routeName: (context) => const BookingScreen(),
-              UserProfileScreen.routeName: (context) => const UserProfileScreen(),
             },
           );
         },

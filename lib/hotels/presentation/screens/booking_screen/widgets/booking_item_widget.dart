@@ -98,6 +98,7 @@ class BookingItemWidget extends StatelessWidget {
                           SmallHeadLineText(
                             size: Dimensions.font20,
                             text: hotelName,
+                            maxLines: 1,
                           ),
                           SizedBox(
                             height: Dimensions.height10,

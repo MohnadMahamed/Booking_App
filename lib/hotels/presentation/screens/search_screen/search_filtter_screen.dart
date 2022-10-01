@@ -3,6 +3,7 @@ import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/resources/String_manager.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
@@ -41,38 +42,35 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                 SizedBox(
                   height: Dimensions.height20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Container(
-                    width: Dimensions.width30 * 2,
-                    height: Dimensions.height30 * 2,
-                    decoration: BoxDecoration(
-                        // color: Colors.transparent.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(50.0)),
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, SearchResultScreen.routeName);
-                        },
-                        icon: Icon(
-                          Icons.close,
-                          size: Dimensions.iconSize30 * 1.5,
-                          color: AppColors.mainColor,
-                        )),
-                  ),
+                Container(
+                  width: Dimensions.width30 * 2,
+                  height: Dimensions.height30 * 2,
+                  decoration: BoxDecoration(
+                      // color: Colors.transparent.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(50.0)),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, SearchResultScreen.routeName);
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        size: Dimensions.iconSize30 * 1.5,
+                        color: AppColors.mainColor,
+                      )),
                 ),
 
                 // My Button Widget
 
                 SizedBox(
-                  height: Dimensions.height20,
+                  height: Dimensions.height10,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 10.0),
                   child: BigText(text: LocaleKeys.filtter.tr()),
                 ),
                 SizedBox(
-                  height: Dimensions.height20,
+                  height: Dimensions.height10,
                 ),
                 Expanded(
                     child: SingleChildScrollView(
@@ -88,31 +86,35 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                             SizedBox(
                               height: Dimensions.height20,
                             ),
-                            SmallText(text: LocaleKeys.price_room.tr()),
+                            SmallHeadLineText(text: LocaleKeys.price_room.tr()),
                             SizedBox(
-                              height: Dimensions.height10,
+                              height: Dimensions.height20,
                             ),
-                            //Money Slider
+                            //Price Slider
                             const PriceSliderWidget(),
                             //Divider
                             myDivider(),
                             //Popular facilities
-                            SmallText(text: LocaleKeys.popular_facilities.tr()),
+                            SmallHeadLineText(
+                                text: LocaleKeys.popular_facilities.tr()),
+                            SizedBox(
+                              height: Dimensions.height20,
+                            ),
+                            const PopularFacilitiesWidget(),
                             SizedBox(
                               height: Dimensions.height10,
                             ),
-                            const PopularFacilitiesWidget(),
                             myDivider(),
                             //name address lat and lon
                             const NameAdressLatAndLonWidget(),
                             myDivider(),
-                            SmallText(
+                            //Distance Slider
+                            SmallHeadLineText(
                                 text: LocaleKeys.distance_from_your_location
                                     .tr()),
                             SizedBox(
                               height: Dimensions.height10,
                             ),
-                            //Distance Slider
                             const DistanceSliderWidget(),
                             //Divider
                             myDivider(),
@@ -122,7 +124,6 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                               height: 30.0,
                             ),
                           ],
-
                         ),
                       ),
                     ],

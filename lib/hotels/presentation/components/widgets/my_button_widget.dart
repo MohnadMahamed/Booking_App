@@ -14,8 +14,8 @@ class MyButtonWidget extends StatelessWidget {
       {super.key,
       required this.text,
       required this.onTap,
-      this.width = 0.0,
-      this.height = 0.0,
+      this.width = 0,
+      this.height = 0,
       this.isPadding = true});
 
   @override
@@ -39,6 +39,7 @@ class MyButtonWidget extends StatelessWidget {
           child: Center(
             child: StaticColorText(
               text: text,
+              size: Dimensions.width20,
               // color: Colors.white,
             ),
           ),

@@ -30,21 +30,12 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
       builder: (context, state) {
         return Stack(
           children: [
-            Container(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30.0),
-                bottomRight: Radius.circular(30.0),
-              )),
-              //background Image
-              child: Image(
-                image: NetworkImage(
-                    "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
-                height: double.infinity,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+            Image(
+              image: NetworkImage(
+                  "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -55,122 +46,147 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: Dimensions.width10),
-                    child: SizedBox(
-                      height: Dimensions.cardDetaialsImageHeight,
-                      width: double.infinity,
-                      child: ClipRect(
-                        child: Card(
-                          color: HotelCubit.get(context).isDark
-                              ? Colors.grey[200]
-                              : Colors.black87,
-
-                          // color: Colors.white70.withOpacity(.2),
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                width: 2, color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(0, 3),
+                            // changes position of shadow
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: Dimensions.width15,
-                                right: Dimensions.width15,
-                                top: Dimensions.height20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SmallHeadLineText(
-                                  color: Colors.white,
-                                  size: Dimensions.font20,
-                                  maxLines: 1,
-                                  text: cubit.hotelDetails!.name!,
-                                ),
-                                SizedBox(
-                                  height: Dimensions.height10,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                        child: Column(
-                                      children: [
-                                        //address
-                                        SmallText(
-                                          maxLines: 2,
-                                          color: Colors.white70,
-                                          text: cubit.hotelDetails!.address!,
-                                        ),
-                                        SizedBox(
-                                          height: Dimensions.height10 / 2,
-                                        ),
-                                        //rate
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.teal,
-                                              size: Dimensions.iconSize16 * 1.5,
-                                            ),
-                                            SizedBox(
-                                              height: Dimensions.height10 / 2,
-                                            ),
-                                            SmallText(
-                                                color: Colors.white70,
-                                                text:
-                                                    cubit.hotelDetails!.rate!),
-                                            SizedBox(
-                                              width: Dimensions.width10 / 1.5,
-                                            ),
-                                            Icon(
-                                              Icons.location_pin,
-                                              color: Colors.teal,
-                                              size: Dimensions.iconSize16 * 1.3,
-                                            ),
-                                            SizedBox(
-                                              width: Dimensions.width10 / 5,
-                                            ),
-                                            SmallText(
-                                              color: Colors.white70,
-                                              text: '40.0 Km ',
-                                              size: Dimensions.font16 * .9,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    )),
-                                    SizedBox(
-                                      width: Dimensions.width10,
+                        ],
+                      ),
+                      child: SizedBox(
+                        height: Dimensions.cardDetaialsImageHeight,
+                        width: double.infinity,
+                        child: ClipRect(
+                          child: Card(
+                            color: HotelCubit.get(context).isDark
+                                ? Colors.grey[200]
+                                : Colors.black87,
+
+                            // color: Colors.white70.withOpacity(.2),
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  width: 2, color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: Dimensions.width15,
+                                  right: Dimensions.width15,
+                                  top: Dimensions.height20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SmallHeadLineText(
+                                    color: Colors.white,
+                                    size: Dimensions.font20,
+                                    maxLines: 1,
+                                    text: cubit.hotelDetails!.name!,
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: Dimensions.height10,
                                     ),
-                                    Column(
-                                      children: [
-                                        SmallHeadLineText(
-                                          size: Dimensions.font20,
-                                          text:
-                                              "\$${cubit.hotelDetails!.price!}",
-                                        ),
-                                        const SmallText(
-                                          color: Colors.white70,
-                                          text: "/per night,",
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                const Spacer(),
-                                MyButtonWidget(
-                                  text: 'Book now',
-                                  isPadding: false,
-                                  height: Dimensions.height30 * 1.7,
-                                  onTap: () {
-                                    cubit.createBookings(cubit.hotelDetails!.id!, cubit.userId);
-                                    cubit.getAllBookings("upcomming", 10);
-                                    Navigator.pushNamed(context, BookingScreen.routeName );
-                                  },
-                                ),
-                                SizedBox(
-                                  height: Dimensions.height15,
-                                ),
-                              ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                          child: Column(
+                                        children: [
+                                          //address
+                                          SmallText(
+                                            maxLines: 2,
+                                            color: Colors.white70,
+                                            text: cubit.hotelDetails!.address!,
+                                          ),
+                                          SizedBox(
+                                            height: Dimensions.height10 / 2,
+                                          ),
+                                          //rate
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.star,
+                                                color: Colors.teal,
+                                                size:
+                                                    Dimensions.iconSize16 * 1.5,
+                                              ),
+                                              SizedBox(
+                                                height: Dimensions.height10 / 2,
+                                              ),
+                                              SmallText(
+                                                  color: Colors.white70,
+                                                  text: cubit
+                                                      .hotelDetails!.rate!),
+                                              SizedBox(
+                                                width: Dimensions.width10 / 1.5,
+                                              ),
+                                              Icon(
+                                                Icons.location_pin,
+                                                color: Colors.teal,
+                                                size:
+                                                    Dimensions.iconSize16 * 1.3,
+                                              ),
+                                              SizedBox(
+                                                width: Dimensions.width10 / 5,
+                                              ),
+                                              SmallText(
+                                                color: Colors.white70,
+                                                text: '40.0 Km ',
+                                                size: Dimensions.font16 * .9,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )),
+                                      SizedBox(
+                                        width: Dimensions.width10,
+                                      ),
+                                      Column(
+                                        children: [
+                                          SmallHeadLineText(
+                                            size: Dimensions.font20,
+                                            text:
+                                                "\$${cubit.hotelDetails!.price!}",
+                                          ),
+                                          const SmallText(
+                                            color: Colors.white70,
+                                            text: "/per night,",
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: Dimensions.height10,
+                                    ),
+                                  ),
+                                  MyButtonWidget(
+                                    text: 'Book now',
+                                    height: Dimensions.height30 * 1.5,
+                                    isPadding: false,
+                                    onTap: () {
+                                      cubit.createBookings(
+                                          cubit.hotelDetails!.id!,
+                                          cubit.userId);
+                                      cubit.getAllBookings("upcomming", 10);
+                                      Navigator.pushNamed(
+                                          context, BookingScreen.routeName);
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: Dimensions.height15,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

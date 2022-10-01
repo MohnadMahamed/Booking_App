@@ -58,7 +58,8 @@ abstract class LocaleKeys {
   static const String apply = 'apply';
   static const String popular_facilities = 'popular_facilities';
   static const String price_room = 'price_room';
-  static const String distance_from_your_location = 'summary';
+  static const String distance_from_your_location =
+      'Distance from your location';
   static const String london = 'london';
 
   static const String address = 'address';

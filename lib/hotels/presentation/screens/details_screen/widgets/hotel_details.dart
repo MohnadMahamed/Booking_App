@@ -20,34 +20,34 @@ class _HotelViewDetailsState extends State<HotelViewDetails> {
     var cubit = HotelCubit.get(context);
     return BlocBuilder<HotelCubit, HotelState>(
       builder: (context, state) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SmallHeadLineText(
-                      size: Dimensions.font20, text: cubit.hotelDetails!.name!),
-                  SmallText(
+            SmallHeadLineText(
+                size: Dimensions.font20, text: cubit.hotelDetails!.name!),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: SmallText(
                     text: cubit.hotelDetails!.address!,
                     maxLines: 2,
                   ),
-                ],
-              ),
-            ),
-            Column(
-              children: [
-                SmallHeadLineText(
-                  size: Dimensions.font20,
-                  text: "\$ ${cubit.hotelDetails!.price!}",
                 ),
-                const SmallText(
-                  text: "/per night",
-                ),
+                Column(
+                  children: [
+                    SmallHeadLineText(
+                      size: Dimensions.font20,
+                      text: "\$ ${cubit.hotelDetails!.price!}",
+                    ),
+                    const SmallText(
+                      text: "/per night",
+                    ),
+                  ],
+                )
               ],
-            )
+            ),
           ],
         );
       },

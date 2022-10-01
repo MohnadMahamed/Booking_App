@@ -4,16 +4,14 @@ import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class NameAdressLatAndLonWidget extends StatelessWidget {
   const NameAdressLatAndLonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
+    var cubit = HotelCubit.get(context);
     return BlocConsumer<HotelCubit, HotelState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Column(
           children: [
@@ -25,13 +23,12 @@ class NameAdressLatAndLonWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: defaultTextFormFeild(
-                      controller: cubit.hotelNameController,
-                      labelText: 'Name',
-                      type: TextInputType.name,
-                      filColor: cubit.isDark? Colors.black26:Colors.white,
-                      iconColor: cubit.isDark? Colors.white:Colors.black,
-
-
+                    controller: cubit.hotelNameController,
+                    labelText: 'Name',
+                    type: TextInputType.name,
+                    filColor: cubit.isDark ? Colors.grey[200] : Colors.black87,
+                    textColor: cubit.isDark ? Colors.black : Colors.white,
+                    iconColor: cubit.isDark ? Colors.black38 : Colors.grey,
                   ),
                 ),
                 SizedBox(
@@ -39,32 +36,30 @@ class NameAdressLatAndLonWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: defaultTextFormFeild(
-                      controller:cubit .addressController,
-                      type: TextInputType.name,
-                      labelText: 'Address',
-                    filColor: cubit.isDark? Colors.black26:Colors.white,
-                    iconColor: cubit.isDark? Colors.white:Colors.black,
-
-
+                    controller: cubit.addressController,
+                    type: TextInputType.name,
+                    labelText: 'Address',
+                    filColor: cubit.isDark ? Colors.grey[200] : Colors.black87,
+                    textColor: cubit.isDark ? Colors.black : Colors.white,
+                    iconColor: cubit.isDark ? Colors.black38 : Colors.grey,
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: Dimensions.height30,
+              height: Dimensions.height20,
             ),
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: defaultTextFormFeild(
-                      controller:cubit .latitudeController,
-                      labelText: 'Latitude',
-                      type: TextInputType.number,
-                      filColor: cubit.isDark? Colors.black26:Colors.white,
-                    iconColor: cubit.isDark? Colors.white:Colors.black,
-
-
+                    controller: cubit.latitudeController,
+                    labelText: 'Latitude',
+                    type: TextInputType.number,
+                    filColor: cubit.isDark ? Colors.grey[200] : Colors.black87,
+                    textColor: cubit.isDark ? Colors.black : Colors.white,
+                    iconColor: cubit.isDark ? Colors.black38 : Colors.grey,
                   ),
                 ),
                 SizedBox(
@@ -72,13 +67,12 @@ class NameAdressLatAndLonWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: defaultTextFormFeild(
-                      controller: cubit.longitudeController,
-                      labelText: 'Longitude',
-                      type: TextInputType.number,
-                      filColor: cubit.isDark? Colors.black26:Colors.white,
-                    iconColor: cubit.isDark? Colors.white:Colors.black,
-
-
+                    controller: cubit.longitudeController,
+                    labelText: 'Longitude',
+                    type: TextInputType.number,
+                    filColor: cubit.isDark ? Colors.grey[200] : Colors.black87,
+                    textColor: cubit.isDark ? Colors.black : Colors.white,
+                    iconColor: cubit.isDark ? Colors.black38 : Colors.grey,
                   ),
                 ),
               ],

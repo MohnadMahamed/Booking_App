@@ -38,19 +38,19 @@ class HotelItemWidget extends StatelessWidget {
                     ? Colors.black12
                     : Colors.white12,
                 blurRadius: 5.0,
-                offset: Offset(0, 5),
+                offset: const Offset(0, 5),
               ),
               BoxShadow(
                 color: HotelCubit.get(context).isDark
                     ? Colors.black12
                     : Colors.white12,
-                offset: Offset(-5, 0),
+                offset: const Offset(-5, 0),
               ),
               BoxShadow(
                 color: HotelCubit.get(context).isDark
                     ? Colors.black12
                     : Colors.white12,
-                offset: Offset(5, 0),
+                offset: const Offset(5, 0),
               ),
             ],
             borderRadius: BorderRadiusDirectional.all(
