@@ -45,6 +45,7 @@ class SliverAdapter extends StatelessWidget {
                 itemBuilder: (context, index) => HotelItemWidget(
                   onTap: () {
                     cubit.getDetails(index);
+                    // Navigator.pushNamed(context, DetailsScreen.routeName);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
