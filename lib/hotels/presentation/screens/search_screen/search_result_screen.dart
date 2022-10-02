@@ -64,8 +64,7 @@ class SearchResultScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(50.0)),
                               child: IconButton(
                                   onPressed: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, LayoutScreen.routeName);
+                                    Navigator.pop(context);
                                     // Navigator.pop(context);
                                   },
                                   icon: Icon(
@@ -116,9 +115,6 @@ class SearchResultScreen extends StatelessWidget {
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: Dimensions.width20),
-
-
-
                       child: Row(
                         children: [
                           Expanded(

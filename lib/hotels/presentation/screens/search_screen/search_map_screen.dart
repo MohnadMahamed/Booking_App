@@ -2,21 +2,14 @@ import 'package:booking_app/core/network/location_helper.dart';
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/hotel_item.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/hotel_map_item.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
-import 'package:booking_app/hotels/presentation/screens/booking_screen/widgets/booking_item_widget.dart';
-import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/search_screen/search_result_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -108,9 +101,7 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
                     width: Dimensions.width30 * 2,
                     height: Dimensions.width30 * 2,
                     decoration: BoxDecoration(
-                        color: HotelCubit.get(context).isDark
-                            ? Colors.grey[200]
-                            : Colors.black87,
+                        color: Colors.black87,
                         borderRadius: BorderRadius.circular(30.0)),
                     child: IconButton(
                         onPressed: () {

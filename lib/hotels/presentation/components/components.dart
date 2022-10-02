@@ -1,11 +1,13 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget defaultTextFormFeild({
@@ -15,15 +17,18 @@ Widget defaultTextFormFeild({
   TextInputType? type,
   void Function(String)? onTap,
   void Function(String)? onChanged,
-  Color? filColor=Colors.grey,
-  Color? iconColor=Colors.white,
+  Color? filColor = Colors.grey,
+  Color? textColor = Colors.white,
+  Color? iconColor = Colors.white,
   String? Function(String?)? valdide,
 }) =>
     SizedBox(
       height: Dimensions.height30 * 2,
       // width: Dimensions.width30 * 7,
       child: TextFormField(
-        style: TextStyle(fontSize: Dimensions.font26, color: Colors.white),
+        style: TextStyle(
+            fontSize: Dimensions.font26,
+            color: textColor == Colors.white ? Colors.white : textColor),
         controller: controller,
         keyboardType: type,
         onChanged: onChanged,
@@ -31,10 +36,10 @@ Widget defaultTextFormFeild({
         // onSubmitted: onTap,
         decoration: InputDecoration(
           filled: true,
-          fillColor:Colors.grey,
-          label: SmallText(
+          fillColor: filColor == Colors.grey ? Colors.grey : filColor,
+          label: SmallHeadLineText(
             text: '$labelText',
-            color: Colors.white,
+            color: textColor,
           ),
           suffixIcon: Icon(suffix, color: iconColor),
           // labelStyle: TextStyle(
@@ -132,7 +137,19 @@ Widget myForm({
       padding: EdgeInsets.symmetric(
         vertical: Dimensions.height10 / 1.5,
       ),
-      child: SizedBox(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(Dimensions.radius30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: const Offset(0, 3),
+              // changes position of shadow
+            ),
+          ],
+        ),
         height: Dimensions.height30 * 1.7,
         child: TextFormField(
           onTap: onTap,
@@ -210,3 +227,193 @@ Widget searchButton({
         ),
       ),
     );
+
+void updateBookingAlert({context}) {
+  final AlertDialog alart = AlertDialog(
+    scrollable: true,
+    // title: BigText(
+    //   text: 'Update to',
+    //   color: Colors.black,
+    // ),
+    content: Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30.0),
+            color: Colors.grey[200],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: AppColors.mainColor),
+                  child: InkWell(
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // AppCubit.get(context).updateData(
+                        //     id: model['id'],
+                        //     isfav: 'true',
+                        //     isCompleted: model['isCompleted']);
+                        showToast(text: '', state: ToastStates.WARNING);
+                      },
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Icon(
+                                Icons.next_plan,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                height: 2.0,
+                              ),
+                              StaticColorText(
+                                text: 'Upcoming',
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                ),
+              ),
+              const SizedBox(
+                width: 10.0,
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.red),
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        showToast(text: '', state: ToastStates.ERROR);
+                      },
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Icon(Icons.close),
+                              SizedBox(
+                                height: 2.0,
+                              ),
+                              StaticColorText(
+                                text: 'Cancelled',
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                ),
+              ),
+              const SizedBox(
+                width: 10.0,
+              ),
+              Expanded(
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: AppColors.mainColor),
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+
+                          showToast(
+                              text: ' llllll', state: ToastStates.SUCCESS);
+                        },
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Icon(
+                                  Icons.next_plan,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  height: 2.0,
+                                ),
+                                StaticColorText(
+                                  text: 'Completed',
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+  showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (ctx) {
+        return alart;
+      });
+}
+
+enum ToastStates { SUCCESS, ERROR, WARNING }
+
+Color chooseToastColor(ToastStates state) {
+  Color color;
+  switch (state) {
+    case ToastStates.SUCCESS:
+      color = Colors.green;
+      break;
+    case ToastStates.ERROR:
+      color = Colors.red;
+      break;
+    case ToastStates.WARNING:
+      color = Colors.yellow;
+      break;
+  }
+  return color;
+}
+
+void showToast({
+  String text = '',
+  required ToastStates state,
+}) =>
+    Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 3,
+        backgroundColor: chooseToastColor(state),
+        textColor: Colors.white,
+        fontSize: 16.0);

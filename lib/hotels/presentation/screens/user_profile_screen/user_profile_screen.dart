@@ -1,6 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
@@ -16,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/datasource/network/local/shared_preferences.dart';
 
 class UserProfileScreen extends StatelessWidget {
-  static const routeName="UserProfileScreen";
+  static const routeName = "UserProfileScreen";
   const UserProfileScreen({super.key});
 
   @override
@@ -33,27 +34,55 @@ class UserProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: Dimensions.height20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      width: Dimensions.width30 * 2,
-                      height: Dimensions.height30 * 2,
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: IconButton(
-                          onPressed: () {
-                            navigateeeTo(context, const EditProfileScreen());
-                          },
-                          icon: Icon(
-                            Icons.edit,
-                            size: Dimensions.iconSize30 * 1.3,
-                            color: AppColors.mainColor,
-                          )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Container(
+                          width: Dimensions.width30 * 2,
+                          height: Dimensions.height30 * 2,
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: IconButton(
+                              onPressed: () {
+                                signOut(context);
+                              },
+                              icon: Icon(
+                                Icons.power_settings_new,
+                                size: Dimensions.iconSize30 * 1.3,
+                                color: Colors.red,
+                              )),
+                        ),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          width: Dimensions.width30 * 2,
+                          height: Dimensions.height30 * 2,
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: IconButton(
+                              onPressed: () {
+                                navigateeeTo(
+                                    context, const EditProfileScreen());
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                size: Dimensions.iconSize30 * 1.3,
+                                color: AppColors.mainColor,
+                              )),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: Dimensions.height20,
@@ -63,33 +92,32 @@ class UserProfileScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        if(cubit.userInfo!.image==null)
-                           CircleAvatar(
-                          radius: Dimensions.radius70,
-                          backgroundColor: AppColors.mainColor,
-                          child: CircleAvatar(
-                            backgroundImage: const AssetImage("assets/images/no.png"),
-                            radius: Dimensions.radius73,
-                          ),
-                        ),
-                        if(cubit.userInfo!.image!=null)
+                        if (cubit.userInfo!.image == null)
                           CircleAvatar(
-                          radius: Dimensions.radius70,
-                          backgroundColor: AppColors.mainColor,
-                          child: CircleAvatar(
-                            backgroundImage:NetworkImage(
-                                "http://api.mahmoudtaha.com/images/${cubit.imageUrl}",
-                                scale: .5
-
-                                // 'assets/me.jpg',
-                                ),
-                            radius: Dimensions.radius73,
+                            radius: Dimensions.radius70,
+                            backgroundColor: AppColors.mainColor,
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  const AssetImage("assets/images/no.png"),
+                              radius: Dimensions.radius73,
+                            ),
                           ),
-                        ),
+                        if (cubit.userInfo!.image != null)
+                          CircleAvatar(
+                            radius: Dimensions.radius70,
+                            backgroundColor: AppColors.mainColor,
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  "${cubit.userInfo!.image}",
+                                  scale: .5
 
-
+                                  // 'assets/me.jpg',
+                                  ),
+                              radius: Dimensions.radius73,
+                            ),
+                          ),
                         SizedBox(
-                          height: Dimensions.height20 * 2,
+                          height: Dimensions.height20,
                         ),
                         Padding(
                           padding: EdgeInsets.all(Dimensions.width20),
@@ -123,31 +151,16 @@ class UserProfileScreen extends StatelessWidget {
                               const LanguageWidget(),
                               SizedBox(
                                 height: Dimensions.height20,
-                              ),const SizedBox(
-                                height: 40,
                               ),
-                              Container(
-                                height: 50,
-                                width: 400,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  color: Colors.teal,
-                                ),
-                                child: MaterialButton(
-                                  onPressed: () {
-                                    Navigator.pushReplacementNamed(context, LoginScreen.routeName);
-
-                                   cubit.signOut(context);
-
-                                  },
-                                  child: const Text(
-                                    'Logout',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
+                              SizedBox(
+                                height: 20,
                               ),
+                              MyButtonWidget(
+                                  isPadding: false,
+                                  text: 'Logout',
+                                  onTap: () {
+                                    signOut(context);
+                                  })
                             ],
                           ),
                         ),

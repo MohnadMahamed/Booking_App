@@ -26,11 +26,14 @@ class SliverAdapter extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    top: Dimensions.height10, left: Dimensions.width10),
+                    top: Dimensions.height15, left: Dimensions.width10),
                 child: BigText(
                   text: LocaleKeys.other_hotel.tr(),
                   size: Dimensions.font20,
                 ),
+              ),
+              SizedBox(
+                height: Dimensions.height20,
               ),
               //list of hotel
               ListView.separated(
@@ -43,7 +46,9 @@ class SliverAdapter extends StatelessWidget {
                   onTap: () {
                     cubit.getDetails(index);
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => const DetailsScreen(),
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(),
                         ));
                   },
                   hotelImage: (cubit.allHotelsData!.hotelData![index]
@@ -53,9 +58,9 @@ class SliverAdapter extends StatelessWidget {
                           fit: BoxFit.cover,
                         )
                       : Image(
-          // 'http://api.mahmoudtaha.com/images/${AppBloc.get(context).hotels[index].images[math.Random().nextInt(AppBloc.get(context).hotels[index].images.length)]}'),
+                          // 'http://api.mahmoudtaha.com/images/${AppBloc.get(context).hotels[index].images[math.Random().nextInt(AppBloc.get(context).hotels[index].images.length)]}'),
 
-          image: NetworkImage(
+                          image: NetworkImage(
                               "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![math.Random().nextInt(cubit.allHotelsData!.hotelData![index].hotelImages!.length)].image!}"),
                           fit: BoxFit.cover,
                         ),

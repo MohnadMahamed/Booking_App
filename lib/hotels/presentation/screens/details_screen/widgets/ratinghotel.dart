@@ -1,6 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,19 @@ class _RatingHotelState extends State<RatingHotel> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: .5,
+            blurRadius: 1,
+            offset: const Offset(0, 3),
+            // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(20),
+      ),
       width: double.infinity,
       height: Dimensions.ratingHotelHeight,
       child: Center(
@@ -48,7 +61,7 @@ class _RatingHotelState extends State<RatingHotel> {
                     SizedBox(
                       width: Dimensions.width10,
                     ),
-                    const SmallText(
+                    const SmallHeadLineText(
                       text: 'Overall rating',
                     ),
                   ],

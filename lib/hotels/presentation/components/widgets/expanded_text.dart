@@ -1,6 +1,8 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 
 import 'package:flutter/material.dart';
 
@@ -43,7 +45,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                 SmallText(
                     size: Dimensions.font16,
                     height: 1,
-                    maxLines: 10,
+                    maxLines: 15,
                     text: hiddenText
                         ? (firstHalf + '...')
                         : (firstHalf + secondHalf)),
@@ -55,8 +57,8 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                   },
                   child: Row(
                     children: [
-                      SmallText(
-                        size: Dimensions.font12,
+                      StaticColorText(
+                        size: Dimensions.font16,
                         text: hiddenText ? 'Show more' : 'Show less',
                         color: AppColors.mainColor,
                       ),

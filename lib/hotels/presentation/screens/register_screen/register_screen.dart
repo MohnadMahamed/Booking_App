@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/layout/layout.dart';
@@ -113,7 +115,20 @@ class RegisterScreen extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    log(
+                                      MediaQuery.of(context)
+                                          .size
+                                          .height
+                                          .toString(),
+                                    );
+                                    log(
+                                      MediaQuery.of(context)
+                                          .size
+                                          .width
+                                          .toString(),
+                                    );
+                                  },
                                 ),
                               ),
                               SizedBox(

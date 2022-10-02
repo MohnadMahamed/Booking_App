@@ -1,11 +1,12 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-
 
 class CountAndPageWiget extends StatefulWidget {
   const CountAndPageWiget({super.key});
@@ -17,10 +18,9 @@ class CountAndPageWiget extends StatefulWidget {
 class _CountAndPageWigetState extends State<CountAndPageWiget> {
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
+    var cubit = HotelCubit.get(context);
     return BlocConsumer<HotelCubit, HotelState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,7 +28,6 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
             Expanded(
               child: Container(
                 padding: EdgeInsets.all(0),
-
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppColors.mainColor,
@@ -55,7 +54,7 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                         color: Colors.white,
                       ),
                     ),
-                    SmallText(
+                    StaticColorText(
                       text: 'Count(${cubit.countValue})',
                       color: Colors.white,
                       size: Dimensions.font12 * 1.5,
@@ -63,10 +62,11 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                     IconButton(
                       onPressed: () {
                         setState(() {
-                          if (cubit.countValue > 0) {
+                          if (cubit.countValue > 1) {
                             cubit.countValue--;
                           } else {
-                            Get.snackbar('Item count', "You can't reduce more !",
+                            Get.snackbar(
+                                'Item count', "You can't reduce more !",
                                 backgroundColor: AppColors.mainColor,
                                 colorText: Colors.white);
                           }
@@ -82,7 +82,9 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                 ),
               ),
             ),
-            SizedBox(width: 8,),
+            SizedBox(
+              width: 8,
+            ),
             Expanded(
               child: Container(
                 padding: EdgeInsets.all(0),
@@ -112,7 +114,7 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                         color: Colors.white,
                       ),
                     ),
-                    SmallText(
+                    StaticColorText(
                       text: 'Page(${cubit.pageValue})',
                       color: Colors.white,
                       size: Dimensions.font12 * 1.7,
@@ -120,10 +122,11 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                     IconButton(
                       onPressed: () {
                         setState(() {
-                          if (cubit.pageValue > 0) {
+                          if (cubit.pageValue > 1) {
                             cubit.pageValue--;
                           } else {
-                            Get.snackbar('Item count', "You can't add more !",
+                            Get.snackbar(
+                                'Item count', "You can't reduce more !",
                                 backgroundColor: AppColors.mainColor,
                                 colorText: Colors.white);
                           }
