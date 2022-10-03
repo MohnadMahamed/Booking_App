@@ -45,6 +45,8 @@ class EditProfileScreen extends StatelessWidget {
                       child: IconButton(
                           onPressed: () {
                             Navigator.pop(context);
+                            // Navigator.pushReplacementNamed(
+                            //     context, UserProfileScreen.routeName);
                           },
                           icon: Icon(
                             Icons.arrow_back_ios_new_outlined,
@@ -65,12 +67,10 @@ class EditProfileScreen extends StatelessWidget {
                         Stack(
                           // alignment: Alignment.bottomRight,
                           children: [
-                            if(cubit.userInfo!.image==null)
+                            if (cubit.userInfo!.image == null)
                               CircleAvatar(
                                 radius: Dimensions.radius83,
                                 backgroundColor: AppColors.mainColor,
-
-
                                 child: CircleAvatar(
                                   backgroundImage: AssetImage(
                                     "assets/images/no.png",
@@ -78,19 +78,17 @@ class EditProfileScreen extends StatelessWidget {
                                   radius: Dimensions.radius83,
                                 ),
                               ),
-                               if(cubit.userInfo!.image!=null)
-                                 CircleAvatar(
-                              radius: Dimensions.radius83,
-                              backgroundColor: AppColors.mainColor,
-
-
-                                 child: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                  "http://api.mahmoudtaha.com/images/${cubit.imageUrl}",
-                                ),
+                            if (cubit.userInfo!.image != null)
+                              CircleAvatar(
                                 radius: Dimensions.radius83,
+                                backgroundColor: AppColors.mainColor,
+                                child: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                    "http://api.mahmoudtaha.com/images/${cubit.imageUrl}",
+                                  ),
+                                  radius: Dimensions.radius83,
+                                ),
                               ),
-                            ),
                             Positioned(
                               bottom: 0,
                               right: 1,
@@ -102,7 +100,7 @@ class EditProfileScreen extends StatelessWidget {
                                 },
                                 child: Container(
                                   width: Dimensions.width20 * 2.5,
-                                  height: Dimensions.height20 * 2.5,
+                                  height: Dimensions.width20 * 2.5,
                                   decoration: BoxDecoration(
                                       color: Colors.grey[300],
                                       borderRadius: BorderRadius.circular(
@@ -127,14 +125,13 @@ class EditProfileScreen extends StatelessWidget {
                               Row(
                                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SmallHeadLineText(
-                                      text: LocaleKeys.name.tr()),
+                                  SmallHeadLineText(text: LocaleKeys.name.tr()),
                                   SizedBox(
                                     width: Dimensions.width30,
                                   ),
                                   Expanded(
                                     child: editTextFormFeild(
-                                        TextColor:
+                                        textColor:
                                             HotelCubit.get(context).isDark
                                                 ? Colors.black
                                                 : Colors.white70,
@@ -157,7 +154,7 @@ class EditProfileScreen extends StatelessWidget {
 
                                   Expanded(
                                     child: editTextFormFeild(
-                                        TextColor:
+                                        textColor:
                                             HotelCubit.get(context).isDark
                                                 ? Colors.black
                                                 : Colors.white70,
@@ -189,7 +186,6 @@ class EditProfileScreen extends StatelessWidget {
                     cubit.getInfo();
 
                     Navigator.pop(context);
-
                   },
                 ),
               ],

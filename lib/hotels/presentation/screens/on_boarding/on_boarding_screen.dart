@@ -45,7 +45,7 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
     BordingModel(
       image: 'assets/images/bord3.jpeg',
       title: 'Go Booking Now',
-      body: 'Easily booking any hotel , you want to stay in !',
+      body: 'Easily booking any hotel , you want!',
     ),
   ];
   bool isLast = false;
@@ -63,7 +63,7 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(Dimensions.width10),
+        padding: EdgeInsets.all(Dimensions.width20),
         child: Column(
           children: [
             SizedBox(
@@ -113,9 +113,9 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
                   count: boarding.length,
                   effect: const ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    dotHeight: 20,
+                    dotHeight: 10,
                     expansionFactor: 2,
-                    dotWidth: 25,
+                    dotWidth: 15,
                     spacing: 8,
                     activeDotColor: Colors.teal,
                   ),
@@ -157,6 +157,7 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
             child: Center(
               child: SizedBox(
                 width: double.infinity,
+                height: 500,
                 child: Image(
                   fit: BoxFit.cover,
                   image: AssetImage(
@@ -169,10 +170,10 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
           SizedBox(height: Dimensions.height20),
           BigText(
             text: model.title,
-            size: Dimensions.font30,
+            size: Dimensions.font20,
             maxLines: 2,
           ),
-          SizedBox(height: Dimensions.height15),
+          SizedBox(height: Dimensions.height10),
           SmallText(
             text: model.body,
             size: Dimensions.font20,

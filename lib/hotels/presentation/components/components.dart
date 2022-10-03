@@ -64,13 +64,16 @@ Widget editTextFormFeild({
   void Function(String)? onTap,
   void Function(String)? onChanged,
   String? Function(String?)? valdide,
-  required Color? TextColor,
+  Color? textColor = Colors.white,
 }) =>
     SizedBox(
-      height: Dimensions.height30 * 2,
+      height: Dimensions.height30 * 1.7,
       // width: Dimensions.width30 * 9,
       child: TextFormField(
-        style: TextStyle(fontSize: Dimensions.font26, color: Colors.white),
+        style: GoogleFonts.cairo(
+            fontSize: Dimensions.font20,
+            fontWeight: FontWeight.w700,
+            color: textColor == Colors.white ? Colors.white : textColor),
         controller: controller,
         keyboardType: type,
         onChanged: onChanged,
@@ -78,7 +81,10 @@ Widget editTextFormFeild({
         // onSubmitted: onTap,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(color: TextColor, fontSize: Dimensions.font20),
+          hintStyle: GoogleFonts.cairo(
+              color: textColor,
+              fontSize: Dimensions.font16,
+              fontWeight: FontWeight.w600),
           filled: true,
           fillColor: Colors.transparent.withOpacity(.2),
           border: OutlineInputBorder(
@@ -140,15 +146,6 @@ Widget myForm({
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.radius30),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: const Offset(0, 3),
-              // changes position of shadow
-            ),
-          ],
         ),
         height: Dimensions.height30 * 1.7,
         child: TextFormField(
@@ -163,6 +160,9 @@ Widget myForm({
           onChanged: onChanged,
           validator: (T) => validate!(T),
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(
+                left: Dimensions.width20, top: Dimensions.height20),
+
             hintText: hintText,
             hintStyle: GoogleFonts.cairo(
                 fontWeight: FontWeight.w500,
@@ -228,153 +228,168 @@ Widget searchButton({
       ),
     );
 
-void updateBookingAlert({context}) {
+void updateBookingAlert({context, func, String? not}) {
   final AlertDialog alart = AlertDialog(
     scrollable: true,
-    // title: BigText(
-    //   text: 'Update to',
-    //   color: Colors.black,
-    // ),
+    title: const StaticColorText(
+      text: 'Update to : ',
+      color: Colors.black,
+    ),
     content: Center(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.0),
-            color: Colors.grey[200],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: AppColors.mainColor),
-                  child: InkWell(
-                      onTap: () {
-                        // Navigator.pop(context);
-                        // AppCubit.get(context).updateData(
-                        //     id: model['id'],
-                        //     isfav: 'true',
-                        //     isCompleted: model['isCompleted']);
-                        showToast(text: '', state: ToastStates.WARNING);
-                      },
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Icon(
-                                Icons.next_plan,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                height: 2.0,
-                              ),
-                              StaticColorText(
-                                text: 'Upcoming',
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                            ],
-                          ),
-                        ),
-                      )),
-                ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.red),
-                  child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                        showToast(text: '', state: ToastStates.ERROR);
-                      },
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Icon(Icons.close),
-                              SizedBox(
-                                height: 2.0,
-                              ),
-                              StaticColorText(
-                                text: 'Cancelled',
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                            ],
-                          ),
-                        ),
-                      )),
-                ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Expanded(
-                child: Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: AppColors.mainColor),
-                    child: InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            not == 'upcome'
+                ? const SizedBox(
+                    width: 0.0,
+                  )
+                : Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: AppColors.mainColor),
+                      child: InkWell(
+                          onTap: () {
+                            func;
+                            Navigator.pop(context);
 
-                          showToast(
-                              text: ' llllll', state: ToastStates.SUCCESS);
-                        },
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Icon(
-                                  Icons.next_plan,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  height: 2.0,
-                                ),
-                                StaticColorText(
-                                  text: 'Completed',
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                            showToast(
+                                text: 'Updated Succesfuly',
+                                state: ToastStates.SUCCESS);
+                          },
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Icon(
+                                    Icons.next_plan,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  StaticColorText(
+                                    text: 'Upcoming',
+                                    size: Dimensions.font12,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        )),
+                          )),
+                    ),
                   ),
-                ),
-              ),
-            ],
-          ),
+            const SizedBox(
+              width: 10.0,
+            ),
+            not == 'cancel'
+                ? const SizedBox(
+                    width: 0.0,
+                  )
+                : Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.red),
+                      child: InkWell(
+                          onTap: () {
+                            func;
+                            Navigator.pop(context);
+                            showToast(
+                                text: 'Updated Succesfuly',
+                                state: ToastStates.ERROR);
+                          },
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Icon(
+                                    Icons.close,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  StaticColorText(
+                                    text: 'Canceled',
+                                    size: Dimensions.font12,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )),
+                    ),
+                  ),
+            const SizedBox(
+              width: 10.0,
+            ),
+            not == 'complet'
+                ? const SizedBox(
+                    width: 0.0,
+                  )
+                : Expanded(
+                    child: Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.green),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                              func;
+                              showToast(
+                                  text: ' Updated Succesfuly',
+                                  state: ToastStates.SUCCESS);
+                            },
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Icon(
+                                      Icons.cloud_done,
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    StaticColorText(
+                                      text: 'Completed',
+                                      size: Dimensions.font12,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )),
+                      ),
+                    ),
+                  ),
+          ],
         ),
       ),
     ),

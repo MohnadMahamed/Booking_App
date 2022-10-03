@@ -16,7 +16,6 @@ import 'dart:math' as math;
 class SliverBackgroundWidget extends StatefulWidget {
   final List<Widget> images;
 
-
   const SliverBackgroundWidget({super.key, required this.images});
 
   @override
@@ -26,19 +25,15 @@ class SliverBackgroundWidget extends StatefulWidget {
 class _SliverBackgroundWidgetState extends State<SliverBackgroundWidget> {
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
-
+    var cubit = HotelCubit.get(context);
 
     return BlocConsumer<HotelCubit, HotelState>(
-      listener: (context, state) {
-
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Stack(
           children: [
             //Carousel Slider
             CarouselSlider(
-
                 items: widget.images,
                 options: CarouselOptions(
                   height: Dimensions.carouselrHeight,
@@ -46,12 +41,9 @@ class _SliverBackgroundWidgetState extends State<SliverBackgroundWidget> {
                   viewportFraction: 1,
                   initialPage: 0,
                   onPageChanged: (index, reason) {
-
-                    setState((){
-                      cubit.pageNumber=index;
-
+                    setState(() {
+                      cubit.pageNumber = index;
                     });
-
                   },
                   enableInfiniteScroll: true,
                   reverse: false,
@@ -65,21 +57,10 @@ class _SliverBackgroundWidgetState extends State<SliverBackgroundWidget> {
             //info details
             Positioned(
                 bottom: Dimensions.height30,
-                left: Dimensions.width30,
+                left: Dimensions.width20,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  // SmallHeadLineText(
-                  // //[math.Random().nextInt(cubit.allHotelsData!.hotelData!.length)].name!
-                  // text: cubit.allHotelsData!.hotelData![currentIndex].name!,
-                  // size: Dimensions.font20,
-                  // ),
-                  // SizedBox(
-                  //     height: Dimensions.height10,
-                  //   ),
-                  //   const SmallText(
-                  //     text: '',
-                  //   ),
                     SizedBox(
                       height: Dimensions.height10,
                     ),

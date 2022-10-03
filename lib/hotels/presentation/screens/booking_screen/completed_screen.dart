@@ -1,5 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/components.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/empty_list.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/widgets/booking_item_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
@@ -32,6 +34,15 @@ class CompletedScreen extends StatelessWidget {
                         height: 16,
                       ),
                       itemBuilder: (context, index) => BookingItemWidget(
+                        onDotTap: () {
+                          updateBookingAlert(
+                              not: 'complet',
+                              context: context,
+                              func: cubit.updateBookings(
+                                  "upcomming",
+                                  cubit.listOfCompletedBooking[index]
+                                      .bookingId!));
+                        },
                         onTap: () {
                           cubit.getDetails(index);
                           Navigator.push(
@@ -40,8 +51,11 @@ class CompletedScreen extends StatelessWidget {
                                 builder: (context) => const DetailsScreen(),
                               ));
                         },
-                        hotelImage: (cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!
-                                .hotelImages!.isEmpty)
+                        hotelImage: (cubit
+                                .listOfCompletedBooking[index]
+                                .hotelDetailsForBookingModel!
+                                .hotelImages!
+                                .isEmpty)
                             ? const Image(
                                 image: AssetImage("assets/images/no.png"),
                                 fit: BoxFit.cover,
@@ -51,12 +65,14 @@ class CompletedScreen extends StatelessWidget {
                                     "http://api.mahmoudtaha.com/images/${cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.hotelImages![0].image!}"),
                                 fit: BoxFit.cover,
                               ),
-                        hotelName: cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.name!,
-                        hotelAddress:
-                        cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.address!,
+                        hotelName: cubit.listOfCompletedBooking[index]
+                            .hotelDetailsForBookingModel!.name!,
+                        hotelAddress: cubit.listOfCompletedBooking[index]
+                            .hotelDetailsForBookingModel!.address!,
                         hotelPrice:
                             '\$${cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.price!}',
-                        hotelRate: cubit.listOfCompletedBooking[index].hotelDetailsForBookingModel!.rate!,
+                        hotelRate: cubit.listOfCompletedBooking[index]
+                            .hotelDetailsForBookingModel!.rate!,
                       ),
                       itemCount: cubit.listOfCompletedBooking.length,
                     ),

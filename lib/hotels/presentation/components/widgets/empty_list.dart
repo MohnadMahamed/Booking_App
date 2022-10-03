@@ -4,27 +4,26 @@ import 'package:booking_app/hotels/presentation/components/widgets/small_text.da
 import 'package:flutter/material.dart';
 
 class EmptyList extends StatelessWidget {
-  const EmptyList({super.key});
+  final String massage;
+  const EmptyList({super.key, required this.massage});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: AppColors.backGroundColor,
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 200.0, width: 200.0, child: emptySvg),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                const SmallText(
-                  text: 'No booking to show',
-                )
-              ],
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 200.0, width: 200.0, child: emptySvg),
+            const SizedBox(
+              height: 20.0,
             ),
-          ),
-        ));
+            SmallText(
+              text: massage,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

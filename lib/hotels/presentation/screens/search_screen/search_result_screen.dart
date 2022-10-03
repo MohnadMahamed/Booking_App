@@ -1,6 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/empty_list.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/hotel_item.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
@@ -64,11 +65,14 @@ class SearchResultScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(50.0)),
                               child: IconButton(
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    Navigator.pushReplacementNamed(
+                                        context, LayoutScreen.routeName);
+                                    cubit.getAllHotels(1);
+
                                     // Navigator.pop(context);
                                   },
                                   icon: Icon(
-                                    Icons.arrow_back,
+                                    Icons.arrow_back_ios,
                                     size: Dimensions.iconSize30 * 1.2,
                                     color: cubit.isDark
                                         ? Colors.black
@@ -96,6 +100,7 @@ class SearchResultScreen extends StatelessWidget {
                                     Navigator.pushReplacementNamed(
                                         context, SearchMapScreen.routeName);
                                     // Navigator.pop(context);
+                                    cubit.getAllHotels(1);
                                   },
                                   icon: Icon(
                                     Icons.location_on_sharp,
@@ -205,47 +210,60 @@ class SearchResultScreen extends StatelessWidget {
                       height: Dimensions.height10,
                     ),
                     if (state is SearchHotelsSuccessState)
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            separatorBuilder: (context, index) => SizedBox(
-                              height: Dimensions.height15,
+                      cubit.searchHotelList.isEmpty
+                          ? const Expanded(
+                              child: Center(
+                              child: EmptyList(
+                                massage: 'No search result',
+                              ),
+                            ))
+                          : Expanded(
+                              child: SingleChildScrollView(
+                                child: ListView.separated(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(
+                                    height: Dimensions.height15,
+                                  ),
+                                  itemBuilder: (context, index) =>
+                                      HotelItemWidget(
+                                    onTap: () {
+                                      cubit.getAllFacilities();
+
+                                      cubit.getDetails(index);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const DetailsScreen(),
+                                          ));
+                                    },
+                                    hotelImage: (cubit.searchHotelList[index]
+                                            .hotelImages!.isEmpty)
+                                        ? const Image(
+                                            image: AssetImage(
+                                                "assets/images/no.png"),
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image(
+                                            image: NetworkImage(
+                                                "http://api.mahmoudtaha.com/images/${cubit.searchHotelList[index].hotelImages![0].image!}"),
+                                            fit: BoxFit.cover,
+                                          ),
+                                    hotelName:
+                                        cubit.searchHotelList[index].name!,
+                                    hotelAddress:
+                                        cubit.searchHotelList[index].address!,
+                                    hotelPrice:
+                                        '\$${cubit.searchHotelList[index].price!}',
+                                    hotelRate: cubit
+                                        .allHotelsData!.hotelData![index].rate!,
+                                  ),
+                                  itemCount: cubit.searchHotelList.length,
+                                ),
+                              ),
                             ),
-                            itemBuilder: (context, index) => HotelItemWidget(
-                              onTap: () {
-                                cubit.getDetails(index);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const DetailsScreen(),
-                                    ));
-                              },
-                              hotelImage: (cubit.searchHotelList[index]
-                                      .hotelImages!.isEmpty)
-                                  ? const Image(
-                                      image: AssetImage("assets/images/no.png"),
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image(
-                                      image: NetworkImage(
-                                          "http://api.mahmoudtaha.com/images/${cubit.searchHotelList[index].hotelImages![0].image!}"),
-                                      fit: BoxFit.cover,
-                                    ),
-                              hotelName: cubit.searchHotelList[index].name!,
-                              hotelAddress:
-                                  cubit.searchHotelList[index].address!,
-                              hotelPrice:
-                                  '\$${cubit.searchHotelList[index].price!}',
-                              hotelRate:
-                                  cubit.allHotelsData!.hotelData![index].rate!,
-                            ),
-                            itemCount: cubit.searchHotelList.length,
-                          ),
-                        ),
-                      ),
                     SizedBox(
                       height: Dimensions.height15,
                     ),

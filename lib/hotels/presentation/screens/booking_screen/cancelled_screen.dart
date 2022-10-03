@@ -1,5 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/components.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/empty_list.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/widgets/booking_item_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
@@ -32,16 +34,27 @@ class CancelledScreen extends StatelessWidget {
                         height: 16,
                       ),
                       itemBuilder: (context, index) => BookingItemWidget(
-                        onTap: () {
-                          cubit.updateBookings("completed", cubit.listOfCancelledBooking[index].bookingId!);
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => const DetailsScreen(),
-                          //     ));
+                        onDotTap: () {
+                          updateBookingAlert(
+                              not: 'cancel',
+                              context: context,
+                              func: cubit.updateBookings(
+                                  "completed",
+                                  cubit.listOfCancelledBooking[index]
+                                      .bookingId!));
                         },
-                        hotelImage: (cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!
-                                .hotelImages!.isEmpty)
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DetailsScreen(),
+                              ));
+                        },
+                        hotelImage: (cubit
+                                .listOfCancelledBooking[index]
+                                .hotelDetailsForBookingModel!
+                                .hotelImages!
+                                .isEmpty)
                             ? const Image(
                                 image: AssetImage("assets/images/no.png"),
                                 fit: BoxFit.cover,
@@ -51,12 +64,14 @@ class CancelledScreen extends StatelessWidget {
                                     "http://api.mahmoudtaha.com/images/${cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.hotelImages![0].image!}"),
                                 fit: BoxFit.cover,
                               ),
-                        hotelName: cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.name!,
-                        hotelAddress:
-                        cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.address!,
+                        hotelName: cubit.listOfCancelledBooking[index]
+                            .hotelDetailsForBookingModel!.name!,
+                        hotelAddress: cubit.listOfCancelledBooking[index]
+                            .hotelDetailsForBookingModel!.address!,
                         hotelPrice:
                             '\$${cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.price!}',
-                        hotelRate: cubit.listOfCancelledBooking[index].hotelDetailsForBookingModel!.rate!,
+                        hotelRate: cubit.listOfCancelledBooking[index]
+                            .hotelDetailsForBookingModel!.rate!,
                       ),
                       itemCount: cubit.listOfCancelledBooking.length,
                     ),

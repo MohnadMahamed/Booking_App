@@ -68,21 +68,6 @@ class _DetailMapWidgetState extends State<DetailMapWidget> {
     );
   }
 
-  Future<void> _goToMyCurrentLocation() async {
-    final GoogleMapController controller = await _mapController.future;
-    controller.animateCamera(
-      CameraUpdate.newCameraPosition(_myCurrentLocationCameraPosition),
-    );
-  }
-
-  Future<void> _goToLocation(double lat, double lon) async {
-    final GoogleMapController controller = await _mapController.future;
-    controller.animateCamera(
-      CameraUpdate.newCameraPosition(CameraPosition(
-          zoom: 15, tilt: 50.0, bearing: 45.0, target: LatLng(lat, lon))),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HotelCubit, HotelState>(
