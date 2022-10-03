@@ -69,221 +69,220 @@ class _DetailsScreenState extends State<DetailsScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           return SafeArea(
-              child: Scaffold(
-            //backgroundColor: AppColors.backGroundColor,
-            body: CustomScrollView(
-              controller: scrollController,
-              slivers: [
-                SliverAppBar(
-                  elevation: 0,
-                  actionsIconTheme: const IconThemeData(size: 25),
-                  backgroundColor: Colors.transparent,
-                  expandedHeight: MediaQuery.of(context).size.height,
-                  pinned: true,
-                  toolbarHeight: Dimensions.detailsToolBarHeight,
-                  leadingWidth: Dimensions.leadingDetaialsWidth,
-                  automaticallyImplyLeading: false,
-                  leading: Padding(
+            child: Scaffold(
+                //backgroundColor: AppColors.backGroundColor,
+                body: CustomScrollView(controller: scrollController, slivers: [
+              SliverAppBar(
+                elevation: 0,
+                actionsIconTheme: const IconThemeData(size: 25),
+                backgroundColor: Colors.transparent,
+                expandedHeight: MediaQuery.of(context).size.height,
+                pinned: true,
+                toolbarHeight: Dimensions.detailsToolBarHeight,
+                leadingWidth: Dimensions.leadingDetaialsWidth,
+                automaticallyImplyLeading: false,
+                leading: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 55),
+                  child: Container(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      // color: Colors.white60
+                    ),
+                    child: IconButton(
+                        onPressed: () {
+                          cubit.getAllHotels(1);
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                          size: 30,
+                        )),
+                  ),
+                ),
+                actions: [
+                  Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 55),
+                        horizontal: 20, vertical: 53),
                     child: Container(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        // color: Colors.white60
-                      ),
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          color: Colors.transparent),
                       child: IconButton(
-                          onPressed: () {
-                            cubit.getAllHotels(1);
-                            Navigator.pop(context);
-                          },
+                          onPressed: () {},
                           icon: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.black,
+                            Icons.favorite_border,
+                            color: Colors.teal,
                             size: 30,
                           )),
                     ),
-                  ),
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 53),
-                      child: Container(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(50)),
-                            color: Colors.transparent),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border,
-                              color: Colors.teal,
-                              size: 30,
-                            )),
-                      ),
-                    )
-                  ],
-                  //flexibleSpace
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    background: showTitle == false
-                        ? const BackGroundDetailsPage()
-                        : const SizedBox(
-                            height: 0,
-                          ),
-                    title: showTitle == true
-                        ? Container(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20.0),
-                              bottomRight: Radius.circular(20.0),
-                            )),
-                            child: Image(
-                              image: NetworkImage(
-                                  "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
-                              //"http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
+                  )
+                ],
+                //flexibleSpace
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  background: showTitle == false
+                      ? const BackGroundDetailsPage()
+                      : const SizedBox(
+                          height: 0,
+                        ),
+                  title: showTitle == true
+                      ? Container(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20.0),
+                            bottomRight: Radius.circular(20.0),
+                          )),
+                          child: Image(
+                            image: NetworkImage(
+                                "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
+                            //"http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
 
-                              height: double.infinity,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        : const SizedBox(
-                            height: 0,
+                            height: double.infinity,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
-                  ),
+                        )
+                      : const SizedBox(
+                          height: 0,
+                        ),
                 ),
-                SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: Dimensions.width20,
-                            left: Dimensions.width20,
-                            top: Dimensions.height20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const HotelViewDetails(),
-                            myDivider(),
-                            SmallHeadLineText(
-                              text: LocaleKeys.summary.tr(),
-                              size: Dimensions.font20,
-                            ),
-                            SizedBox(
-                              height: Dimensions.height10 / 2,
-                            ),
-                            Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                    horizontal: Dimensions.width20,
-                                  ),
-                                  child: ExpandableTextWidget(
-                                      text: cubit.hotelDetails!.description!),
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: Dimensions.width20,
+                          left: Dimensions.width20,
+                          top: Dimensions.height20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const HotelViewDetails(),
+                          myDivider(),
+                          SmallHeadLineText(
+                            text: LocaleKeys.summary.tr(),
+                            size: Dimensions.font20,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height10 / 2,
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.width20,
                                 ),
-                              ],
-                            ),
+                                child: ExpandableTextWidget(
+                                    text: cubit.hotelDetails!.description!),
+                              ),
+                            ],
+                          ),
 
-                            myDivider(),
-                            //Popular facilities
-                            SmallHeadLineText(
-                                size: Dimensions.font20,
-                                text: LocaleKeys.popular_facilities.tr()),
-                            SizedBox(
-                              height: Dimensions.height10,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Dimensions.width20),
-                              child: Wrap(
-                                runSpacing: 16.0,
-                                spacing: 16.0,
-                                children: [
-                                  ...cubit.listOfHotelFacility
-                                      .asMap()
-                                      .map(
-                                        (key, value) => MapEntry(
-                                          key,
-                                          Container(
-                                            width: 70.0,
-                                            height: 70.0,
-                                            padding: const EdgeInsets.all(8.0),
-                                            decoration: BoxDecoration(
-                                              color: Colors.teal,
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 7,
-                                                  offset: const Offset(0,
-                                                      3), // changes position of shadow
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Expanded(
-                                                  child: Image.network(
-                                                      value.image!,
-                                                      color: Colors.white70,
-                                                      fit: BoxFit.cover),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5.0,
-                                                ),
-                                                Expanded(
-                                                  child: Center(
-                                                    child: StaticColorText(
-                                                      text: value.name!,
-                                                      size: 16,
-                                                      color: Colors.white70,
-                                                    ),
+                          myDivider(),
+                          //Popular facilities
+                          SmallHeadLineText(
+                              size: Dimensions.font20,
+                              text: LocaleKeys.popular_facilities.tr()),
+                          SizedBox(
+                            height: Dimensions.height10,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.width20),
+                            child: Wrap(
+                              runSpacing: 16.0,
+                              spacing: 16.0,
+                              children: [
+                                ...cubit.listOfHotelFacility
+                                    .asMap()
+                                    .map(
+                                      (key, value) => MapEntry(
+                                        key,
+                                        Container(
+                                          width: 70.0,
+                                          height: 70.0,
+                                          padding: const EdgeInsets.all(8.0),
+                                          decoration: BoxDecoration(
+                                            color: Colors.teal,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 1,
+                                                blurRadius: 7,
+                                                offset: const Offset(0,
+                                                    3), // changes position of shadow
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                child: Image.network(
+                                                    value.image!,
+                                                    color: Colors.white70,
+                                                    fit: BoxFit.cover),
+                                              ),
+                                              const SizedBox(
+                                                height: 5.0,
+                                              ),
+                                              Expanded(
+                                                child: Center(
+                                                  child: StaticColorText(
+                                                    text: value.name!,
+                                                    size: Dimensions.font12,
+                                                    color: Colors.white70,
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      )
-                                      .values
-                                      .toList(),
-                                ],
+                                      ),
+                                    )
+                                    .values
+                                    .toList(),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: Dimensions.height10,
+                          ),
+                          myDivider(),
+
+                          //rate
+                          SmallHeadLineText(
+                              size: Dimensions.font20, text: 'Rate'),
+                          SizedBox(
+                            height: Dimensions.height10,
+                          ),
+                          Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.width20),
+                              child: const RatingHotel()),
+                          SizedBox(
+                            height: Dimensions.height10,
+                          ),
+
+                          myDivider(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SmallHeadLineText(
+                                text: LocaleKeys.photo.tr(),
+                                size: Dimensions.font20,
                               ),
-                            ),
-                            SizedBox(
-                              height: Dimensions.height10,
-                            ),
-                            myDivider(),
-
-                            //rate
-                            SmallHeadLineText(
-                                size: Dimensions.font20, text: 'Rate'),
-                            SizedBox(
-                              height: Dimensions.height10,
-                            ),
-                            Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: Dimensions.width20),
-                                child: const RatingHotel()),
-                            SizedBox(
-                              height: Dimensions.height10,
-                            ),
-
-                            myDivider(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SmallHeadLineText(
-                                  text: LocaleKeys.photo.tr(),
-                                  size: Dimensions.font20,
-                                ),
-                                Row(children: [
+                              Row(
+                                children: [
                                   InkWell(
                                     child: SmallText(
                                       text: LocaleKeys.view_all.tr(),
@@ -291,57 +290,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
                                     onTap: () {},
                                   ),
-                                ]),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: DetailMapWidget(),
-                                ),
-                                SizedBox(
-                                  height: Dimensions.height30,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: Dimensions.width10),
-                                  child: MyButtonWidget(
-                                    onTap: () {
-                                      cubit.createBookings(
-                                          cubit.hotelDetails!.id!,
-                                          cubit.userId);
-                                      // cubit.getAllBookings("upcomming", 10);
-                                      // Navigator.pushNamed(context, BookingScreen.routeName );
-                                    },
-                                    text: LocaleKeys.booking_new.tr(),
+                                  SizedBox(
+                                    width: Dimensions.height10,
                                   ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                                  const Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.teal,
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: Dimensions.height15),
+                          const PhotoOfHotel(),
+                          SizedBox(height: Dimensions.height10),
+                          myDivider(),
+                          SizedBox(height: Dimensions.height10),
+                        ],
                       ),
-                      SizedBox(height: Dimensions.height15),
-                      const PhotoOfHotel(),
-                      SizedBox(height: Dimensions.height10),
-                      myDivider(),
-                      SizedBox(height: Dimensions.height10),
-
-                      // SizedBox(
-                      //   width: double.infinity,
-                      //   height: 280,
-                      //   child: Image(
-                      //     image: NetworkImage(
-                      //          "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
-                      //         //"http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
-                      //
-                      //     height: double.infinity,
-                      //     width: double.infinity,
-                      //     fit: BoxFit.cover,
-                      //   ),
-                      // ),
-                      const DetailMapWidget(),
-                      SizedBox(
-                        height: Dimensions.height30,
-                      ),
-                      MyButtonWidget(
+                    ),
+                    const DetailMapWidget(),
+                    SizedBox(
+                      height: Dimensions.height30,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Dimensions.width20),
+                      child: MyButtonWidget(
                         isPadding: false,
                         onTap: () {
                           cubit.createBookings(
@@ -353,15 +328,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         },
                         text: LocaleKeys.booking_new.tr(),
                       ),
-                      SizedBox(
-                        height: Dimensions.height20,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: Dimensions.height20,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ));
+              ),
+            ])),
+          );
         });
   }
 }

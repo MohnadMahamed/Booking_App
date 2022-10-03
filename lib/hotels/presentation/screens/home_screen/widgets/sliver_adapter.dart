@@ -26,24 +26,23 @@ class SliverAdapter extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    top: Dimensions.height15, left: Dimensions.width10),
+                    top: Dimensions.height20, left: Dimensions.width10),
                 child: BigText(
                   text: LocaleKeys.other_hotel.tr(),
                   size: Dimensions.font20,
                 ),
-              ),
-              SizedBox(
-                height: Dimensions.height20,
               ),
               //list of hotel
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) => SizedBox(
-                  height: Dimensions.height15,
+                  height: Dimensions.height20,
                 ),
                 itemBuilder: (context, index) => HotelItemWidget(
                   onTap: () {
+                    cubit.getAllFacilities();
+
                     cubit.getDetails(index);
                     Navigator.push(
                         context,

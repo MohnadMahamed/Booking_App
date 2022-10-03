@@ -27,7 +27,7 @@ class _RatingHotelState extends State<RatingHotel> {
             color: Colors.grey.withOpacity(0.1),
             spreadRadius: .5,
             blurRadius: 1,
-            offset: const Offset(0, 3),
+            offset: const Offset(0, -.8),
             // changes position of shadow
           ),
         ],
@@ -69,11 +69,11 @@ class _RatingHotelState extends State<RatingHotel> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SmallText(
-                      text: 'Room',
-                    ),
-                    SizedBox(
-                      width: Dimensions.width20,
+                    const SizedBox(
+                      width: 40,
+                      child: SmallText(
+                        text: 'Room',
+                      ),
                     ),
                     Slider(
                       activeColor: Colors.teal,
@@ -90,8 +90,11 @@ class _RatingHotelState extends State<RatingHotel> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SmallText(
-                      text: 'Services',
+                    const SizedBox(
+                      width: 40,
+                      child: SmallText(
+                        text: 'Servic',
+                      ),
                     ),
                     Slider(
                       activeColor: AppColors.mainColor,
@@ -108,11 +111,11 @@ class _RatingHotelState extends State<RatingHotel> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SmallText(
-                      text: 'Price',
-                    ),
-                    SizedBox(
-                      width: Dimensions.width20,
+                    const SizedBox(
+                      width: 40,
+                      child: SmallText(
+                        text: 'Price',
+                      ),
                     ),
                     Slider(
                       activeColor: Colors.teal,

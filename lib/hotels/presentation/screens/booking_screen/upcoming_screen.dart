@@ -1,5 +1,7 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
+import 'package:booking_app/hotels/presentation/components/components.dart';
+import 'package:booking_app/hotels/presentation/components/widgets/empty_list.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/widgets/booking_item_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
@@ -32,19 +34,30 @@ class UpcomingScreen extends StatelessWidget {
                     itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.only(top: Dimensions.height20),
                       child: BookingItemWidget(
+                        onDotTap: () {
+                          updateBookingAlert(
+                              not: 'upcome',
+                              context: context,
+                              func: cubit.updateBookings(
+                                  "cancelled",
+                                  cubit.listOfUpcomingBooking[index]
+                                      .bookingId!));
+                        },
                         onTap: () {
                           // cubit.updateBookings("cancelled", cubit.allHotelsData!.hotelData![index].id!);
-                          cubit.updateBookings("cancelled", cubit.listOfUpcomingBooking[index].bookingId!);
 
-                          // cubit.getDetails(index);
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => const DetailsScreen(),
-                          //     ));
+                          cubit.getDetails(index);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DetailsScreen(),
+                              ));
                         },
-                        hotelImage: (cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!
-                                .hotelImages!.isEmpty)
+                        hotelImage: (cubit
+                                .listOfUpcomingBooking[index]
+                                .hotelDetailsForBookingModel!
+                                .hotelImages!
+                                .isEmpty)
                             ? const Image(
                                 image: AssetImage("assets/images/no.png"),
                                 fit: BoxFit.cover,
@@ -54,12 +67,14 @@ class UpcomingScreen extends StatelessWidget {
                                     "http://api.mahmoudtaha.com/images/${cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.hotelImages![0].image!}"),
                                 fit: BoxFit.cover,
                               ),
-                        hotelName: cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.name!,
-                        hotelAddress:
-                        cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.address!,
+                        hotelName: cubit.listOfUpcomingBooking[index]
+                            .hotelDetailsForBookingModel!.name!,
+                        hotelAddress: cubit.listOfUpcomingBooking[index]
+                            .hotelDetailsForBookingModel!.address!,
                         hotelPrice:
                             '\$${cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.price!}',
-                        hotelRate:cubit.listOfUpcomingBooking[index].hotelDetailsForBookingModel!.rate!,
+                        hotelRate: cubit.listOfUpcomingBooking[index]
+                            .hotelDetailsForBookingModel!.rate!,
                       ),
                     ),
                     itemCount: cubit.listOfUpcomingBooking.length,

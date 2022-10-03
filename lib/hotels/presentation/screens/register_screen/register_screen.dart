@@ -29,26 +29,7 @@ class RegisterScreen extends StatelessWidget {
     var formKey = GlobalKey<FormState>();
     var cubit = HotelCubit.get(context);
     return BlocConsumer<HotelCubit, HotelState>(
-      listener: (context, state) {
-
-
-        if  (state is UserRegisterSuccessState )
-        {
-
-          showToast(
-              text:'Register successfully',
-              state: ToastStates.SUCCESS
-          );
-          Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
-        }
-        else
-        {
-          showToast(
-              text: 'Try again',
-              state: ToastStates.ERROR
-          );
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
@@ -90,7 +71,7 @@ class RegisterScreen extends StatelessWidget {
                                   child: Container(
                                     clipBehavior: Clip.antiAliasWithSaveLayer,
                                     // width: Dimensions.width30 * 7,
-                                    height: Dimensions.height30 * 2,
+                                    height: Dimensions.height30 * 1.7,
                                     decoration: BoxDecoration(
                                       color: AppColors.faceBackGroundColor,
                                       borderRadius: BorderRadius.circular(
@@ -139,7 +120,7 @@ class RegisterScreen extends StatelessWidget {
                                   child: Container(
                                     clipBehavior: Clip.antiAliasWithSaveLayer,
                                     // width: Dimensions.width30 * 7,
-                                    height: Dimensions.height30 * 2,
+                                    height: Dimensions.height30 * 1.7,
                                     decoration: BoxDecoration(
                                       color: AppColors.gmailBackGroundColor,
                                       borderRadius: BorderRadius.circular(
@@ -184,9 +165,10 @@ class RegisterScreen extends StatelessWidget {
                           //name
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.width10),
+                                horizontal: Dimensions.width15),
                             child: SmallText(
                               text: LocaleKeys.user_name.tr(),
+                              size: Dimensions.font12 + 2,
                             ),
                           ),
                           myForm(
@@ -216,14 +198,15 @@ class RegisterScreen extends StatelessWidget {
                             hintText: LocaleKeys.enter_your_name.tr(),
                           ),
                           SizedBox(
-                            height: Dimensions.height10,
+                            height: Dimensions.height15,
                           ),
                           //email
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.width10),
+                                horizontal: Dimensions.width15),
                             child: SmallText(
                               text: LocaleKeys.your_email.tr(),
+                              size: Dimensions.font12 + 2,
                             ),
                           ),
                           myForm(
@@ -255,14 +238,15 @@ class RegisterScreen extends StatelessWidget {
                             hintText: LocaleKeys.enter_your_email.tr(),
                           ),
                           SizedBox(
-                            height: Dimensions.height10,
+                            height: Dimensions.height15,
                           ),
                           //password
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.width10),
+                                horizontal: Dimensions.width15),
                             child: SmallText(
                               text: LocaleKeys.password_hint.tr(),
+                              size: Dimensions.font12 + 2,
                             ),
                           ),
                           myForm(
@@ -306,13 +290,14 @@ class RegisterScreen extends StatelessWidget {
                             hintText: LocaleKeys.enter_password.tr(),
                           ),
                           SizedBox(
-                            height: Dimensions.height10,
+                            height: Dimensions.height15,
                           ),
                           //confirm password
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.width10),
+                                horizontal: Dimensions.width15),
                             child: SmallText(
+                              size: Dimensions.font12 + 2,
                               text: LocaleKeys.confirm_password.tr(),
                             ),
                           ),
@@ -361,58 +346,62 @@ class RegisterScreen extends StatelessWidget {
                             controller: cubit.confirmPasswordController,
                             hintText: LocaleKeys.enter_confirm_password.tr(),
                           ),
-                          SizedBox(
-                            height: Dimensions.height10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SmallText(
-                                text: LocaleKeys.already_have_account.tr(),
-                              ),
-                              InkWell(
-                                  onTap: () {
-                                    // navigateTo(context, const LoginScreen());
-                                    Navigator.pushReplacementNamed(
-                                        context, LoginScreen.routeName);
-                                  },
-                                  child: Text(
-                                    LocaleKeys.login.tr(),
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        fontSize: Dimensions.font16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.teal),
-                                  )
-                                  // SmallText(
-                                  //   text: 'Login',
-                                  //   color: AppColors.mainColor,
-                                  //   size: Dimensions.font20,
-                                  // ),
-                                  ),
-                            ],
-                          ),
                         ],
                       ),
                     ),
-                    MyButtonWidget(
-                      text: LocaleKeys.sign_up.tr(),
-                      onTap: () {
-
-
-                        if (formKey.currentState!.validate()) {
-                          cubit.register(RegisterRequestModel(
-                              name: cubit.nameController.text,
-                              email: cubit.emailController.text,
-                              password: cubit.passwordController.text,
-                              passwordConfirmation:
-                                  cubit.confirmPasswordController.text,
-                              image: ""));
-                          CacheHelper.saveData(key: 'email', value: cubit.emailController.text);
-                          CacheHelper.saveData(key: 'password', value: cubit.passwordController.text);
-
-                        }
-                      },
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Dimensions.width10),
+                      child: MyButtonWidget(
+                        text: LocaleKeys.sign_up.tr(),
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            showToast(
+                                text: 'Register successfully',
+                                state: ToastStates.SUCCESS);
+                            Navigator.pushReplacementNamed(
+                                context, LayoutScreen.routeName);
+                            cubit.register(RegisterRequestModel(
+                                name: cubit.nameController.text,
+                                email: cubit.emailController.text,
+                                password: cubit.passwordController.text,
+                                passwordConfirmation:
+                                    cubit.confirmPasswordController.text,
+                                image: ""));
+                            CacheHelper.saveData(
+                                key: 'email',
+                                value: cubit.emailController.text);
+                            CacheHelper.saveData(
+                                key: 'password',
+                                value: cubit.passwordController.text);
+                            cubit.nameController.text = '';
+                            cubit.emailController.text = '';
+                            cubit.passwordController.text = '';
+                            cubit.confirmPasswordController.text = '';
+                          }
+                        },
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SmallText(
+                          size: Dimensions.font12,
+                          text: LocaleKeys.already_have_account.tr(),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            // navigateTo(context, const LoginScreen());
+                            Navigator.pushReplacementNamed(
+                                context, LoginScreen.routeName);
+                          },
+                          child: StaticColorText(
+                              text: LocaleKeys.login.tr(), color: Colors.teal),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
                     ),
                   ],
                 ),

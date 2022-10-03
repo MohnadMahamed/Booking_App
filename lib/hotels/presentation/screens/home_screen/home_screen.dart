@@ -122,8 +122,8 @@ class HomeScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     Positioned(
-                      //                             child: Text(cubit.allHotelsData!.hotelData![math.Random().nextInt(cubit.allHotelsData!.hotelData![cubit.pageNumber].hotelImages!.length)].name!),
-
+                      bottom: Dimensions.height30 * 3,
+                      left: Dimensions.width20,
                       child: SizedBox(
                         width: Dimensions.screenWidth - 100,
                         child: StaticColorText(
@@ -132,13 +132,11 @@ class HomeScreen extends StatelessWidget {
                               .hotelData![math.Random().nextInt(
                                   cubit.allHotelsData!.hotelData!.length)]
                               .name!,
-                          color: Colors.black,
-                          size: Dimensions.font26,
+                          color: Colors.white,
+                          size: Dimensions.font12 * 2,
                           maxLines: 2,
                         ),
                       ),
-                      bottom: 100,
-                      left: 20,
                     )
                   ],
                 );

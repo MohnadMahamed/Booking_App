@@ -72,18 +72,18 @@ class _SplashWidgetState extends State<SplashWidget> {
                 image: DecorationImage(
                   fit: BoxFit.fill,
                   image: AssetImage(
-                    'assets/images/splash.gif',
+                    'assets/images/night.jpg',
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 60),
+              padding: EdgeInsets.only(top: 70),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: BigText(
                   text: 'Booking Application',
-                  size: Dimensions.font30,
+                  size: Dimensions.font20,
                 ),
               ),
             ),

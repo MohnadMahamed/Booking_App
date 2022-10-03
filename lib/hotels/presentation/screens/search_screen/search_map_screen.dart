@@ -91,6 +91,7 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
             child: Scaffold(
               backgroundColor: AppColors.backGroundColor,
               appBar: AppBar(
+                toolbarHeight: 70,
                 backgroundColor: AppColors.backGroundColor,
                 leadingWidth: Dimensions.width20 * 4,
                 leading: Padding(
@@ -110,10 +111,9 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
                           // Navigator.pop(context);
                         },
                         icon: Icon(
-                          Icons.arrow_back,
+                          Icons.arrow_back_ios,
                           size: Dimensions.iconSize30 * 1.2,
-                          color:
-                              cubit.isDark ? Colors.black : AppColors.mainColor,
+                          color: Colors.white,
                         )),
                   ),
                 ),

@@ -27,8 +27,6 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
           children: [
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(0),
-                width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppColors.mainColor,
                   borderRadius: BorderRadius.circular(10.0),
@@ -55,9 +53,9 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                       ),
                     ),
                     StaticColorText(
+                      size: 14,
                       text: 'Count(${cubit.countValue})',
                       color: Colors.white,
-                      size: Dimensions.font12 * 1.5,
                     ),
                     IconButton(
                       onPressed: () {
@@ -83,11 +81,10 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
               ),
             ),
             SizedBox(
-              width: 8,
+              width: Dimensions.width10 / 2,
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: AppColors.mainColor,
                   borderRadius: BorderRadius.circular(10.0),
@@ -117,7 +114,7 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                     StaticColorText(
                       text: 'Page(${cubit.pageValue})',
                       color: Colors.white,
-                      size: Dimensions.font12 * 1.7,
+                      size: 14,
                     ),
                     IconButton(
                       onPressed: () {

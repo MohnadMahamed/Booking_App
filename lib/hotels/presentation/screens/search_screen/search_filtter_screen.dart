@@ -66,7 +66,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                   height: Dimensions.height10,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10.0),
+                  padding: const EdgeInsets.only(left: 20.0),
                   child: BigText(text: LocaleKeys.filtter.tr()),
                 ),
                 SizedBox(
@@ -79,7 +79,7 @@ class _SearchFiltterScreenState extends State<SearchFiltterScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: Dimensions.width20),
+                            horizontal: Dimensions.width30),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

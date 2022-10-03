@@ -230,7 +230,7 @@ class _BackGroundDetailsPageState extends State<BackGroundDetailsPage> {
                     ),
                   ),
                   SizedBox(
-                    height: Dimensions.height30,
+                    height: Dimensions.height30 * 1.5,
                   ),
                 ],
               ),

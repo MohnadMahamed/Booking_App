@@ -21,7 +21,7 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'package:to_do_app/shared/components/component.dart';
 
 class BookingScreen extends StatelessWidget {
-  static const routeName="BookingScreen";
+  static const routeName = "BookingScreen";
   const BookingScreen({Key? key}) : super(key: key);
 
   @override
@@ -48,8 +48,9 @@ class BookingScreen extends StatelessWidget {
                       //   }
                       //   ,icon: Icon(Icons.arrow_back_ios_rounded),
                       // ),
-                      centerTitle: true,
+                      // centerTitle: true,
                       elevation: 0,
+                      toolbarHeight: 80,
                       // backgroundColor: AppColors.backGroundColor,
                       title: Column(
                         children: [
@@ -67,11 +68,9 @@ class BookingScreen extends StatelessWidget {
                                   cubit.getCompletedBook("completed", 10);
                                 }
                               },
-
                               unselectedLabelColor: Colors.white70,
                               unselectedLabelStyle: GoogleFonts.kanit(
                                 fontSize: Dimensions.font16,
-
                                 fontWeight: FontWeight.bold,
                               ),
                               labelColor: Colors.white,
@@ -86,35 +85,50 @@ class BookingScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                               padding: const EdgeInsets.only(
-                                top: 30,
+                                top: 40,
                                 right: 0,
                                 left: 10,
                               ),
                               tabs: [
                                 Tab(
+                                  height: 60,
                                   child: Center(
-                                    child: Text(
-                                      LocaleKeys.upcoming.tr(),
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        LocaleKeys.upcoming.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
                                     ),
                                   ),
                                 ),
                                 Tab(
+                                  height: 60,
                                   child: Center(
-                                    child: Text(
-                                      LocaleKeys.cancelled.tr(),
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        LocaleKeys.cancelled.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
                                     ),
                                   ),
                                 ),
                                 Tab(
+                                  height: 60,
                                   child: Center(
-                                    child: Text(
-                                      LocaleKeys.completed.tr(),
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        LocaleKeys.completed.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -126,7 +140,7 @@ class BookingScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    body: TabBarView(
+                    body: const TabBarView(
                       children: [
                         UpcomingScreen(),
                         CancelledScreen(),

@@ -35,7 +35,7 @@ class MyButtonWidget extends StatelessWidget {
           ),
           // height: ,
           width: width == 0 ? double.infinity : width,
-          height: height == 0 ? Dimensions.height30 * 2 : height,
+          height: height == 0 ? Dimensions.height30 * 1.7 : height,
           child: Center(
             child: StaticColorText(
               text: text,
