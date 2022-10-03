@@ -5,7 +5,6 @@ import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart
 import 'package:booking_app/hotels/presentation/components/widgets/expanded_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
@@ -15,13 +14,13 @@ import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/d
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/hotel_details.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/photohotel.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/widgets/ratinghotel.dart';
-import 'package:booking_app/hotels/presentation/screens/search_screen/widgets/search_filtter/popular_facilities.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
+
 
 class DetailsScreen extends StatefulWidget {
   static const routeName = 'DetailsScreen';
