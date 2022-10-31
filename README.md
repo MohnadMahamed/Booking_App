@@ -1,6 +1,6 @@
-# booking_app
+# Booking_App
 
 # video 
-https://user-images.githubusercontent.com/62365860/194777693-cdbcc4ac-2f27-4abe-aa72-37fcb084c6a5.mp4
+https://user-images.githubusercontent.com/62365860/199041924-32e65679-006b-4c8b-a0b1-7d6236783d0a.mp4
 
 
