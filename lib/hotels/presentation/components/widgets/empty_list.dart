@@ -1,4 +1,3 @@
-import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:flutter/material.dart';

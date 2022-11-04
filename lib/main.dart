@@ -1,6 +1,5 @@
 import 'package:booking_app/core/services/blocobserver.dart';
 import 'package:booking_app/core/services/services_locator.dart';
-import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/layout/layout.dart';
 import 'package:booking_app/hotels/presentation/resources/codegen_loader.g.dart';
@@ -16,7 +15,6 @@ import 'package:booking_app/hotels/presentation/screens/splash_screen/splash_wid
 import 'package:booking_app/hotels/presentation/styles/themes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -39,12 +37,12 @@ void main() async {
 
       runApp(EasyLocalization(
         path: "assets/translations",
-        supportedLocales: [
+        supportedLocales: const [
           Locale('en'),
           Locale('ar'),
         ],
         // fallbackLocale:   Locale('en'),
-        assetLoader: CodegenLoader(),
+        assetLoader: const CodegenLoader(),
         child: MyApp(
           isDark: isDark,
           // startWidget: widget
@@ -57,7 +55,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   bool? isDark;
-  MyApp({this.isDark});
+  MyApp({super.key, this.isDark});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

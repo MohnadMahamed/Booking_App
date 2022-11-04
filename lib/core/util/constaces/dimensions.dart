@@ -44,18 +44,18 @@ class Dimensions {
 
   //sliver app bar
   static double carouselrHeight = screenHeight / 1.366; //500
-  static double homeExpandedHeight = screenHeight / 1.8; //380
+  static double homeExpandedHeight = screenHeight / 1.95; //350
   static double homeToolBarHeight = screenHeight / 6.83; //100
   static double detailsToolBarHeight = screenHeight / 4.55; //150
   static double detailsTogleHeight = screenHeight / 1.366; //500
-  static double hotelItemHeight = screenHeight / 4.02; //170
-  static double hotelMapItemHeight = screenHeight / 5.25; //130
+  static double hotelItemHeight = screenHeight / 5.25; //130
+  static double hotelMapItemHeight = screenHeight / 6.83; //100
   static double hotelMapItemWidth = screenWidth / 1.37; //300
-  static double ratingHotelHeight = screenHeight / 3.10; //220
-  static double cardDetaialsImageHeight = screenHeight / 3.10; //220
-  static double cardMoreDetaialsHeight = screenHeight / 11.38; //60
+  static double ratingHotelHeight = screenHeight / 3.79; //180
+  static double cardDetaialsImageHeight = screenHeight / 3.79; //180
+  static double cardMoreDetaialsHeight = screenHeight / 13.66; //50
   static double cardMoreDetaialsWidth = screenWidth / 2.055; //200
   static double leadingDetaialsWidth = screenWidth / 4.11; //100
-  static double bookingItemHeight = screenHeight / 2.63; //260
+  static double bookingItemHeight = screenHeight / 3.415; //200
 
 }

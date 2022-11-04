@@ -34,7 +34,6 @@ class _PhotoOfHotelState extends State<PhotoOfHotel> {
                       image: NetworkImage(
                           // "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![0].image}"),
                           "http://api.mahmoudtaha.com/images/${cubit.hotelDetails!.hotelImages![math.Random().nextInt(cubit.hotelDetails!.hotelImages!.length)].image!}"),
-
                       height: double.infinity,
                       width: double.infinity,
                       fit: BoxFit.cover,

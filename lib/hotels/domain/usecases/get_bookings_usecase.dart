@@ -10,7 +10,7 @@ class GetBookingsUseCase {
 
   Future<Either<Failure, List<BookingModel>>> call(
     String type,
-  int count,
+    int count,
   ) async {
     return await baseHotelsRepository.getBookings(type, count);
   }

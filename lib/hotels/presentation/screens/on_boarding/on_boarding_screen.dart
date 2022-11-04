@@ -1,16 +1,11 @@
-import 'package:booking_app/app/app_prefs.dart';
+import 'package:booking_app/core/animation/fade_animation.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:booking_app/hotels/presentation/layout/layout.dart';
-import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../../core/services/services_locator.dart';
 import '../../../data/datasource/network/local/shared_preferences.dart';
-import '../../../domain/usecases/user_log_in_usecase.dart';
 import '../../components/widgets/my_button_widget.dart';
 import '../register_screen/register_screen.dart';
 
@@ -53,8 +48,7 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
   void submit() {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
       if (value) {
-        print(value);
-        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+        Navigator.pushReplacementNamed(context, RegisterScreen.routeName);
       }
     });
   }
@@ -71,15 +65,18 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: MyButtonWidget(
-                isPadding: false,
-                width: 100,
-                height: 50,
-                text: 'Skip',
-                onTap: () {
-                  Navigator.pushReplacementNamed(
-                      context, RegisterScreen.routeName);
-                },
+              child: FadeAnimation(
+                .7,
+                child: MyButtonWidget(
+                  isPadding: false,
+                  width: 100,
+                  height: 50,
+                  text: 'Skip',
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, RegisterScreen.routeName);
+                  },
+                ),
               ),
             ),
             SizedBox(
@@ -106,43 +103,46 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
               ),
             ),
             SizedBox(height: Dimensions.height20),
-            Row(
-              children: [
-                SmoothPageIndicator(
-                  controller: boardController,
-                  count: boarding.length,
-                  effect: const ExpandingDotsEffect(
-                    dotColor: Colors.grey,
-                    dotHeight: 10,
-                    expansionFactor: 2,
-                    dotWidth: 15,
-                    spacing: 8,
-                    activeDotColor: Colors.teal,
+            FadeAnimation(
+              1.9,
+              child: Row(
+                children: [
+                  SmoothPageIndicator(
+                    controller: boardController,
+                    count: boarding.length,
+                    effect: const ExpandingDotsEffect(
+                      dotColor: Colors.grey,
+                      dotHeight: 10,
+                      expansionFactor: 2,
+                      dotWidth: 15,
+                      spacing: 8,
+                      activeDotColor: Colors.teal,
+                    ),
                   ),
-                ),
-                const Spacer(),
-                FloatingActionButton(
-                  backgroundColor: HotelCubit.get(context).isDark
-                      ? Colors.white70
-                      : Colors.black,
-                  onPressed: () {
-                    if (isLast) {
-                      submit();
-                    } else {
-                      boardController.nextPage(
-                        duration: const Duration(
-                          milliseconds: 750,
-                        ),
-                        curve: Curves.fastLinearToSlowEaseIn,
-                      );
-                    }
-                  },
-                  child: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.teal,
+                  const Spacer(),
+                  FloatingActionButton(
+                    backgroundColor: HotelCubit.get(context).isDark
+                        ? Colors.white70
+                        : Colors.black,
+                    onPressed: () {
+                      if (isLast) {
+                        submit();
+                      } else {
+                        boardController.nextPage(
+                          duration: const Duration(
+                            milliseconds: 750,
+                          ),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                        );
+                      }
+                    },
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.teal,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -155,28 +155,37 @@ class _OnBoradingScreenState extends State<OnBoradingScreen> {
         children: [
           Expanded(
             child: Center(
-              child: SizedBox(
-                width: double.infinity,
-                height: 500,
-                child: Image(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    model.image,
+              child: FadeAnimation(
+                1,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 500,
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: AssetImage(
+                      model.image,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           SizedBox(height: Dimensions.height20),
-          BigText(
-            text: model.title,
-            size: Dimensions.font20,
-            maxLines: 2,
+          FadeAnimation(
+            1.3,
+            child: BigText(
+              text: model.title,
+              size: Dimensions.font20,
+              maxLines: 2,
+            ),
           ),
           SizedBox(height: Dimensions.height10),
-          SmallText(
-            text: model.body,
-            size: Dimensions.font20,
+          FadeAnimation(
+            1.6,
+            child: SmallText(
+              text: model.body,
+              size: Dimensions.font20,
+            ),
           ),
         ],
       );

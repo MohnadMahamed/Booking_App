@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/network/location_helper.dart';
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
@@ -29,7 +30,7 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
   static Position? position;
   String? _mapStyle;
 
-  Completer<GoogleMapController> _mapController = Completer();
+  final Completer<GoogleMapController> _mapController = Completer();
   static final CameraPosition _myCurrentLocationCameraPosition = CameraPosition(
       zoom: 15,
       tilt: 50.0,
@@ -88,164 +89,168 @@ class _SearchMapScreenState extends State<SearchMapScreen> {
           var cubit = HotelCubit.get(context);
 
           return SafeArea(
-            child: Scaffold(
-              backgroundColor: AppColors.backGroundColor,
-              appBar: AppBar(
-                toolbarHeight: 70,
+            child: FadeIn(
+              duration: const Duration(milliseconds: 500),
+              child: Scaffold(
                 backgroundColor: AppColors.backGroundColor,
-                leadingWidth: Dimensions.width20 * 4,
-                leading: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Dimensions.width10,
-                  ),
-                  child: Container(
-                    width: Dimensions.width30 * 2,
-                    height: Dimensions.width30 * 2,
-                    decoration: BoxDecoration(
-                        color: Colors.black87,
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, SearchResultScreen.routeName);
-                          // Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          size: Dimensions.iconSize30 * 1.2,
-                          color: Colors.white,
-                        )),
-                  ),
-                ),
-                title: StaticColorText(
-                  text: 'Explore',
-                  size: Dimensions.font20,
-                ),
-                centerTitle: true,
-              ),
-              body: Stack(children: [
-                (position != null)
-                    ? buildMap()
-                    : const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.blue,
-                        ),
-                      ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
+                appBar: AppBar(
+                  toolbarHeight: 70,
+                  backgroundColor: AppColors.backGroundColor,
+                  leadingWidth: Dimensions.width20 * 4,
+                  leading: Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: Dimensions.width10,
-                        vertical: Dimensions.height15),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: myForm(
-                                TextColor: Colors.white38,
-                                hitTextColor: Colors.white38,
-                                fillColor:
-                                    const Color.fromARGB(255, 27, 22, 22),
-                                colorsBorderSide: Colors.transparent,
-                                controller: cubit.searchResultController,
-                                hintText: LocaleKeys.london.tr())),
-                        SizedBox(
-                          width: Dimensions.width10,
-                        ),
-                        Container(
-                          width: Dimensions.width30 * 2,
-                          height: Dimensions.width30 * 2,
-                          decoration: BoxDecoration(
-                              color: AppColors.mainColor,
-                              borderRadius: BorderRadius.circular(50.0)),
-                          child: IconButton(
-                              onPressed: () {
-                                // cubit.searchHotels();
-                              },
-                              icon: Icon(
-                                Icons.search,
-                                size: Dimensions.iconSize30 * 1.3,
-                                color: Colors.white,
-                              )),
-                        ),
-                      ],
+                      horizontal: Dimensions.width10,
+                    ),
+                    child: Container(
+                      width: Dimensions.width30 * 2,
+                      height: Dimensions.width30 * 2,
+                      decoration: BoxDecoration(
+                          color: Colors.black87,
+                          borderRadius: BorderRadius.circular(30.0)),
+                      child: IconButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, SearchResultScreen.routeName);
+                            // Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            size: Dimensions.iconSize30 * 1.2,
+                            color: Colors.white,
+                          )),
                     ),
                   ),
+                  title: StaticColorText(
+                    text: 'Explore',
+                    size: Dimensions.font20,
+                  ),
+                  centerTitle: true,
                 ),
-
-                //list view
-                state is GetAllHotelsSuccessState
-                    ? Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: Dimensions.height20 + 10,
-                              horizontal: Dimensions.width20),
-                          child: SizedBox(
-                            height: Dimensions.hotelMapItemHeight +
-                                Dimensions.height10,
-                            width: double.infinity,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: Dimensions.width15,
-                              ),
-                              itemBuilder: (context, index) => SizedBox(
-                                height: Dimensions.hotelMapItemHeight,
-                                width: Dimensions.hotelMapItemWidth,
-                                child: HotelMapItemWidget(
-                                  color: HotelCubit.get(context).isDark
-                                      ? Colors.grey[200]
-                                      : Colors.black87,
-                                  onTap: () {
-                                    _goToLocation(
-                                        double.parse(cubit.allHotelsData!
-                                            .hotelData![index].latitude!),
-                                        double.parse(cubit.allHotelsData!
-                                            .hotelData![index].longitude!));
-                                  },
-                                  hotelImage: (cubit
-                                          .allHotelsData!
-                                          .hotelData![index]
-                                          .hotelImages!
-                                          .isEmpty)
-                                      ? const Image(
-                                          image: AssetImage(
-                                              "assets/images/no.png"),
-                                          fit: BoxFit.cover,
-                                        )
-                                      : Image(
-                                          image: NetworkImage(
-                                              "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
-                                          fit: BoxFit.cover,
-                                        ),
-                                  hotelName: cubit
-                                      .allHotelsData!.hotelData![index].name!,
-                                  hotelAddress: cubit.allHotelsData!
-                                      .hotelData![index].address!,
-                                  hotelPrice:
-                                      '\$${cubit.allHotelsData!.hotelData![index].price!}',
-                                  hotelRate: cubit
-                                      .allHotelsData!.hotelData![index].rate!,
-                                ),
-                              ),
-                              itemCount: cubit.allHotelsData!.hotelData!.length,
-                            ),
+                body: Stack(children: [
+                  (position != null)
+                      ? buildMap()
+                      : const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.blue,
                           ),
                         ),
-                      )
-                    : const CircularProgressIndicator(),
-              ]),
-              floatingActionButton: Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0,
-                    Dimensions.hotelMapItemHeight + Dimensions.height30 * 2),
-                child: FloatingActionButton(
-                  backgroundColor: Colors.blue,
-                  onPressed: _goToMyCurrentLocation,
-                  child: const Icon(
-                    Icons.place,
-                    color: Colors.white,
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.width10,
+                          vertical: Dimensions.height15),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: myForm(
+                                  textColor: Colors.white38,
+                                  hitTextColor: Colors.white38,
+                                  fillColor:
+                                      const Color.fromARGB(255, 27, 22, 22),
+                                  colorsBorderSide: Colors.transparent,
+                                  controller: cubit.searchResultController,
+                                  hintText: LocaleKeys.london.tr())),
+                          SizedBox(
+                            width: Dimensions.width10,
+                          ),
+                          Container(
+                            width: Dimensions.width30 * 2,
+                            height: Dimensions.width30 * 2,
+                            decoration: BoxDecoration(
+                                color: AppColors.mainColor,
+                                borderRadius: BorderRadius.circular(50.0)),
+                            child: IconButton(
+                                onPressed: () {
+                                  // cubit.searchHotels();
+                                },
+                                icon: Icon(
+                                  Icons.search,
+                                  size: Dimensions.iconSize30 * 1.3,
+                                  color: Colors.white,
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  //list view
+                  state is GetAllHotelsSuccessState
+                      ? Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: Dimensions.height20 + 10,
+                                horizontal: Dimensions.width20),
+                            child: SizedBox(
+                              height: Dimensions.hotelMapItemHeight +
+                                  Dimensions.height10,
+                              width: double.infinity,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                separatorBuilder: (context, index) => SizedBox(
+                                  width: Dimensions.width15,
+                                ),
+                                itemBuilder: (context, index) => SizedBox(
+                                  height: Dimensions.hotelMapItemHeight,
+                                  width: Dimensions.hotelMapItemWidth,
+                                  child: HotelMapItemWidget(
+                                    color: HotelCubit.get(context).isDark
+                                        ? Colors.grey[200]
+                                        : Colors.black87,
+                                    onTap: () {
+                                      _goToLocation(
+                                          double.parse(cubit.allHotelsData!
+                                              .hotelData![index].latitude!),
+                                          double.parse(cubit.allHotelsData!
+                                              .hotelData![index].longitude!));
+                                    },
+                                    hotelImage: (cubit
+                                            .allHotelsData!
+                                            .hotelData![index]
+                                            .hotelImages!
+                                            .isEmpty)
+                                        ? const Image(
+                                            image: AssetImage(
+                                                "assets/images/no.png"),
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image(
+                                            image: NetworkImage(
+                                                "http://api.mahmoudtaha.com/images/${cubit.allHotelsData!.hotelData![index].hotelImages![0].image!}"),
+                                            fit: BoxFit.cover,
+                                          ),
+                                    hotelName: cubit
+                                        .allHotelsData!.hotelData![index].name!,
+                                    hotelAddress: cubit.allHotelsData!
+                                        .hotelData![index].address!,
+                                    hotelPrice:
+                                        '\$${cubit.allHotelsData!.hotelData![index].price!}',
+                                    hotelRate: cubit
+                                        .allHotelsData!.hotelData![index].rate!,
+                                  ),
+                                ),
+                                itemCount:
+                                    cubit.allHotelsData!.hotelData!.length,
+                              ),
+                            ),
+                          ),
+                        )
+                      : const CircularProgressIndicator(),
+                ]),
+                floatingActionButton: Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0,
+                      Dimensions.hotelMapItemHeight + Dimensions.height30 * 2),
+                  child: FloatingActionButton(
+                    backgroundColor: Colors.blue,
+                    onPressed: _goToMyCurrentLocation,
+                    child: const Icon(
+                      Icons.place,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

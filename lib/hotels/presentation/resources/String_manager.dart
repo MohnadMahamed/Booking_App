@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 abstract class LocaleKeys {
 //booking
   static const String upcoming = 'upcoming';

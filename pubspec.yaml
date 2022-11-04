@@ -54,6 +54,9 @@ dependencies:
   hexcolor: ^2.0.6
   google_maps_flutter: ^2.2.0
   geolocator: ^9.0.2
+  simple_animations: ^4.2.0
+  supercharged: ^2.1.1
+
 
 
 
@@ -68,13 +71,16 @@ dependencies:
 
 
 
-    #firebase
+  #firebase
   easy_localization: ^3.0.1
   flutter_phoenix: ^1.1.0
   shared_preferences: ^2.0.15
   image_picker: ^0.8.5+3
   smooth_page_indicator: ^1.0.0+2
   fluttertoast: ^8.0.9
+  animate_do: ^2.1.0
+  firebase_core_platform_interface: 4.5.1
+
 
 
 

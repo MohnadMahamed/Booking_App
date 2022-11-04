@@ -9,8 +9,8 @@ class CreateBookingUseCase {
   CreateBookingUseCase(this.baseHotelsRepository);
 
   Future<Either<Failure, BookingStateModel>> call(
-      int userId,
-      int hotelId,
+    int userId,
+    int hotelId,
   ) async {
     return await baseHotelsRepository.getCreateBooking(
       userId,

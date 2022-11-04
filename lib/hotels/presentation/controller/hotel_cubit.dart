@@ -15,13 +15,11 @@ import 'package:booking_app/hotels/domain/usecases/user_log_in_usecase.dart';
 import 'package:booking_app/hotels/domain/usecases/user_register_usecase.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/booking_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/home_screen.dart';
-import 'package:booking_app/hotels/presentation/screens/login_screen/login_screen.dart';
 import 'package:booking_app/hotels/presentation/screens/user_profile_screen/user_profile_screen.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -90,8 +88,8 @@ class HotelCubit extends Cubit<HotelState> {
 
   double distaceSliderValue = 20.0;
   int pageNumber = 0;
-  int pageValue = 0;
-  int countValue = 0;
+  int pageValue = 1;
+  int countValue = 1;
 
   int currentIndex = 0;
   List<int> selectedFacilities = [];
@@ -106,7 +104,7 @@ class HotelCubit extends Cubit<HotelState> {
   }
 
   List<Widget> screens = [
-    HomeScreen(),
+    const HomeScreen(),
     const BookingScreen(),
     const UserProfileScreen(),
   ];
@@ -148,7 +146,6 @@ class HotelCubit extends Cubit<HotelState> {
   getDetails(int index) {
     emit(GetHotelDetailsLoadingState());
     hotelDetails = allHotelsData!.hotelData![index];
-    print(hotelDetails!.name);
     emit(GetHotelDetailsSuccessState());
   }
 
@@ -157,19 +154,16 @@ class HotelCubit extends Cubit<HotelState> {
     emit(UserRegisterLoadingState());
     final result = await registerUseCase.call(registerRequest);
     result.fold((l) {
-      print(l.message);
       ServerFailure(l.message);
       emit(HotelErrorState());
     }, (r) {
       registerDataModel = r;
-      print(r);
       userInfo = r.userDataDetails;
       userId = registerDataModel!.userDataDetails.id!;
       errorMassage = registerDataModel!.status!.titleEntity!.en!;
       emit(UserRegisterSuccessState());
     });
     getAllHotels(3);
-    print(userId);
     // ApiConstance.token = registerDataModel!.apiToken!;
     CacheHelper.saveData(
         key: 'token', value: registerDataModel!.userDataDetails.apiToken!);
@@ -184,7 +178,6 @@ class HotelCubit extends Cubit<HotelState> {
     final result = await loginUseCase.call(loginRequestModel);
     result.fold((l) {
       ServerFailure(l.message);
-      print(l.message);
 
       emit(HotelErrorState());
     }, (r) {
@@ -193,8 +186,6 @@ class HotelCubit extends Cubit<HotelState> {
       errorMassage = loginDataModel!.status!.titleEntity!.en!;
 
       emit(UserLoginSuccessState());
-
-      print(loginDataModel);
     });
     // userId=registerDataModel!.id!;
     //ApiConstance.token = loginDataModel!.apiToken!;
@@ -202,7 +193,6 @@ class HotelCubit extends Cubit<HotelState> {
         key: 'token', value: loginDataModel!.userDataDetails.apiToken);
 
     getAllHotels(3);
-    print(userId);
 
     return result;
   }
@@ -217,7 +207,6 @@ class HotelCubit extends Cubit<HotelState> {
     }, (r) {
       userInfo = r;
       emit(UserInfoSuccessState());
-      print(userInfo);
     });
     return result;
   }
@@ -264,7 +253,6 @@ class HotelCubit extends Cubit<HotelState> {
       updateInfoDataModel = r;
       imageUrl = r.userDataDetails.image!;
       emit(UserUpdateInfoSuccessState());
-      print(updateInfoDataModel);
     });
     return result;
   }
@@ -278,11 +266,10 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       allHotelsData = r;
-      print(allHotelsData);
-      allHotelsData!.hotelData!.forEach((element) {
+      for (var element in allHotelsData!.hotelData!) {
         // element.
         imageList = element.hotelImages!;
-      });
+      }
 
       emit(GetAllHotelsSuccessState());
     });
@@ -310,7 +297,6 @@ class HotelCubit extends Cubit<HotelState> {
       //     listOfCompletedBooking.add(element);
       //   }
       // });
-      print(listOfBooking);
       emit(GetAllBookingSuccessState());
     });
     return result;
@@ -338,7 +324,6 @@ class HotelCubit extends Cubit<HotelState> {
       //     listOfCompletedBooking.add(element);
       //   }
       // });
-      print(listOfBooking);
       emit(GetAllBookingSuccessState());
     });
     return result;
@@ -367,7 +352,6 @@ class HotelCubit extends Cubit<HotelState> {
       //     listOfCompletedBooking.add(element);
       //   }
       // });
-      print(listOfBooking);
       emit(GetAllBookingSuccessState());
     });
     return result;
@@ -396,7 +380,6 @@ class HotelCubit extends Cubit<HotelState> {
       //     listOfCompletedBooking.add(element);
       //   }
       // });
-      print(listOfBooking);
       emit(GetAllBookingSuccessState());
     });
     return result;
@@ -412,7 +395,6 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       createBookingResult = r;
-      print(createBookingResult);
       emit(CreateBookingSuccessState());
     });
     return result;
@@ -427,7 +409,6 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       listOfHotelFacility = r;
-      print(listOfHotelFacility);
       emit(GetAllFacilitiesSuccessState());
     });
     return result;
@@ -443,7 +424,6 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       updateBookingResult = r;
-      print(updateBookingResult);
       emit(UpdateBookingSuccessState());
     });
     return result;
@@ -462,7 +442,6 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       searchHotelList = r;
-      print(searchHotelList);
       emit(SearchHotelsSuccessState());
     });
     return result;
@@ -484,7 +463,6 @@ class HotelCubit extends Cubit<HotelState> {
       emit(HotelErrorState());
     }, (r) {
       searchHotelList = r;
-      print(searchHotelList);
       emit(SearchHotelsSuccessState());
     });
     return result;
@@ -520,14 +498,14 @@ class HotelCubit extends Cubit<HotelState> {
   changeLang(BuildContext context) async {
     // lang=!lang;
 
-    if (context.locale == Locale('ar')) {
+    if (context.locale == const Locale('ar')) {
       await context.setLocale(const Locale('en'));
-      Get.updateLocale(Locale('en'));
+      Get.updateLocale(const Locale('en'));
       // emit(LangEnStateSuccess());
 
     } else {
       await context.setLocale(const Locale('ar'));
-      Get.updateLocale(Locale('ar'));
+      Get.updateLocale(const Locale('ar'));
 
       // emit(LangArStateSuccess());
     }

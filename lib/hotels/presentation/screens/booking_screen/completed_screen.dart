@@ -1,7 +1,6 @@
-import 'package:booking_app/core/util/constaces/app_colors.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/empty_list.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/screens/booking_screen/widgets/booking_item_widget.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';

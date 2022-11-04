@@ -8,15 +8,15 @@ class FilterHotelsUseCase {
 
   FilterHotelsUseCase(this.baseHotelsRepository);
 
-  Future<Either<Failure, List<HotelDetailsForBookingModel>>> call(
-      {
-        String? name,
-        String? lat,
-        String? lon,
-        String? minPrice,
-        String? maxPrice,
-        String? distance,
-      }) async {
-    return await baseHotelsRepository.filterHotels(name, lat, lon, minPrice, maxPrice, distance);
+  Future<Either<Failure, List<HotelDetailsForBookingModel>>> call({
+    String? name,
+    String? lat,
+    String? lon,
+    String? minPrice,
+    String? maxPrice,
+    String? distance,
+  }) async {
+    return await baseHotelsRepository.filterHotels(
+        name, lat, lon, minPrice, maxPrice, distance);
   }
 }

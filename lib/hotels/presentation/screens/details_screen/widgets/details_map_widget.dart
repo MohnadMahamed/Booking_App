@@ -1,17 +1,8 @@
 import 'package:booking_app/core/network/location_helper.dart';
-import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/components.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/hotel_item.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/hotel_map_item.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -33,12 +24,7 @@ class _DetailMapWidgetState extends State<DetailMapWidget> {
   static Position? position;
   String? _mapStyle;
 
-  Completer<GoogleMapController> _mapController = Completer();
-  static final CameraPosition _myCurrentLocationCameraPosition = CameraPosition(
-      zoom: 15,
-      tilt: 50.0,
-      bearing: 45.0,
-      target: LatLng(position!.latitude, position!.longitude));
+  final Completer<GoogleMapController> _mapController = Completer();
   Future<void> getMyCurrentlocation() async {
     position = await LocationHelper.getCurrrentLocation().whenComplete(() {
       setState(() {});

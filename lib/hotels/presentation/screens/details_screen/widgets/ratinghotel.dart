@@ -1,6 +1,5 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
@@ -50,29 +49,33 @@ class _RatingHotelState extends State<RatingHotel> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    StaticColorText(
-                      text: '8.8',
-                      color: Colors.teal,
-                      size: Dimensions.font30,
-                    ),
-                    // BigText(text: '8.8', color: Colors.teal),
-                    SizedBox(
-                      width: Dimensions.width10,
-                    ),
-                    const SmallHeadLineText(
-                      text: 'Overall rating',
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.only(top: Dimensions.height10),
+                  child: Row(
+                    children: [
+                      StaticColorText(
+                        text: '8.8',
+                        color: Colors.teal,
+                        size: Dimensions.font30,
+                      ),
+                      // BigText(text: '8.8', color: Colors.teal),
+                      SizedBox(
+                        width: Dimensions.width10,
+                      ),
+                      const SmallHeadLineText(
+                        text: 'Overall rating',
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      width: 40,
-                      child: SmallText(
+                    SizedBox(
+                      width: Dimensions.width20 * 2.5,
+                      child: const SmallText(
                         text: 'Room',
+                        maxLines: 1,
                       ),
                     ),
                     Slider(
@@ -88,12 +91,13 @@ class _RatingHotelState extends State<RatingHotel> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      width: 40,
-                      child: SmallText(
+                    SizedBox(
+                      width: Dimensions.width20 * 2.5,
+                      child: const SmallText(
                         text: 'Servic',
+                        maxLines: 1,
                       ),
                     ),
                     Slider(
@@ -109,11 +113,11 @@ class _RatingHotelState extends State<RatingHotel> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      width: 40,
-                      child: SmallText(
+                    SizedBox(
+                      width: Dimensions.width20 * 2.5,
+                      child: const SmallText(
                         text: 'Price',
                       ),
                     ),

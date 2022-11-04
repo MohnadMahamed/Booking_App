@@ -43,10 +43,6 @@ class ServiceLocator {
 
     /// Data Source
     sl.registerLazySingleton<BaseRemoteDataSource>(() => RemoteDataSource());
-    // shared prefs instance
-    // final sharedPrefs =  SharedPreferences.getInstance();
-    // sl.registerLazySingleton(() => sharedPrefs);
-    // sl.registerLazySingleton<AppPreference>(() => AppPreferences(sl()));
   }
 }
 
@@ -59,6 +55,4 @@ Future<void> initAppModule() async {
   final sharedPrefs = await SharedPreferences.getInstance();
 
   instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
-
-  // app prefs instance
 }

@@ -11,4 +11,5 @@ class AppColors {
   static const Color gmailBackGroundColor = Color(0xffb23121);
   static const Color myTFFColor = Color(0XFF2C2C2C);
   // static const Color scafoldBackColor = Color.fromARGB(255, 1, 2, 19).withOpacity(0.8);
+
 }

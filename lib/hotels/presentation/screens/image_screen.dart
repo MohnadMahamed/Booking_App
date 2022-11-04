@@ -13,37 +13,50 @@ class SelectImage extends StatefulWidget {
 class _SelectImageState extends State<SelectImage> {
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(body: Column(
+    return Scaffold(
+        body: Column(
       children: [
-        Container(
+        const SizedBox(
           height: 200,
           width: double.infinity,
           // child:  (HotelCubit.get(context).image==null)?Center(child: const Text("no image Selceted")):
-        // Image.asset(HotelCubit.get(context).image!.path),
+          // Image.asset(HotelCubit.get(context).image!.path),
         ),
-Spacer(),
+        const Spacer(),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-            Expanded(child: ElevatedButton(
-              child: Text("from gallery"),
-              onPressed: () {
-                HotelCubit.get(context).getImageFromGallery();
-              },),),
-            SizedBox(width: 20,),
-            Expanded(child: ElevatedButton(child: Text("from camera"),onPressed: (){
-              HotelCubit.get(context).getImageFromCamera();
-            },),),
-          ],),
+              Expanded(
+                child: ElevatedButton(
+                  child: const Text("from gallery"),
+                  onPressed: () {
+                    HotelCubit.get(context).getImageFromGallery();
+                  },
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  child: const Text("from camera"),
+                  onPressed: () {
+                    HotelCubit.get(context).getImageFromCamera();
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(8),
-          child: ElevatedButton(onPressed: (){
-            Navigator.pop(context);
-          }, child: Text("ok")),
+          padding: const EdgeInsets.all(8),
+          child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("ok")),
         )
       ],
     ));

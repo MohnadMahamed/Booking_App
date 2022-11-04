@@ -1,9 +1,6 @@
+import 'package:booking_app/core/animation/fade_animation.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/my_button_widget.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:booking_app/hotels/presentation/resources/string_manager.dart';
 import 'package:booking_app/hotels/presentation/screens/details_screen/details_screen.dart';
@@ -11,7 +8,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:math' as math;
 
 class SliverBackgroundWidget extends StatefulWidget {
   final List<Widget> images;
@@ -48,8 +44,8 @@ class _SliverBackgroundWidgetState extends State<SliverBackgroundWidget> {
                   enableInfiniteScroll: true,
                   reverse: false,
                   autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 3),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                  autoPlayInterval: const Duration(seconds: 5),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 900),
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enlargeCenterPage: true,
                   scrollDirection: Axis.horizontal,
@@ -65,15 +61,18 @@ class _SliverBackgroundWidgetState extends State<SliverBackgroundWidget> {
                       height: Dimensions.height10,
                     ),
                     //my button
-                    MyButtonWidget(
-                      onTap: () {
-                        HotelCubit.get(context).getDetails(1);
-                        Navigator.pushNamed(context, DetailsScreen.routeName);
-                      },
-                      text: LocaleKeys.view_hotel.tr(),
-                      isPadding: false,
-                      width: Dimensions.width30 * 6,
-                      height: Dimensions.width30 * 2,
+                    FadeAnimation(
+                      .8,
+                      child: MyButtonWidget(
+                        onTap: () {
+                          HotelCubit.get(context).getDetails(1);
+                          Navigator.pushNamed(context, DetailsScreen.routeName);
+                        },
+                        text: LocaleKeys.view_hotel.tr(),
+                        isPadding: false,
+                        width: Dimensions.width30 * 6,
+                        height: Dimensions.width30 * 2,
+                      ),
                     ),
                   ],
                 )),

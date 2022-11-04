@@ -1,5 +1,4 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
-import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,29 +27,12 @@ class LayoutScreen extends StatelessWidget {
             // height: 70,
             activeColor: AppColors.mainColor,
 
-            items: [
+            items: const [
               TabItem(
-                // title: 'Explor',
-                // activeIcon: Icon(
-                //   Icons.search,
-                //   size: Dimensions.iconSize30 * 1.2,
-                // ),
                 icon: Icons.search,
               ),
-              TabItem(
-                  // activeIcon: Icon(
-                  //   Icons.history,
-                  //   size: Dimensions.iconSize30 * 1.2,
-                  // ),
-                  // title: 'Booking',
-                  icon: Icons.history),
-              TabItem(
-                  // title: 'Profile',
-                  // activeIcon: Icon(
-                  //   Icons.person_outline,
-                  //   size: Dimensions.iconSize30 * 1.2,
-                  // ),
-                  icon: Icons.person_outline),
+              TabItem(icon: Icons.history),
+              TabItem(icon: Icons.person_outline),
             ],
             initialActiveIndex: 0,
             onTap: (index) {
@@ -63,7 +45,7 @@ class LayoutScreen extends StatelessWidget {
                 cubit.getUpComingBook("upcomming", 10);
                 cubit.getCanceledBook("cancelled ", 10);
               }
-              if(index==2){
+              if (index == 2) {
                 cubit.getInfo();
               }
             },

@@ -11,10 +11,9 @@ class DistanceSliderWidget extends StatefulWidget {
 }
 
 class _DistanceSliderWidgetState extends State<DistanceSliderWidget> {
-
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
+    var cubit = HotelCubit.get(context);
     return BlocBuilder<HotelCubit, HotelState>(
       builder: (context, state) {
         return Slider(

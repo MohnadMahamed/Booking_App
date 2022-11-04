@@ -12,3 +12,4 @@ class GetFacilitiesUseCase {
     return await baseHotelsRepository.getFacilities();
   }
 }
+//

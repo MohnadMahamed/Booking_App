@@ -4,13 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../../core/util/constaces/app_colors.dart';
-import 'colors.dart';
 
 ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.backGroundColor,
   //Colors.,
   //HexColor('6B7579'),
-  primarySwatch: defualtColor,
+  primarySwatch: Colors.blue,
   appBarTheme: const AppBarTheme(
       titleSpacing: 20,
       iconTheme: IconThemeData(color: Colors.white),
@@ -27,7 +26,7 @@ ThemeData darkTheme = ThemeData(
       )),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: defualtColor,
+      selectedItemColor: Colors.blue,
       elevation: 20.0,
       backgroundColor: HexColor('6B7579'),
       unselectedItemColor: Colors.grey),
@@ -46,7 +45,7 @@ ThemeData darkTheme = ThemeData(
 //  fontFamily: 'Janna',
 );
 ThemeData lightTheme = ThemeData(
-  primarySwatch: defualtColor,
+  primarySwatch: Colors.blue,
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: const AppBarTheme(
       titleSpacing: 20,
@@ -64,7 +63,7 @@ ThemeData lightTheme = ThemeData(
       )),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: defualtColor,
+      selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.white,
       elevation: 20.0),

@@ -1,18 +1,24 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:booking_app/hotels/presentation/resources/langauge_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 const String PREFS_KEY_LANG = "PREFS_KEY_LANG";
 const String PREFS_KEY_ONBOARDING_SCREEN_VIEWED =
     "PREFS_KEY_ONBOARDING_SCREEN_VIEWED";
 const String PREFS_KEY_IS_USER_LOGGED_IN = "PREFS_KEY_IS_USER_LOGGED_IN";
-abstract class AppPreference{
+
+abstract class AppPreference {
   Future<String> getAppLanguage();
 }
-class AppPreferences extends AppPreference{
+
+class AppPreferences extends AppPreference {
   final SharedPreferences _sharedPreferences;
 
   AppPreferences(this._sharedPreferences);
 
+  @override
   Future<String> getAppLanguage() async {
     String? language = _sharedPreferences.getString(PREFS_KEY_LANG);
     if (language != null && language.isNotEmpty) {

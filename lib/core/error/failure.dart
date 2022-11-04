@@ -5,8 +5,7 @@ abstract class Failure extends Equatable {
 
   const Failure(this.message);
   @override
-  List<Object> get props=>[message];
-
+  List<Object> get props => [message];
 }
 
 class OffLineFailure extends Failure {
@@ -14,10 +13,9 @@ class OffLineFailure extends Failure {
 }
 
 class ServerFailure extends Failure {
-   ServerFailure(super.message);
+  const ServerFailure(super.message);
 }
 
 class EmptyCasheFailure extends Failure {
-  EmptyCasheFailure(super.message);
-
+  const EmptyCasheFailure(super.message);
 }

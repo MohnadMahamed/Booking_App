@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum LanguageType { ENGLISH, ARABIC }
 
 const String ARABIC = "ar";

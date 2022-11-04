@@ -1,6 +1,5 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 
@@ -47,7 +46,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                     height: 1,
                     maxLines: 15,
                     text: hiddenText
-                        ? (firstHalf + '...')
+                        ? ('$firstHalf...')
                         : (firstHalf + secondHalf)),
                 InkWell(
                   onTap: () {

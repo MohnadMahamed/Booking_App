@@ -1,12 +1,9 @@
-import 'package:booking_app/core/util/constaces/app_colors.dart';
+import 'package:booking_app/core/animation/fade_animation.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
+import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
-
-import '../../../controller/hotel_cubit.dart';
 
 class BookingItemWidget extends StatelessWidget {
   final void Function() onTap;
@@ -45,7 +42,7 @@ class BookingItemWidget extends StatelessWidget {
                         ? Colors.black12
                         : Colors.white12,
                     blurRadius: 5.0,
-                    offset: Offset(0, 5),
+                    offset: const Offset(0, 5),
                   ),
                 ],
 
@@ -61,15 +58,18 @@ class BookingItemWidget extends StatelessWidget {
                   //hotel photo
 
                   Expanded(
-                    child: SizedBox(
-                      // height: 170,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadiusDirectional.only(
-                          topStart: Radius.circular(Dimensions.width15),
-                          topEnd: Radius.circular(Dimensions.width15),
+                    child: FadeAnimation(
+                      .2,
+                      child: SizedBox(
+                        // height: 170,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusDirectional.only(
+                            topStart: Radius.circular(Dimensions.width15),
+                            topEnd: Radius.circular(Dimensions.width15),
+                          ),
+                          child: hotelImage,
                         ),
-                        child: hotelImage,
                       ),
                     ),
                   ),
@@ -87,61 +87,83 @@ class BookingItemWidget extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SmallHeadLineText(
-                                size: Dimensions.font20,
-                                text: hotelName,
-                                maxLines: 1,
+                              FadeAnimation(
+                                .4,
+                                child: SmallHeadLineText(
+                                  size: Dimensions.font20,
+                                  text: hotelName,
+                                  maxLines: 1,
+                                ),
                               ),
                               SizedBox(
-                                height: Dimensions.height10,
+                                height: Dimensions.height10 / 2,
                               ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
+                              FadeAnimation(
+                                .6,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          SmallText(
+                                            maxLines: 2,
+                                            text: hotelAddress,
+                                          ),
+                                          SizedBox(
+                                            height: Dimensions.height10 / 2,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Icon(
+                                                Icons.star,
+                                                color: Colors.teal,
+                                                size:
+                                                    Dimensions.iconSize16 * 1.5,
+                                              ),
+                                              SizedBox(
+                                                width: Dimensions.width10 / 5,
+                                              ),
+                                              SmallText(
+                                                text: hotelRate,
+                                              ),
+                                              SizedBox(
+                                                width: Dimensions.width10,
+                                              ),
+                                              Icon(
+                                                Icons.location_on,
+                                                color: Colors.teal,
+                                                size:
+                                                    Dimensions.iconSize16 * 1.5,
+                                              ),
+                                              SizedBox(
+                                                width: Dimensions.width10 / 5,
+                                              ),
+                                              const SmallText(
+                                                text: '40.0 Km',
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: Dimensions.width10 / 2,
+                                    ),
+                                    Column(
                                       children: [
-                                        SmallText(
-                                          maxLines: 2,
-                                          text: hotelAddress,
+                                        SmallHeadLineText(
+                                          size: Dimensions.font20,
+                                          text: hotelPrice,
                                         ),
-                                        SizedBox(
-                                          height: Dimensions.height10 / 2,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SmallText(
-                                              text: hotelRate,
-                                            ),
-                                            SizedBox(
-                                              width: Dimensions.width10 / 2,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.teal,
-                                              size: Dimensions.iconSize16 * 1.7,
-                                            ),
-                                          ],
+                                        const SmallText(
+                                          text: '/per night',
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: Dimensions.width10 / 2,
-                                  ),
-                                  Column(
-                                    children: [
-                                      SmallHeadLineText(
-                                        size: Dimensions.font20,
-                                        text: hotelPrice,
-                                      ),
-                                      const SmallText(
-                                        text: '/per night',
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -155,8 +177,8 @@ class BookingItemWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 40,
-          top: 30,
+          right: 35,
+          top: 25,
           child: InkWell(
               onTap: onDotTap,
               child: Container(
@@ -164,8 +186,8 @@ class BookingItemWidget extends StatelessWidget {
                   color: Colors.white.withOpacity(.4),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                height: 50,
-                width: 50,
+                height: Dimensions.width20 * 2,
+                width: Dimensions.width20 * 2,
                 child: const Center(
                   child: SmallHeadLineText(
                     text: '...',

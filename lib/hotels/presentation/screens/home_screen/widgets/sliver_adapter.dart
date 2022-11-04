@@ -44,7 +44,6 @@ class SliverAdapter extends StatelessWidget {
                     cubit.getAllFacilities();
 
                     cubit.getDetails(index);
-                    // Navigator.pushNamed(context, DetailsScreen.routeName);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

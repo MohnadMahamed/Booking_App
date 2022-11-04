@@ -8,7 +8,8 @@ class RegisterUseCase {
 
   RegisterUseCase(this.baseHotelsRepository);
 
-  Future<Either<Failure, UserDataModel>> call(RegisterRequestModel registerRequest) async {
+  Future<Either<Failure, UserDataModel>> call(
+      RegisterRequestModel registerRequest) async {
     return await baseHotelsRepository.getUserRegister(registerRequest);
   }
 }

@@ -1,9 +1,8 @@
-import 'package:booking_app/core/util/constaces/app_colors.dart';
+import 'package:booking_app/core/animation/fade_animation.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -15,14 +14,15 @@ class HotelItemWidget extends StatelessWidget {
   final String hotelPrice;
   final String hotelRate;
 
-  const HotelItemWidget(
-      {super.key,
-      required this.onTap,
-      required this.hotelImage,
-      required this.hotelName,
-      required this.hotelAddress,
-      required this.hotelPrice,
-      required this.hotelRate});
+  const HotelItemWidget({
+    super.key,
+    required this.onTap,
+    required this.hotelImage,
+    required this.hotelName,
+    required this.hotelAddress,
+    required this.hotelPrice,
+    required this.hotelRate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -81,70 +81,84 @@ class HotelItemWidget extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          BigText(
-                            text: hotelName,
+                          FadeAnimation(
+                            1,
+                            child: BigText(
+                              text: hotelName,
+                            ),
                           ),
-                          SmallText(
-                            text: hotelAddress,
-                            size: Dimensions.font16,
-                            maxLines: 2,
+                          FadeAnimation(
+                            1.3,
+                            child: SmallText(
+                              text: hotelAddress,
+                              size: Dimensions.font16,
+                              maxLines: 2,
+                            ),
                           )
                         ],
                       ),
                       const Spacer(),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                      FadeAnimation(
+                        1.9,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Row(
+                                  //   mainAxisAlignment: MainAxisAlignment.start,
+                                  //   children: [
+                                  //     Icon(
+                                  //       Icons.location_pin,
+                                  //       color: Colors.teal,
+                                  //       size: Dimensions.iconSize16,
+                                  //     ),
+                                  //     SizedBox(
+                                  //       width: Dimensions.width10 / 3,
+                                  //     ),
+                                  //     const SmallText(
+                                  //       text: '40.0 Km',
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.teal,
+                                        size: Dimensions.iconSize16 * 1.5,
+                                      ),
+                                      SizedBox(
+                                        width: Dimensions.width10 / 3,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 5.0),
+                                        child: SmallText(
+                                          text: hotelRate,
+                                          size: Dimensions.font20 - 2,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              // mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                // Row(
-                                //   mainAxisAlignment: MainAxisAlignment.start,
-                                //   children: [
-                                //     Icon(
-                                //       Icons.location_pin,
-                                //       color: Colors.teal,
-                                //       size: Dimensions.iconSize16,
-                                //     ),
-                                //     SizedBox(
-                                //       width: Dimensions.width10 / 3,
-                                //     ),
-                                //     const SmallText(
-                                //       text: '40.0 Km',
-                                //     ),
-                                //   ],
-                                // ),
-                                SizedBox(
-                                  height: Dimensions.height10 / 2,
+                                SmallHeadLineText(
+                                  text: hotelPrice,
                                 ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.teal,
-                                      size: Dimensions.iconSize16 * 1.5,
-                                    ),
-                                    SizedBox(
-                                      height: Dimensions.height10 / 2,
-                                    ),
-                                    SmallText(text: hotelRate),
-                                  ],
+                                const SmallText(
+                                  text: 'per night',
                                 ),
                               ],
                             ),
-                          ),
-                          Column(
-                            // mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              SmallHeadLineText(
-                                text: hotelPrice,
-                              ),
-                              const SmallText(
-                                text: 'per night',
-                              ),
-                            ],
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: Dimensions.height15,

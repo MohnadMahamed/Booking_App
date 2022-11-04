@@ -1,10 +1,8 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
-import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -134,7 +132,7 @@ Widget myForm({
   required Color? colorsBorderSide,
   required Color? fillColor,
   required Color? hitTextColor,
-  required Color? TextColor,
+  required Color? textColor,
   String? Function(String?)? validate,
   double maxLenght = 10,
   bool isPassword = false,
@@ -154,7 +152,7 @@ Widget myForm({
           style: GoogleFonts.cairo(
               fontSize: Dimensions.font16,
               fontWeight: FontWeight.w700,
-              color: TextColor),
+              color: textColor),
           controller: controller,
           keyboardType: type,
           onChanged: onChanged,
@@ -402,6 +400,7 @@ void updateBookingAlert({context, func, String? not}) {
       });
 }
 
+// ignore: constant_identifier_names
 enum ToastStates { SUCCESS, ERROR, WARNING }
 
 Color chooseToastColor(ToastStates state) {

@@ -1,3 +1,4 @@
+import 'package:booking_app/core/animation/fade_animation.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 
@@ -14,7 +15,6 @@ var searchAppBarController = TextEditingController();
 class SliverApp extends StatelessWidget {
   const SliverApp({
     Key? key,
-
     required this.images,
   }) : super(key: key);
 
@@ -30,14 +30,18 @@ class SliverApp extends StatelessWidget {
       toolbarHeight: Dimensions.homeToolBarHeight,
       title: Padding(
         padding: EdgeInsets.only(top: Dimensions.height30),
-        child: searchButton(
-          color: HotelCubit.get(context).isDark
-              ? Colors.grey[400]
-              : Colors.black87,
-          onTap: () {
-            Navigator.pushReplacementNamed(context, SearchResultScreen.routeName);
-          },
-          text: LocaleKeys.search_place.tr(),
+        child: FadeAnimation(
+          .2,
+          child: searchButton(
+            color: HotelCubit.get(context).isDark
+                ? Colors.grey[400]
+                : Colors.black87,
+            onTap: () {
+              Navigator.pushReplacementNamed(
+                  context, SearchResultScreen.routeName);
+            },
+            text: LocaleKeys.search_place.tr(),
+          ),
         ),
       ),
       flexibleSpace: FlexibleSpaceBar(

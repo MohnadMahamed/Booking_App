@@ -8,7 +8,8 @@ class LoginUseCase {
 
   LoginUseCase(this.baseHotelsRepository);
 
-  Future<Either<Failure, UserDataModel>> call(LoginRequestModel loginRequestModel) async {
+  Future<Either<Failure, UserDataModel>> call(
+      LoginRequestModel loginRequestModel) async {
     return await baseHotelsRepository.getUserLogin(loginRequestModel);
   }
 }

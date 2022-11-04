@@ -1,6 +1,5 @@
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SmallText extends StatelessWidget {
   final Color? color;

@@ -10,17 +10,17 @@ class PriceSliderWidget extends StatefulWidget {
 }
 
 class _PriceSliderStateWidget extends State<PriceSliderWidget> {
-
   @override
   Widget build(BuildContext context) {
-    var cubit=HotelCubit.get(context);
+    var cubit = HotelCubit.get(context);
     return RangeSlider(
       labels: RangeLabels('\$${cubit.priceSliderStartValue.toInt()}',
           '\$${cubit.priceSliderEndValue.toInt()}'),
       divisions: 100,
       min: 10,
-      max:500,
-      values: RangeValues( cubit.priceSliderStartValue, cubit.priceSliderEndValue),
+      max: 500,
+      values:
+          RangeValues(cubit.priceSliderStartValue, cubit.priceSliderEndValue),
       onChanged: (values) {
         setState(() {
           cubit.priceSliderStartValue = values.start;

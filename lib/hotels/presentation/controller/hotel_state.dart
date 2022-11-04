@@ -8,17 +8,18 @@ class UserRegisterLoadingState extends HotelState {}
 
 class UserRegisterSuccessState extends HotelState {}
 
-
 class LangEnStateSuccess extends HotelState {}
+
 class LangArStateSuccess extends HotelState {}
 
 class ChangeLanguageSuccessState extends HotelState {}
-class SelectFacilityState extends HotelState {}
 
+class SelectFacilityState extends HotelState {}
 
 class UserLoginLoadingState extends HotelState {}
 
 class UserLoginSuccessState extends HotelState {}
+
 class UserLogOutLoadingState extends HotelState {}
 
 class UserLogOutSuccessState extends HotelState {}
@@ -26,6 +27,7 @@ class UserLogOutSuccessState extends HotelState {}
 class UserUpdateInfoLoadingState extends HotelState {}
 
 class UserUpdateInfoSuccessState extends HotelState {}
+
 class UserInfoLoadingState extends HotelState {}
 
 class UserInfoSuccessState extends HotelState {}
@@ -63,8 +65,5 @@ class HotelErrorState extends HotelState {}
 class ChangeNavBarState extends HotelState {}
 
 class ChangPassVisibilityState extends HotelState {}
-
-
-
 
 class AppChangeHotelMode extends HotelState {}

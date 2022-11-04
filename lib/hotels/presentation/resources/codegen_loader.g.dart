@@ -10,7 +10,7 @@ class CodegenLoader extends AssetLoader {
   const CodegenLoader();
 
   @override
-  Future<Map<String, dynamic>> load(String fullPath, Locale locale) {
+  Future<Map<String, dynamic>> load(String path, Locale locale) {
     return Future.value(mapLocales[locale.toString()]);
   }
 
@@ -23,8 +23,6 @@ class CodegenLoader extends AssetLoader {
     "detailsScreen": "شاشة التفاصيل",
     "summary": "ملخص",
     "booking_new": "حجز جديد",
-
-
     "view_hotel": "عرض الفندق",
     "your_email": "بريدك الإلكتروني",
     "email_must_not_be_empty": "يجب ألا يكون البريد الإلكتروني فارغا",
@@ -40,18 +38,17 @@ class CodegenLoader extends AssetLoader {
     "gmail": "جوجل",
     "sign_up": "التسجيل",
     "user_name": "الاسم",
-
     "name_must_not_be_empty": "يجب ألا يكون الاسم فارغا",
-
     "enter_your_name": "أدخل اسمك",
     "confirm_password": "تأكيد كلمة المرور",
     "password_not_match": "كلمة المرور غير متطابقة",
     "enter_confirm_password": "أدخل تأكيد كلمة المرور",
-    "password_confirm_must_not_be_empty": "يجب ألا يكون تأكيد كلمة المرور فارغا",
-    "by_signing_up,_your_agreed_with_our_terms_of": "من خلال التسجيل ، وافقت على شروطنا الخاصة بنا",
+    "password_confirm_must_not_be_empty":
+        "يجب ألا يكون تأكيد كلمة المرور فارغا",
+    "by_signing_up,_your_agreed_with_our_terms_of":
+        "من خلال التسجيل ، وافقت على شروطنا الخاصة بنا",
     "service_and_privacy_policy": "سياسة الخدمة والخصوصية",
     "already_have_account": "هل لديك حساب بالفعل؟ تسجيل الدخول",
-
     "name": "الاسم",
     "email": "الايميل",
     "mood": "الوضع",
@@ -62,7 +59,6 @@ class CodegenLoader extends AssetLoader {
     "arabic": "عربي",
     "splash": "البدايه",
     "change_photo": "تغيير الصورة",
-
     " search_screen": "شاشة البحث",
     "filtter": "فيلتر",
     "apply": "تطبيق",
@@ -70,7 +66,6 @@ class CodegenLoader extends AssetLoader {
     "price_room": "السعر (لمدة 1 ليلة)",
     "distance_from_your_location": "المسافة من موقعك",
     "london": "لندن",
-
     "home_screen": "الصفحه الرئيسية",
     "address": "العنوان",
     "latitude": "العرض",
@@ -81,8 +76,6 @@ class CodegenLoader extends AssetLoader {
     "other_hotel": "فندق آخر",
     "view_all": "عرض الكل",
     "photo": "صورة",
-
-
   };
   static const Map<String, dynamic> en = {
     "upcoming": "Upcoming",
@@ -93,7 +86,6 @@ class CodegenLoader extends AssetLoader {
     "detailsScreen": "DetailsScreen",
     "summary": "Summary",
     "booking_new": "Booking New",
-
     "view_all": "View All",
     "photo": "Photo",
     "home_screen": "Home Screen",
@@ -112,17 +104,16 @@ class CodegenLoader extends AssetLoader {
     "gmail": "Gmail",
     "sign_up": "Sign Up",
     "user_name": "Your name",
-
     "name_must_not_be_empty": "Name  must  not be empty",
     "enter_your_name": "Enter your name",
     "confirm_password": "Confirm password",
     "password_not_match": "Password Not match",
     "enter_confirm_password": "Enter confirm password",
     "password_confirm_must_not_be_empty": "Password Confirm Must  Not Be Empty",
-    "by_signing_up,_your_agreed_with_our_terms_of": "By Signing up, your agreed with our terms of",
+    "by_signing_up,_your_agreed_with_our_terms_of":
+        "By Signing up, your agreed with our terms of",
     "service_and_privacy_policy": "Service And Privacy Policy",
     "already_have_account": "Already have an account? login",
-
     "name": "Name",
     "email": "Email",
     "mood": "Mood",
@@ -133,8 +124,6 @@ class CodegenLoader extends AssetLoader {
     "arabic": "Arabic",
     "splash": "Splash",
     "change_photo": "Change photo",
-
-
     " search_screen": " SearchScreen",
     "filtter": "Filtter",
     "apply": "Apply",
@@ -142,8 +131,6 @@ class CodegenLoader extends AssetLoader {
     "price_room": "price (for 1 night)",
     "distance_from_your_location": "Distance From your location",
     "london": "London",
-
-
     "address": "Address",
     "latitude": "Latitude",
     "longitude": "Longitude",

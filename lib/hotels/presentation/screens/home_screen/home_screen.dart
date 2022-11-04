@@ -1,11 +1,11 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/core/animation/fade_animation.dart';
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_app_bar.dart';
 import 'package:booking_app/hotels/presentation/screens/home_screen/widgets/sliver_adapter.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
@@ -22,14 +22,17 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           //backgroundColor: AppColors.backGroundColor,
           body: state is GetAllHotelsSuccessState
-              ? CustomScrollView(
-                  physics: const ScrollPhysics(),
-                  slivers: [
-                    SliverApp(
-                      images: buildListView(),
-                    ),
-                    const SliverAdapter(),
-                  ],
+              ? FadeIn(
+                  duration: const Duration(milliseconds: 500),
+                  child: CustomScrollView(
+                    physics: const ScrollPhysics(),
+                    slivers: [
+                      SliverApp(
+                        images: buildListView(),
+                      ),
+                      const SliverAdapter(),
+                    ],
+                  ),
                 )
               : const Center(
                   child: CircularProgressIndicator(
@@ -126,15 +129,18 @@ class HomeScreen extends StatelessWidget {
                       left: Dimensions.width20,
                       child: SizedBox(
                         width: Dimensions.screenWidth - 100,
-                        child: StaticColorText(
-                          text: cubit
-                              .allHotelsData!
-                              .hotelData![math.Random().nextInt(
-                                  cubit.allHotelsData!.hotelData!.length)]
-                              .name!,
-                          color: Colors.white,
-                          size: Dimensions.font12 * 2,
-                          maxLines: 2,
+                        child: FadeAnimation(
+                          .5,
+                          child: StaticColorText(
+                            text: cubit
+                                .allHotelsData!
+                                .hotelData![math.Random().nextInt(
+                                    cubit.allHotelsData!.hotelData!.length)]
+                                .name!,
+                            color: Colors.white,
+                            size: Dimensions.font12 * 2,
+                            maxLines: 2,
+                          ),
                         ),
                       ),
                     )

@@ -1,10 +1,7 @@
-import 'package:booking_app/core/util/constaces/app_colors.dart';
+import 'package:booking_app/core/animation/fade_animation.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/big_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
-import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
 
 class HotelMapItemWidget extends StatelessWidget {
@@ -44,20 +41,23 @@ class HotelMapItemWidget extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: Container(
-                  height: Dimensions.hotelMapItemHeight,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadiusDirectional.only(
-                      topStart: Radius.circular(17),
-                      bottomStart: Radius.circular(17),
-                    ),
-                  ),
-                  child: ClipRRect(
-                      borderRadius: const BorderRadiusDirectional.only(
+              child: FadeAnimation(
+                .7,
+                child: Container(
+                    height: Dimensions.hotelMapItemHeight,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadiusDirectional.only(
                         topStart: Radius.circular(17),
                         bottomStart: Radius.circular(17),
                       ),
-                      child: hotelImage)),
+                    ),
+                    child: ClipRRect(
+                        borderRadius: const BorderRadiusDirectional.only(
+                          topStart: Radius.circular(17),
+                          bottomStart: Radius.circular(17),
+                        ),
+                        child: hotelImage)),
+              ),
             ),
             Expanded(
               flex: 2,
@@ -72,16 +72,25 @@ class HotelMapItemWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SmallHeadLineText(
-                          size: Dimensions.font16,
-                          text: hotelName,
-                          maxLines: 1,
+                        FadeAnimation(
+                          .7,
+                          child: SmallHeadLineText(
+                            size: Dimensions.font16,
+                            text: hotelName,
+                            maxLines: 1,
+                          ),
                         ),
-                        SmallText(
-                          color: Colors.white70,
-                          size: Dimensions.font12 + 4,
-                          text: hotelAddress,
-                          maxLines: 2,
+                        SizedBox(
+                          height: Dimensions.height10 / 2,
+                        ),
+                        FadeAnimation(
+                          1.0,
+                          child: SmallText(
+                            color: Colors.white70,
+                            size: Dimensions.font12 + 2,
+                            text: hotelAddress,
+                            maxLines: 2,
+                          ),
                         )
                       ],
                     ),
@@ -98,20 +107,23 @@ class HotelMapItemWidget extends StatelessWidget {
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: Dimensions.width10 / 1.5),
-                                child: Row(
-                                  children: [
-                                    SmallHeadLineText(
-                                      text: hotelRate,
-                                    ),
-                                    SizedBox(
-                                      height: Dimensions.height10 / 2,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.teal,
-                                      size: Dimensions.iconSize16 * 1.3,
-                                    ),
-                                  ],
+                                child: FadeAnimation(
+                                  1.3,
+                                  child: Row(
+                                    children: [
+                                      SmallHeadLineText(
+                                        text: hotelRate,
+                                      ),
+                                      SizedBox(
+                                        height: Dimensions.height10 / 2,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.teal,
+                                        size: Dimensions.iconSize16 * 1.3,
+                                      ),
+                                    ],
+                                  ),
                                 )),
                           ],
                         ),

@@ -6,134 +6,147 @@ import '../../../core/error/exceptions.dart';
 import '../../../core/error/failure.dart';
 import '../../domain/repository/base_hotel_repository.dart';
 
-class HotelsRepository extends BaseHotelsRepository{
+class HotelsRepository extends BaseHotelsRepository {
   HotelsRepository(super.baseHotelRemoteDataSource);
   @override
-  Future<Either<Failure, UserDataModel>> getUserRegister(RegisterRequestModel registerRequest) async {
-    final result=await baseHotelRemoteDataSource.userRegister(  registerRequest);
+  Future<Either<Failure, UserDataModel>> getUserRegister(
+      RegisterRequestModel registerRequest) async {
+    final result =
+        await baseHotelRemoteDataSource.userRegister(registerRequest);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure, UserDataModel>> getUserLogin(LoginRequestModel loginRequestModel) async {
-    final result=await baseHotelRemoteDataSource.userLogin( loginRequestModel);
+  Future<Either<Failure, UserDataModel>> getUserLogin(
+      LoginRequestModel loginRequestModel) async {
+    final result = await baseHotelRemoteDataSource.userLogin(loginRequestModel);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure,AllDataModel>> getAllHotelsDetails(int pageNumber) async {
-    final result=await baseHotelRemoteDataSource.getAllHotelsDetails(pageNumber);
+  Future<Either<Failure, AllDataModel>> getAllHotelsDetails(
+      int pageNumber) async {
+    final result =
+        await baseHotelRemoteDataSource.getAllHotelsDetails(pageNumber);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure, UserDataModel>> getUpdateUserInfo(String name,String email,File image) async {
-    final result=await baseHotelRemoteDataSource.updateUserInfo(name,email,image);
+  Future<Either<Failure, UserDataModel>> getUpdateUserInfo(
+      String name, String email, File image) async {
+    final result =
+        await baseHotelRemoteDataSource.updateUserInfo(name, email, image);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure, BookingStateModel>> getCreateBooking(int userId, int hotelId) async {
-    final result=await baseHotelRemoteDataSource.createBooking( userId, hotelId);
+  Future<Either<Failure, BookingStateModel>> getCreateBooking(
+      int userId, int hotelId) async {
+    final result =
+        await baseHotelRemoteDataSource.createBooking(userId, hotelId);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure, StatusModel>> getUpdateBookingStatus(int bookingId, String type) async {
-    final result=await baseHotelRemoteDataSource.updateBookingStatus( bookingId, type);
+  Future<Either<Failure, StatusModel>> getUpdateBookingStatus(
+      int bookingId, String type) async {
+    final result =
+        await baseHotelRemoteDataSource.updateBookingStatus(bookingId, type);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure, List<BookingModel>>> getBookings(String type, int count) async {
-    final result=await baseHotelRemoteDataSource.getBookings( type,count);
+  Future<Either<Failure, List<BookingModel>>> getBookings(
+      String type, int count) async {
+    final result = await baseHotelRemoteDataSource.getBookings(type, count);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
   Future<Either<Failure, List<HotelFacilityModel>>> getFacilities() async {
-    final result=await baseHotelRemoteDataSource.getFacilities() ;
+    final result = await baseHotelRemoteDataSource.getFacilities();
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> getSearch(
-      String name,
-      ) async {
-    final result=await baseHotelRemoteDataSource.searchHotels(name) ;
+    String address,
+  ) async {
+    final result = await baseHotelRemoteDataSource.searchHotels(address);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
+
   @override
   Future<Either<Failure, List<HotelDetailsForBookingModel>>> filterHotels(
-      String? name, String? lat, String? lon, String? minPrice, String? maxPrice, String? distance
-      ) async {
-    final result=await baseHotelRemoteDataSource.filterHotels(name, lat, lon, minPrice, maxPrice, distance) ;
+      String? name,
+      String? lat,
+      String? lon,
+      String? minPrice,
+      String? maxPrice,
+      String? distance) async {
+    final result = await baseHotelRemoteDataSource.filterHotels(
+        name, lat, lon, minPrice, maxPrice, distance);
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure, UserDataDetailsModel>> getInfo()async {
-    final result=await baseHotelRemoteDataSource.getInfo();
+  Future<Either<Failure, UserDataDetailsModel>> getInfo() async {
+    final result = await baseHotelRemoteDataSource.getInfo();
 
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
-
 }
-
-
-
-

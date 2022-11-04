@@ -1,7 +1,5 @@
 import 'package:booking_app/core/util/constaces/app_colors.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
-import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/static_color_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +51,7 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                       ),
                     ),
                     StaticColorText(
-                      size: 14,
+                      size: Dimensions.font12 + 3,
                       text: 'Count(${cubit.countValue})',
                       color: Colors.white,
                     ),
@@ -81,7 +79,7 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
               ),
             ),
             SizedBox(
-              width: Dimensions.width10 / 2,
+              width: Dimensions.width10 / 1.7,
             ),
             Expanded(
               child: Container(
@@ -114,7 +112,7 @@ class _CountAndPageWigetState extends State<CountAndPageWiget> {
                     StaticColorText(
                       text: 'Page(${cubit.pageValue})',
                       color: Colors.white,
-                      size: 14,
+                      size: Dimensions.font12 + 3,
                     ),
                     IconButton(
                       onPressed: () {
