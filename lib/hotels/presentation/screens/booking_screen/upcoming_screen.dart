@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/util/constaces/dimensions.dart';
 import 'package:booking_app/hotels/presentation/components/components.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';

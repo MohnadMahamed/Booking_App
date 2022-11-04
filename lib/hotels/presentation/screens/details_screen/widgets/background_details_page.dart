@@ -5,7 +5,6 @@ import 'package:booking_app/hotels/presentation/components/widgets/my_button_wid
 import 'package:booking_app/hotels/presentation/components/widgets/small_headline_text.dart';
 import 'package:booking_app/hotels/presentation/components/widgets/small_text.dart';
 import 'package:booking_app/hotels/presentation/controller/hotel_cubit.dart';
-import 'package:booking_app/hotels/presentation/screens/booking_screen/booking_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
