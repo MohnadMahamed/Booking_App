@@ -10,8 +10,6 @@ Some of the cool features applied in this project:
 - Some Simple Animation.
 - Dio Package for API.
 - Shared Preferences Package to cash info.
-- Flutter Offline package to check network connection.
-
 
 # Video
 https://user-images.githubusercontent.com/62365860/199971531-57dcf985-8867-4b3e-8d8b-d05a41026eb3.mp4
